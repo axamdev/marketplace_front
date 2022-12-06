@@ -23,6 +23,7 @@ type ShopLayout1Props = {
   showTopbar?: boolean;
   showNavbar?: boolean;
   topbarBgColor?: string;
+  categoriesList?:any[];
 };
 // ===================================================
 
@@ -31,18 +32,19 @@ const ShopLayout1: FC<ShopLayout1Props> = ({
   showTopbar = true,
   topbarBgColor,
   showNavbar = true,
+  categoriesList
 }) => {
   const [isFixed, setIsFixed] = useState(false);
   const toggleIsFixed = useCallback((fixed) => setIsFixed(fixed), []);
-
   return (
+  
     <Fragment>
       {/* TOPBAR */}
       {showTopbar && <Topbar bgColor={topbarBgColor} />}
-
+  
       {/* HEADER */}
       <Sticky fixedOn={0} onSticky={toggleIsFixed} scrollDistance={300}>
-        <Header isFixed={isFixed} />
+        <Header isFixed={isFixed} categoriesList={categoriesList}/>
       </Sticky>
 
       <div className="section-after-sticky">

@@ -38,6 +38,7 @@ type HeaderProps = {
   isFixed?: boolean;
   className?: string;
   searchBoxType?: "type1" | "type2";
+  categoriesList?:any[];
 };
 // ==============================================================
 
@@ -45,6 +46,7 @@ const Header: FC<HeaderProps> = ({
   isFixed,
   className,
   searchBoxType = "type1",
+  categoriesList
 }) => {
   const theme = useTheme();
   const { state } = useAppContext();
@@ -55,6 +57,9 @@ const Header: FC<HeaderProps> = ({
 
   const toggleDialog = () => setDialogOpen(!dialogOpen);
   const toggleSidenav = () => setSidenavOpen(!sidenavOpen);
+  console.log("categoriesList"+categoriesList) 
+  console.log(categoriesList) 
+
 
   return (
     <HeaderWrapper className={clsx(className)}>

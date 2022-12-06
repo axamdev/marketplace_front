@@ -47,6 +47,7 @@ const CategoryMenu: FC<CategoryMenuProps> = ({
     return () => window.removeEventListener("click", handleDocumentClick);
   }, []);
 
+
   return (
     <Wrapper open={open}>
       {React.cloneElement(children, {
