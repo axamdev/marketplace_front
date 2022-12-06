@@ -16,6 +16,7 @@ import TopSellingProducts from "pages-sections/furnitureshop/TopSellingProducts"
 import { useEffect, useRef, useState } from "react";
 import api from "utils/api/furniture-shop";
 import api2 from "utils/api/gift-shop";
+import apiCategories from "utils/api/axam-category";
 import { layoutConstant } from "utils/constants";
 import GiftShopSection1 from "pages-sections/giftshop/GiftShopSection1";
 import GiftShopServices from "pages-sections/giftshop/GiftShopServices";
@@ -51,11 +52,12 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 // ======================================================================
 type FurnitureShopProps = {
+  categoriesList: any[]
   topNewProducts: any[];
   furnitureProducts: any[];
   topSellingProducts: any[];
   furnitureShopNavList: any[]; 
-   giftShopNavList: any[];
+  giftShopNavList: any[];
   popularProducts: any[];
   giftShopProducts: any[];
   topSailedProducts: any[];
@@ -73,7 +75,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
   useEffect(() => setSidebarHeight(pageContentRef.current.offsetHeight), []);
 
   return (
-    <ShopLayout1 showTopbar={false}>
+    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}>
       <SEO title="Furniture shop template" />
 
       {/* HERO SECTION */}
@@ -97,9 +99,9 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
             <FurnitureShopSection2 />
             <GiftShopSection3 />
 
-<Box my={10} className="categories">
-  <TopCategorySection categoryList={props.giftShopTopCategories} />
-</Box>
+            <Box my={10} className="categories">
+              <TopCategorySection categoryList={props.giftShopTopCategories} />
+            </Box>
             <Box className="pageContent" ref={pageContentRef}>
           {/* <GiftShopServices serviceData={props.giftShopServicesList} /> */}
     
@@ -133,11 +135,12 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 };
 
 export async function getStaticProps() {
+  const categoriesList = await apiCategories.getAllCategories();
   const topNewProducts = await api.getTopNewProducts();
   const furnitureProducts = await api.getFurnitureProducts();
   const topSellingProducts = await api.getTopSellingProducts();
   const furnitureShopNavList = await api.getFurnitureShopNavList();
- const popularProducts = await api2.getPopularProducts();
+  const popularProducts = await api2.getPopularProducts();
   const giftShopProducts = await api2.getGiftShopProducts();
   const giftShopNavList = await api2.getGiftShopNavigation();
   const topSailedProducts = await api2.getTopSailedProducts();
@@ -145,6 +148,7 @@ export async function getStaticProps() {
   const giftShopTopCategories = await api2.getGiftShopTopCategories();
   return {
     props: {
+      categoriesList,
       topNewProducts,
       furnitureProducts,
       topSellingProducts,
