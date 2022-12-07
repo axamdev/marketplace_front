@@ -85,18 +85,18 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
         <StyledContainer>
           {/* LEFT SIDEBAR */}
           <Box className="sidenav">
-            {/* <SideNavbar
+            <SideNavbar
               lineStyle="dash"
               sidebarStyle="style2"
               navList={props.furnitureShopNavList}
               sidebarHeight={sidebarHeight || "85vh"}
-            /> */}
-             <ProductFilterCard />
+            />
+             {/* <ProductFilterCard /> */}
           </Box>
 
           <Box className="pageContent" ref={pageContentRef}>
             {/* OFFER BANNERS */}
-            <FurnitureShopSection2 />
+             {/* <FurnitureShopSection2 /> */}
             <GiftShopSection3 />
 
             <Box my={10} className="categories">
@@ -110,12 +110,13 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
         </StyledContainer>
 
         <Stack spacing={6} my={6}>
+        <GiftShopPopularItems productsData={props.popularProducts} />
+      <GiftShopTopSales  productsData={props.topSailedProducts} />
+      <GiftShopAllProducts productsData={props.giftShopProducts} />
           <TopProductsSection productsData={props.topNewProducts} />
           <TopSellingProducts productsData={props.topSellingProducts} />
           <FurnitureShopAllProducts productsData={props.furnitureProducts} />
-          <GiftShopPopularItems productsData={props.popularProducts} />
-      <GiftShopTopSales  productsData={props.topSailedProducts} />
-      <GiftShopAllProducts productsData={props.giftShopProducts} />
+      
         </Stack>
       </Container>
 
