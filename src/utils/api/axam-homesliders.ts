@@ -1,6 +1,6 @@
 import axios from "axios";
 import Dress from "components/icons/Dress";
-import { categoriesUrl, TOKEN } from "utils/constants";
+import {  sliderhomeUrl, TOKEN } from "utils/constants";
 
 const params = { 
 
@@ -10,10 +10,10 @@ var config = {
         'Authorization': TOKEN
       },
   };
-const getAllCategories = async () => {
-   const response = await axios.post(categoriesUrl,params,config);
-   console.log(response.data);
-   return response.data;
+const getAllSlidersHome = async () => {
+   const response = await axios.post( sliderhomeUrl,params,config);
+   console.log(response.data.data);
+   return response.data.data;
   //return data["data"] ;
 };
 
@@ -21,6 +21,6 @@ const getAllCategories = async () => {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 
-    getAllCategories,
+    getAllSlidersHome,
 
 };

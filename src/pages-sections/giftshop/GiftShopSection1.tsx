@@ -3,6 +3,7 @@ import Carousel from "components/carousel/Carousel";
 import LazyImage from "components/LazyImage";
 import { H1, Paragraph } from "components/Typography";
 import React, { FC } from "react";
+import {useEffect,useState} from "react";
 
 // styled components
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -53,11 +54,17 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const GridItemTwo = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: { display: "none" },
 }));
+//----------------------------------------
+type GiftShopSection1Props = {
+  slidershomeList?:any[];
+};
 
-const GiftShopSection1: FC = () => {
+//---------------------------------------
+
+const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
   const { palette } = useTheme();
   let images: Array<string> = ['/assets/images/Furniture Shop/Furniture Shop Header.jpg', '/assets/images/Gift Shop/Header.png', '/assets/images/banners/banner-15.jpg'];
-
+  let [imgs,setImgs]=useState<any>([])
 
   return (
     <StyledBox id="carouselBox">
@@ -91,14 +98,26 @@ const GiftShopSection1: FC = () => {
             </GridItemOne>
 
             <GridItemTwo item md={6} sm={6} xs={12}>
-              <LazyImage
-                priority
-                width={600}
-                height={450}
-                layout="responsive"
-                objectFit="contain"
-                src={images[ind]}
-              />
+              {slidershomeList.map((slid,key)=>{
+                 <LazyImage
+                 priority
+                 width={600}
+                 height={450}
+                 layout="responsive"
+                 objectFit="contain"
+                 src={slid.image}
+               />              
+               })}
+               {console.log(slidershomeList)}
+
+                 {/*<LazyImage
+                 priority
+                 width={600}
+                 height={450}
+                 layout="responsive"
+                 objectFit="contain"
+                 src={images[ind]}
+               />*/}           
             </GridItemTwo>
           </StyledGrid>
         ))}
