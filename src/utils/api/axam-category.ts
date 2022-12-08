@@ -12,7 +12,7 @@ var config = {
   };
 const getAllCategories = async () => {
    const response = await axios.post(categoriesUrl,params,config);
-   console.log(response.data);
+  //  console.log(response.data);
    return response.data;
   //return data["data"] ;
 };
