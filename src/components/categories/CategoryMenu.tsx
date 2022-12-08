@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, styled } from "@mui/material";
 import React, { FC, useEffect, useRef, useState } from "react";
+import { DataCategories } from "utils/api/axam-category";
 import CategoryMenuCard from "./CategoryMenuCard";
 
 // styled component
@@ -21,12 +22,14 @@ const Wrapper = styled(Box)<{ open: boolean }>(
 type CategoryMenuProps = {
   open?: boolean;
   children: React.ReactElement;
+  categoriesList?:DataCategories;
 };
 // ===========================================================
 
 const CategoryMenu: FC<CategoryMenuProps> = ({
   open: isOpen = false,
   children,
+  categoriesList
 }) => {
   const [open, setOpen] = useState(isOpen);
   const popoverRef = useRef(open);
@@ -47,6 +50,8 @@ const CategoryMenu: FC<CategoryMenuProps> = ({
     return () => window.removeEventListener("click", handleDocumentClick);
   }, []);
 
+console.log("Data in category menu : "+ categoriesList)
+
 
   return (
     <Wrapper open={open}>
@@ -56,7 +61,7 @@ const CategoryMenu: FC<CategoryMenuProps> = ({
         className: `${children.props.className}`,
       })}
 
-      <CategoryMenuCard open={open} />
+    {categoriesList!= undefined && <CategoryMenuCard open={open} categoriesList={categoriesList} />}
     </Wrapper>
   );
 };

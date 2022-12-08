@@ -29,7 +29,7 @@ const Wrapper = styled(Box)(({ theme }) => ({
 // =============================================================
 type CategoryMenuItemProps = {
   icon?: any;
-  href: string;
+  href?: string;
   title: string;
   caret?: boolean;
 };

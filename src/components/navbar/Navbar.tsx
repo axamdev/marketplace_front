@@ -16,6 +16,7 @@ import { Paragraph } from "components/Typography";
 import navbarNavigations from "data/navbarNavigations";
 import useSettings from "hooks/useSettings";
 import { FC } from "react";
+import { DataCategories } from "utils/api/axam-category";
 import MegaMenu from "./MegaMenu";
 import MegaMenu2 from "./MegaMenu2";
 
@@ -104,6 +105,7 @@ type NavbarProps = {
   border?: number;
   navListOpen?: boolean;
   hideCategories?: boolean;
+  categoriesList?:DataCategories
 };
 // ==========================================================
 
@@ -112,6 +114,7 @@ const Navbar: FC<NavbarProps> = ({
   hideCategories,
   elevation,
   border,
+  categoriesList
 }) => {
   const { settings } = useSettings();
 
@@ -215,7 +218,7 @@ const Navbar: FC<NavbarProps> = ({
       {!hideCategories ? (
         <InnerContainer>
           {/* Category megamenu */}
-          <CategoryMenu open={navListOpen}>
+          <CategoryMenu open={navListOpen} categoriesList={categoriesList} >
             <CategoryMenuButton variant="text">
               <Category fontSize="small" />
               <Paragraph
