@@ -16,7 +16,7 @@ import TopSellingProducts from "pages-sections/furnitureshop/TopSellingProducts"
 import { useEffect, useRef, useState } from "react";
 import api from "utils/api/furniture-shop";
 import api2 from "utils/api/gift-shop";
-import apiCategories from "utils/api/axam-category";
+import apiCategories, { DataCategories } from "utils/api/axam-category";
 import { layoutConstant } from "utils/constants";
 import GiftShopSection1 from "pages-sections/giftshop/GiftShopSection1";
 import GiftShopServices from "pages-sections/giftshop/GiftShopServices";
@@ -52,7 +52,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 // ======================================================================
 type FurnitureShopProps = {
-  categoriesList: any[]
+  categoriesList: DataCategories;
   topNewProducts: any[];
   furnitureProducts: any[];
   topSellingProducts: any[];
@@ -110,9 +110,9 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
         </StyledContainer>
 
         <Stack spacing={6} my={6}>
-        <GiftShopPopularItems productsData={props.popularProducts} />
-      <GiftShopTopSales  productsData={props.topSailedProducts} />
-      <GiftShopAllProducts productsData={props.giftShopProducts} />
+          <GiftShopPopularItems productsData={props.popularProducts} />
+          <GiftShopTopSales  productsData={props.topSailedProducts} />
+          <GiftShopAllProducts productsData={props.giftShopProducts} />
           <TopProductsSection productsData={props.topNewProducts} />
           <TopSellingProducts productsData={props.topSellingProducts} />
           <FurnitureShopAllProducts productsData={props.furnitureProducts} />
