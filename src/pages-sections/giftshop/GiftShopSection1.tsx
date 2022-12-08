@@ -7,7 +7,7 @@ import {useEffect,useState} from "react";
 
 // styled components
 const StyledBox = styled(Box)(({ theme }) => ({
-  marginBottom: 60,
+  marginBottom: 2,
   overflow: "hidden",
   backgroundColor: theme.palette.primary[100],
   "& .carousel-dot": {
@@ -29,8 +29,8 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 const GridItemOne = styled(Grid)(({ theme }) => ({
   padding: 20,
   "& .titleBox": {
-    marginTop: 10,
-    marginBottom: 30,
+    marginTop: 2,
+    marginBottom: 2,
     "& h1": { fontSize: 45, lineHeight: 1.3 },
   },
   [theme.breakpoints.down("md")]: {
@@ -63,9 +63,7 @@ type GiftShopSection1Props = {
 
 const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
   const { palette } = useTheme();
-  let images: Array<string> = ['/assets/images/Furniture Shop/Furniture Shop Header.jpg', '/assets/images/Gift Shop/Header.png', '/assets/images/banners/banner-15.jpg'];
-  let [imgs,setImgs]=useState<any>([])
-
+  console.log("slidershomeList"+slidershomeList)
   return (
     <StyledBox id="carouselBox">
       <Carousel
@@ -78,7 +76,7 @@ const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
         dotClass="carousel-dot"
         dotColor={palette.primary.main}
       >
-        {[...new Array(3)].map((_item, ind) => (
+        {slidershomeList.map((_item, ind) => (
           <StyledGrid container key={ind}>
             <GridItemOne item md={6} sm={6} xs={12}>
               <Box py={6}>
@@ -86,7 +84,7 @@ const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
                 <Box className="titleBox">
                   <H1>Decorative products</H1>
                   <H1>your Home and all you need</H1>
-                </Box>
+                </Box> 
 
                 {/* <StyledButton
                   variant="contained"
@@ -98,26 +96,26 @@ const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
             </GridItemOne>
 
             <GridItemTwo item md={6} sm={6} xs={12}>
-              {slidershomeList.map((slid,key)=>{
                  <LazyImage
                  priority
                  width={600}
                  height={450}
                  layout="responsive"
                  objectFit="contain"
-                 src={slid.image}
+                  //src="http://5.135.194.236:8181/uploads/media/2022/Capture_d%E2%80%99%C3%A9cran_2022-10-11_021812.png"
+               src={_item.image}
                />              
-               })}
-               {console.log(slidershomeList)}
+              
+             
 
-                 {/*<LazyImage
+                 {/* <LazyImage
                  priority
                  width={600}
                  height={450}
                  layout="responsive"
                  objectFit="contain"
-                 src={images[ind]}
-               />*/}           
+                 src="http://5.135.194.236:8181/uploads/media/2022/Capture_d%E2%80%99%C3%A9cran_2022-10-11_021812.png"
+               />            */}
             </GridItemTwo>
           </StyledGrid>
         ))}

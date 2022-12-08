@@ -12,7 +12,7 @@ var config = {
   };
 const getAllSlidersHome = async () => {
    const response = await axios.post( sliderhomeUrl,params,config);
-   console.log(response.data.data);
+   console.log("Sliderss"+response.data.data);
    return response.data.data;
   //return data["data"] ;
 };
