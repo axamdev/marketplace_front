@@ -3,7 +3,7 @@ import Carousel from "components/carousel/Carousel";
 import LazyImage from "components/LazyImage";
 import { H1, Paragraph } from "components/Typography";
 import React, { FC } from "react";
-import {useEffect,useState} from "react";
+
 
 // styled components
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -64,7 +64,7 @@ type GiftShopSection1Props = {
 const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
   const { palette } = useTheme();
   let images: Array<string> = ['/assets/images/Furniture Shop/Furniture Shop Header.jpg', '/assets/images/Gift Shop/Header.png', '/assets/images/banners/banner-15.jpg'];
-  let [imgs,setImgs]=useState<any>([])
+ 
 
   return (
     <StyledBox id="carouselBox">
@@ -106,9 +106,10 @@ const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
                  layout="responsive"
                  objectFit="contain"
                  src={slid.image}
-               />              
+               /> 
+                {console.log(slid.image)}             
                })}
-               {console.log(slidershomeList)}
+           
 
                  {/*<LazyImage
                  priority
