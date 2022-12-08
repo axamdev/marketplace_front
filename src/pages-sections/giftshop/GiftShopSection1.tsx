@@ -20,6 +20,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
+  height:440,
   maxWidth: 1280,
   margin: "auto",
   alignItems: "center",
@@ -53,6 +54,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const GridItemTwo = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: { display: "none" },
+
 }));
 //----------------------------------------
 type GiftShopSection1Props = {
@@ -69,7 +71,7 @@ const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
     <StyledBox id="carouselBox">
       <Carousel
         spacing="0px"
-        totalSlides={3}
+        totalSlides={6}
         showDots={true}
         autoPlay={false}
         visibleSlides={1}
@@ -79,32 +81,16 @@ const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
       >
         {slidershomeList.map((_item, ind) => (
           <StyledGrid container key={ind} >
-          {/*  <GridItemOne item md={6} sm={6} xs={12}>
-              <Box py={6}>
-                <Paragraph color="primary.main">AXAM Marketplace</Paragraph>
-                <Box className="titleBox">
-                  <H1>Decorative products</H1>
-                  <H1>your Home and all you need</H1>
-                </Box> 
-
-                {/* <StyledButton
-                  variant="contained"
-                  sx={{ px: "30px", py: "8px" }}
-                >
-                  Shop Now
-                </StyledButton> 
-              </Box>
-            </GridItemOne>*/}
-
-            <GridItemTwo item md={12} sm={12} xs={12}>
+           
+            <GridItemTwo item md={6} sm={6} xs={12}>
             <LazyImage
                  priority
                  width={600}
                  height={450}
                  layout="responsive"
-                 objectFit="contain"
+                 //objectFit="contain"//
                   //src="http://5.135.194.236:8181/uploads/media/2022/Capture_d%E2%80%99%C3%A9cran_2022-10-11_021812.png"
-              //  src={_item.image}
+               src={_item.image}
                />                           
 
                  {/* <LazyImage
