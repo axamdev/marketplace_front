@@ -19,6 +19,7 @@ import api2 from "utils/api/gift-shop";
 import apiSlidersHome from "utils/api/axam-homesliders";
 import apiCategories, { DataCategories } from "utils/api/axam-category";
 import apiSections, { SectionsResponse } from "utils/api/axam-sections";
+import apiOffers, { OffersResponse } from "utils/api/axam-offers";
 
 import { layoutConstant } from "utils/constants";
 import GiftShopSection1 from "pages-sections/giftshop/GiftShopSection1";
@@ -58,6 +59,7 @@ type FurnitureShopProps = {
   slidershomeList:any[];
   categoriesList: DataCategories;
   sectionsList: SectionsResponse;
+  offersList: OffersResponse;
   topNewProducts: any[];
   furnitureProducts: any[];
   topSellingProducts: any[];
@@ -84,7 +86,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
   console.log("Sections list"+props.sectionsList.data)
   return (
     <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList} >
-      <SEO title="Furniture shop template" />
+      <SEO title="AXAM" />
 
       {/* HERO SECTION */}
       {/* <FurnitureShopSection1 /> */}
@@ -105,7 +107,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
           <Box className="pageContent" ref={pageContentRef}>
             {/* OFFER BANNERS */}
              {/* <FurnitureShopSection2 /> */}
-            <GiftShopSection3 />
+            <GiftShopSection3 offersList={props.offersList.data}/>
 
             <Box my={10} className="categories">
               <TopCategorySection categoryList={props.giftShopTopCategories} />
@@ -121,7 +123,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 
        {props.sectionsList.data.map((item) => {
         return (
-          
+
           <GiftShopPopularItems dataSections={item} productsData={props.popularProducts} />
 
         );
@@ -157,6 +159,7 @@ export async function getStaticProps() {
   const slidershomeList=await  apiSlidersHome.getAllSlidersHome();
   const categoriesList = await apiCategories.getAllCategories();
   const sectionsList = await apiSections.getAllSections();
+  const offersList = await apiOffers.getAllOffers();
   const topNewProducts = await api.getTopNewProducts();
   const furnitureProducts = await api.getFurnitureProducts();
   const topSellingProducts = await api.getTopSellingProducts();
@@ -172,6 +175,7 @@ export async function getStaticProps() {
       slidershomeList,
       categoriesList,
       sectionsList,
+      offersList,
       topNewProducts,
       furnitureProducts,
       topSellingProducts,

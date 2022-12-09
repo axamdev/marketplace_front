@@ -75,7 +75,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
               textAlign="center"
               maxWidth="200px"
             >
-              Your shopping bag is empty. Start shopping
+              Panier est vide. 
             </Box>
           </FlexBox>
         )}
@@ -135,7 +135,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
               </Link>
 
               <Tiny color="grey.600">
-                ${item.price.toFixed(2)} x {item.qty}
+                {item.price.toFixed(2)} x {item.qty}
               </Tiny>
 
               <Box
@@ -169,7 +169,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
               sx={{ mb: "0.75rem", height: "40px" }}
               onClick={toggleSidenav}
             >
-              Checkout Now (TND {getTotalPrice().toFixed(2)})
+              Valider (TND {getTotalPrice().toFixed(2)})
             </BazaarButton>
           </Link>
 
@@ -181,7 +181,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
               sx={{ height: 40 }}
               onClick={toggleSidenav}
             >
-              View Cart
+              Consulter panier
             </BazaarButton>
           </Link>
         </Box>
