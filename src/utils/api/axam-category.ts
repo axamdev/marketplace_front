@@ -13,6 +13,7 @@ var config = {
 const getAllCategories = async () => {
    const response = await axios.post(categoriesUrl,params,config);
   //  console.log(response.data);
+
   console.log("In api category") ;
   console.log(typeof response.data["data"][0]["name"])
   console.log(response.data["data"][0]["name"])

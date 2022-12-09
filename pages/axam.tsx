@@ -16,6 +16,7 @@ import TopSellingProducts from "pages-sections/furnitureshop/TopSellingProducts"
 import { useEffect, useRef, useState } from "react";
 import api from "utils/api/furniture-shop";
 import api2 from "utils/api/gift-shop";
+import apiSlidersHome from "utils/api/axam-homesliders";
 import apiCategories, { DataCategories } from "utils/api/axam-category";
 import { layoutConstant } from "utils/constants";
 import GiftShopSection1 from "pages-sections/giftshop/GiftShopSection1";
@@ -52,6 +53,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 // ======================================================================
 type FurnitureShopProps = {
+  slidershomeList:any[];
   categoriesList: DataCategories;
   topNewProducts: any[];
   furnitureProducts: any[];
@@ -75,12 +77,12 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
   useEffect(() => setSidebarHeight(pageContentRef.current.offsetHeight), []);
 
   return (
-    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}>
+    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList} >
       <SEO title="Furniture shop template" />
 
       {/* HERO SECTION */}
       {/* <FurnitureShopSection1 /> */}
-      <GiftShopSection1 />
+      <GiftShopSection1 slidershomeList={props.slidershomeList}/>
       <Container>
         <StyledContainer>
           {/* LEFT SIDEBAR */}
@@ -136,6 +138,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 };
 
 export async function getStaticProps() {
+  const slidershomeList=await  apiSlidersHome.getAllSlidersHome();
   const categoriesList = await apiCategories.getAllCategories();
   const topNewProducts = await api.getTopNewProducts();
   const furnitureProducts = await api.getFurnitureProducts();
@@ -149,6 +152,7 @@ export async function getStaticProps() {
   const giftShopTopCategories = await api2.getGiftShopTopCategories();
   return {
     props: {
+      slidershomeList,
       categoriesList,
       topNewProducts,
       furnitureProducts,
