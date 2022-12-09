@@ -80,12 +80,12 @@ const MegaMenu1: FC<MegaMenuProps> = ({
         {bottomImage && (
           <Link href={bottomImage.href}>
             <a>
-              <Box position="relative" height="170px">
+              <Box position="relative" height="250px" width="318px" maxWidth="100vh">
                 <LazyImage
                   src={bottomImage.banner}
                   layout="fill"
                   objectFit="cover"
-                  width="20%"
+                  
                 />
               </Box>
             </a>
