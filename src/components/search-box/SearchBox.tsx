@@ -35,10 +35,12 @@ const DropDownHandler = styled(FlexBox)(({ theme }) => ({
   borderLeft: `1px solid ${theme.palette.text.disabled}`,
   [theme.breakpoints.down("xs")]: { display: "none" },
 }));
-type SearcgBoxProps = {
+//j'ai ajouter SearchBoxProps pour passer categoriesList comme props
+type SearchBoxProps = {
   categoriesList?: DataCategories;
 };
-const SearchBox: FC<SearcgBoxProps> = (props) => {
+//j'ai ajouter props
+const SearchBox: FC<SearchBoxProps> = (props) => {
   const {categoriesList } = props;
 //console.log(categoriesList);
   const [category, setCategory] = useState("All Categories");
@@ -49,7 +51,7 @@ const SearchBox: FC<SearcgBoxProps> = (props) => {
   const handleCategoryChange = (cat: any) => () =>
   
   setCategory(cat);
-//******* */
+//******* **/
   const search = debounce((e) => {
     const value = e.target?.value;
 
@@ -88,14 +90,16 @@ const SearchBox: FC<SearcgBoxProps> = (props) => {
         </DropDownHandler>
       }
     >
+      
       {categoriesList.data.map((item) => (
         <MenuItem key={item} onClick={handleCategoryChange(item.name)}>
+          {/* item.name pour afficher le nom de categorie */}
           {item.name}
         </MenuItem>
       ))}
     </BazaarMenu>
   );
-
+//j'ai importée categoriesList pour map sur les categories
   return (
     <Box
       position="relative"

@@ -12,7 +12,7 @@ import StyledMegaMenu from "./StyledMegaMenu";
 type Image = { banner: string; href: string };
 // type SubCategory = { title: string; href: string };
 
-/* type Category = {
+/* qsfZEFtype Category = {
   title: string;
   href?: string;
   subCategories: SubCategory[];
