@@ -110,7 +110,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
             <GiftShopSection3 offersList={props.offersList.data}/>
 
             <Box my={10} className="categories">
-              <TopCategorySection categoryList={props.giftShopTopCategories} />
+              <TopCategorySection categoriesList={props.categoriesList} />
             </Box>
             <Box className="pageContent" ref={pageContentRef}>
           {/* <GiftShopServices serviceData={props.giftShopServicesList} /> */}
