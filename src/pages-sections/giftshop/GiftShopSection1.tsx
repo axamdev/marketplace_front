@@ -71,38 +71,40 @@ const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
     <StyledBox id="carouselBox">
       <Carousel
         spacing="0px"
-        totalSlides={6}
+        totalSlides={slidershomeList.length}
         showDots={true}
-        autoPlay={false}
+        autoPlay={true}
         visibleSlides={1}
         showArrow={false}
         dotClass="carousel-dot"
         dotColor={palette.primary.main}
+        interval={9000}
       >
         {slidershomeList.map((_item, ind) => (
-          <StyledGrid container key={ind} >
+           <LazyImage
+           priority
+           width={1200}
+           height={450}
+           layout="responsive"
+           //objectFit="contain"//
+            //src="http://5.135.194.236:8181/uploads/media/2022/Capture_d%E2%80%99%C3%A9cran_2022-10-11_021812.png"
+         src={_item.image}
+         />                  
+          // <StyledGrid container key={ind} >
            
-            <GridItemTwo item md={6} sm={6} xs={12}>
-            <LazyImage
-                 priority
-                 width={600}
-                 height={450}
-                 layout="responsive"
-                 //objectFit="contain"//
-                  //src="http://5.135.194.236:8181/uploads/media/2022/Capture_d%E2%80%99%C3%A9cran_2022-10-11_021812.png"
-               src={_item.image}
-               />                           
+          //   <GridItemTwo item md={6} sm={6} xs={12}>
+                    
 
-                 {/* <LazyImage
-                 priority
-                 width={600}
-                 height={450}
-                 layout="responsive"
-                 objectFit="contain"
-                 src="http://5.135.194.236:8181/uploads/media/2022/Capture_d%E2%80%99%C3%A9cran_2022-10-11_021812.png"
-               />            */}
-            </GridItemTwo>
-          </StyledGrid>
+          //        {/* <LazyImage
+          //        priority
+          //        width={600}
+          //        height={450}
+          //        layout="responsive"
+          //        objectFit="contain"
+          //        src="http://5.135.194.236:8181/uploads/media/2022/Capture_d%E2%80%99%C3%A9cran_2022-10-11_021812.png"
+          //      />            */}
+          //   </GridItemTwo>
+          // </StyledGrid>
         ))}
       </Carousel>
     </StyledBox>
