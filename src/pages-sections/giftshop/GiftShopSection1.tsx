@@ -82,6 +82,7 @@ const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
       >
         {slidershomeList.map((_item, ind) => (
            <LazyImage
+           id={_item.id}
            priority
            width={1200}
            height={450}

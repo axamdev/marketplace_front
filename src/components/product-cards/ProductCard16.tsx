@@ -87,6 +87,8 @@ type Props = {
   title: string;
   price: number;
   imgUrl: string;
+  short_description: string;
+  category_name: string;
   rating?: number;
   className?: string;
   id: string | number;
@@ -98,7 +100,7 @@ type Props = {
 // ============================================================
 
 const ProductCard16: FC<Props> = (props) => {
-  const { sx, off, id, title, price, imgUrl, rating, hideRating } = props;
+  const { sx, off, id, title, price, imgUrl, short_description,category_name,rating, hideRating } = props;
 
   const { palette } = useTheme();
   const { state, dispatch } = useAppContext();
@@ -170,13 +172,13 @@ const ProductCard16: FC<Props> = (props) => {
       <ProductViewDialog
         openDialog={openModal}
         handleCloseDialog={toggleDialog}
-        product={{ title, price, id, imgGroup: [imgUrl, imgUrl] }}
+        product={{ title, price, id, imgGroup: [imgUrl, imgUrl,imgUrl],short_description,category_name}}
       />
 
       <ContentWrapper>
         <FlexRowCenter>
           <Box pr={1} fontWeight="500" color="primary.main">
-            ${(price - (price * off) / 100).toFixed(2)}
+            dt {(price - (price * off) / 100).toFixed(2)}
           </Box>
 
           {off !== 0 && (

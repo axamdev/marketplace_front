@@ -99,10 +99,10 @@ const ProductViewDialog: FC<ProductViewDialogProps> = (props) => {
               <H2>{product.title}</H2>
 
               <Paragraph py={1} color="grey.500" fontWeight={600} fontSize={13}>
-                CATEGORY: Cosmetic
+                CATEGORIE: {product.category_name}
               </Paragraph>
 
-              <H1 color="primary.main">${product.price.toFixed(2)}</H1>
+              <H1 color="primary.main">TND {product.price.toFixed(2)}</H1>
 
               <FlexBox alignItems="center" gap={1}>
                 <BazaarRating
@@ -111,13 +111,11 @@ const ProductViewDialog: FC<ProductViewDialogProps> = (props) => {
                   value={4}
                   readOnly
                 />
-                <H6 lineHeight="1">(50)</H6>
+                <H6 lineHeight="1"></H6>
               </FlexBox>
 
               <Paragraph my={2}>
-                Sed egestas, ante et vulputate volutpat, eros pede semper est,
-                vitae luctus metus libero eu augue. Morbi purus liberpuro ate
-                vol faucibus adipiscing.
+              {product.short_description}
               </Paragraph>
 
               <Divider sx={{ mb: 2 }} />
@@ -130,7 +128,7 @@ const ProductViewDialog: FC<ProductViewDialogProps> = (props) => {
                   onClick={handleCartAmountChange(1)}
                   sx={{ height: 45 }}
                 >
-                  Add to Cart
+                  Ajouter au panier 
                 </BazaarButton>
               ) : (
                 <FlexBox alignItems="center">

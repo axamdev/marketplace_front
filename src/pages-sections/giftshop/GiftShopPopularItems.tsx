@@ -4,12 +4,17 @@ import CategorySectionCreator from "components/CategorySectionCreator";
 import ProductCard16 from "components/product-cards/ProductCard16";
 import useWindowSize from "hooks/useWindowSize";
 import React, { FC, useEffect, useState } from "react";
+import { DataSections } from "utils/api/axam-sections";
 
 // =========================================================
-type Props = { productsData: any[] };
+type Props = { 
+  
+  productsData: any[] 
+  dataSections:DataSections
+};
 // =========================================================
 
-const GiftShopPopularItems: FC<Props> = ({ productsData }) => {
+const GiftShopPopularItems: FC<Props> = ({ productsData,dataSections }) => {
   const width = useWindowSize();
   const { palette, shadows } = useTheme();
   const [visibleSlides, setVisibleSlides] = useState(4);
@@ -22,11 +27,11 @@ const GiftShopPopularItems: FC<Props> = ({ productsData }) => {
   }, [width]);
 
   return (
-    <CategorySectionCreator title="Popular Items" seeMoreLink="#">
+    <CategorySectionCreator title={dataSections.title} subtitle={dataSections.short_description} seeMoreLink="#">
       <Carousel
         infinite={true}
         visibleSlides={visibleSlides}
-        totalSlides={productsData.length}
+        totalSlides={dataSections.product_details.length}
         sx={{
           "& .carousel__slider": { paddingBottom: "15px" },
           "& #backArrowButton, #backForwardButton": {
@@ -40,15 +45,17 @@ const GiftShopPopularItems: FC<Props> = ({ productsData }) => {
           },
         }}
       >
-        {productsData.map((item, ind) => (
+        {dataSections.product_details.map((item, ind) => (
           <ProductCard16
             key={ind}
             id={item.id}
-            title={item.title}
-            price={item.price}
-            off={item.discount}
-            rating={item.rating}
-            imgUrl={item.imgUrl}
+            title={item.name}
+            price={item.min_max_price.min_price}
+            off={item.min_max_price.discount_in_percentage}
+            rating={Number(item.rating)}
+            imgUrl={item.image}
+            category_name={item.category_name}
+            short_description={item.short_description}
           />
         ))}
       </Carousel>

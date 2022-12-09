@@ -18,6 +18,8 @@ import api from "utils/api/furniture-shop";
 import api2 from "utils/api/gift-shop";
 import apiSlidersHome from "utils/api/axam-homesliders";
 import apiCategories, { DataCategories } from "utils/api/axam-category";
+import apiSections, { SectionsResponse } from "utils/api/axam-sections";
+
 import { layoutConstant } from "utils/constants";
 import GiftShopSection1 from "pages-sections/giftshop/GiftShopSection1";
 import GiftShopServices from "pages-sections/giftshop/GiftShopServices";
@@ -55,6 +57,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 type FurnitureShopProps = {
   slidershomeList:any[];
   categoriesList: DataCategories;
+  sectionsList: SectionsResponse;
   topNewProducts: any[];
   furnitureProducts: any[];
   topSellingProducts: any[];
@@ -76,6 +79,9 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 
   useEffect(() => setSidebarHeight(pageContentRef.current.offsetHeight), []);
 
+
+
+  console.log("Sections list"+props.sectionsList.data)
   return (
     <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList} >
       <SEO title="Furniture shop template" />
@@ -111,14 +117,23 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
           </Box>
         </StyledContainer>
 
-        <Stack spacing={6} my={6}>
-          <GiftShopPopularItems productsData={props.popularProducts} />
+       <Stack spacing={6} my={6}>
+
+       {props.sectionsList.data.map((item) => {
+        return (
+          <GiftShopPopularItems dataSections={item} productsData={props.popularProducts} />
+
+        );
+      })}
+
+{/* 
+
           <GiftShopTopSales  productsData={props.topSailedProducts} />
           <GiftShopAllProducts productsData={props.giftShopProducts} />
           <TopProductsSection productsData={props.topNewProducts} />
           <TopSellingProducts productsData={props.topSellingProducts} />
           <FurnitureShopAllProducts productsData={props.furnitureProducts} />
-      
+       */}
         </Stack>
       </Container>
 
@@ -140,6 +155,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 export async function getStaticProps() {
   const slidershomeList=await  apiSlidersHome.getAllSlidersHome();
   const categoriesList = await apiCategories.getAllCategories();
+  const sectionsList = await apiSections.getAllSections();
   const topNewProducts = await api.getTopNewProducts();
   const furnitureProducts = await api.getFurnitureProducts();
   const topSellingProducts = await api.getTopSellingProducts();
@@ -154,6 +170,7 @@ export async function getStaticProps() {
     props: {
       slidershomeList,
       categoriesList,
+      sectionsList,
       topNewProducts,
       furnitureProducts,
       topSellingProducts,
