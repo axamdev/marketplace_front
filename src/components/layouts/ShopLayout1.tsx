@@ -6,6 +6,7 @@ import Topbar from "components/topbar/Topbar";
 import Head from "next/head";
 import React, { FC, Fragment, useCallback, useState } from "react";
 import Navbar from "components/navbar/Navbar";
+import { DataCategories } from "utils/api/axam-category";
 
 /**
  *  Used in:
@@ -23,7 +24,7 @@ type ShopLayout1Props = {
   showTopbar?: boolean;
   showNavbar?: boolean;
   topbarBgColor?: string;
-  categoriesList?:any[];
+  categoriesList?:DataCategories;
 };
 // ===================================================
 
@@ -49,7 +50,7 @@ const ShopLayout1: FC<ShopLayout1Props> = ({
 
       <div className="section-after-sticky">
         {/* NAVIGATION BAR */}
-        {showNavbar && <Navbar elevation={0} border={1} />}
+        {showNavbar && <Navbar elevation={0} border={1} categoriesList={categoriesList} />}
 
         {/* BODY CONTENT */}
         {children}

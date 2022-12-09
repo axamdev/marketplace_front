@@ -18,6 +18,7 @@ import { useAppContext } from "contexts/AppContext";
 import Link from "next/link";
 import Login from "pages-sections/sessions/Login";
 import { FC, useState } from "react";
+import { DataCategories } from "utils/api/axam-category";
 import { layoutConstant } from "utils/constants";
 import SearchBox from "../search-box/SearchBox";
 
@@ -38,7 +39,7 @@ type HeaderProps = {
   isFixed?: boolean;
   className?: string;
   searchBoxType?: "type1" | "type2";
-  categoriesList?:any[];
+  categoriesList?:DataCategories;
 };
 // ==============================================================
 
@@ -58,7 +59,7 @@ const Header: FC<HeaderProps> = ({
   const toggleDialog = () => setDialogOpen(!dialogOpen);
   const toggleSidenav = () => setSidenavOpen(!sidenavOpen);
   console.log("categoriesList"+categoriesList) 
-  console.log(categoriesList) 
+   //console.log(categoriesList) 
 
 
   return (
@@ -85,7 +86,7 @@ const Header: FC<HeaderProps> = ({
           </Link>
 
           {isFixed && (
-            <CategoryMenu>
+            <CategoryMenu categoriesList={categoriesList}>
               <FlexBox color="grey.600" alignItems="center" ml={2}>
                 <BazaarButton color="inherit">
                   <Category fontSize="small" color="inherit" />

@@ -1,6 +1,7 @@
 import { Box, styled } from "@mui/material";
 import navigations from "data/navigations";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { DataCategories } from "utils/api/axam-category";
 import CategoryMenuItem from "./CategoryMenuItem";
 import MegaMenu1 from "./mega-menu/MegaMenu1";
 import MegaMenu2 from "./mega-menu/MegaMenu2";
@@ -27,27 +28,46 @@ const Wrapper = styled(Box)<CategoryMenuCardProps>(
 type CategoryMenuCardProps = {
   open?: boolean;
   position?: "absolute" | "relative";
+  categoriesList?:DataCategories;
 };
 // ===============================================================
 
 const CategoryMenuCard: FC<CategoryMenuCardProps> = (props) => {
-  const { open, position } = props;
+  const { open, position,categoriesList } = props;
 
   const megaMenu: any = { MegaMenu1, MegaMenu2 };
-  return (
+
+
+  // type ObjectKey = keyof typeof categoriesList;
+  // const myVar = 'data' as ObjectKey;
+  // console.log(categoriesList[myVar]); // 👉️ Hamza
+
+ // console.log("hello"+ categoriesList.keys() )
+    // console.log("1"+typeof categoriesList);
+    // console.log("2"+categoriesList.message);
+
+    // const [categories, setcategories] = useState([]); 
+    // useEffect(() => {
+  
+    //   categoriesList!=undefined ?? setcategories(props.categoriesList.data);
+
+    // });
+  console.log("categories"+categoriesList.data[0].name);
+    return (
     <Wrapper open={open} position={position}>
-      {navigations.map((item) => {
-        let MegaMenu = megaMenu[item.menuComponent];
+      {categoriesList.data.map((item) => {
+         let MegaMenu = megaMenu['MegaMenu1'];
          
         return (
           <CategoryMenuItem
-            key={item.title}
-            href={item.href}
-            icon={item.icon}
-            title={item.title}
-            caret={!!item.menuData}
+            key={item.id}
+             href={"#"}
+            // icon={item.icon}
+            title={item.name}
+            caret={!!item.children}
           >
-            <MegaMenu data={item.menuData || {}} />
+            {/* <MegaMenu data={item.menuData || {}} /> */}
+            <MegaMenu data={item.children || {}} />
           </CategoryMenuItem>
         );
       })}
