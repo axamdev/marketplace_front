@@ -4,21 +4,22 @@ import LazyImage from "components/LazyImage";
 import NavLink from "components/nav-link/NavLink";
 import Link from "next/link";
 import { FC } from "react";
+import { ChildCategory, DataCategories } from "utils/api/axam-category";
 import StyledMegaMenu from "./StyledMegaMenu";
 
 // =========================================================
 
-type Image = { imgUrl: string; href: string };
-type SubCategory = { title: string; href: string };
+type Image = { banner: string; href: string };
+// type SubCategory = { title: string; href: string };
 
-type Category = {
+/* type Category = {
   title: string;
   href?: string;
   subCategories: SubCategory[];
-};
+}; */
 
 type MegaMenu = {
-  categories: Category[];
+  categories: ChildCategory[];
   rightImage?: Image;
   bottomImage?: Image;
 };
@@ -30,27 +31,29 @@ type MegaMenuProps = {
 // =========================================================
 
 const MegaMenu1: FC<MegaMenuProps> = ({
-  data: { categories, rightImage, bottomImage },
+  data: { categories = [], rightImage, bottomImage },
   minWidth,
 }) => {
+
+  
   return categories ? (
     <StyledMegaMenu>
       <Card elevation={2} sx={{ ml: "1rem", minWidth }}>
         <FlexBox px={2.5} py={1.75} alignItems="unset">
           <Box flex="1 1 0">
             <Grid container spacing={4}>
-              {categories?.map((item, ind) => (
-                <Grid item md={3} key={ind}>
-                  {item.href ? (
-                    <NavLink className="title-link" href={item.href}>
-                      {item.title}
+              {categories.map(({id, ...item}) => (
+                <Grid item md={3} key={id}>
+                  {item.banner ? (
+                    <NavLink className="title-link" href={"#"}>
+                      {item.name}
                     </NavLink>
                   ) : (
-                    <Box className="title-link">{item.title}</Box>
+                    <Box className="title-link">{item.name}</Box>
                   )}
-                  {item.subCategories?.map((sub, ind) => (
-                    <NavLink className="child-link" href={sub.href} key={ind}>
-                      {sub.title}
+                  {item.children.map(({id, ...item}) => (
+                    <NavLink className="child-link" href={"#"} key={id}>
+                      {item.name}
                     </NavLink>
                   ))}
                 </Grid>
@@ -63,7 +66,7 @@ const MegaMenu1: FC<MegaMenuProps> = ({
               <Link href={rightImage.href}>
                 <a>
                   <LazyImage
-                    src={rightImage.imgUrl}
+                    src={rightImage.banner}
                     objectFit="contain"
                     width={137}
                     height={318}
@@ -79,9 +82,10 @@ const MegaMenu1: FC<MegaMenuProps> = ({
             <a>
               <Box position="relative" height="170px">
                 <LazyImage
-                  src={bottomImage.imgUrl}
+                  src={bottomImage.banner}
                   layout="fill"
                   objectFit="cover"
+                  width="20%"
                 />
               </Box>
             </a>

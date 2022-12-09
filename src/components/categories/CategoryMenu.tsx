@@ -51,6 +51,7 @@ const CategoryMenu: FC<CategoryMenuProps> = ({
   }, []);
 
 console.log("Data in category menu : "+ categoriesList)
+console.log(categoriesList);
 
 
   return (
@@ -61,7 +62,7 @@ console.log("Data in category menu : "+ categoriesList)
         className: `${children.props.className}`,
       })}
 
-    {categoriesList!= undefined && <CategoryMenuCard open={open} categoriesList={categoriesList} />}
+    {!!categoriesList && <CategoryMenuCard open={open} categoriesList={categoriesList} />}
     </Wrapper>
   );
 };

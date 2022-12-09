@@ -25,6 +25,7 @@ import TopCategorySection from "pages-sections/giftshop/TopCategorySection";
 import GiftShopPopularItems from "pages-sections/giftshop/GiftShopPopularItems";
 import GiftShopTopSales from "pages-sections/giftshop/GiftShopTopSales";
 import GiftShopAllProducts from "pages-sections/giftshop/GiftShopAllProducts";
+import apiSubCategories from "utils/api/axam-category";
 
 
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -52,7 +53,8 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 // ======================================================================
 type FurnitureShopProps = {
-  categoriesList: DataCategories;
+  categoriesList?:DataCategories;
+  subcategoriesList:any[];
   topNewProducts: any[];
   furnitureProducts: any[];
   topSellingProducts: any[];
@@ -75,7 +77,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
   useEffect(() => setSidebarHeight(pageContentRef.current.offsetHeight), []);
 
   return (
-    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}>
+    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList} >
       <SEO title="Furniture shop template" />
 
       {/* HERO SECTION */}
@@ -137,6 +139,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 
 export async function getStaticProps() {
   const categoriesList = await apiCategories.getAllCategories();
+  //const subCategoriesList = await apiSubCategories.getSubCategories();
   const topNewProducts = await api.getTopNewProducts();
   const furnitureProducts = await api.getFurnitureProducts();
   const topSellingProducts = await api.getTopSellingProducts();
@@ -150,6 +153,7 @@ export async function getStaticProps() {
   return {
     props: {
       categoriesList,
+      
       topNewProducts,
       furnitureProducts,
       topSellingProducts,

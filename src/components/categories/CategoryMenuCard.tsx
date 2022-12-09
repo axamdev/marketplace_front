@@ -28,12 +28,12 @@ const Wrapper = styled(Box)<CategoryMenuCardProps>(
 type CategoryMenuCardProps = {
   open?: boolean;
   position?: "absolute" | "relative";
-  categoriesList?:DataCategories;
+  categoriesList?: DataCategories;
 };
 // ===============================================================
 
 const CategoryMenuCard: FC<CategoryMenuCardProps> = (props) => {
-  const { open, position,categoriesList } = props;
+  const { open, position, categoriesList } = props;
 
   const megaMenu: any = { MegaMenu1, MegaMenu2 };
 
@@ -42,35 +42,46 @@ const CategoryMenuCard: FC<CategoryMenuCardProps> = (props) => {
   // const myVar = 'data' as ObjectKey;
   // console.log(categoriesList[myVar]); // 👉️ Hamza
 
- // console.log("hello"+ categoriesList.keys() )
-    // console.log("1"+typeof categoriesList);
-    // console.log("2"+categoriesList.message);
+  // console.log("hello"+ categoriesList.keys() )
+  // console.log("1"+typeof categoriesList);
+  // console.log("2"+categoriesList.message);
 
-    // const [categories, setcategories] = useState([]); 
-    // useEffect(() => {
-  
-    //   categoriesList!=undefined ?? setcategories(props.categoriesList.data);
+  // const [categories, setcategories] = useState([]); 
+  // useEffect(() => {
 
-    // });
-  console.log("categories"+categoriesList.data[0].name);
-    return (
+  //   categoriesList!=undefined ?? setcategories(props.categoriesList.data);
+
+  // });
+  console.log("categories" + categoriesList.data[0].name);
+  return (
     <Wrapper open={open} position={position}>
-      {categoriesList.data.map((item) => {
-         let MegaMenu = megaMenu['MegaMenu1'];
-         
+      {categoriesList.data.map(({ id, icon, name, banner, children }) => {
+        let MegaMenu = megaMenu['MegaMenu1'];
+
         return (
           <CategoryMenuItem
-            key={item.id}
-             href={"#"}
-            // icon={item.icon}
-            title={item.name}
-            caret={!!item.children}
+            key={id}
+            href={"#"}
+            icon={icon}
+            title={name}
+            caret={!!banner}
           >
-            {/* <MegaMenu data={item.menuData || {}} /> */}
-            <MegaMenu data={item.children || {}} />
+            <MegaMenu data={{
+              categories: children,
+              rightImage: {
+                banner,
+                href: ""
+              },
+              bottomImage: {
+                banner,
+                href: ""
+              }
+            }} />
           </CategoryMenuItem>
         );
+
       })}
+
     </Wrapper>
   );
 };

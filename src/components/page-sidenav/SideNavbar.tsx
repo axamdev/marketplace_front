@@ -8,6 +8,7 @@ import NavLink from "components/nav-link/NavLink";
 import Scrollbar from "components/Scrollbar";
 import { H5, Span } from "components/Typography";
 import { FC } from "react";
+import { DataCategories } from "utils/api/axam-category";
 
 const NavbarRoot = styled(BazaarCard)<{
   isfixed: boolean;
@@ -71,14 +72,17 @@ type SideNavbarProps = {
   lineStyle?: "dash" | "solid";
   sidebarHeight?: string | number;
   sidebarStyle?: "style1" | "style2";
+  categoriesList?:DataCategories;
+
 };
 // ==================================================================
 
 const SideNavbar: FC<SideNavbarProps> = (props) => {
-  const { isFixed, navList, lineStyle, sidebarHeight, sidebarStyle } = props;
-
+  const { isFixed, navList, lineStyle, sidebarHeight, sidebarStyle,categoriesList } = props;
+ 
   const { palette } = useTheme();
-
+  
+  //console.log("categories"+categoriesList.data[0].name);
   const renderChild = (childList: any[]) => {
     return childList.map((item, ind) => (
       <NavLink key={ind} href={item.href} color="grey.700">
@@ -121,7 +125,7 @@ const SideNavbar: FC<SideNavbarProps> = (props) => {
                         >
                           <FlexBox gap={1.5} alignItems="center">
                             <Icon fontSize="small" />
-                            <Span fontWeight="600">{item.title}</Span>
+                            <Span fontWeight="600">hello</Span>
                           </FlexBox>
                         </AccordionHeader>
 
