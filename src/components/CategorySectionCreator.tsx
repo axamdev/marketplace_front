@@ -5,6 +5,7 @@ import CategorySectionHeader from "./CategorySectionHeader";
 // ==============================================================
 type CategorySectionCreatorProps = {
   title?: string;
+  subtitle?: string;
   icon?: ReactNode;
   seeMoreLink?: string;
 };
@@ -13,7 +14,7 @@ type CategorySectionCreatorProps = {
 const CategorySectionCreator: FC<CategorySectionCreatorProps & BoxProps> = (
   props
 ) => {
-  const { icon, title, children, seeMoreLink, ...others } = props;
+  const { icon, title, subtitle,children, seeMoreLink, ...others } = props;
 
   return (
     <Box mb={7.5} {...others}>
@@ -21,6 +22,7 @@ const CategorySectionCreator: FC<CategorySectionCreatorProps & BoxProps> = (
         {title && (
           <CategorySectionHeader
             title={title}
+            subtitle={subtitle}
             seeMoreLink={seeMoreLink}
             icon={icon}
           />

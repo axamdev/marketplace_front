@@ -20,28 +20,28 @@ type ActionType = cartActionType;
 
 const initialState = {
   cart: [
-    {
-      price: 250,
-      name: "Feuteuil salon",
-      imgUrl: "/assets/images/Furniture Shop/Furniture.png",
-      id: "7222243834583537",
-      qty: 1,
-    },
-    {
-      price: 250,
-      name: "Canapé gris",
-      imgUrl: "/assets/images/Furniture Shop/Furniture (1).png",
-      id: "38553442244076086",
-      qty: 1,
-    },
-    {
-      price: 250,
-      name: "Heavy 20kt Gold Necklace",
-      imgUrl:
-        "/assets/images/Furniture Shop/Furniture (2).png",
-      id: "9573201630529315",
-      qty: 1,
-    },
+    // {
+    //   price: 250,
+    //   name: "Feuteuil salon",
+    //   imgUrl: "/assets/images/Furniture Shop/Furniture.png",
+    //   id: "7222243834583537",
+    //   qty: 1,
+    // },
+    // {
+    //   price: 250,
+    //   name: "Canapé gris",
+    //   imgUrl: "/assets/images/Furniture Shop/Furniture (1).png",
+    //   id: "38553442244076086",
+    //   qty: 1,
+    // },
+    // {
+    //   price: 250,
+    //   name: "Heavy 20kt Gold Necklace",
+    //   imgUrl:
+    //     "/assets/images/Furniture Shop/Furniture (2).png",
+    //   id: "9573201630529315",
+    //   qty: 1,
+    // },
   ],
 };
 

@@ -1,20 +1,22 @@
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
+import { Box } from "@mui/system";
 import useSettings from "hooks/useSettings";
 import Link from "next/link";
 import React, { ReactNode } from "react";
 import { FlexBetween, FlexBox } from "./flex-box";
-import { H2 } from "./Typography";
+import { H1, H2, H5, Paragraph } from "./Typography";
 
 // ===================================================
 type CategorySectionHeaderProps = {
   title?: string;
+  subtitle?: string;
   icon?: ReactNode;
   seeMoreLink?: string;
 };
 // ===================================================
 
 const CategorySectionHeader: React.FC<CategorySectionHeaderProps> = (props) => {
-  const { title, seeMoreLink, icon } = props;
+  const { title, subtitle,seeMoreLink, icon } = props;
 
   const { settings } = useSettings();
 
@@ -22,9 +24,12 @@ const CategorySectionHeader: React.FC<CategorySectionHeaderProps> = (props) => {
     <FlexBetween mb={3}>
       <FlexBox alignItems="center" gap={1}>
         {icon && <FlexBox alignItems="center">{icon}</FlexBox>}
-        <H2 fontWeight="bold" lineHeight="1">
-          {title}
-        </H2>
+        <Box my={2}>
+        <H1 mb="4px">{title}</H1>
+        <Paragraph color="grey.600">
+          {subtitle}
+        </Paragraph>
+      </Box>
       </FlexBox>
 
       {seeMoreLink && (

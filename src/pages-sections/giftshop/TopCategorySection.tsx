@@ -5,12 +5,13 @@ import { H1 } from "components/Typography";
 import useWindowSize from "hooks/useWindowSize";
 import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
+import { DataCategories } from "utils/api/axam-category";
 
 // ===============================================
-type Props = { categoryList: any[] };
+type Props = {   categoriesList?:DataCategories;};
 // ===============================================
 
-const TopCategorySection: FC<Props> = ({ categoryList }) => {
+const TopCategorySection: FC<Props> = ({ categoriesList }) => {
   const theme = useTheme();
   const width = useWindowSize();
   const [visibleSlides, setVisibleSlides] = useState(4);
@@ -24,9 +25,9 @@ const TopCategorySection: FC<Props> = ({ categoryList }) => {
 
   return (
     <Box>
-      <H1 my={2}>Top Categories</H1>
+      <H1 my={2}>Principales catégories</H1>
       <Carousel
-        totalSlides={categoryList.length}
+        totalSlides={categoriesList.data.length}
         visibleSlides={visibleSlides}
         infinite={true}
         sx={{
@@ -41,13 +42,13 @@ const TopCategorySection: FC<Props> = ({ categoryList }) => {
           },
         }}
       >
-        {categoryList.map((item, ind) => (
+        {categoriesList.data.map((item, ind) => (
           <Link href="#" key={ind}>
             <a>
               <ProductCard15
-                title={item.title}
-                available={item.available}
-                imgUrl={item.imgUrl}
+                title={item.name}
+                available=''
+                imgUrl={item.image}
               />
             </a>
           </Link>

@@ -16,7 +16,11 @@ import TopSellingProducts from "pages-sections/furnitureshop/TopSellingProducts"
 import { useEffect, useRef, useState } from "react";
 import api from "utils/api/furniture-shop";
 import api2 from "utils/api/gift-shop";
+import apiSlidersHome from "utils/api/axam-homesliders";
 import apiCategories, { DataCategories } from "utils/api/axam-category";
+import apiSections, { SectionsResponse } from "utils/api/axam-sections";
+import apiOffers, { OffersResponse } from "utils/api/axam-offers";
+
 import { layoutConstant } from "utils/constants";
 import GiftShopSection1 from "pages-sections/giftshop/GiftShopSection1";
 import GiftShopServices from "pages-sections/giftshop/GiftShopServices";
@@ -55,6 +59,9 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 type FurnitureShopProps = {
   categoriesList?:DataCategories;
   subcategoriesList:any[];
+  slidershomeList:any[];
+  sectionsList: SectionsResponse;
+  offersList: OffersResponse;
   topNewProducts: any[];
   furnitureProducts: any[];
   topSellingProducts: any[];
@@ -76,13 +83,17 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 
   useEffect(() => setSidebarHeight(pageContentRef.current.offsetHeight), []);
 
+
+
+  console.log("Sections list"+props.sectionsList.data)
   return (
     <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList} >
-      <SEO title="Furniture shop template" />
+
+      <SEO title="AXAM" />
 
       {/* HERO SECTION */}
       {/* <FurnitureShopSection1 /> */}
-      <GiftShopSection1 />
+      <GiftShopSection1 slidershomeList={props.slidershomeList}/>
       <Container>
         <StyledContainer>
           {/* LEFT SIDEBAR */}
@@ -99,10 +110,10 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
           <Box className="pageContent" ref={pageContentRef}>
             {/* OFFER BANNERS */}
              {/* <FurnitureShopSection2 /> */}
-            <GiftShopSection3 />
+            <GiftShopSection3 offersList={props.offersList.data}/>
 
             <Box my={10} className="categories">
-              <TopCategorySection categoryList={props.giftShopTopCategories} />
+              <TopCategorySection categoriesList={props.categoriesList} />
             </Box>
             <Box className="pageContent" ref={pageContentRef}>
           {/* <GiftShopServices serviceData={props.giftShopServicesList} /> */}
@@ -111,14 +122,24 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
           </Box>
         </StyledContainer>
 
-        <Stack spacing={6} my={6}>
-          <GiftShopPopularItems productsData={props.popularProducts} />
+       <Stack spacing={6} my={6}>
+
+       {props.sectionsList.data.map((item) => {
+        return (
+
+          <GiftShopPopularItems dataSections={item} productsData={props.popularProducts} />
+
+        );
+      })}
+
+{/* 
+
           <GiftShopTopSales  productsData={props.topSailedProducts} />
           <GiftShopAllProducts productsData={props.giftShopProducts} />
           <TopProductsSection productsData={props.topNewProducts} />
           <TopSellingProducts productsData={props.topSellingProducts} />
           <FurnitureShopAllProducts productsData={props.furnitureProducts} />
-      
+       */}
         </Stack>
       </Container>
 
@@ -138,8 +159,11 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 };
 
 export async function getStaticProps() {
+  const slidershomeList=await  apiSlidersHome.getAllSlidersHome();
   const categoriesList = await apiCategories.getAllCategories();
   //const subCategoriesList = await apiSubCategories.getSubCategories();
+  const sectionsList = await apiSections.getAllSections();
+  const offersList = await apiOffers.getAllOffers();
   const topNewProducts = await api.getTopNewProducts();
   const furnitureProducts = await api.getFurnitureProducts();
   const topSellingProducts = await api.getTopSellingProducts();
@@ -152,8 +176,11 @@ export async function getStaticProps() {
   const giftShopTopCategories = await api2.getGiftShopTopCategories();
   return {
     props: {
+      slidershomeList,
       categoriesList,
-      
+
+      sectionsList,
+      offersList,
       topNewProducts,
       furnitureProducts,
       topSellingProducts,
