@@ -22,6 +22,7 @@ import { DataCategories } from "utils/api/axam-category";
 import { layoutConstant } from "utils/constants";
 import SearchBox from "../search-box/SearchBox";
 
+
 // styled component
 export const HeaderWrapper = styled(Box)(({ theme }) => ({
   zIndex: 3,
@@ -98,7 +99,7 @@ const Header: FC<HeaderProps> = ({
         </FlexBox>
 
         <FlexBox justifyContent="center" flex="1 1 0">
-          {searchBoxType === "type1" && <SearchBox />}
+          {searchBoxType === "type1" && <SearchBox categoriesList={categoriesList}/>}
           {searchBoxType === "type2" && <GrocerySearchBox />}
         </FlexBox>
 

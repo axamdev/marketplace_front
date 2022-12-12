@@ -12,6 +12,8 @@ var config = {
   };
 const getAllCategories = async () => {
    const response = await axios.post(categoriesUrl,params,config);
+    console.log(response.data);
+
   //  console.log(response.data);
 
   console.log("In api category") ;
@@ -19,15 +21,26 @@ const getAllCategories = async () => {
   console.log(response.data["data"][0]["name"])
   console.log(typeof response.data["data"])
    return response.data as DataCategories;
+ 
   //return data["data"] ;
 };
 
+// const getSubCategories = async () => {
+//   const response = await axios.post(categoriesUrl,params,config);
+//   console.log(response.data.children); 
+//  console.log("In api category") ;
+//  console.log(typeof response.data["data"][0]["name"])
+//  console.log(response.data["data"][0]["name"])
+//  console.log(typeof response.data["data"])
+//   return response.data.children as ChildCategory[];
+
+//  };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 
     getAllCategories,
-
+     //getSubCategories
 };
 
 
@@ -37,7 +50,7 @@ export default {
 
 
 
-   interface ChildCategory {
+   export interface ChildCategory {
       id: string;
       name: string;
       parent_id: string;
@@ -48,12 +61,14 @@ export default {
       status: string;
       clicks: string;
       children?: ChildCategory[];
+      
       text: string;
       state?: StateCategory;
       level: number;
       total?: number;
       icon?: string;
   }
+  
 
    interface PopularCategory {
     id: string;
@@ -78,6 +93,7 @@ export default {
       error: boolean;
       total: number;
       data: ChildCategory[];
+      
       popular_categories: PopularCategory[];
   }
 

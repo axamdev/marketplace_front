@@ -9,6 +9,7 @@ import BazaarMenu from "components/BazaarMenu";
 import { FlexBox } from "components/flex-box";
 import Link from "next/link";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { DataCategories } from "utils/api/axam-category";
 
 // styled components
 // also used in the GrocerySearchBox component
@@ -34,14 +35,23 @@ const DropDownHandler = styled(FlexBox)(({ theme }) => ({
   borderLeft: `1px solid ${theme.palette.text.disabled}`,
   [theme.breakpoints.down("xs")]: { display: "none" },
 }));
-
-const SearchBox: FC = () => {
+//j'ai ajouter SearchBoxProps pour passer categoriesList comme props
+type SearchBoxProps = {
+  categoriesList?: DataCategories;
+};
+//j'ai ajouter props
+const SearchBox: FC<SearchBoxProps> = (props) => {
+  const {categoriesList } = props;
+//console.log(categoriesList);
   const [category, setCategory] = useState("All Categories");
+
   const [resultList, setResultList] = useState<string[]>([]);
   const parentRef = useRef();
-
-  const handleCategoryChange = (cat: any) => () => setCategory(cat);
-
+///***** */
+  const handleCategoryChange = (cat: any) => () =>
+  
+  setCategory(cat);
+//******* **/
   const search = debounce((e) => {
     const value = e.target?.value;
 
@@ -80,14 +90,16 @@ const SearchBox: FC = () => {
         </DropDownHandler>
       }
     >
-      {categories.map((item) => (
-        <MenuItem key={item} onClick={handleCategoryChange(item)}>
-          {item}
+      
+      {categoriesList.data.map((item) => (
+        <MenuItem key={item} onClick={handleCategoryChange(item.name)}>
+          {/* item.name pour afficher le nom de categorie */}
+          {item.name}
         </MenuItem>
       ))}
     </BazaarMenu>
   );
-
+//j'ai importée categoriesList pour map sur les categories
   return (
     <Box
       position="relative"
@@ -130,16 +142,16 @@ const SearchBox: FC = () => {
   );
 };
 
-const categories = [
-  "All Categories",
-  "Car",
-  "Clothes",
-  "Electronics",
-  "Laptop",
-  "Desktop",
-  "Camera",
-  "Toys",
-];
+// const categories = [
+//   "All Categories",
+//   "Car",
+//   "Clothes",
+//   "Electronics",
+//   "Laptop",
+//   "Desktop",
+//   "Camera",
+//   "Toys",
+// ];
 
 const dummySearchResult = [
   "Macbook Air 13",
