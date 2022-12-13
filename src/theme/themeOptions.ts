@@ -55,7 +55,7 @@ const themesOptions: ThemeOptions = {
     typography,
     breakpoints,
     components: { ...components },
-    palette: { primary: { ...marron, light: marron[100] }, ...themeColors },
+    palette: { primary: { ...primary, light: primary[100] }, ...themeColors },
   },
 };
 

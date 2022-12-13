@@ -1,4 +1,5 @@
 import { Box, styled } from "@mui/material";
+import HoverBox from "components/HoverBox";
 import LazyImage from "components/LazyImage";
 import { H6, Paragraph } from "components/Typography";
 import React, { FC } from "react";
@@ -30,6 +31,7 @@ const ProductCard15: FC<Props> = (props) => {
 
   return (
     <StyledCard sx={sx}>
+        <HoverBox borderRadius="8px" mb={1}>
       <ImgBox>
         <LazyImage
           src={imgUrl}
@@ -39,7 +41,7 @@ const ProductCard15: FC<Props> = (props) => {
           objectFit="contain"
         />
       </ImgBox>
-
+      </HoverBox>
       <H6 fontSize={15} mt="8px" mb="2px">
         {title}
       </H6>

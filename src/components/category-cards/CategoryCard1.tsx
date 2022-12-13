@@ -1,4 +1,5 @@
 import { Box, styled } from "@mui/material";
+import LazyImage from "components/LazyImage";
 import { H4 } from "components/Typography";
 import Image from "next/image";
 import { FC } from "react";
@@ -40,13 +41,13 @@ type CategoryCard1Props = {
 const CategoryCard1: FC<CategoryCard1Props> = ({ image, title }) => {
   return (
     <Wrapper position="relative">
+
       <Image
         src={image}
-        width={300}
-        height={300}
-        alt="category"
-        objectFit="cover"
+        width="10%"
+        height="10%"
         layout="responsive"
+        objectFit="contain"
       />
 
       <CategoryTitle className="category-title">

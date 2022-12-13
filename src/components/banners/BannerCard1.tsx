@@ -72,13 +72,13 @@ const BannerCard1: FC<BannerCard1Props & BoxProps> = ({
       <CardContent contentAlign={contentPosition} className="content">
         <H2>{title}</H2>
         <Paragraph>{subTitle}</Paragraph>
-        <Divider sx={{ borderWidth: 2, my: 1.5, width: 50 }} />
+        {/* <Divider sx={{ borderWidth: 2, my: 1.5, width: 50 }} /> */}
 
-        <Link href={url}>
+        {/* <Link href={url}>
           <a>
             <CardLink>Shop Now</CardLink>
           </a>
-        </Link>
+        </Link> */}
       </CardContent>
     </CardWrapper>
   );

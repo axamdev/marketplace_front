@@ -5,17 +5,20 @@ import Carousel from "components/carousel/Carousel";
 import { H1, H4, Paragraph, Span } from "components/Typography";
 import WhiteButton from "components/WhiteButton";
 import { FC } from "react";
+import { DataOffers } from "utils/api/axam-offers";
 
 // ======================================================
-type Props = { data?: any[] };
+type Props = {   slidershomeList?:any[];
+  offersList?:DataOffers[];
+};
 // ======================================================
 
-const Section1: FC<Props> = () => {
+const Section1: FC<Props> = ({slidershomeList,offersList}) => {
   // CAROUSEL TEXT CONTENTS
   const carouselContent1 = (
     <>
       <Box pl={{ md: 10 }}>
-        <H4
+        {/* <H4
           lineHeight={1}
           fontWeight={400}
           textTransform="uppercase"
@@ -45,7 +48,7 @@ const Section1: FC<Props> = () => {
         <Paragraph fontSize={{ sm: 18, xs: 14 }} mb={4}>
           Get Free Shipping on orders over $99.00
         </Paragraph>
-        <WhiteButton size="large">Shop Now</WhiteButton>
+        <WhiteButton size="large">Shop Now</WhiteButton> */}
       </Box>
     </>
   );
@@ -53,7 +56,7 @@ const Section1: FC<Props> = () => {
   const carouselContent2 = (
     <>
       <Box pl={{ md: 10 }}>
-        <H4
+        {/* <H4
           lineHeight={1}
           fontWeight={400}
           textTransform="uppercase"
@@ -83,7 +86,7 @@ const Section1: FC<Props> = () => {
         <Paragraph fontSize={{ sm: 18, xs: 14 }} mb={4}>
           Get Free Shipping on orders over $99.00
         </Paragraph>
-        <WhiteButton size="large">Shop Now</WhiteButton>
+        <WhiteButton size="large">Shop Now</WhiteButton> */}
       </Box>
     </>
   );
@@ -93,12 +96,13 @@ const Section1: FC<Props> = () => {
       <Container>
         <Carousel
           spacing="0px"
-          totalSlides={2}
+          totalSlides={slidershomeList.length}
           infinite={true}
           showDots={true}
-          autoPlay={false}
+          autoPlay={true}
           visibleSlides={1}
           showArrow={false}
+          interval={9000}
           sx={{
             mb: 3,
             overflow: "hidden",
@@ -115,19 +119,65 @@ const Section1: FC<Props> = () => {
             },
           }}
         >
-          <CarouselCard4
+                {slidershomeList.map((_item, ind) => (
+      <CarouselCard4
             content={carouselContent1}
             mode="dark"
-            bgImage="/assets/images/banners/banner-24.jpg"
+            bgImage={_item.image}
           />
-          <CarouselCard4
+        ))}
+    
+          {/* <CarouselCard4
             content={carouselContent2}
             mode="dark"
             bgImage="/assets/images/banners/banner-23.jpg"
-          />
+          /> */}
         </Carousel>
 
-        <Grid container spacing={3}>
+        <Carousel
+          spacing="20px"
+          totalSlides={offersList.length}
+          infinite={true}
+          showDots={false}
+          autoPlay={true}
+          visibleSlides={2}
+          showArrow={true}
+          interval={5000}
+          sx={{
+            mb: 3,
+            overflow: "hidden",
+            "& .carousel__dot-group": {
+              mt: 0,
+              left: 0,
+              right: 0,
+              bottom: 10,
+              position: "absolute",
+              "& div": {
+                borderColor: "#fff",
+                "::after": { backgroundColor: "#fff" },
+              },
+            },
+          }}
+        >
+                {offersList.map((_item, ind) => (
+             <BannerCard1
+             url="#"
+             title=""
+             subTitle=""
+             img={_item.image}
+             sx={{ borderRadius: 0 }}
+           />
+        ))}
+    
+          {/* <CarouselCard4
+            content={carouselContent2}
+            mode="dark"
+            bgImage="/assets/images/banners/banner-23.jpg"
+          /> */}
+        </Carousel>
+
+
+        {/* <Grid container spacing={3}>
           <Grid item md={6} xs={12}>
             <BannerCard1
               url="#"
@@ -148,7 +198,7 @@ const Section1: FC<Props> = () => {
               sx={{ borderRadius: 0 }}
             />
           </Grid>
-        </Grid>
+        </Grid> */}
       </Container>
     </Box>
   );

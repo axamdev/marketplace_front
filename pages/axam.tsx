@@ -49,9 +49,9 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     [theme.breakpoints.down("md")]: { display: "none" },
   },
   ".pageContent": {
-    left: "unset",
-    position: "relative",
-    width: `calc(100% - ${layoutConstant.grocerySidenavWidth}px)`,
+    // left: "unset",
+    position: "center",
+    width: `100%`,
     [theme.breakpoints.down("md")]: { width: "100%", marginLeft: 0 },
   },
 }));
@@ -94,8 +94,8 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
 
       {/* HERO SECTION */}
       {/* <FurnitureShopSection1 /> */}
-      <GiftShopSection1 slidershomeList={props.slidershomeList}/>
-      <Section1/>
+      {/* <GiftShopSection1 slidershomeList={props.slidershomeList}/> */}
+      <Section1 slidershomeList={props.slidershomeList} offersList={props.offersList.data}/>
       <Container>
         <StyledContainer>
           {/* LEFT SIDEBAR */}
@@ -112,10 +112,11 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
           <Box className="pageContent" ref={pageContentRef}>
             {/* OFFER BANNERS */}
              {/* <FurnitureShopSection2 /> */}
-            <GiftShopSection3 offersList={props.offersList.data}/>
+            {/* <GiftShopSection3 offersList={props.offersList.data}/> */}
 
             <Box my={10} className="categories">
-              <TopCategorySection categoriesList={props.categoriesList} />
+            <TopCategorySection categoriesList={props.categoriesList} />
+
             </Box>
             <Box className="pageContent" ref={pageContentRef}>
           {/* <GiftShopServices serviceData={props.giftShopServicesList} /> */}

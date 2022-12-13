@@ -7,8 +7,9 @@ import React, { FC } from "react";
 // custom styled components
 const CardWrapper = styled(Box)<{ img: string; mode: string }>(
   ({ theme, img, mode }) => ({
-    minHeight: 500,
+    minHeight: 400,
     display: "flex",
+    // borderRadius: 30,
     alignItems: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",

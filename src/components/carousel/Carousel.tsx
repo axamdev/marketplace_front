@@ -108,7 +108,7 @@ const Carousel: FC<CarouselProps> = ({
         <Fragment>
           <StyledArrowBackButton
             id="backArrowButton"
-            sx={{ left: "-20px" }}
+            sx={{ left: "0px" }}
             style={leftButtonStyle || {}}
             className={clsx(leftButtonClass, arrowButtonClass)}
           >
@@ -121,7 +121,7 @@ const Carousel: FC<CarouselProps> = ({
 
           <StyledArrowNextButton
             id="backForwardButton"
-            sx={{ right: "-20px" }}
+            sx={{ right: "0px" }}
             style={rightButtonStyle || {}}
             className={clsx(arrowButtonClass, rightButtonClass)}
           >
@@ -195,7 +195,7 @@ Carousel.defaultProps = {
   hasMasterSpinner: false,
   isIntrinsicHeight: true,
   dotGroupMarginTop: "2rem",
-  arrowButtonColor: "secondary",
+  arrowButtonColor: "primary",
 };
 
 export default Carousel;
