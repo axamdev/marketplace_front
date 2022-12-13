@@ -5,7 +5,8 @@ import { DataCategories } from "utils/api/axam-category";
 import CategoryMenuItem from "./CategoryMenuItem";
 import MegaMenu1 from "./mega-menu/MegaMenu1";
 import MegaMenu2 from "./mega-menu/MegaMenu2";
-
+import Scrollbar from "components/Scrollbar";
+import useSettings from "hooks/useSettings";
 // styled component
 const Wrapper = styled(Box)<CategoryMenuCardProps>(
   ({ theme, position, open }) => ({
@@ -29,6 +30,7 @@ type CategoryMenuCardProps = {
   open?: boolean;
   position?: "absolute" | "relative";
   categoriesList?: DataCategories;
+  caret?: boolean;
 };
 // ===============================================================
 
@@ -36,7 +38,7 @@ const CategoryMenuCard: FC<CategoryMenuCardProps> = (props) => {
   const { open, position, categoriesList } = props;
 
   const megaMenu: any = { MegaMenu1, MegaMenu2 };
-
+  const { settings } = useSettings();
 
   // type ObjectKey = keyof typeof categoriesList;
   // const myVar = 'data' as ObjectKey;
@@ -54,35 +56,50 @@ const CategoryMenuCard: FC<CategoryMenuCardProps> = (props) => {
   // });
   console.log("categories" + categoriesList.data[0].name);
   return (
+   
     <Wrapper open={open} position={position}>
-      {categoriesList.data.map(({ id, icon, name, banner, children }) => {
+     
+      {categoriesList.data.map(({ id, icon, name, banner, children,caret}) => {
         let MegaMenu = megaMenu['MegaMenu1'];
+        let SimpleMenu = megaMenu['MegaMenu2'];
 
         return (
+          //<Scrollbar autoHide={false} key={id}>
+          
           <CategoryMenuItem
             key={id}
             href={"#"}
             icon={icon}
             title={name}
-            caret={!!banner}
+            caret={!!children.length}
           >
-            <MegaMenu data={{
-              categories: children,
-              rightImage: {
-                banner,
-                href: ""
-              },
-              bottomImage: {
-                banner,
-                href: ""
-              }
-            }} />
+            {caret? (
+              <MegaMenu data={{
+                categories: children,
+                rightImage: {
+                  banner,
+                  href: ""
+                },
+                bottomImage: {
+                  banner,
+                  href: ""
+                }
+              }} />
+            ) : (
+              <SimpleMenu data={{
+                categories: children
+              }} />
+            )}
+            
           </CategoryMenuItem>
+          //</Scrollbar>
         );
 
       })}
+      
+</Wrapper>
 
-    </Wrapper>
+   
   );
 };
 
