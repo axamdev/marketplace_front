@@ -30,6 +30,7 @@ import GiftShopPopularItems from "pages-sections/giftshop/GiftShopPopularItems";
 import GiftShopTopSales from "pages-sections/giftshop/GiftShopTopSales";
 import GiftShopAllProducts from "pages-sections/giftshop/GiftShopAllProducts";
 import apiSubCategories from "utils/api/axam-category";
+import Section1 from "pages-sections/fashion-shop-3/Section1";
 
 
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -94,10 +95,11 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
       {/* HERO SECTION */}
       {/* <FurnitureShopSection1 /> */}
       <GiftShopSection1 slidershomeList={props.slidershomeList}/>
+      <Section1/>
       <Container>
         <StyledContainer>
           {/* LEFT SIDEBAR */}
-          <Box className="sidenav">
+          {/* <Box className="sidenav">
             <SideNavbar
               lineStyle="dash"
               sidebarStyle="style2"
@@ -105,7 +107,7 @@ const Axam: NextPage<FurnitureShopProps> = (props) => {
               sidebarHeight={sidebarHeight || "85vh"}
             />
              {/* <ProductFilterCard /> */}
-          </Box>
+          {/*  </Box> */}
 
           <Box className="pageContent" ref={pageContentRef}>
             {/* OFFER BANNERS */}

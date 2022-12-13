@@ -35,7 +35,7 @@ const ShopLayout1: FC<ShopLayout1Props> = ({
   showNavbar = true,
   categoriesList
 }) => {
-  const [isFixed, setIsFixed] = useState(false);
+  const [isFixed, setIsFixed] = useState(true);
   const toggleIsFixed = useCallback((fixed) => setIsFixed(fixed), []);
   return (
   
@@ -51,6 +51,7 @@ const ShopLayout1: FC<ShopLayout1Props> = ({
       <div className="section-after-sticky">
         {/* NAVIGATION BAR */}
         {showNavbar && <Navbar elevation={0} border={1} categoriesList={categoriesList} />}
+        
 
         {/* BODY CONTENT */}
         {children}
