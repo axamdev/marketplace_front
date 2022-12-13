@@ -110,18 +110,18 @@ const navbarNavigations = [
   //   title: "Mega Menu",
   //   child: megaMenus,
   // },
-  {
-    megaMenu: false,
-    // megaMenuWithSub: true,
-    title: "Favorites",url: "/wish-list" ,
+  // {
+  //   megaMenu: false,
+  //   // megaMenuWithSub: true,
+  //   title: "Favorites",url: "/wish-list" ,
 
-    child: categoriesMegaMenu,
-  },
+  //   child: categoriesMegaMenu,
+  // },
 
   {
     megaMenu: false,
     megaMenuWithSub: false,
-    title: "My orders",
+    title: "Mes commandes",
     url: "/orders" ,
     child: [
       {
@@ -189,30 +189,30 @@ const navbarNavigations = [
       { title: "Wishlist", url: "/wish-list" },
     ],
   },
-  {
-    megaMenu: false,
-    megaMenuWithSub: false,
-    title: "Devenir vendeur",
-    url: "/vendor/dashboard" ,
-    child: [
-      { title: "Dashboard", url: "/vendor/dashboard" },
-      {
-        title: "Products",
-        child: [
-          { title: "All products", url: "/admin/products" },
-          { title: "Add/Edit product", url: "/admin/products/248104" },
-        ],
-      },
-      {
-        title: "Orders",
-        child: [
-          { title: "All orders", url: "/admin/orders" },
-          { title: "Order details", url: "/admin/orders/248104" },
-        ],
-      },
-      { title: "Profile", url: "/vendor/account-setting" },
-    ],
-  },
+  // {
+  //   megaMenu: false,
+  //   megaMenuWithSub: false,
+  //   title: "Devenir vendeur",
+  //   url: "/vendor/dashboard" ,
+  //   child: [
+  //     { title: "Dashboard", url: "/vendor/dashboard" },
+  //     {
+  //       title: "Products",
+  //       child: [
+  //         { title: "All products", url: "/admin/products" },
+  //         { title: "Add/Edit product", url: "/admin/products/248104" },
+  //       ],
+  //     },
+  //     {
+  //       title: "Orders",
+  //       child: [
+  //         { title: "All orders", url: "/admin/orders" },
+  //         { title: "Order details", url: "/admin/orders/248104" },
+  //       ],
+  //     },
+  //     { title: "Profile", url: "/vendor/account-setting" },
+  //   ],
+  // },
 
   // { megaMenu: false, megaMenuWithSub: false, title: "Back to Demos", url: "/" },
 ];

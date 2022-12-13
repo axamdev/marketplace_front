@@ -1,4 +1,4 @@
-import { KeyboardArrowDown, PersonOutline } from "@mui/icons-material";
+import { Favorite, KeyboardArrowDown, PersonOutline } from "@mui/icons-material";
 import { Badge, Box, Dialog, Drawer, styled } from "@mui/material";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
@@ -107,7 +107,9 @@ const Header: FC<HeaderProps> = ({
           alignItems="center"
           sx={{ display: { xs: "none", md: "flex" } }}
         >
+     
           <Box
+            mr={2.5}
             component={IconButton}
             p={1.25}
             bgcolor="grey.200"
@@ -115,10 +117,19 @@ const Header: FC<HeaderProps> = ({
           >
             <PersonOutline />
           </Box>
-
+         <Link href="/wish-list">
+         <Box
+            component={IconButton}
+            p={1.25}
+            bgcolor="grey.200"
+            // onClick={toggleDialog}
+>
+              <Favorite /> 
+          </Box></Link>
           <Badge badgeContent={state.cart.length} color="primary">
             <Box
-              ml={2.5}
+                        ml={2.5}
+
               p={1.25}
               bgcolor="grey.200"
               component={IconButton}

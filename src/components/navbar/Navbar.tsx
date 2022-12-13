@@ -5,7 +5,7 @@ import {
   KeyboardArrowDown,
 } from "@mui/icons-material";
 import ArrowRight from "@mui/icons-material/ArrowRight";
-import { Box, Container, MenuItem, styled, SvgIconProps } from "@mui/material";
+import { Box, Button, Container, MenuItem, styled, SvgIconProps } from "@mui/material";
 import BazaarButton from "components/BazaarButton";
 import BazaarCard from "components/BazaarCard";
 import CategoryMenu from "components/categories/CategoryMenu";
@@ -214,7 +214,7 @@ const Navbar: FC<NavbarProps> = ({
   };
 
   return (
-    <NavBarWrapper hoverEffect={false} elevation={elevation} border={border}>
+    <NavBarWrapper hoverEffect={true} elevation={elevation} border={border}>
       {!hideCategories ? (
         <InnerContainer>
           {/* Category megamenu */}
@@ -239,6 +239,34 @@ const Navbar: FC<NavbarProps> = ({
             </CategoryMenuButton>
           </CategoryMenu>
 
+
+          <FlexBox justifyContent="center" mb={0}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                size="large"
+                sx={{ m: "1.2rem" }}
+              >
+                Enfants et bébé
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                size="large"
+                sx={{ m: "1.2rem" }}
+              >
+                Mariage
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                size="large"
+                sx={{ m: "1.2rem" }}
+              >
+                Anniversaire
+              </Button>
+
+          </FlexBox>
           {/* Horizontal menu */}
           <FlexBox gap={4}>{renderNestedNav(navbarNavigations, true)}</FlexBox>
         </InnerContainer>
@@ -247,6 +275,7 @@ const Navbar: FC<NavbarProps> = ({
           <FlexBox gap={4}>{renderNestedNav(navbarNavigations, true)}</FlexBox>
         </InnerContainer>
       )}
+          
     </NavBarWrapper>
   );
 };
