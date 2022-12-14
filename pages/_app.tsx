@@ -13,6 +13,7 @@ import MuiTheme from "theme/MuiTheme";
 import OpenGraphTags from "utils/OpenGraphTags";
 import "../src/fake-db";
 
+
 type MyAppProps = AppProps & {
   Component: NextPage & {
     getLayout?: (page: ReactElement) => ReactNode;

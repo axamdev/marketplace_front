@@ -9,9 +9,9 @@ import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import SocialButtons from "./SocialButtons";
 
+
 const fbStyle = { background: "#3B5998", color: "white" };
 const googleStyle = { background: "#4285F4", color: "white" };
-
 type WrapperProps = { passwordVisibility?: boolean };
 
 export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
@@ -31,18 +31,16 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
   ".googleButton": { ...googleStyle, "&:hover": googleStyle },
   ".agreement": { marginTop: 12, marginBottom: 24 },
 }));
-
-const Login = () => {
+ const Login = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-  const togglePasswordVisibility = useCallback(() => {
+ const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
-  }, []);
+  },[]);
 
-  const handleFormSubmit = async (values: any) => {
-    console.log(values);
+  const handleFormSubmit =  () => {
+    console.log(values)
   };
-
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
