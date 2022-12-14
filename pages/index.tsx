@@ -18,6 +18,7 @@ import api from "utils/api/furniture-shop";
 import api2 from "utils/api/gift-shop";
 import apiSlidersHome from "utils/api/axam-homesliders";
 import apiCategories, { DataCategories } from "utils/api/axam-category";
+import apiRegister from "utils/api/axam-RegisterUser"
 import apiSections, { SectionsResponse } from "utils/api/axam-sections";
 import apiOffers, { OffersResponse } from "utils/api/axam-offers";
 
@@ -31,6 +32,9 @@ import GiftShopTopSales from "pages-sections/giftshop/GiftShopTopSales";
 import GiftShopAllProducts from "pages-sections/giftshop/GiftShopAllProducts";
 import apiSubCategories from "utils/api/axam-category";
 import Section1 from "pages-sections/fashion-shop-3/Section1";
+import {Provider} from 'react-redux'
+import store from '../src/redux/store'
+
 
 
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -88,6 +92,7 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
 
   console.log("Sections list"+props.sectionsList.data)
   return (
+    <Provider store={store}>
     <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList} >
 
       <SEO title="AXAM" />
@@ -158,13 +163,14 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
         />
       </MobileNavigationBar2>
     </ShopLayout1>
+    </Provider>
   );
 };
 
 export async function getStaticProps() {
   const slidershomeList=await  apiSlidersHome.getAllSlidersHome();
   const categoriesList = await apiCategories.getAllCategories();
-  //const subCategoriesList = await apiSubCategories.getSubCategories();
+  const registerUserList = await apiRegister.postSignUpUser();
   const sectionsList = await apiSections.getAllSections();
   const offersList = await apiOffers.getAllOffers();
   const topNewProducts = await api.getTopNewProducts();

@@ -9,6 +9,11 @@ import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import { Wrapper } from "./Login";
 import SocialButtons from "./SocialButtons";
+import { useDispatch } from "react-redux";
+import postSignUpUser from "utils/api/axam-RegisterUser"
+
+
+const dispatch = useDispatch()
 
 const Signup = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -163,7 +168,7 @@ const Signup = () => {
         </BazaarButton>
       </form>
 
-      <SocialButtons redirect="/login" redirectText="Login" />
+      {/* <SocialButtons redirect="/login" redirectText="Login" /> */}
     </Wrapper>
   );
 };
