@@ -1,41 +1,47 @@
-import {createSlice} from '@reduxjs/toolkit'
-import { userLogin } from './userAction'
-import { useEffect } from "react";
+import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
+import  { loginUrl, TOKEN } from "../utils/constants";
+import axios from "axios";
+
 export interface initialTypes {
-    loading:boolean,
-    userInfo:object, 
-    activation_code: string, 
-    error: string,
-    success: boolean,
+  msg:String,
+  user:String,
+  token:String,
+  loading:boolean,
+  error:String
   }
 const initialState:initialTypes ={
+    msg:"",
+    user:"",
+    token:"",
     loading:false,
-    userInfo: {}, 
-    activation_code: null, 
-    error: null,
-    success: false,
+    error:""
 }
+var config = {
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded'   ,
+      'Authorization': TOKEN
+    },
+};
+export const loginUser = createAsyncThunk('loginuser',async () => {
+ 
+  const response = await axios.post(loginUrl,{ 
+    email:"rania2525@gmail.com",
+    password:"123456781"
+  },config);
+   console.log(response.data)
+})
 
 export const authSlice=createSlice({
     name:'auth',
     initialState,
-    reducers:{},
+    reducers:{
+      addToken:(state,action)=>{
+        state.token = localStorage.getItem('token')
+      }
+      
+    },
     extraReducers: {
-        // login user
-        [userLogin.pending]: (state) => {
-          state.loading = true
-          state.error = null
-        },
-        [userLogin.fulfilled]: (state, { payload }) => {
-          state.loading = false
-          state.userInfo = payload
-          state.activation_code = payload.activation_code
-        },
-        [userLogin.rejected]: (state, { payload }) => {
-          state.loading = false
-          state.error = payload
-        },
-        // register user reducer...
+   
       },
 })
+
 export default authSlice.reducer

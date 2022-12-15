@@ -95,7 +95,7 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
   console.log("Sections list"+props.sectionsList.data)
   return (
    <Provider store={store}>
-    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}  loginList={props.loginList}>
+    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}  >
 
 <SEO title="AXAM" />
 

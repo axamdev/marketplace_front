@@ -9,6 +9,9 @@ import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import SocialButtons from "./SocialButtons";
 
+import {useDispatch} from 'react-redux'
+import { loginUser } from "redux/authSlice";
+
 
 const fbStyle = { background: "#3B5998", color: "white" };
 const googleStyle = { background: "#4285F4", color: "white" };
@@ -37,9 +40,12 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
  const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   },[]);
-
+   const dispatch=useDispatch();
   const handleFormSubmit =  () => {
     console.log(values)
+    dispatch(loginUser())
+
+    
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
