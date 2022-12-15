@@ -19,6 +19,7 @@ import Link from "next/link";
 import Login from "pages-sections/sessions/Login";
 import { FC, useState } from "react";
 import { DataCategories } from "utils/api/axam-category";
+
 import { layoutConstant } from "utils/constants";
 import SearchBox from "../search-box/SearchBox";
 

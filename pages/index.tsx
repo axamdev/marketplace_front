@@ -32,9 +32,9 @@ import GiftShopTopSales from "pages-sections/giftshop/GiftShopTopSales";
 import GiftShopAllProducts from "pages-sections/giftshop/GiftShopAllProducts";
 import apiSubCategories from "utils/api/axam-category";
 import Section1 from "pages-sections/fashion-shop-3/Section1";
-import {Provider} from 'react-redux'
-import store from '../src/redux/store'
-
+import {Provider} from 'react-redux';
+import store from '../src/redux/store';
+import { useDispatch } from 'react-redux';
 
 
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -88,12 +88,12 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
 
   useEffect(() => setSidebarHeight(pageContentRef.current.offsetHeight), []);
 
-
+  
 
   console.log("Sections list"+props.sectionsList.data)
   return (
-    <Provider store={store}>
-    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList} >
+    <Provider store={store} >
+    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}  >
 
       <SEO title="AXAM" />
 
@@ -135,7 +135,7 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
        {props.sectionsList.data.map((item) => {
         return (
 
-          <GiftShopPopularItems dataSections={item} productsData={props.popularProducts} />
+          <GiftShopPopularItems dataSections={item} productsData={props.popularProducts}/>
 
         );
       })}

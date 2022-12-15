@@ -9,21 +9,34 @@ import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import { Wrapper } from "./Login";
 import SocialButtons from "./SocialButtons";
+
+import postSignUpUser from "features/user/userSlice"
+import {UserData} from "utils/api/axam-RegisterUser"
 import { useDispatch } from "react-redux";
-import postSignUpUser from "utils/api/axam-RegisterUser"
 
 
-const dispatch = useDispatch()
 
-const Signup = () => {
+
+
+//import { FC} from "react";
+//const dispatch = useDispatch()
+//type SignupProps = {
+  
+ // registerUserList?:UserData;
+//};
+//const Signup: FC <SignupProps> = (registerUserList) => {
+  const Signup = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-
+ 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
 
+ const dispatch= useDispatch();
+
   const handleFormSubmit = async (values: any) => {
-    console.log(values);
+     console.log(values);
+   dispatch(postSignUpUser())
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -32,7 +45,8 @@ const Signup = () => {
       onSubmit: handleFormSubmit,
       validationSchema: formSchema,
     });
-
+    
+//console.log(registerUserList);
   return (
     <Wrapper elevation={3} passwordVisibility={passwordVisibility}>
       <form onSubmit={handleSubmit}>

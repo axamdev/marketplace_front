@@ -61,7 +61,6 @@ export default {
       status: string;
       clicks: string;
       children?: ChildCategory[];
-      
       text: string;
       state?: StateCategory;
       level: number;
