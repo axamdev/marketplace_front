@@ -41,11 +41,10 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
     setPasswordVisibility((visible) => !visible);
   },[]);
    const dispatch=useDispatch();
-  const handleFormSubmit =  () => {
+  const handleFormSubmit =  (data) => {
     console.log(values)
-    dispatch(loginUser())
+    dispatch(loginUser(data))
 
-    
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
