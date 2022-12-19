@@ -16,7 +16,7 @@ var config = {
 //const postSignUpUser = createAsyncThunk('signupuser',async () => {
  const postSignUpUser = async () => {
    const response = await axios.post(registerUrl,params,config);
-    console.log(response.data);
+    // console.log(response.data);
  
    return response.data as UserData;
  

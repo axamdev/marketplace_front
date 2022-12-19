@@ -60,7 +60,7 @@ const Header: FC<HeaderProps> = ({
 
   const toggleDialog = () => setDialogOpen(!dialogOpen);
   const toggleSidenav = () => setSidenavOpen(!sidenavOpen);
-  console.log("categoriesList"+categoriesList) 
+  // console.log("categoriesList"+categoriesList) 
    //console.log(categoriesList) 
 
 

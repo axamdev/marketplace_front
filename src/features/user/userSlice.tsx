@@ -19,21 +19,30 @@ const initialState :initialTypes= {
     error: ""
 }
 
-const params = { 
-name:"rania ben h",
-email:"rania2525@gmail.com",
-password:"123456789"
-  }
+
+export const postSignUpUser = createAsyncThunk('signupuser',async () => {
+
+  var bodyFormData = new FormData();
+  bodyFormData.append('name', 'rania 123');
+  bodyFormData.append('email', 'rania87975454@gmail.com');
+  bodyFormData.append('mobile', '58748788');
+  bodyFormData.append('password', 'Azert56789');
+  bodyFormData.append('country_code', '216');
+
 var config = {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded'   ,
+    headers: {  
+        'Accept':"*/*",
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': TOKEN
       },
   };
-export const postSignUpUser = createAsyncThunk('signupuser',async () => {
  //const postSignUpUser = async () => 
-   const response = await axios.post(registerUrl,params,config);
+   const response = await axios.post(registerUrl,bodyFormData,config);
+    console.log("response in post signup user : "+response.data);
     console.log(response.data);
- 
+    console.log(response.config);
+    console.log(response.headers);
+
    return response.data;
 });
 

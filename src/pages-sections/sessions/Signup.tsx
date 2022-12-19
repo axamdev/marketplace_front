@@ -10,9 +10,10 @@ import EyeToggleButton from "./EyeToggleButton";
 import { Wrapper } from "./Login";
 import SocialButtons from "./SocialButtons";
 
-import postSignUpUser from "features/user/userSlice"
 import {UserData} from "utils/api/axam-RegisterUser"
 import { useDispatch } from "react-redux";
+import { postSignUpUser } from "features/user/userSlice";
+import { useAppDispatch } from "redux/store";
 
 
 
@@ -32,11 +33,12 @@ import { useDispatch } from "react-redux";
     setPasswordVisibility((visible) => !visible);
   }, []);
 
- const dispatch= useDispatch();
+ const dispatch= useAppDispatch();
 
   const handleFormSubmit = async (values: any) => {
      console.log(values);
    dispatch(postSignUpUser())
+   console.log("after gestting values"+values);
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

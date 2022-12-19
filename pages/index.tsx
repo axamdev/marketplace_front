@@ -90,7 +90,7 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
 
   
 
-  console.log("Sections list"+props.sectionsList.data)
+  // console.log("Sections list"+props.sectionsList.data)
   return (
     <Provider store={store} >
     <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}  >
