@@ -33,6 +33,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "@types/next": "^9.0.0",
     "@types/react-redux": "^7.1.24",
+    "@types/react-router-dom": "^5.3.3",
     "apexcharts": "^3.35.2",
     "axios": "^0.24.0",
     "axios-mock-adapter": "^1.20.0",

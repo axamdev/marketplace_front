@@ -26,7 +26,11 @@ import { useAppDispatch } from "redux/store";
  // registerUserList?:UserData;
 //};
 //const Signup: FC <SignupProps> = (registerUserList) => {
-  const Signup = () => {
+  
+const Signup = () => {
+
+
+
   const [passwordVisibility, setPasswordVisibility] = useState(false);
  
   const togglePasswordVisibility = useCallback(() => {
@@ -34,7 +38,16 @@ import { useAppDispatch } from "redux/store";
   }, []);
 
  const dispatch= useAppDispatch();
+ 
+ const [auth,setAuth] = ('signin')
+ const authenticate =()=>{
 
+ if (auth=='signin'){
+
+ }else{
+   dispatch(postSignUpUser())
+ }
+}
   const handleFormSubmit = async (values: any) => {
      console.log(values);
    dispatch(postSignUpUser())
@@ -48,6 +61,7 @@ import { useAppDispatch } from "redux/store";
       validationSchema: formSchema,
     });
     
+
 //console.log(registerUserList);
   return (
     <Wrapper elevation={3} passwordVisibility={passwordVisibility}>
@@ -97,6 +111,21 @@ import { useAppDispatch } from "redux/store";
           helperText={touched.email && errors.email}
         />
 
+<BazaarTextField
+          mb={1.5}
+          fullWidth
+          name="mobile"
+          size="small"
+          type="mobile"
+          variant="outlined"
+          onBlur={handleBlur}
+          value={values.mobile}
+          onChange={handleChange}
+          label="Phone Number"
+          placeholder="+216222333"
+          error={!!touched.mobile && !!errors.mobile}
+          helperText={touched.mobile && errors.mobile}
+        />
         <BazaarTextField
           mb={1.5}
           fullWidth

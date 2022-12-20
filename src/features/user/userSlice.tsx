@@ -1,18 +1,18 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
-import signUpUser from "utils/api/axam-RegisterUser";
+import {useHistory} from "react-router-dom"
 import axios from "axios";
 import { registerUrl, TOKEN } from "utils/constants";
 
 
 export interface  initialTypes{
-    msg: string,
+    message: string,
     user: string,
     token:string,
     loading: boolean,
     error: string
 }
 const initialState :initialTypes= {
-    msg: "",
+    message: "",
     user: "",
     token: "",
     loading: false,
@@ -23,12 +23,12 @@ const initialState :initialTypes= {
 export const postSignUpUser = createAsyncThunk('signupuser',async () => {
 
   var bodyFormData = new FormData();
-  bodyFormData.append('name', 'rania 123');
-  bodyFormData.append('email', 'rania87975454@gmail.com');
-  bodyFormData.append('mobile', '58748788');
-  bodyFormData.append('password', 'Azert56789');
+  bodyFormData.append('name', 'imene');
+  bodyFormData.append('email', 'i@gmail.com');
+  bodyFormData.append('mobile', '9147258');
+  bodyFormData.append('password', '13456789');
   bodyFormData.append('country_code', '216');
-
+//const {name,email,mobile,password,country_code}=formData;
 var config = {
     headers: {  
         'Accept':"*/*",
@@ -42,8 +42,10 @@ var config = {
     console.log(response.data);
     console.log(response.config);
     console.log(response.headers);
-
+    localStorage.setItem("user-info",response.data)
+    //history.push("/login")
    return response.data;
+  
 });
 
 
@@ -53,21 +55,27 @@ export const userSlice = createSlice({
     reducers : {
 
     },
-    extraReducers : {
-    //    [signUpUser.pending]: (state,action) =>{
-    //      state.loading = true
-    //    },
-    //    [signUpUser.fulfilled]: (state,{payload:{error,msg}})=>{
-    //      state.loading = false;
-    //      if (error){
-    //         state.error = error
-    //      }else{
-    //         state.msg = msg
-    //      }
-    //    },
-    // [signUpUser.rejected]: (state,action)=> {
-    //     state.loading = true
-    // }
+    extraReducers : (builder)=>{
+        builder
+        .addCase(postSignUpUser.pending,(state,action) =>{
+         state.loading = true
+       }),
+       builder
+        .addCase(postSignUpUser.fulfilled,(state,{payload})=>{
+         state.loading = false;
+        //  if(error){
+        //  state.error = error
+        //  }else{
+        //     state.message = message
+        //  }
+            state.user = payload
+          
+
+       }),
+       builder
+       .addCase(postSignUpUser.rejected,(state,action)=> {
+        state.loading = true
+    })
     }
 })
 
