@@ -8,10 +8,10 @@ import React, { useCallback, useState } from "react";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import SocialButtons from "./SocialButtons";
-
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import { loginUser } from "redux/authSlice";
-
+import { AppDispatch } from "redux/store";
+import {authSelector} from 'redux/authSlice'
 
 const fbStyle = { background: "#3B5998", color: "white" };
 const googleStyle = { background: "#4285F4", color: "white" };
@@ -40,11 +40,13 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
  const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   },[]);
-   const dispatch=useDispatch();
-  const handleFormSubmit =  (data) => {
+  const { error, msg } = useSelector(authSelector)
+   const dispatch=useDispatch<AppDispatch>();
+  const handleFormSubmit =  () => {
     console.log(values)
-    dispatch(loginUser(data))
-
+    
+    dispatch(loginUser({ email:values.email, password:values.password }))
+  
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -52,12 +54,13 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
       onSubmit: handleFormSubmit,
       validationSchema: formSchema,
     });
-
+  
   return (
     <Wrapper elevation={3} passwordVisibility={passwordVisibility}>
       <form onSubmit={handleSubmit}>
         <H3 textAlign="center" mb={1}>
           Welcome To Ecommerce
+          
         </H3>
         <Small
           mb={4.5}
@@ -120,6 +123,7 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
         >
           Login
         </BazaarButton>
+        <>  {error?msg:null}</>
       </form>
 
       <SocialButtons redirect="/signup" redirectText="Sign Up" />
@@ -131,6 +135,7 @@ const initialValues = {
   email: "",
   password: "",
 };
+
 
 const formSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
