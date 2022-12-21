@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, AlertTitle, Checkbox, FormControlLabel } from "@mui/material";
 import BazaarButton from "components/BazaarButton";
 import BazaarTextField from "components/BazaarTextField";
 import { FlexBox } from "components/flex-box";
@@ -210,7 +210,11 @@ const Signup = () => {
         >
           Create Account
         </BazaarButton>
-        <>  {error?msg:null}</>
+        <br/><br/>
+        {error?(<Alert severity="error">
+                   <AlertTitle>{msg}</AlertTitle>
+</Alert>):null}
+         
       </form>
 
       {/* <SocialButtons redirect="/login" redirectText="Login" /> */}
