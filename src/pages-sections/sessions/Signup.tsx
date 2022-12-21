@@ -14,7 +14,8 @@ import {UserData} from "utils/api/axam-RegisterUser"
 import { useDispatch } from "react-redux";
 import { postSignUpUser } from "features/user/userSlice";
 import { useAppDispatch } from "redux/store";
-
+import { useSelector } from "react-redux";
+import {userSelector} from "features/user/userSlice"
 
 
 
@@ -29,8 +30,6 @@ import { useAppDispatch } from "redux/store";
   
 const Signup = () => {
 
-
-
   const [passwordVisibility, setPasswordVisibility] = useState(false);
  
   const togglePasswordVisibility = useCallback(() => {
@@ -38,19 +37,19 @@ const Signup = () => {
   }, []);
 
  const dispatch= useAppDispatch();
- 
+ const { error, msg } = useSelector(userSelector)
  const [auth,setAuth] = ('signin')
- const authenticate =()=>{
+//  const authenticate =()=>{
 
- if (auth=='signin'){
+//  if (auth=='signin'){
 
- }else{
-   dispatch(postSignUpUser())
- }
-}
+//  }else{
+//    dispatch(postSignUpUser())
+//  }
+// }
   const handleFormSubmit = async (values: any) => {
      console.log(values);
-   dispatch(postSignUpUser())
+   dispatch(postSignUpUser({name:values.name,email:values.email,mobile:values.mobile,password:values.password,country_code:216}))
    console.log("after gestting values"+values);
   };
 
@@ -105,7 +104,7 @@ const Signup = () => {
           onBlur={handleBlur}
           value={values.email}
           onChange={handleChange}
-          label="Email or Phone Number"
+          label="Email"
           placeholder="exmple@mail.com"
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
@@ -121,8 +120,8 @@ const Signup = () => {
           onBlur={handleBlur}
           value={values.mobile}
           onChange={handleChange}
-          label="Phone Number"
-          placeholder="+216222333"
+          label="Mobile"
+          placeholder="********"
           error={!!touched.mobile && !!errors.mobile}
           helperText={touched.mobile && errors.mobile}
         />
@@ -211,6 +210,7 @@ const Signup = () => {
         >
           Create Account
         </BazaarButton>
+        <>  {error?msg:null}</>
       </form>
 
       {/* <SocialButtons redirect="/login" redirectText="Login" /> */}
@@ -229,6 +229,7 @@ const initialValues = {
 const formSchema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup.string().email("invalid email").required("Email is required"),
+  mobile: yup.string().required("invalid mobile").required("Mobile is required"),
   password: yup.string().required("Password is required"),
   re_password: yup
     .string()

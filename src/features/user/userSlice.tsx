@@ -5,14 +5,14 @@ import { registerUrl, TOKEN } from "utils/constants";
 
 
 export interface  initialTypes{
-    message: string,
+    msg: string,
     user: string,
     token:string,
     loading: boolean,
     error: string
 }
 const initialState :initialTypes= {
-    message: "",
+    msg: "",
     user: "",
     token: "",
     loading: false,
@@ -20,15 +20,15 @@ const initialState :initialTypes= {
 }
 
 
-export const postSignUpUser = createAsyncThunk('signupuser',async () => {
+export const postSignUpUser = createAsyncThunk('signupuser',async ({name,email,mobile,password,country_code}:any) => {
 
   var bodyFormData = new FormData();
-  bodyFormData.append('name', 'imene');
-  bodyFormData.append('email', 'i@gmail.com');
-  bodyFormData.append('mobile', '9147258');
-  bodyFormData.append('password', '13456789');
-  bodyFormData.append('country_code', '216');
-//const {name,email,mobile,password,country_code}=formData;
+  bodyFormData.append('name', name);
+  bodyFormData.append('email', email);
+  bodyFormData.append('mobile', mobile);
+  bodyFormData.append('password', password);
+  bodyFormData.append('country_code', country_code);
+
 var config = {
     headers: {  
         'Accept':"*/*",
@@ -42,7 +42,7 @@ var config = {
     console.log(response.data);
     console.log(response.config);
     console.log(response.headers);
-    localStorage.setItem("user-info",response.data)
+    //localStorage.setItem("user-info",response.data.data[0].activation_code)
     //history.push("/login")
    return response.data;
   
@@ -63,12 +63,18 @@ export const userSlice = createSlice({
        builder
         .addCase(postSignUpUser.fulfilled,(state,{payload})=>{
          state.loading = false;
-        //  if(error){
-        //  state.error = error
-        //  }else{
-        //     state.message = message
-        //  }
+         if(payload.error){
+            state.error=payload.error
+            state.msg=payload.message
+            state.loading = false
             state.user = payload
+          }
+          else{
+            state.error=payload.error
+            state.msg=payload.message
+            state.loading = false
+            state.user = payload
+          }
           
 
        }),
@@ -78,5 +84,5 @@ export const userSlice = createSlice({
     })
     }
 })
-
+export const userSelector = (state) => state.user
 export default userSlice.reducer;
