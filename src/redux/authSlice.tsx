@@ -5,7 +5,6 @@ import axios from "axios";
 export interface initialTypes {
   msg: String;
   user: String;
-  token: String;
   loading: boolean;
   error: String;
 }
@@ -15,7 +14,6 @@ export interface initialTypes {
 const initialState: initialTypes = {
   msg: "",
   user: "",
-  token:"",
   loading: false,
   error: "",
 };

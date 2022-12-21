@@ -1,4 +1,4 @@
-import { Card, CardProps } from "@mui/material";
+import { Alert, AlertTitle,Card, CardProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import BazaarButton from "components/BazaarButton";
 import BazaarTextField from "components/BazaarTextField";
@@ -123,7 +123,9 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
         >
           Login
         </BazaarButton>
-        <>  {error?msg:null}</>
+        {error?(<Alert severity="error">
+                   <AlertTitle>{msg}</AlertTitle>
+        </Alert>):null}
       </form>
 
       <SocialButtons redirect="/signup" redirectText="Sign Up" />
