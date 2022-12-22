@@ -2,7 +2,7 @@ import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
 import {useHistory} from "react-router-dom"
 import axios from "axios";
 import { registerUrl, TOKEN } from "utils/constants";
-
+//import {useRouter} from 'next/router'
 
 export interface  initialTypes{
     msg: string,
@@ -36,6 +36,7 @@ var config = {
         'Authorization': TOKEN
       },
   };
+  //const router=useRouter;
  //const postSignUpUser = async () => 
    const response = await axios.post(registerUrl,bodyFormData,config);
     console.log("response in post signup user : "+response.data);
@@ -43,7 +44,8 @@ var config = {
     console.log(response.config);
     console.log(response.headers);
     //localStorage.setItem("user-info",response.data.data[0].activation_code)
-    //history.push("/login")
+   
+    //router.push("login")
    return response.data;
   
 });

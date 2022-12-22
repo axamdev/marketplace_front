@@ -16,7 +16,7 @@ import { postSignUpUser } from "features/user/userSlice";
 import { useAppDispatch } from "redux/store";
 import { useSelector } from "react-redux";
 import {userSelector} from "features/user/userSlice"
-
+import {useRouter} from 'next/router'
 
 
 
@@ -38,7 +38,8 @@ const Signup = () => {
 
  const dispatch= useAppDispatch();
  const { error, msg } = useSelector(userSelector)
- const [auth,setAuth] = ('signin')
+ //const user = useSelector(userSelector)
+ //const [auth,setAuth] = ('signin')
 //  const authenticate =()=>{
 
 //  if (auth=='signin'){
@@ -47,10 +48,14 @@ const Signup = () => {
 //    dispatch(postSignUpUser())
 //  }
 // }
+const router= useRouter();
   const handleFormSubmit = async (values: any) => {
      console.log(values);
+     //console.log(user,"here error signup");
    dispatch(postSignUpUser({name:values.name,email:values.email,mobile:values.mobile,password:values.password,country_code:216}))
    console.log("after gestting values"+values);
+   
+   router.push("login")
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -207,6 +212,7 @@ const Signup = () => {
           color="primary"
           variant="contained"
           sx={{ height: 44 }}
+          
         >
           Create Account
         </BazaarButton>
@@ -214,6 +220,7 @@ const Signup = () => {
         {error?(<Alert severity="error">
                    <AlertTitle>{msg}</AlertTitle>
 </Alert>):null}
+                  
          
       </form>
 
