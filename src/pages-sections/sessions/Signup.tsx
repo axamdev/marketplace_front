@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, AlertTitle, Checkbox, FormControlLabel, Modal } from "@mui/material";
 import BazaarButton from "components/BazaarButton";
 import BazaarTextField from "components/BazaarTextField";
 import { FlexBox } from "components/flex-box";
@@ -54,8 +54,8 @@ const router= useRouter();
      //console.log(user,"here error signup");
    dispatch(postSignUpUser({name:values.name,email:values.email,mobile:values.mobile,password:values.password,country_code:216}))
    console.log("after gestting values"+values);
+   {error?router.push("login"): router.push("signup")}
    
-   router.push("login")
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

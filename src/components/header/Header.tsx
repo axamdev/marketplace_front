@@ -100,7 +100,7 @@ const Header: FC<HeaderProps> = ({
         </FlexBox>
 
         <FlexBox justifyContent="center" flex="1 1 0">
-          {searchBoxType === "type1" && <SearchBox categoriesList={categoriesList}/>}
+          {/* {searchBoxType === "type1" && <SearchBox categoriesList={categoriesList}/>} */}
           {searchBoxType === "type2" && <GrocerySearchBox />}
         </FlexBox>
 
