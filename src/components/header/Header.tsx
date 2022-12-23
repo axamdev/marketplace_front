@@ -123,7 +123,7 @@ const Header: FC<HeaderProps> = ({
             p={1.25}
             bgcolor="grey.200"
             // onClick={toggleDialog}
->
+            >
               <Favorite /> 
           </Box></Link>
           <Badge badgeContent={state.cart.length} color="primary">
@@ -147,7 +147,8 @@ const Header: FC<HeaderProps> = ({
            onClose={toggleDialog}
           // onClick={toggleDialog}
         >
-          <Login />
+          <form onSubmit={toggleDialog}><Login/></form>
+          
         </Dialog>
 
         <Drawer open={sidenavOpen} anchor="right" onClose={toggleSidenav}>
