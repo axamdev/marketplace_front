@@ -32,11 +32,8 @@ import GiftShopTopSales from "pages-sections/giftshop/GiftShopTopSales";
 import GiftShopAllProducts from "pages-sections/giftshop/GiftShopAllProducts";
 import apiSubCategories from "utils/api/axam-category";
 import Section1 from "pages-sections/fashion-shop-3/Section1";
-import { Provider } from 'react-redux';
-import  {store} from '../src/redux/store'
-
-
-
+import { Provider } from "react-redux";
+import { store } from "../src/redux/store";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   gap: "1.75rem",
@@ -63,16 +60,16 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 // ======================================================================
 type FurnitureShopProps = {
-  categoriesList?:DataCategories;
-  subcategoriesList:any[];
-  slidershomeList:any[];
-  loginList?:IdentificationList ;
+  categoriesList?: DataCategories;
+  subcategoriesList: any[];
+  slidershomeList: any[];
+  loginList?: IdentificationList;
   sectionsList: SectionsResponse;
   offersList: OffersResponse;
   topNewProducts: any[];
   furnitureProducts: any[];
   topSellingProducts: any[];
-  furnitureShopNavList: any[]; 
+  furnitureShopNavList: any[];
   giftShopNavList: any[];
   popularProducts: any[];
   giftShopProducts: any[];
@@ -90,23 +87,23 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
 
   useEffect(() => setSidebarHeight(pageContentRef.current.offsetHeight), []);
 
-
-
-  console.log("Sections list"+props.sectionsList.data)
+  console.log("Sections list" + props.sectionsList.data);
   return (
-   <Provider store={store}>
-    <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}  >
+    <Provider store={store}>
+      <ShopLayout1 showTopbar={false} categoriesList={props.categoriesList}>
+        <SEO title="AXAM" />
 
-<SEO title="AXAM" />
-
-{/* HERO SECTION */}
-{/* <FurnitureShopSection1 /> */}
-{/* <GiftShopSection1 slidershomeList={props.slidershomeList}/> */}
-<Section1 slidershomeList={props.slidershomeList} offersList={props.offersList.data}/>
-<Container>
-  <StyledContainer >
-    {/* LEFT SIDEBAR */}
-    {/* <Box className="sidenav">
+        {/* HERO SECTION */}
+        {/* <FurnitureShopSection1 /> */}
+        {/* <GiftShopSection1 slidershomeList={props.slidershomeList}/> */}
+        <Section1
+          slidershomeList={props.slidershomeList}
+          offersList={props.offersList.data}
+        />
+        <Container>
+          <StyledContainer>
+            {/* LEFT SIDEBAR */}
+            {/* <Box className="sidenav">
       <SideNavbar
         lineStyle="dash"
         sidebarStyle="style2"
@@ -114,35 +111,33 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
         sidebarHeight={sidebarHeight || "85vh"}
       />
        {/* <ProductFilterCard /> */}
-    {/*  </Box> */}
+            {/*  </Box> */}
 
-    <Box className="pageContent" ref={pageContentRef}>
-      {/* OFFER BANNERS */}
-       {/* <FurnitureShopSection2 /> */}
-      {/* <GiftShopSection3 offersList={props.offersList.data}/> */}
+            <Box className="pageContent" ref={pageContentRef}>
+              {/* OFFER BANNERS */}
+              {/* <FurnitureShopSection2 /> */}
+              {/* <GiftShopSection3 offersList={props.offersList.data}/> */}
 
-      <Box my={10} className="categories">
-      <TopCategorySection categoriesList={props.categoriesList} />
+              <Box my={10} className="categories">
+                <TopCategorySection categoriesList={props.categoriesList} />
+              </Box>
+              <Box className="pageContent" ref={pageContentRef}>
+                {/* <GiftShopServices serviceData={props.giftShopServicesList} /> */}
+              </Box>
+            </Box>
+          </StyledContainer>
 
-      </Box>
-      <Box className="pageContent" ref={pageContentRef}>
-    {/* <GiftShopServices serviceData={props.giftShopServicesList} /> */}
+          <Stack spacing={6} my={6}>
+            {props.sectionsList.data.map((item) => {
+              return (
+                <GiftShopPopularItems
+                  dataSections={item}
+                  productsData={props.popularProducts}
+                />
+              );
+            })}
 
-  </Box>
-    </Box>
-  </StyledContainer>
-
- <Stack spacing={6} my={6}>
-
- {props.sectionsList.data.map((item) => {
-  return (
-
-    <GiftShopPopularItems dataSections={item} productsData={props.popularProducts} />
-
-  );
-})}
-
-{/* 
+            {/* 
 
     <GiftShopTopSales  productsData={props.topSailedProducts} />
     <GiftShopAllProducts productsData={props.giftShopProducts} />
@@ -150,28 +145,27 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
     <TopSellingProducts productsData={props.topSellingProducts} />
     <FurnitureShopAllProducts productsData={props.furnitureProducts} />
  */}
-  </Stack>
-</Container>
+          </Stack>
+        </Container>
 
+        {/* REMOVE THIS SETTING COMPONENT */}
+        <Setting />
 
-{/* REMOVE THIS SETTING COMPONENT */}
-<Setting />
-
-<MobileNavigationBar2>
-  <SideNavbar
-    navList={props.furnitureShopNavList}
-    lineStyle="dash"
-    sidebarStyle="style2"
-  />
-</MobileNavigationBar2>
-</ShopLayout1>
-   </Provider> 
+        <MobileNavigationBar2>
+          <SideNavbar
+            navList={props.furnitureShopNavList}
+            lineStyle="dash"
+            sidebarStyle="style2"
+          />
+        </MobileNavigationBar2>
+      </ShopLayout1>
+    </Provider>
   );
 };
 
 export async function getStaticProps() {
-  const loginList= await apiLogin.getLogin();
-  const slidershomeList=await  apiSlidersHome.getAllSlidersHome();
+  const loginList = await apiLogin.getLogin();
+  const slidershomeList = await apiSlidersHome.getAllSlidersHome();
   const categoriesList = await apiCategories.getAllCategories();
   //const subCategoriesList = await apiSubCategories.getSubCategories();
   const sectionsList = await apiSections.getAllSections();
@@ -202,7 +196,7 @@ export async function getStaticProps() {
       giftShopProducts,
       topSailedProducts,
       giftShopServicesList,
-      giftShopTopCategories
+      giftShopTopCategories,
     },
   };
 }

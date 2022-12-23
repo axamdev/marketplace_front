@@ -99,7 +99,7 @@ const Header: FC<HeaderProps> = ({
         </FlexBox>
 
         <FlexBox justifyContent="center" flex="1 1 0">
-          {searchBoxType === "type1" && <SearchBox categoriesList={categoriesList}/>}
+          {/* {searchBoxType === "type1" && <SearchBox categoriesList={categoriesList}/>} */}
           {searchBoxType === "type2" && <GrocerySearchBox />}
         </FlexBox>
 
@@ -144,7 +144,8 @@ const Header: FC<HeaderProps> = ({
           open={dialogOpen}
           fullWidth={isMobile}
           scroll="body"
-          onClose={toggleDialog}
+           onClose={toggleDialog}
+          // onClick={toggleDialog}
         >
           <Login />
         </Dialog>
