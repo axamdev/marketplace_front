@@ -84,10 +84,10 @@ const Header = () => {
               <Scroll to="top" duration={400} smooth={true} isDynamic>
                 <Box sx={{ cursor: "pointer" }}>
                   <Image
-                    width="96px"
-                    height="44px"
+                    width="126px"
+                    height="88px"
                     src="/assets/images/axamlogo.png"
-                    alt="logo"
+                    alt="logo-axaù-header"
                   />
                 </Box>
               </Scroll>

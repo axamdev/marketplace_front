@@ -239,7 +239,7 @@ const Navbar: FC<NavbarProps> = ({
             </CategoryMenuButton>
           </CategoryMenu>
 
-
+{/* 
           <FlexBox justifyContent="center" mb={0}>
               <Button
                 variant="outlined"
@@ -266,7 +266,7 @@ const Navbar: FC<NavbarProps> = ({
                 Anniversaire
               </Button>
 
-          </FlexBox>
+          </FlexBox> */}
           {/* Horizontal menu */}
           <FlexBox gap={4}>{renderNestedNav(navbarNavigations, true)}</FlexBox>
         </InnerContainer>
