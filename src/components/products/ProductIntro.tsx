@@ -10,17 +10,18 @@ import { CartItem, useAppContext } from "contexts/AppContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
+import { Productsdata } from "utils/api/axam-products";
 // import ImageViewer from "react-simple-image-viewer";
 import { FlexBox, FlexRowCenter } from "../flex-box";
 
 // ================================================================
 type ProductIntroProps = {
-  product: { [key: string]: any };
+  product: Productsdata;
 };
 // ================================================================
 
 const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
-  const { id, price, title, imgGroup } = product;
+  const prod = product;
 
   const router = useRouter();
   const routerId = router.query.id as string;
@@ -32,7 +33,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const { state, dispatch } = useAppContext();
   const cartList: CartItem[] = state.cart;
   const cartItem = cartList.find(
-    (item) => item.id === id || item.id === routerId
+    (item) => item.id === prod.id || item.id === routerId
   );
 
   const handleImageClick = (ind: number) => () => {
@@ -48,17 +49,17 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   //   setCurrentImage(0);
   //   setIsViewerOpen(false);
   // };
-
+var price: number =  +prod.variants[0].special_price ;
   const handleCartAmountChange = useCallback(
     (amount) => () => {
       dispatch({
         type: "CHANGE_CART_AMOUNT",
         payload: {
-          price,
+          price ,
           qty: amount,
-          name: title,
-          imgUrl: imgGroup[0],
-          id: id || routerId,
+          name: prod.name,
+          imgUrl: prod.image,
+          id: prod.id || routerId,
         },
       });
     },
@@ -72,11 +73,11 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
           <FlexBox justifyContent="center" mb={6}>
             <LazyImage
               width={300}
-              alt={title}
+              alt={prod.name}
               height={300}
               loading="eager"
               objectFit="contain"
-              src={product.imgGroup[selectedImage]}
+              src={prod.other_images[selectedImage]}
               // onClick={() => openImageViewer(imgGroup.indexOf(imgGroup[selectedImage]))}
             />
             {/* {isViewerOpen && (
@@ -93,7 +94,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
           </FlexBox>
 
           <FlexBox overflow="auto">
-            {imgGroup.map((url, ind) => (
+            {prod.other_images.map((url, ind) => (
               <FlexRowCenter
                 key={ind}
                 width={64}
@@ -105,7 +106,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
                 ml={ind === 0 ? "auto" : 0}
                 style={{ cursor: "pointer" }}
                 onClick={handleImageClick(ind)}
-                mr={ind === imgGroup.length - 1 ? "auto" : "10px"}
+                mr={ind === prod.other_images.length - 1 ? "auto" : "10px"}
                 borderColor={
                   selectedImage === ind ? "primary.main" : "grey.400"
                 }
@@ -117,11 +118,11 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
         </Grid>
 
         <Grid item md={6} xs={12} alignItems="center">
-          <H1 mb={2}>{title}</H1>
+          <H1 mb={2}>{prod.name}</H1>
 
           <FlexBox alignItems="center" mb={2}>
-            <Box>Brand:</Box>
-            <H6 ml={1}>Xiaomi</H6>
+            <Box>Category</Box>
+            <H6 ml={1}>{prod.category_name}</H6>
           </FlexBox>
 
           <FlexBox alignItems="center" mb={2}>
@@ -182,10 +183,10 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
           )}
 
           <FlexBox alignItems="center" mb={2}>
-            <Box>Sold By:</Box>
+            <Box>Vendu par : :</Box>
             <Link href="/shops/fdfdsa">
               <a>
-                <H6 ml={1}>Dari Deco Store</H6>
+                <H6 ml={1}>{prod.seller_name}</H6>
               </a>
             </Link>
           </FlexBox>

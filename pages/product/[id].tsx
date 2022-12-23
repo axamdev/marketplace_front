@@ -1,3 +1,4 @@
+import { Update } from "@mui/icons-material";
 import { Box, Container, styled, Tab, Tabs } from "@mui/material";
 import ShopLayout1 from "components/layouts/ShopLayout1";
 import Navbar from "components/navbar/Navbar";
@@ -9,7 +10,10 @@ import ProductReview from "components/products/ProductReview";
 import RelatedProducts from "components/products/RelatedProducts";
 import { H2 } from "components/Typography";
 import bazaarReactDatabase from "data/bazaar-react-database";
+import { id } from "date-fns/locale";
 import { FC, useEffect, useState } from "react";
+import api, { ProductsResponse } from "utils/api/axam-products";
+
 import {
   getFrequentlyBought,
   getRelatedProducts,
@@ -37,11 +41,12 @@ type ProductDetailsProps = {
 const ProductDetails: FC<ProductDetailsProps> = (props) => {
   // const { frequentlyBought, relatedProducts } = props;
 
-  const [product, setProduct] = useState(bazaarReactDatabase[0]);
+  // const [product, setProduct] = useState(bazaarReactDatabase[0]);
+  const [product, setProduct] = useState<ProductsResponse> ();
   const [selectedOption, setSelectedOption] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [frequentlyBought, setFrequentlyBought] = useState([]);
-
+  // let idP: number = id.code 
   /**
    * Note:
    * ==============================================================
@@ -53,16 +58,22 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
   useEffect(() => {
     getRelatedProducts().then((data) => setRelatedProducts(data));
     getFrequentlyBought().then((data) => setFrequentlyBought(data));
+    api.get_products(6).then((data)=> setProduct(data)    )
   }, []);
 
   const handleOptionClick = (_, value: number) => setSelectedOption(value);
-
+  console.log("before getting id ") ;
+    console.log(id) ;
+      console.log("after getting id ") ;
   return (
+
     <ShopLayout1>
       <Container sx={{ my: 4 }}>
-        {product ? <ProductIntro product={product} /> : <H2>Loading...</H2>}
-
-        <StyledTabs
+        {product ? <ProductIntro product={product.data[0]} /> : <H2>Loading...</H2>} 
+        
+        
+        {product ? <H2>{product.data[0].name}</H2> : <H2>Loading...</H2>}
+        {/* <StyledTabs
           textColor="primary"
           value={selectedOption}
           indicatorColor="primary"
@@ -83,7 +94,9 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
 
         <AvailableShops />
 
-        {relatedProducts && <RelatedProducts productsData={relatedProducts} />}
+        {relatedProducts && <RelatedProducts productsData={relatedProducts} />} */}
+
+
       </Container>
     </ShopLayout1>
   );
