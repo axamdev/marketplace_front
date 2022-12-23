@@ -11,6 +11,7 @@ const jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcy
 export const categoriesUrl = devUrl+"get_categories" ;
 export const sliderhomeUrl=devUrl+"get_slider_images";
 export const registerUrl = devUrl+"register_user" ;
+export const loginUrl=devUrl+"login";
 export const sectionsUrl=devUrl+"get_sections";
 export const offersUrl=devUrl+"get_offer_images";
 

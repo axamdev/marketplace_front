@@ -1,7 +1,7 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
 import {useHistory} from "react-router-dom"
 import axios from "axios";
-import { registerUrl, TOKEN } from "utils/constants";
+import { registerUrl, TOKEN,loginUrl } from "utils/constants";
 //import {useRouter} from 'next/router'
 
 export interface  initialTypes{
@@ -19,7 +19,13 @@ const initialState :initialTypes= {
     error: ""
 }
 
-
+var config = {
+  headers: {  
+      'Accept':"*/*",
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': TOKEN
+    },
+};
 export const postSignUpUser = createAsyncThunk('signupuser',async ({name,email,mobile,password,country_code}:any) => {
 
   var bodyFormData = new FormData();
@@ -29,13 +35,7 @@ export const postSignUpUser = createAsyncThunk('signupuser',async ({name,email,m
   bodyFormData.append('password', password);
   bodyFormData.append('country_code', country_code);
 
-var config = {
-    headers: {  
-        'Accept':"*/*",
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': TOKEN
-      },
-  };
+
   //const router=useRouter;
  //const postSignUpUser = async () => 
    const response = await axios.post(registerUrl,bodyFormData,config);
@@ -49,6 +49,16 @@ var config = {
    return response.data;
   
 });
+
+
+//*****Login *****/
+// export const loginUser = createAsyncThunk('loginuser', async ({email,password}:any) => {
+//   var bodyFormData = new FormData();
+//   bodyFormData.append('email',email);
+//   bodyFormData.append('password', password);
+//    const response = await axios.post(loginUrl,bodyFormData,
+//       config);
+//    console.log(response.data)})
 
 
 export const userSlice = createSlice({

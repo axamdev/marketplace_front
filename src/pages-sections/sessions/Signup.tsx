@@ -9,7 +9,7 @@ import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import { Wrapper } from "./Login";
 import SocialButtons from "./SocialButtons";
-
+import {Phone} from 'components/mobileCode';
 import {UserData} from "utils/api/axam-RegisterUser"
 import { useDispatch } from "react-redux";
 import { postSignUpUser } from "features/user/userSlice";
@@ -17,8 +17,8 @@ import { useAppDispatch } from "redux/store";
 import { useSelector } from "react-redux";
 import {userSelector} from "features/user/userSlice"
 import {useRouter} from 'next/router'
-
-
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 //import { FC} from "react";
 //const dispatch = useDispatch()
@@ -38,6 +38,7 @@ const Signup = () => {
 
  const dispatch= useAppDispatch();
  const { error, msg } = useSelector(userSelector)
+ const user = useSelector(userSelector)
  //const user = useSelector(userSelector)
  //const [auth,setAuth] = ('signin')
 //  const authenticate =()=>{
@@ -54,6 +55,7 @@ const router= useRouter();
      //console.log(user,"here error signup");
    dispatch(postSignUpUser({name:values.name,email:values.email,mobile:values.mobile,password:values.password,country_code:216}))
    console.log("after gestting values"+values);
+// console.log(user,"erreur is here");
    {error?router.push("login"): router.push("signup")}
    
   };
@@ -71,7 +73,7 @@ const router= useRouter();
     <Wrapper elevation={3} passwordVisibility={passwordVisibility}>
       <form onSubmit={handleSubmit}>
         <H3 textAlign="center" mb={1}>
-          Create Your Account
+        Créez votre compte
         </H3>
         <Small
           mb={4.5}
@@ -81,7 +83,7 @@ const router= useRouter();
           color="grey.800"
           textAlign="center"
         >
-          Please fill all fields to continue
+          Veuillez remplir tous les champs pour continuer
         </Small>
 
         <BazaarTextField
@@ -89,12 +91,12 @@ const router= useRouter();
           fullWidth
           name="name"
           size="small"
-          label="Full Name"
+          label="Nom et prénom"
           variant="outlined"
           onBlur={handleBlur}
           value={values.name}
           onChange={handleChange}
-          placeholder="Ralph Adwards"
+          placeholder="Ahmed Ben Salah"
           error={!!touched.name && !!errors.name}
           helperText={touched.name && errors.name}
         />
@@ -109,7 +111,7 @@ const router= useRouter();
           onBlur={handleBlur}
           value={values.email}
           onChange={handleChange}
-          label="Email"
+          label="E-mail"
           placeholder="exmple@mail.com"
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
@@ -121,21 +123,33 @@ const router= useRouter();
           name="mobile"
           size="small"
           type="mobile"
+          
           variant="outlined"
           onBlur={handleBlur}
           value={values.mobile}
           onChange={handleChange}
-          label="Mobile"
-          placeholder="********"
+          label="Téléphone"
+          placeholder="+21655823147"
           error={!!touched.mobile && !!errors.mobile}
           helperText={touched.mobile && errors.mobile}
         />
+        
+        {/* <PhoneInput
+         name="mobile"
+          onBlur={handleBlur}
+          value={values.mobile}
+          onChange={handleChange}
+          placeholder="+216 50450450"
+        
+         inputStyle={{width:'405px',height: '45px'}} 
+        
+      /> */}
         <BazaarTextField
           mb={1.5}
           fullWidth
           size="small"
           name="password"
-          label="Password"
+          label="Mot de passe"
           variant="outlined"
           autoComplete="on"
           placeholder="*********"
@@ -161,7 +175,7 @@ const router= useRouter();
           autoComplete="on"
           name="re_password"
           variant="outlined"
-          label="Retype Password"
+          label="Retaper le mot de passe"
           placeholder="*********"
           onBlur={handleBlur}
           onChange={handleChange}
@@ -196,10 +210,10 @@ const router= useRouter();
               alignItems="center"
               justifyContent="flex-start"
             >
-              By signing up, you agree to
+              En vous inscrivant, vous acceptez nos
               <a href="/" target="_blank" rel="noreferrer noopener">
                 <H6 ml={1} borderBottom="1px solid" borderColor="grey.900">
-                  Terms & Condtion
+                Conditions
                 </H6>
               </a>
             </FlexBox>
@@ -214,7 +228,7 @@ const router= useRouter();
           sx={{ height: 44 }}
           
         >
-          Create Account
+         Créer un compte
         </BazaarButton>
         <br/><br/>
         {error?(<Alert severity="error">
@@ -238,14 +252,14 @@ const initialValues = {
 };
 
 const formSchema = yup.object().shape({
-  name: yup.string().required("Name is required"),
-  email: yup.string().email("invalid email").required("Email is required"),
-  mobile: yup.string().required("invalid mobile").required("Mobile is required"),
-  password: yup.string().required("Password is required"),
+  name: yup.string().required("Le nom est requis"),
+  email: yup.string().email("e-mail invalide").required("L'e-mail est requis"),
+  mobile: yup.string().required("Numéro de téléphone invalide").required("Le numéro de portable est requis"),
+  password: yup.string().required("Mot de passe requis"),
   re_password: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match")
-    .required("Please re-type password"),
+    .oneOf([yup.ref("password"), null], "les mots de passe doivent correspondre")
+    .required("Veuillez retaper le mot de passe"),
   agreement: yup
     .bool()
     .test(
@@ -253,7 +267,7 @@ const formSchema = yup.object().shape({
       "You have to agree with our Terms and Conditions!",
       (value) => value === true
     )
-    .required("You have to agree with our Terms and Conditions!"),
+    .required("Vous devez accepter nos Termes et Conditions!"),
 });
 
 export default Signup;
