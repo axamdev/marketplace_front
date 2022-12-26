@@ -25,11 +25,11 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
 
         <FlexBox justifyContent="center" mt={-1.625}>
           <Box color="grey.600" bgcolor="background.paper" px={2}>
-            or
+            ou
           </Box>
         </FlexBox>
       </Box>
-
+{/* 
       <BazaarButton
         className="facebookButton"
         size="medium"
@@ -43,8 +43,8 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
         <Box fontSize="12px" ml={1}>
           Continue with Facebook
         </Box>
-      </BazaarButton>
-
+      </BazaarButton> */}
+{/* 
       <BazaarButton
         className="googleButton"
         size="medium"
@@ -55,10 +55,10 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
         <Box fontSize="12px" ml={1}>
           Continue with Google
         </Box>
-      </BazaarButton>
+      </BazaarButton> */}
 
       <FlexRowCenter my="1.25rem">
-        <Box>Don&apos;t have account?</Box>
+        <Box>Vous n'avez pas de compte ?</Box>
         <Link href={redirect}>
           <a>
             <H6 ml={1} borderBottom="1px solid" borderColor="grey.900">
@@ -68,7 +68,7 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
         </Link>
       </FlexRowCenter>
 
-      <FlexBox
+      {/* <FlexBox
         justifyContent="center"
         bgcolor="grey.200"
         borderRadius="4px"
@@ -82,7 +82,7 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
             </H6>
           </a>
         </Link>
-      </FlexBox>
+      </FlexBox> */}
     </Fragment>
   );
 };

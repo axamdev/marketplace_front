@@ -7,7 +7,7 @@ const jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcy
 
 
 
-
+export const loginUrl=devUrl+"login"
 export const categoriesUrl = devUrl+"get_categories" ;
 export const sliderhomeUrl=devUrl+"get_slider_images";
 export const sectionsUrl=devUrl+"get_sections";
