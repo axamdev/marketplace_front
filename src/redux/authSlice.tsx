@@ -67,7 +67,7 @@ const authSlice = createSlice({
         state.error = payload.error;
         state.msg = payload.message;
         state.loading = false;
-        state.user = payload.data;
+        state.user = payload.data[0];
         state.token=payload.data[0].activation_code;
         localStorage.setItem('token', payload.data[0].activation_code)
       }
