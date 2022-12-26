@@ -11,6 +11,7 @@ import RelatedProducts from "components/products/RelatedProducts";
 import { H2 } from "components/Typography";
 import bazaarReactDatabase from "data/bazaar-react-database";
 import { id } from "date-fns/locale";
+import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
 import api, { ProductsResponse } from "utils/api/axam-products";
 
@@ -42,6 +43,8 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
   // const { frequentlyBought, relatedProducts } = props;
 
   // const [product, setProduct] = useState(bazaarReactDatabase[0]);
+  const router = useRouter()
+  const pId =parseInt(router.query.id as string, 10)
   const [product, setProduct] = useState<ProductsResponse> ();
   const [selectedOption, setSelectedOption] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -58,7 +61,7 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
   useEffect(() => {
     getRelatedProducts().then((data) => setRelatedProducts(data));
     getFrequentlyBought().then((data) => setFrequentlyBought(data));
-    api.get_products(6).then((data)=> setProduct(data)    )
+    api.get_products(pId).then((data)=> setProduct(data)    )
   }, []);
 
   const handleOptionClick = (_, value: number) => setSelectedOption(value);
@@ -72,7 +75,7 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
         {product ? <ProductIntro product={product.data[0]} /> : <H2>Loading...</H2>} 
         
         
-        {product ? <H2>{product.data[0].name}</H2> : <H2>Loading...</H2>}
+        {/* {product ? <H2>{product.data[0].name}</H2> : <H2>Loading...</H2>} */}
         {/* <StyledTabs
           textColor="primary"
           value={selectedOption}

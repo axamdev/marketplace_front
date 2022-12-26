@@ -9,7 +9,7 @@ import { H1, H2, H3, H6 } from "components/Typography";
 import { CartItem, useAppContext } from "contexts/AppContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Productsdata } from "utils/api/axam-products";
 // import ImageViewer from "react-simple-image-viewer";
 import { FlexBox, FlexRowCenter } from "../flex-box";
@@ -29,6 +29,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [ImageList, setImageList] = useState([]);
 
   const { state, dispatch } = useAppContext();
   const cartList: CartItem[] = state.cart;
@@ -65,7 +66,12 @@ var price: number =  +prod.variants[0].special_price ;
     },
     []
   );
-
+  useEffect(() => {
+    ImageList.push(prod.other_images);
+    ImageList.push(prod.image) ; 
+  
+    
+  }, []);
   return (
     <Box width="100%">
       <Grid container spacing={3} justifyContent="space-around">
@@ -77,7 +83,7 @@ var price: number =  +prod.variants[0].special_price ;
               height={300}
               loading="eager"
               objectFit="contain"
-              src={prod.other_images[selectedImage]}
+              src={ImageList[selectedImage]}
               // onClick={() => openImageViewer(imgGroup.indexOf(imgGroup[selectedImage]))}
             />
             {/* {isViewerOpen && (
@@ -94,7 +100,7 @@ var price: number =  +prod.variants[0].special_price ;
           </FlexBox>
 
           <FlexBox overflow="auto">
-            {prod.other_images.map((url, ind) => (
+            {ImageList.map((url, ind) => (
               <FlexRowCenter
                 key={ind}
                 width={64}
@@ -106,7 +112,7 @@ var price: number =  +prod.variants[0].special_price ;
                 ml={ind === 0 ? "auto" : 0}
                 style={{ cursor: "pointer" }}
                 onClick={handleImageClick(ind)}
-                mr={ind === prod.other_images.length - 1 ? "auto" : "10px"}
+                mr={ind === ImageList.length - 1 ? "auto" : "10px"}
                 borderColor={
                   selectedImage === ind ? "primary.main" : "grey.400"
                 }

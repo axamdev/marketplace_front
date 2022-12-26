@@ -17,7 +17,7 @@ import { useEffect, useRef, useState } from "react";
 import api from "utils/api/furniture-shop";
 import api2 from "utils/api/gift-shop";
 import apiSlidersHome from "utils/api/axam-homesliders";
-import apiCategories, { DataCategories } from "utils/api/axam-category";
+import apiCategories, { DataCategories } from "utils/api/axam-category";  
 import apiSections, { SectionsResponse } from "utils/api/axam-sections";
 import apiOffers, { OffersResponse } from "utils/api/axam-offers";
 
