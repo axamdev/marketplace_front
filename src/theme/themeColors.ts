@@ -28,10 +28,10 @@ declare module "@mui/material/styles" {
 // =================================================================
 
 export const grey = {
-  900: "#2B3445", // Main Text
-  800: "#373F50", // Paragraph
-  700: "#4B566B",
-  600: "#7D879C", // Low Priority form Title/Text
+  900: "#005651", // Main Text
+  800: "#005651", // Paragraph
+  700: "#005651",
+  600: "#005651", // Low Priority form Title/Text
   500: "#AEB4BE",
   400: "#DAE1E7", // Border
   300: "#E3E9EF",
@@ -40,11 +40,11 @@ export const grey = {
 };
 
 export const primary = {
-  100: "#FCE9EC",
+  100: "#FEFBEA",
   200: "#F8C7CF",
   300: "#F07D90",
-  400: "#EC6178",
-  500: "#D23F57",
+  400: "#e09351",
+  500: "#e09351",
   600: "#E63E58",
   700: "#E3364E",
   800: "#DF2E44",
@@ -153,6 +153,6 @@ export const themeColors = {
   secondary,
   info: blue,
   divider: grey[200],
-  background: { default: grey[100] },
+  background: { default: white },
   text: { primary: grey[900], secondary: grey[800], disabled: grey[400] },
 };

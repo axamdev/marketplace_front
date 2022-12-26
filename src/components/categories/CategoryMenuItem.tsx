@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Box, MenuItem, styled } from "@mui/material";
+import Scrollbar from "components/Scrollbar";
 import useSettings from "hooks/useSettings";
 import Link from "next/link";
 import { FC } from "react";
@@ -42,6 +43,7 @@ const CategoryMenuItem: FC<CategoryMenuItemProps> = (props) => {
 
   return (
     <Wrapper>
+      
       <Link href={href} passHref>
         <MenuItem className="category-dropdown-link">
           {rest.icon && <rest.icon fontSize="small" color="inherit" />}
@@ -56,6 +58,7 @@ const CategoryMenuItem: FC<CategoryMenuItemProps> = (props) => {
       </Link>
 
       {children}
+      
     </Wrapper>
   );
 };

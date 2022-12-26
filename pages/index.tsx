@@ -19,6 +19,7 @@ import api2 from "utils/api/gift-shop";
 import apiSlidersHome from "utils/api/axam-homesliders";
 import apiLogin, { IdentificationList } from "utils/api/axam-login";
 import apiCategories, { DataCategories } from "utils/api/axam-category";
+
 import apiSections, { SectionsResponse } from "utils/api/axam-sections";
 import apiOffers, { OffersResponse } from "utils/api/axam-offers";
 

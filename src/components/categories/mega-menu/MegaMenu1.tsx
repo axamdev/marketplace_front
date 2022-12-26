@@ -77,20 +77,7 @@ const MegaMenu1: FC<MegaMenuProps> = ({
           )}
         </FlexBox>
 
-        {bottomImage && (
-          <Link href={bottomImage.href}>
-            <a>
-              <Box position="relative" height="250px" width="318px" maxWidth="100vh">
-                <LazyImage
-                  src={bottomImage.banner}
-                  layout="fill"
-                  objectFit="cover"
-                  
-                />
-              </Box>
-            </a>
-          </Link>
-        )}
+        
       </Card>
     </StyledMegaMenu>
   ) : null;

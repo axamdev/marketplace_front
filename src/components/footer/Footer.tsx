@@ -57,13 +57,13 @@ const Footer: FC = () => {
                   About Us
                 </Box>
 
-                <div>
-                  {aboutLinks.map((item, ind) => (
-                    <Link href="/" key={ind} passHref>
-                      <StyledLink>{item}</StyledLink>
-                    </Link>
-                  ))}
-                </div>
+                  {/* <div>
+                    {aboutLinks.map((item, ind) => (
+                      <Link href="/" key={ind} passHref>
+                        <StyledLink>{item}</StyledLink>
+                      </Link>
+                    ))}
+                  </div> */}
               </Grid>
 
               <Grid item lg={3} md={6} sm={6} xs={12}>
@@ -77,13 +77,13 @@ const Footer: FC = () => {
                   Customer Care
                 </Box>
 
-                <div>
+                {/* <div>
                   {customerCareLinks.map((item, ind) => (
                     <Link href="/" key={ind} passHref>
                       <StyledLink>{item}</StyledLink>
                     </Link>
-                  ))}
-                </div>
+                  ))}   
+                </div>*/}
               </Grid>
 
               <Grid item lg={3} md={6} sm={6} xs={12}>
@@ -126,6 +126,10 @@ const Footer: FC = () => {
                   ))}
                 </FlexBox>
               </Grid>
+
+
+
+              
             </Grid>
           </Box>
         </Container>

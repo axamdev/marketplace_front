@@ -125,7 +125,7 @@ const SideNavbar: FC<SideNavbarProps> = (props) => {
                         >
                           <FlexBox gap={1.5} alignItems="center">
                             <Icon fontSize="small" />
-                            <Span fontWeight="600">hello</Span>
+                            <Span fontWeight="600">Category Name</Span>
                           </FlexBox>
                         </AccordionHeader>
 

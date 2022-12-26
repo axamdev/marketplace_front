@@ -8,26 +8,27 @@ import { H3, Small } from "components/Typography";
 import Link from "next/link";
 import React, { FC } from "react";
 import StyledMegaMenu from "./StyledMegaMenu";
+import { ChildCategory, DataCategories } from "utils/api/axam-category";
 
 // component props with nested interface
 interface Image {
-  imgUrl: string;
+  banner: string;
   href: string;
 }
 
-interface SubCategory {
-  title: string;
-  href: string;
-}
+// interface SubCategory {
+//   title: string;
+//   href: string;
+// }
 
 interface Category {
   title: string;
   href?: string;
-  subCategories: SubCategory[];
+  categories: ChildCategory[];
 }
 
 interface MegaMenu {
-  categories: Category[];
+  categories: ChildCategory[];
   rightImage?: Image;
 }
 
@@ -48,16 +49,16 @@ const MegaMenu3: FC<MegaMenuProps> = ({
             <Grid container spacing={4}>
               {categories?.map((item, ind) => (
                 <Grid item md={3} key={ind}>
-                  {item.href ? (
-                    <NavLink className="title-link" href={item.href}>
-                      {item.title}
+                  {!!item.banner ? (
+                    <NavLink className="title-link" href={'#'}>
+                      {item.name}
                     </NavLink>
                   ) : (
-                    <Box className="title-link">{item.title}</Box>
+                    <Box className="title-link">{item.name}</Box>
                   )}
-                  {item.subCategories?.map((sub, ind) => (
-                    <NavLink className="child-link" href={sub.href} key={ind}>
-                      {sub.title}
+                  {item.children?.map(({id, ...item}) => (
+                    <NavLink className="child-link" href={'#'} key={id}>
+                      {item.name}
                     </NavLink>
                   ))}
                 </Grid>
@@ -70,7 +71,7 @@ const MegaMenu3: FC<MegaMenuProps> = ({
               <a>
                 <Box position="relative" width="153px" height="100%">
                   <LazyImage
-                    src={rightImage.imgUrl}
+                    src={rightImage.banner}
                     layout="fill"
                     objectFit="contain"
                   />

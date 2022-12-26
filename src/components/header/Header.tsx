@@ -43,7 +43,7 @@ type HeaderProps = {
   className?: string;
   searchBoxType?: "type1" | "type2";
   categoriesList?:DataCategories;
-};
+};  
 // ==============================================================
 
 const Header: FC<HeaderProps> = ({
@@ -82,7 +82,7 @@ const Header: FC<HeaderProps> = ({
         >
           <Link href="/">
             <a>
-              <Image height={44} src="/assets/images/axamlogo.png" alt="logo" />
+              <Image height={88} src="/assets/images/axamlogo.png" alt="logo" />
             </a>
           </Link>
 
