@@ -66,7 +66,7 @@ type GiftShopSection1Props = {
 const GiftShopSection1: FC <GiftShopSection1Props> = ({slidershomeList})=>{
   const { palette } = useTheme();
 
-  console.log("slidershomeList"+slidershomeList)
+  // console.log("slidershomeList"+slidershomeList)
   return (
     <StyledBox id="carouselBox">
       <Carousel

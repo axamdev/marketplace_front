@@ -54,7 +54,7 @@ const CategoryMenuCard: FC<CategoryMenuCardProps> = (props) => {
   //   categoriesList!=undefined ?? setcategories(props.categoriesList.data);
 
   // });
-  console.log("categories" + categoriesList.data[0].name);
+  // console.log("categories" + categoriesList.data[0].name);
   return (
    
     <Wrapper open={open} position={position}>

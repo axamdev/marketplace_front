@@ -5,6 +5,7 @@ import BazaarTextField from "components/BazaarTextField";
 import { H3, Small } from "components/Typography";
 import { useFormik } from "formik";
 import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import SocialButtons from "./SocialButtons";
@@ -42,6 +43,10 @@ const Login = () => {
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
+  const dispatch = useDispatch();
+  const handleFormSubmit = async (values: any) => {
+    console.log(values);
+    
   const {close}=useSelector(logSelector)
   const { error, msg,token,user } = useSelector(authSelector);
   const auth = useSelector(authSelector);

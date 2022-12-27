@@ -11,7 +11,7 @@ var config = {
   };
 const getAllSections = async () => {
    const response = await axios.post( sectionsUrl,params,config);
-   console.log("sections"+response.data);
+//    console.log("sections"+response.data);
    return response.data as SectionsResponse;
   //return data["data"] ;
 };
