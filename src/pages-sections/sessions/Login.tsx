@@ -10,7 +10,8 @@ import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import SocialButtons from "./SocialButtons";
 import { useDispatch, useSelector } from "react-redux";
-import {closeLogin} from 'redux/reducerLg'
+import {closeLogin} from 'redux/reducerLg';
+
 import { loginUser } from "redux/authSlice";
 import { AppDispatch } from "redux/store";
 import{logSelector} from 'redux/reducerLg'
