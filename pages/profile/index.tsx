@@ -8,18 +8,21 @@ import TableRow from "components/TableRow";
 import { H3, H5, Small } from "components/Typography";
 import { format } from "date-fns";
 import Link from "next/link";
+import { authSelector } from "redux/authSlice";
+import {  useSelector } from "react-redux";
 
 const Profile = () => {
+  const {user} = useSelector(authSelector)
   return (
     <CustomerDashboardLayout>
       <UserDashboardHeader
         icon={Person}
-        title="My Profile"
+        title="Mon Profil"
         navigation={<CustomerDashboardNavigation />}
         button={
           <Link href="/profile/edit" passHref>
             <Button color="primary" sx={{ px: 4, bgcolor: "primary.light" }}>
-              Edit Profile
+              Editer Le Profil 
             </Button>
           </Link>
         }
@@ -37,18 +40,19 @@ const Profile = () => {
               }}
             >
               <Avatar
-                src="/assets/images/faces/ralph.png"
+                src={user.image}
+                // src="/assets/images/faces/ralph.png"
                 sx={{ height: 64, width: 64 }}
               />
 
               <Box ml={1.5} flex="1 1 0">
                 <FlexBetween flexWrap="wrap">
                   <div>
-                    <H5 my="0px">Ralph Edwards</H5>
+                    <H5 my="0px">{user.username}</H5>
                     <FlexBox alignItems="center">
-                      <Typography color="grey.600">Balance:</Typography>
+                      <Typography color="grey.600">solde:</Typography>
                       <Typography ml={0.5} color="primary.main">
-                        $500
+                       {user.balance}
                       </Typography>
                     </FlexBox>
                   </div>
@@ -92,38 +96,38 @@ const Profile = () => {
       <TableRow sx={{ p: "0.75rem 1.5rem" }}>
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
-            First Name
+            Prénom
           </Small>
-          <span>Ralph</span>
+          <span>{user.username}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
-            Last Name
+            Nom
           </Small>
-          <span>Edwards</span>
+          <span></span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
-            Email
+           E-mail
           </Small>
-          <span>ralfedwards@email.com</span>
+          <span>{user.email}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
-            Phone
+          Téléphone
           </Small>
-          <span>+1983649392983</span>
+          <span>{user.mobile}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5}>
-            Birth date
+            Date de naissance
           </Small>
           <span className="pre">
-            {format(new Date(1996 / 11 / 16), "dd MMM, yyyy")}
+            {/* {format(new Date(1996 / 11 / 16), "dd MMM, yyyy")} */}
           </span>
         </FlexBox>
       </TableRow>
@@ -132,10 +136,13 @@ const Profile = () => {
 };
 
 const infoList = [
-  { title: "16", subtitle: "All Orders" },
-  { title: "02", subtitle: "Awaiting Payments" },
-  { title: "00", subtitle: "Awaiting Shipment" },
-  { title: "01", subtitle: "Awaiting Delivery" },
+  { title: "16", subtitle: "Tous les ordres" },
+  { title: "02", subtitle: "en attente de paiements" },
+  { title: "00", subtitle: "En attente d'expédition" },
+  { title: "01", subtitle: "En attente de livraison" },
 ];
 
 export default Profile;
+
+
+

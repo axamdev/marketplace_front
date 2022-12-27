@@ -90,13 +90,13 @@ const SearchBox: FC<SearchBoxProps> = (props) => {
         </DropDownHandler>
       }
     >
-      
-      {categoriesList.data.map((item) => (
-        <MenuItem key={item} onClick={handleCategoryChange(item.name)}>
-          {/* item.name pour afficher le nom de categorie */}
+                {/* item.name pour afficher le nom de categorie */}
+
+      {/* {categoriesList.data.map((item) => (
+        <MenuItem key={item.id} onClick={handleCategoryChange(item.name)}>
           {item.name}
         </MenuItem>
-      ))}
+      ))} */}
     </BazaarMenu>
   );
 //j'ai importée categoriesList pour map sur les categories

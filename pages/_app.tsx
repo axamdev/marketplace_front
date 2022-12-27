@@ -9,11 +9,15 @@ import nProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { Fragment, ReactElement, ReactNode, useEffect } from "react";
 import { Provider } from "react-redux";
+
+import { store } from "redux/store";
+
 import "simplebar/dist/simplebar.min.css";
 import MuiTheme from "theme/MuiTheme";
 import OpenGraphTags from "utils/OpenGraphTags";
 import "../src/fake-db";
 import store from "redux/store"
+
 
 
 type MyAppProps = AppProps & {
@@ -58,6 +62,7 @@ const App = ({ Component, pageProps }: MyAppProps) => {
       <SettingsProvider>
         <AppProvider>
         <Provider store={store} >
+
           <MuiTheme>
             <RTL>{getLayout(<AnyComponent {...pageProps} />)}</RTL>
           </MuiTheme>

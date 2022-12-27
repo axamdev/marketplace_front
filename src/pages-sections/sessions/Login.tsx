@@ -1,4 +1,4 @@
-import { Card, CardProps } from "@mui/material";
+import { Alert, AlertTitle, Card, CardProps, Dialog } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import BazaarButton from "components/BazaarButton";
 import BazaarTextField from "components/BazaarTextField";
@@ -9,10 +9,16 @@ import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import SocialButtons from "./SocialButtons";
-
+import { useDispatch, useSelector } from "react-redux";
+import {closeLogin} from 'redux/reducerLg'
+import { loginUser } from "redux/authSlice";
+import { AppDispatch } from "redux/store";
+import{logSelector} from 'redux/reducerLg'
+import { authSelector } from "redux/authSlice";
+import { useRouter } from "next/router";
+import { userAgent } from "next/server";
 const fbStyle = { background: "#3B5998", color: "white" };
 const googleStyle = { background: "#4285F4", color: "white" };
-
 type WrapperProps = { passwordVisibility?: boolean };
 
 export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
@@ -32,10 +38,8 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
   ".googleButton": { ...googleStyle, "&:hover": googleStyle },
   ".agreement": { marginTop: 12, marginBottom: 24 },
 }));
-
 const Login = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
@@ -43,9 +47,26 @@ const Login = () => {
   const handleFormSubmit = async (values: any) => {
     console.log(values);
     
+  const {close}=useSelector(logSelector)
+  const { error, msg,token,user } = useSelector(authSelector);
+  const auth = useSelector(authSelector);
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
+  const handleClose=()=>{
+    dispatch(closeLogin({close:close}))
+  }
+
+  const handleFormSubmit =async ()  => {
+    console.log(values);
+
+   await dispatch(loginUser({ email: values.email, password: values.password }));
+    console.log(auth, "here error login");
+   //{
+   //  {error?null:router.push("/")};
+  // }  
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit} =
     useFormik({
       initialValues,
       onSubmit: handleFormSubmit,
@@ -54,74 +75,95 @@ const Login = () => {
 
   return (
     <Wrapper elevation={3} passwordVisibility={passwordVisibility}>
-      <form onSubmit={handleSubmit}>
-        <H3 textAlign="center" mb={1}>
-          Welcome To Ecommerce
+     {token?(<><H3 textAlign="center" mb={1}>
+         Bienvenue chez AXAM
         </H3>
-        <Small
-          mb={4.5}
-          display="block"
-          fontSize="12px"
-          fontWeight="600"
-          color="grey.800"
-          textAlign="center"
-        >
-          Log in with email & password
-        </Small>
+         <Small
+         mb={4.5}
+         display="block"
+         fontSize="22px"
+         fontWeight="600"
+         color="grey.800"
+         textAlign="center"
+       >
+         {user.username}
+       </Small></>):
+      (
+      <><form onSubmit={handleSubmit}  >
+      <H3 textAlign="center" mb={1}>
+       Bienvenue chez AXAM
+      </H3>
+      <Small
+        mb={4.5}
+        display="block"
+        fontSize="12px"
+        fontWeight="600"
+        color="grey.800"
+        textAlign="center"
+      >
+        Connectez-vous avec email et mot de passe
+      </Small>
 
-        <BazaarTextField
-          mb={1.5}
-          fullWidth
-          name="email"
-          size="small"
-          type="email"
-          variant="outlined"
-          onBlur={handleBlur}
-          value={values.email}
-          onChange={handleChange}
-          label="Email or Phone Number"
-          placeholder="exmple@mail.com"
-          error={!!touched.email && !!errors.email}
-          helperText={touched.email && errors.email}
-        />
+      <BazaarTextField
+        mb={1.5}
+        fullWidth
+        name="email"
+        size="small"
+        type="email"
+        variant="outlined"
+        onBlur={handleBlur}
+        value={values.email}
+        onChange={handleChange}
+        label="E-mail ou numéro de téléphone"
+        placeholder="exemple@mail.com"
+        error={!!touched.email && !!errors.email}
+        helperText={touched.email && errors.email}
+      />
 
-        <BazaarTextField
-          mb={2}
-          fullWidth
-          size="small"
-          name="password"
-          label="Password"
-          autoComplete="on"
-          variant="outlined"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.password}
-          placeholder="*********"
-          type={passwordVisibility ? "text" : "password"}
-          error={!!touched.password && !!errors.password}
-          helperText={touched.password && errors.password}
-          InputProps={{
-            endAdornment: (
-              <EyeToggleButton
-                show={passwordVisibility}
-                click={togglePasswordVisibility}
-              />
-            ),
-          }}
-        />
+      <BazaarTextField
+        mb={2}
+        fullWidth
+        size="small"
+        name="password"
+        label="mot de passe"
+        autoComplete="on"
+        variant="outlined"
+        onBlur={handleBlur}
+        onChange={handleChange}
+        value={values.password}
+        placeholder="*********"
+        type={passwordVisibility ? "text" : "password"}
+        error={!!touched.password && !!errors.password}
+        helperText={touched.password && errors.password}
+        InputProps={{
+          endAdornment: (
+            <EyeToggleButton
+              show={passwordVisibility}
+              click={togglePasswordVisibility}
+            />
+          ),
+        }}
+      />
 
-        <BazaarButton
-          fullWidth
-          type="submit"
-          color="primary"
-          variant="contained"
-          sx={{ mb: "1.65rem", height: 44 }}
-        >
-          Login
-        </BazaarButton>
-      </form>
-
-      <SocialButtons redirect="/signup" redirectText="Sign Up" />
+      <BazaarButton
+        fullWidth
+        type="submit"
+        color="primary"
+        variant="contained"
+        sx={{ mb: "1.65rem", height: 44 }}
+       
+       // onClick={() =>error?console.log("error : "+error) :console.log("I have no error"+error)}
+    //  onClick={() => window.location.reload()}
+      >
+       connexion
+      </BazaarButton>
+      {error ? (
+        <Alert severity="error">
+          <AlertTitle>{msg}</AlertTitle>
+        </Alert>
+      ) : null}
+    </form>
+     <SocialButtons redirect="/signup" redirectText="S'inscrire" /></>)}
     </Wrapper>
   );
 };
@@ -132,8 +174,8 @@ const initialValues = {
 };
 
 const formSchema = yup.object().shape({
-  password: yup.string().required("Password is required"),
-  email: yup.string().email("invalid email").required("Email is required"),
+  password: yup.string().required("Mot de passe requis"),
+  email: yup.string().email("email invalide").required("L'e-mail est requis"),
 });
 
 export default Login;

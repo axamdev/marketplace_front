@@ -17,8 +17,10 @@ import { useEffect, useRef, useState } from "react";
 import api from "utils/api/furniture-shop";
 import api2 from "utils/api/gift-shop";
 import apiSlidersHome from "utils/api/axam-homesliders";
+import apiLogin, { IdentificationList } from "utils/api/axam-login";
 import apiCategories, { DataCategories } from "utils/api/axam-category";
 import apiRegister from "utils/api/axam-RegisterUser"
+
 import apiSections, { SectionsResponse } from "utils/api/axam-sections";
 import apiOffers, { OffersResponse } from "utils/api/axam-offers";
 
@@ -35,6 +37,7 @@ import Section1 from "pages-sections/fashion-shop-3/Section1";
 import {Provider} from 'react-redux';
 import store from '../src/redux/store';
 import { useDispatch } from 'react-redux';
+
 
 
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -62,15 +65,16 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 // ======================================================================
 type FurnitureShopProps = {
-  categoriesList?:DataCategories;
-  subcategoriesList:any[];
-  slidershomeList:any[];
+  categoriesList?: DataCategories;
+  subcategoriesList: any[];
+  slidershomeList: any[];
+  loginList?: IdentificationList;
   sectionsList: SectionsResponse;
   offersList: OffersResponse;
   topNewProducts: any[];
   furnitureProducts: any[];
   topSellingProducts: any[];
-  furnitureShopNavList: any[]; 
+  furnitureShopNavList: any[];
   giftShopNavList: any[];
   popularProducts: any[];
   giftShopProducts: any[];
@@ -120,10 +124,10 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
             {/* <GiftShopSection3 offersList={props.offersList.data}/> */}
 
             <Box my={10} className="categories">
-            <TopCategorySection categoriesList={props.categoriesList} />
+            <TopCategorySection categoriesList={props.categoriesList} /> 
 
-            </Box>
             <Box className="pageContent" ref={pageContentRef}>
+
           {/* <GiftShopServices serviceData={props.giftShopServicesList} /> */}
     
         </Box>
@@ -163,12 +167,14 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
         />
       </MobileNavigationBar2>
     </ShopLayout1>
+
     </Provider>
   );
 };
 
 export async function getStaticProps() {
-  const slidershomeList=await  apiSlidersHome.getAllSlidersHome();
+  const loginList = await apiLogin.getLogin();
+  const slidershomeList = await apiSlidersHome.getAllSlidersHome();
   const categoriesList = await apiCategories.getAllCategories();
   const registerUserList = await apiRegister.postSignUpUser();
   const sectionsList = await apiSections.getAllSections();
@@ -187,7 +193,7 @@ export async function getStaticProps() {
     props: {
       slidershomeList,
       categoriesList,
-
+      loginList,
       sectionsList,
       offersList,
       topNewProducts,
@@ -199,7 +205,7 @@ export async function getStaticProps() {
       giftShopProducts,
       topSailedProducts,
       giftShopServicesList,
-      giftShopTopCategories
+      giftShopTopCategories,
     },
   };
 }

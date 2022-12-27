@@ -1,4 +1,5 @@
 import { Favorite, KeyboardArrowDown, PersonOutline } from "@mui/icons-material";
+import FaceIcon from '@mui/icons-material/Face';
 import { Badge, Box, Dialog, Drawer, styled } from "@mui/material";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
@@ -22,8 +23,9 @@ import { DataCategories } from "utils/api/axam-category";
 
 import { layoutConstant } from "utils/constants";
 import SearchBox from "../search-box/SearchBox";
-
-
+import { authSelector } from "redux/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 // styled component
 export const HeaderWrapper = styled(Box)(({ theme }) => ({
   zIndex: 3,
@@ -42,7 +44,7 @@ type HeaderProps = {
   className?: string;
   searchBoxType?: "type1" | "type2";
   categoriesList?:DataCategories;
-};
+};  
 // ==============================================================
 
 const Header: FC<HeaderProps> = ({
@@ -57,12 +59,15 @@ const Header: FC<HeaderProps> = ({
   const [sidenavOpen, setSidenavOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
   const downMd = useMediaQuery(theme.breakpoints.down(1150));
-
-  const toggleDialog = () => setDialogOpen(!dialogOpen);
+  const toggleDialog = () => {setDialogOpen(!dialogOpen)};
   const toggleSidenav = () => setSidenavOpen(!sidenavOpen);
   // console.log("categoriesList"+categoriesList) 
    //console.log(categoriesList) 
 
+
+  console.log("categoriesList"+categoriesList) 
+  const { error,token,user } = useSelector(authSelector)
+  const router = useRouter();
 
   return (
     <HeaderWrapper className={clsx(className)}>
@@ -83,7 +88,7 @@ const Header: FC<HeaderProps> = ({
         >
           <Link href="/">
             <a>
-              <Image height={44} src="/assets/images/axamlogo.png" alt="logo" />
+              <Image height={88} src="/assets/images/axamlogo.png" alt="logo" />
             </a>
           </Link>
 
@@ -113,10 +118,10 @@ const Header: FC<HeaderProps> = ({
             mr={2.5}
             component={IconButton}
             p={1.25}
-            bgcolor="grey.200"
-            onClick={toggleDialog}
+            bgcolor={token?"pink":"grey.200"}
+            onClick={(token)?()=>router.push("profile"):toggleDialog}
           >
-            <PersonOutline />
+           {token?(<FaceIcon/>):(<PersonOutline />)}
           </Box>
          <Link href="/wish-list">
          <Box
@@ -124,13 +129,12 @@ const Header: FC<HeaderProps> = ({
             p={1.25}
             bgcolor="grey.200"
             // onClick={toggleDialog}
->
+            >
               <Favorite /> 
           </Box></Link>
           <Badge badgeContent={state.cart.length} color="primary">
             <Box
-                        ml={2.5}
-
+              ml={2.5}
               p={1.25}
               bgcolor="grey.200"
               component={IconButton}
@@ -141,14 +145,17 @@ const Header: FC<HeaderProps> = ({
           </Badge>
         </FlexBox>
 
-        <Dialog
+         <Dialog
           open={dialogOpen}
           fullWidth={isMobile}
           scroll="body"
           onClose={toggleDialog}
-        >
-          <Login />
-        </Dialog>
+        > 
+          {/* // <form  onSubmit={handleSubmit} >  */}
+           <Login />
+         {/* // </form>  */}
+          
+         </Dialog> 
 
         <Drawer open={sidenavOpen} anchor="right" onClose={toggleSidenav}>
           <MiniCart />
@@ -159,5 +166,6 @@ const Header: FC<HeaderProps> = ({
     </HeaderWrapper>
   );
 };
+
 
 export default Header;
