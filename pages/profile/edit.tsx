@@ -12,22 +12,24 @@ import CustomerDashboardNavigation from "components/layouts/customer-dashboard/N
 import { Formik } from "formik";
 import Link from "next/link";
 import * as yup from "yup";
+import { authSelector } from "redux/authSlice";
+import {  useSelector } from "react-redux";
 
 const ProfileEditor = () => {
   const handleFormSubmit = async (values: any) => {
     console.log(values);
   };
-
+  const {user} = useSelector(authSelector)
   return (
     <CustomerDashboardLayout>
       <UserDashboardHeader
         icon={Person}
-        title="Edit Profile"
+        title=" Editer Le Profil "
         navigation={<CustomerDashboardNavigation />}
         button={
           <Link href="/profile" passHref>
             <Button color="primary" sx={{ px: 4, bgcolor: "primary.light" }}>
-              Back to Profile
+            retour au profil
             </Button>
           </Link>
         }
@@ -36,7 +38,7 @@ const ProfileEditor = () => {
       <Card1>
         <FlexBox alignItems="flex-end" mb={3}>
           <Avatar
-            src="/assets/images/faces/ralph.png"
+            src={user.image}
             sx={{ height: 64, width: 64 }}
           />
 
@@ -88,7 +90,7 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="first_name"
-                      label="First Name"
+                      label="Prénom"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.first_name}
@@ -100,9 +102,10 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="last_name"
-                      label="Last Name"
+                      label=" Nom"
                       onBlur={handleBlur}
                       onChange={handleChange}
+                      //value={user.username}
                       value={values.last_name}
                       error={!!touched.last_name && !!errors.last_name}
                       helperText={touched.last_name && errors.last_name}
@@ -113,7 +116,7 @@ const ProfileEditor = () => {
                       fullWidth
                       name="email"
                       type="email"
-                      label="Email"
+                      label=" E-mail"
                       onBlur={handleBlur}
                       value={values.email}
                       onChange={handleChange}
@@ -124,7 +127,7 @@ const ProfileEditor = () => {
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="Phone"
+                      label="Téléphone"
                       name="contact"
                       onBlur={handleBlur}
                       value={values.contact}
@@ -163,7 +166,7 @@ const ProfileEditor = () => {
               </Box>
 
               <Button type="submit" variant="contained" color="primary">
-                Save Changes
+              Sauvegarder les modifications
               </Button>
             </form>
           )}

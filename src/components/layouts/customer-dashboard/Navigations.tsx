@@ -78,19 +78,19 @@ const Navigations = () => {
 
 const linkList = [
   {
-    title: "ACCOUNT SETTINGS",
+    title: "PARAMÈTRES DU COMPTE",
     list: [
-      { href: "/profile", title: "Profile Info", icon: Person, count: 3 },
-      { href: "/address", title: "Addresses", icon: Place, count: 16 },
+      { href: "/profile", title: "Profil Info", icon: Person, count: 3 },
+      { href: "/address", title: "Adresses", icon: Place, count: 16 },
       {
         href: "/payment-methods",
-        title: "Payment Methods",
+        title: "méthodes de payement",
         icon: CreditCard,
         count: 4,
       },
       {
         href: "/support-tickets",
-        title: "Support Tickets",
+        title: "tickets d'assistance",
         icon: CustomerService,
         count: 1,
       },

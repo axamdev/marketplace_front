@@ -42,7 +42,7 @@ const Cart: NextPage = () => {
             <Divider sx={{ mb: 2 }} />
 
             <FlexBox alignItems="center" columnGap={1} mb={2}>
-              <Span fontWeight="600">Additional Comments</Span>
+              <Span fontWeight="600">Commentaires supplémentaires</Span>
 
               <Span
                 p="6px 10px"
@@ -67,26 +67,28 @@ const Cart: NextPage = () => {
             <Divider sx={{ mb: 2 }} />
 
             <TextField
+            disabled={true}
               fullWidth
               size="small"
               label="Voucher"
               variant="outlined"
-              placeholder="Voucher"
+              placeholder="le bon d'achat"
             />
 
             <Button
+            disabled={true}
               variant="outlined"
               color="primary"
               fullWidth
               sx={{ mt: 2, mb: 4 }}
             >
-              Apply Voucher
+             Appliquer le bon d'achat
             </Button>
 
             <Divider sx={{ mb: 2 }} />
 
             <Span fontWeight={600} mb={2} display="block">
-              Shipping Estimates
+            Estimations d'expédition
             </Span>
 
             <Autocomplete
@@ -98,9 +100,9 @@ const Cart: NextPage = () => {
                 <TextField
                   {...params}
                   size="small"
-                  label="Country"
+                  label="Etat"
                   variant="outlined"
-                  placeholder="Select Country"
+                  placeholder="Choisissez le pays"
                 />
               )}
             />
@@ -109,9 +111,9 @@ const Cart: NextPage = () => {
               select
               fullWidth
               size="small"
-              label="State"
+              label="Délégation"
               variant="outlined"
-              placeholder="Select State"
+              placeholder="Choisissez la Délégation"
               defaultValue="new-york"
             >
               {stateList.map((item) => (
@@ -124,19 +126,19 @@ const Cart: NextPage = () => {
             <TextField
               fullWidth
               size="small"
-              label="Zip Code"
+              label="Code postal"
               placeholder="3100"
               variant="outlined"
               sx={{ mt: 2 }}
             />
 
             <Button variant="outlined" color="primary" fullWidth sx={{ my: 2 }}>
-              Calculate Shipping
+            Calculer Frais de port
             </Button>
 
             <Link href="/checkout" passHref>
               <Button variant="contained" color="primary" fullWidth>
-                Checkout Now
+              Passer à la caisse
               </Button>
             </Link>
           </Card>
@@ -147,8 +149,9 @@ const Cart: NextPage = () => {
 };
 
 const stateList = [
-  { value: "new-york", label: "New York" },
-  { value: "chicago", label: "Chicago" },
+  { value: "Sahline", label: "Sahline" },
+  { value: "Moknine", label: "Moknine" },
+  { value: "Sousse Medina", label: "Sousse Medina" },
 ];
 
 export default Cart;
