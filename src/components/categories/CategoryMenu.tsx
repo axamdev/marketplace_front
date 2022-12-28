@@ -50,8 +50,8 @@ const CategoryMenu: FC<CategoryMenuProps> = ({
     return () => window.removeEventListener("click", handleDocumentClick);
   }, []);
 
-console.log("Data in category menu : "+ categoriesList)
-console.log(categoriesList);
+//console.log("Data in category menu : "+ categoriesList)
+//console.log(categoriesList);
 
 
   return (

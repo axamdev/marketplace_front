@@ -1,5 +1,7 @@
+
 import {configureStore} from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
+import userReducer from "../features/user/userSlice"
 import {
     persistReducer,
     FLUSH,
@@ -10,19 +12,23 @@ import {
     REGISTER,
 } from 'redux-persist';
 import authReducer from './authSlice'
-import logReducer from './reducerLg'
+import editReducer from'./editSlice'
 import { combineReducers } from '@reduxjs/toolkit';
-const persistConfig = { key: 'counter', storage}
-const rootReducer = combineReducers({auth:authReducer,log:logReducer})
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }),
-});
+import { useDispatch } from 'react-redux';
+//const persistConfig = { key: 'counter', storage}
+const rootReducer = combineReducers({auth:authReducer,user:userReducer,edit:editReducer})
 
+//const persistedReducer = persistReducer(persistConfig, rootReducer)
+ const store = configureStore({
+    reducer:rootReducer
+    // reducer: persistedReducer,
+    // middleware: (getDefaultMiddleware) =>
+    //     getDefaultMiddleware({
+    //         serializableCheck: {
+    //             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    //         },
+    //     }),
+});
+export default store
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch:()=>AppDispatch=useDispatch

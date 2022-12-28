@@ -41,6 +41,7 @@ const MegaMenu3: FC<MegaMenuProps> = ({
   data: { categories, rightImage },
   minWidth,
 }) => {
+  // console.log('child category '+categories)
   return categories ? (
     <StyledMegaMenu>
       <BazaarCard sx={{ ml: "1rem", minWidth }} elevation={2}>

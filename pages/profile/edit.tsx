@@ -12,14 +12,64 @@ import CustomerDashboardNavigation from "components/layouts/customer-dashboard/N
 import { Formik } from "formik";
 import Link from "next/link";
 import * as yup from "yup";
+import { AppDispatch } from "redux/store";
 import { authSelector } from "redux/authSlice";
-import {  useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "redux/editSlice";
+import { useState } from "react";
+import { useFormik } from 'formik';
 
 const ProfileEditor = () => {
-  const handleFormSubmit = async (values: any) => {
-    console.log(values);
-  };
+  const dispatch = useDispatch<AppDispatch>();
+   const handleFormSubmit = async (values: any) => {
+     console.log(values);
+    //await dispatch(updateUser({ email: values.email, username: values.first_name}))
+
+   };
   const {user} = useSelector(authSelector)
+  const [nom,setnom]=useState(user.username)
+  const [mobile,setMobile]=useState(user.mobile)
+  const [email,setEmail]=useState(user.email)
+  const [birth,setBirth]=useState(user.dob)
+  const [adr,setAdr]=useState(user.adresse)
+  const [area,setArea]=useState(user.area)
+  const [city,setCity]=useState(user.city)
+  const [pin,setPin]=useState(user.pincode)
+  const [old,setOld]=useState(user.old)
+  const [neauv,setNeauv]=useState(user.new)
+ const formik = useFormik({
+   initialValues : {
+    nom:nom,
+    mobile:mobile,
+   email: email,
+   birth: birth,
+   adr:adr,
+   area:area,
+   city:city,
+   pin:pin,
+   old:old,
+   neauv:neauv
+   },
+   validationSchema:yup.object().shape({
+      nom: yup.string().required("required"),
+      mobile: yup.string().required("required"),
+      email: yup.string().email("invalid email").required("required"),
+      birth: yup.string().required("required"),
+      adr:yup.string().required("required"),
+      area:yup.string().required("required"),
+      city:yup.string().required("required"),
+      pin:yup.string().required("required"),
+      old:yup.string().required("required"),
+      neauv:yup.string().required("required"),
+     
+    }),
+     onSubmit: values => {
+      console.log(values);
+     },
+   });
+  
+
+  
   return (
     <CustomerDashboardLayout>
       <UserDashboardHeader
@@ -69,28 +119,15 @@ const ProfileEditor = () => {
           </Box>
         </FlexBox>
 
-        <Formik
-          initialValues={initialValues}
-          validationSchema={checkoutSchema}
-          onSubmit={handleFormSubmit}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            setFieldValue,
-          }) => (
-            <form onSubmit={handleSubmit}>
+      
+            <form onSubmit={formik.handleSubmit}>
               <Box mb={4}>
                 <Grid container spacing={3}>
-                  <Grid item md={6} xs={12}>
+                {/* <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
                       name="first_name"
-                      label="Prénom"
+                      label="First Name"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.first_name}
@@ -102,10 +139,9 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="last_name"
-                      label=" Nom"
+                      label="Last Name"
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      //value={user.username}
                       value={values.last_name}
                       error={!!touched.last_name && !!errors.last_name}
                       helperText={touched.last_name && errors.last_name}
@@ -116,7 +152,7 @@ const ProfileEditor = () => {
                       fullWidth
                       name="email"
                       type="email"
-                      label=" E-mail"
+                      label="Email"
                       onBlur={handleBlur}
                       value={values.email}
                       onChange={handleChange}
@@ -127,7 +163,7 @@ const ProfileEditor = () => {
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="Téléphone"
+                      label="Phone"
                       name="contact"
                       onBlur={handleBlur}
                       value={values.contact}
@@ -135,8 +171,131 @@ const ProfileEditor = () => {
                       error={!!touched.contact && !!errors.contact}
                       helperText={touched.contact && errors.contact}
                     />
+                  </Grid> */}
+                   <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      name="first_name"
+                      label="nom"
+                     
+                     // onChange={handleChange}
+                     //value={values.first_name}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.nom}
+                      onChange={formik.handleChange}
+                     
+                    />
+                  </Grid>
+              
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      name="email"
+                      type="email"
+                      label=" E-mail"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      
+                     
+                    />
                   </Grid>
                   <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Téléphone"
+                      name="contact"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.mobile}
+                      onChange={formik.handleChange}
+                     
+                    />
+                     
+                  </Grid> 
+                   <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="date de naissance"
+                      name="naissance"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.birth}
+                      onChange={formik.handleChange}
+                     
+                      //value={values.contact}
+                     // onChange={handleChange}
+                     
+                    />
+                  </Grid> 
+                   <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="adresse"
+                      name="contact"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.adr}
+                      onChange={formik.handleChange}
+                     
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="État"
+                      name="contact"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.area}
+                      onChange={formik.handleChange}
+                     
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="ville"
+                      name="contact"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.city}
+                      onChange={formik.handleChange}
+                      
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="zip Code"
+                      name="contact"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.pin}
+                      onChange={formik.handleChange}
+                      
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="ancien mot de passe"
+                      name="contact"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.old}
+                      onChange={formik.handleChange}
+                     
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="nouveau mot de passe"
+                      name="contact"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.neauv}
+                      onChange={formik.handleChange}
+                    
+                    />
+                  </Grid> 
+
+
+
+                  {/* <Grid item md={6} xs={12}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DateTimePicker
                         label="Birth Date"
@@ -161,7 +320,7 @@ const ProfileEditor = () => {
                         }
                       />
                     </LocalizationProvider>
-                  </Grid>
+                  </Grid>  */}
                 </Grid>
               </Box>
 
@@ -169,8 +328,7 @@ const ProfileEditor = () => {
               Sauvegarder les modifications
               </Button>
             </form>
-          )}
-        </Formik>
+          
       </Card1>
     </CustomerDashboardLayout>
   );
@@ -178,18 +336,43 @@ const ProfileEditor = () => {
 
 const initialValues = {
   first_name: "",
-  last_name: "",
-  email: "",
-  contact: "",
-  birth_date: new Date(),
-};
+   last_name: "",
+   email: "",
+   contact: "",
+   birth_date: new Date(),
+ };
+// const initialValues = {
+//   nom:,
+//   mobile: "",
+//   email: "",
+//   birth: "",
+//   adr: "",
+//   area:"",
+//   city:"",
+//   pin:"",
+//   old:"",
+//   neauv:""
+// };
+// const checkoutSchema = yup.object().shape({
+//   nom: yup.string().required("required"),
+//   mobile: yup.string().required("required"),
+//   email: yup.string().email("invalid email").required("required"),
+//   birth: yup.string().required("required"),
+//   adr:yup.string().required("required"),
+//   area:yup.string().required("required"),
+//   city:yup.string().required("required"),
+//   pin:yup.string().required("required"),
+//   old:yup.string().required("required"),
+//   neauv:yup.string().required("required"),
+ 
+// });
 
-const checkoutSchema = yup.object().shape({
+ const checkoutSchema = yup.object().shape({
   first_name: yup.string().required("required"),
   last_name: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  contact: yup.string().required("required"),
+   contact: yup.string().required("required"),
   birth_date: yup.date().required("invalid date"),
-});
+ });
 
 export default ProfileEditor;
