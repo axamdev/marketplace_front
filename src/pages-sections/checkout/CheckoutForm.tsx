@@ -3,6 +3,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Card1 from "components/Card1";
 import countryList from "data/countryList";
+import { postClientOrder } from "features/orders/ordersSlice";
 import { userSelector } from "features/user/userSlice";
 import { Formik } from "formik";
 import Link from "next/link";
@@ -10,6 +11,7 @@ import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { authSelector } from "redux/authSlice";
+import { useAppDispatch } from "redux/store";
 import * as yup from "yup";
 
 const CheckoutForm: FC = () => {
@@ -19,7 +21,9 @@ const CheckoutForm: FC = () => {
   const auth = useSelector(authSelector);
   const {user} = useSelector(authSelector);
 // const [name,setName] =useState(user.)
+const dispatch= useAppDispatch();
   const handleFormSubmit = async (values: any) => {
+    dispatch(postClientOrder({user_id: "15",product_variant_id:"70"}))
     router.push("/payment");
   };
 
@@ -74,7 +78,7 @@ const CheckoutForm: FC = () => {
                   label="Numéro de téléphone"
                   onChange={handleChange}
                   name="shipping_contact"
-                  value={values.shipping_contact}
+                  value={user.mobile}
                   error={
                     !!touched.shipping_contact && !!errors.shipping_contact
                   }
@@ -119,7 +123,7 @@ const CheckoutForm: FC = () => {
                   name="shipping_email"
                   label="Adresse e-mail"
                   onChange={handleChange}
-                  value={values.shipping_email}
+                  value={user.email}
                   error={!!touched.shipping_email && !!errors.shipping_email}
                   helperText={touched.shipping_email && errors.shipping_email}
                 />

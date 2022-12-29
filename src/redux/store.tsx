@@ -12,20 +12,22 @@ import {
 } from 'redux-persist';
 import authReducer from './authSlice'
 import logReducer from './reducerLg'
+import cartReducer from '../features/cart/cartSlice'
+import ordersReducer from '../features/orders/ordersSlice'
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-const persistConfig = { key: 'counter', storage}
-const rootReducer = combineReducers({auth:authReducer,log:logReducer,user:userReducer})
+//const persistConfig = { key: 'counter', storage}
+const rootReducer = combineReducers({auth:authReducer,log:logReducer,user:userReducer,cart:cartReducer,orders:ordersReducer})
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+//const persistedReducer = persistReducer(persistConfig, rootReducer)
  const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }),
+    reducer: rootReducer,
+    // middleware: (getDefaultMiddleware) =>
+    //     getDefaultMiddleware({
+    //         serializableCheck: {
+    //             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    //         },
+    //     }),
 });
 export default store
 export type AppDispatch = typeof store.dispatch;

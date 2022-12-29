@@ -17,7 +17,7 @@ const CheckoutSummary: FC = () => {
         <Typography color="grey.600">Total:</Typography>
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-          ${getTotalPrice().toFixed(2)}
+          TND{getTotalPrice().toFixed(2)}
           </Typography>
           <Typography fontWeight="600" fontSize="14px" lineHeight="1">
             00
@@ -61,7 +61,7 @@ const CheckoutSummary: FC = () => {
         textAlign="right"
         mb={3}
       >
-         ${getTotalPrice().toFixed(2)}
+         TND{getTotalPrice().toFixed(2)}
       </Typography>
 
       <TextField

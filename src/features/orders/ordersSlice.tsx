@@ -4,12 +4,18 @@ import { orderUrl, TOKEN} from "utils/constants";
 
 export interface  initialTypes{
     createstatus: string,
-    clientorders : []
+    msg: string,
+    error: string,
+    loading: boolean,
+    clientorders : string
 }
 
 const initialState :initialTypes= {
     createstatus: "",
-    clientorders : []
+    msg: "",
+    error: "",
+    loading: false,
+    clientorders : ""
 }
 
 var config = {
@@ -62,22 +68,36 @@ var config = {
             state.createstatus = "loading";
        }),
        builder
-       .addCase(postClientOrder.fulfilled,(state,action) =>{
-        console.log(action.payload);
+       .addCase(postClientOrder.fulfilled,(state,{payload}) =>{
+        state.loading = false;
         state.createstatus = "success";
-        state.clientorders = action.payload.data;
+        if(payload.error){
+            state.error=payload.error
+            state.msg=payload.message
+            state.loading = false
+            state.clientorders = payload.data
+          }
+          else{
+            state.error=payload.error
+            state.msg=payload.message
+            state.loading = true
+            state.clientorders = payload.data[0]
+          }
+        
       }),
       builder
         .addCase(postClientOrder.rejected,(state,action) =>{
             state.createstatus = "failure";
-       }),
+            state.loading = true
+       })
       
-    }
+    }  
 })
+
 //selector
 export const selectaddstatus = (state) => state.orders.createstatus;
 export const ordersSelector = (state) => state.orders
-export const selectclientorders = (state) => state.orders.clientorders;
+
 
 
 

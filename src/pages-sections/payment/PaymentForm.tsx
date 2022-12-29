@@ -3,30 +3,43 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Card1 from "components/Card1";
 import { FlexBox } from "components/flex-box";
 import { Paragraph } from "components/Typography";
+import { ordersSelector, postClientOrder } from "features/orders/ordersSlice";
 import { Formik } from "formik";
 import useWindowSize from "hooks/useWindowSize";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "redux/store";
 import * as yup from "yup";
 
 const PaymentForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
 
+  const dispatch= useAppDispatch();
+  const { error, msg} = useSelector(ordersSelector)
+  const orders = useSelector(ordersSelector)
   const width = useWindowSize();
   const router = useRouter();
   const isMobile = width < 769;
 
   const handleFormSubmit = async (values: any) => {
+    dispatch(postClientOrder({user_id:15}))
     router.push("/payment");
   };
-
+//   dispatch(postClientOrder({user_id: '15',mobile:'55778899',product_variant_id: '72,73,70',quantity:'1,2,1',
+//   total: '1550.00',delivery_charge:'7.0',tax_amount:'0',tax_percentage: '0',final_total: '1557.00',
+//   payment_method:'COD',address_id:'2',delivery_date:'10/12/2023',is_wallet_used:'0',delivery_time:'Today - Evening (4:00pm to 7:00pm)',
+//   order_note:'Salut , je veux savoir si vous ',active_status:'awaiting'}))
+//   router.push("/payment");
+// };
+  
   const handlePaymentMethodChange = ({ target: { name } }: any) => {
     setPaymentMethod(name);
   };
 
   return (
-    <Fragment>
+    <Fragment >
       <Card1 sx={{ mb: 4 }}>
         <FormControlLabel
           sx={{ mb: 3 }}
@@ -107,13 +120,13 @@ const PaymentForm = () => {
                       />
                     </Grid>
                   </Grid>
-                </Box>
+                </Box> 
 
-                <Button variant="outlined" color="primary" sx={{ mb: 4 }}>
+                 <Button variant="outlined" color="primary" sx={{ mb: 4 }}>
                   Submit
-                </Button>
+                </Button> 
 
-                <Divider sx={{ mb: 3, mx: -4 }} />
+                 <Divider sx={{ mb: 3, mx: -4 }} /> 
               </form>
             )}
           </Formik>
@@ -178,7 +191,7 @@ const PaymentForm = () => {
         </Grid>
         <Grid item sm={6} xs={12}>
           <Link href="/orders" passHref>
-            <Button variant="contained" color="primary" type="submit" fullWidth>
+            <Button onClick = {handleFormSubmit} variant="contained" color="primary" type="submit" fullWidth>
               Review
             </Button>
           </Link>
