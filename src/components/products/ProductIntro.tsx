@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { Productsdata } from "utils/api/axam-products";
-// import ImageViewer from "react-simple-image-viewer";
+ import ImageViewer from "react-simple-image-viewer";
 import { FlexBox, FlexRowCenter } from "../flex-box";
 
 // ================================================================
@@ -29,7 +29,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  const [ImageList, setImageList] = useState([]);
+  const [ImageList, setImageList] = useState(product.other_images);
 
   const { state, dispatch } = useAppContext();
   const cartList: CartItem[] = state.cart;
@@ -40,16 +40,16 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const handleImageClick = (ind: number) => () => {
     setSelectedImage(ind);
   };
+   
+  const openImageViewer = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
 
-  // const openImageViewer = useCallback((index) => {
-  //   setCurrentImage(index);
-  //   setIsViewerOpen(true);
-  // }, []);
-
-  // const closeImageViewer = () => {
-  //   setCurrentImage(0);
-  //   setIsViewerOpen(false);
-  // };
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
 var price: number =  +prod.variants[0].special_price ;
   const handleCartAmountChange = useCallback(
     (amount) => () => {
@@ -66,13 +66,14 @@ var price: number =  +prod.variants[0].special_price ;
     },
     []
   );
-  useEffect(() => {
-    ImageList.push(prod.other_images);
-    ImageList.push(prod.image) ; 
-  
-    
-  }, []);
+  // useEffect(() => {
+  //   ImageList.push(prod.other_images);
+  //   ImageList.push(prod.image) ; 
+  // }, );
+
+
   return (
+    
     <Box width="100%">
       <Grid container spacing={3} justifyContent="space-around">
         <Grid item md={6} xs={12} alignItems="center">
@@ -83,12 +84,12 @@ var price: number =  +prod.variants[0].special_price ;
               height={300}
               loading="eager"
               objectFit="contain"
-              src={ImageList[selectedImage]}
-              // onClick={() => openImageViewer(imgGroup.indexOf(imgGroup[selectedImage]))}
+              src={prod.image}
+              //  onClick={() => openImageViewer(ImageList.indexOf(ImageList[selectedImage]))}
             />
             {/* {isViewerOpen && (
               <ImageViewer
-                src={imgGroup}
+                src={ImageList}
                 onClose={closeImageViewer}
                 currentIndex={currentImage}
                 backgroundStyle={{
