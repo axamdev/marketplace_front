@@ -24,7 +24,7 @@ const PaymentForm = () => {
   const isMobile = width < 769;
 
   const handleFormSubmit = async (values: any) => {
-    dispatch(postClientOrder({user_id:15}))
+    dispatch(postClientOrder({user_id: '15',product_variant_id: '72,73,70'}))
     router.push("/payment");
   };
 //   dispatch(postClientOrder({user_id: '15',mobile:'55778899',product_variant_id: '72,73,70',quantity:'1,2,1',

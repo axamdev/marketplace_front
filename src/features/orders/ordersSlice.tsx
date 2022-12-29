@@ -7,7 +7,7 @@ export interface  initialTypes{
     msg: string,
     error: string,
     loading: boolean,
-    clientorders : string
+    clientorders : []
 }
 
 const initialState :initialTypes= {
@@ -15,7 +15,7 @@ const initialState :initialTypes= {
     msg: "",
     error: "",
     loading: false,
-    clientorders : ""
+    clientorders :[]
 }
 
 var config = {
@@ -25,9 +25,39 @@ var config = {
         'Authorization': TOKEN
       },
   };
-
+  export interface OrderItemDataTypes {
+    user_id: string;
+    order_id: number;
+    mobile:number;
+    total:number;
+    tax_percentage:number;
+    final_total:number;
+    payment_method:number;
+    address_id:number;
+    delivery_date:number;
+    is_wallet_used:number;
+    delivery_time:number;
+    delivery_charge:number;
+    order_note:number;
+    seller_id: string;
+    product_name: string;
+    variant_name: string;
+    product_variant_id: string;
+    quantity: string;
+    price: number;
+    tax_percent: number;
+    tax_amount: number;
+    sub_total: number;
+    status: string;
+    active_status: string;
+    otp: number;
+    balance: string;
+    error: boolean;
+    message: string;
+    //order_item_data: OrderItemData[];
+}
   export const postClientOrder = createAsyncThunk('clientorder',async ({user_id,mobile,product_variant_id,quantity,total,delivery_charge,tax_amount,tax_percentage,final_total,payment_method,address_id,delivery_date,is_wallet_used,delivery_time,
-    order_note,active_status}:any) => {
+    order_note,active_status}:OrderItemDataTypes) => {
 
     var bodyFormData = new FormData();
     bodyFormData.append('user_id', user_id);
