@@ -11,7 +11,8 @@ export interface initialTypes {
   user: String;
   loading: boolean;
   error: String;
-  token:String
+  token:String;
+ // user_id:String
 }
 //const token =localStorage.getItem('token')
 // ? localStorage.getItem('token')
@@ -21,7 +22,8 @@ const initialState: initialTypes = {
   user: "",
   loading: false,
   error: "",
-  token:""
+  token:"",
+ // user_id:""
 };
 
 var config = {
@@ -69,6 +71,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = payload.data[0];
         state.token=payload.data[0].activation_code;
+        //state.user_id=payload.data[0].user_id;
         localStorage.setItem('token', payload.data[0].activation_code)
       }
 
