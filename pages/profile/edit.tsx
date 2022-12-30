@@ -19,16 +19,14 @@ import { updateUser } from "redux/editSlice";
 import { useState } from "react";
 import { userAgent } from "next/server";
 
-
+//city:values.ville,pincode:values.CodeZip
 const ProfileEditor = () => {
   const dispatch = useDispatch<AppDispatch>();
    const handleFormSubmit = async (values: any) => {
      console.log(values);
-     console.log("user id");
-     console.log(user.id);
      setImage(user.image)
-    await dispatch(updateUser({ username:values.first_name,mobile:values.contact,dob:values.birth,adress:values.last_name,user_id:user.id}))
-     console.log('submitted')
+    await dispatch(updateUser({ username:values.first_name,mobile:values.contact,dob:values.birth,adress:values.last_name,pincode:values.CodeZip,user_id:user.id}))
+    
    };
   
    const {user} = useSelector(authSelector)
@@ -42,7 +40,7 @@ const ProfileEditor = () => {
   const [city,setCity]=useState(user.city)
   const [pin,setPin]=useState(user.pincode)
   const [old,setOld]=useState(user.old)
-  const [neauv,setNeauv]=useState(user.new)
+ const [neauv,setNeauv]=useState(user.new)
   const initialValues = {
     first_name: nom,
     last_name:adr,
@@ -51,7 +49,7 @@ const ProfileEditor = () => {
      birth:birth,
      Etat:area,
      ville:city,
-      CodeZip:pin,
+     CodeZip:pin,
       oldPassword:old,
      nvPassword:neauv,
      //birth_date: new Date(),
@@ -140,7 +138,7 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="last_name"
-                      label="adresse"
+                      label="Adresse"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.last_name}
@@ -153,7 +151,7 @@ const ProfileEditor = () => {
                       fullWidth
                       name="email"
                       type="email"
-                      label="Email"
+                      label="E-mail"
                       onBlur={handleBlur}
                       value={values.email}
                       onChange={handleChange}
@@ -164,7 +162,7 @@ const ProfileEditor = () => {
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="Phone"
+                      label="téléphone"
                       name="contact"
                       onBlur={handleBlur}
                       value={values.contact}
@@ -176,7 +174,7 @@ const ProfileEditor = () => {
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="Birth"
+                      label="date de naissance"
                       name="birth"
                       onBlur={handleBlur}
                       value={values.birth}
@@ -199,8 +197,9 @@ const ProfileEditor = () => {
                       onBlur={handleBlur}
                       value={values.Etat}
                       onChange={handleChange}
-                      error={!!touched.Etat && !!errors.Etat}
-                      helperText={touched.Etat && errors.Etat}
+                     // error={!!touched.Etat && !!errors.Etat}
+                    //  helperText={touched.Etat && errors.Etat}
+                      disabled={true}
                     />
                   </Grid>
                   <Grid item md={6} xs={12}>
@@ -211,8 +210,9 @@ const ProfileEditor = () => {
                       onBlur={handleBlur}
                       value={values.ville}
                       onChange={handleChange}
-                      error={!!touched.ville && !!errors.ville}
-                      helperText={touched.ville && errors.ville}
+                    //  error={!!touched.ville && !!errors.ville}
+                      //helperText={touched.ville && errors.ville}
+                      disabled={true}
                     />
                   </Grid>
                   <Grid item md={6} xs={12}>
@@ -223,32 +223,35 @@ const ProfileEditor = () => {
                       onBlur={handleBlur}
                       value={values.CodeZip}
                       onChange={handleChange}
-                      error={!!touched.CodeZip && !!errors.CodeZip}
-                      helperText={touched.CodeZip && errors.CodeZip}
+                     // error={!!touched.CodeZip && !!errors.CodeZip}
+                     // helperText={touched.CodeZip && errors.CodeZip}
+                      disabled={true}
                     />
                   </Grid>
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="oldPassword"
+                      label="ancien mot de passe"
                       name="oldPassword"
                       onBlur={handleBlur}
                       value={values.oldPassword}
                       onChange={handleChange}
-                      error={!!touched.oldPassword && !!errors.oldPassword}
-                      helperText={touched.oldPassword && errors.oldPassword}
+                     // error={!!touched.oldPassword && !!errors.oldPassword}
+                     // helperText={touched.oldPassword && errors.oldPassword}
+                      disabled={true}
                     />
                   </Grid>
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="nvPassword"
+                      label="nouveau mot de passe"
                       name="nvPassword"
                       onBlur={handleBlur}
                       value={values.nvPassword}
                       onChange={handleChange}
-                      error={!!touched.nvPassword && !!errors.nvPassword}
-                      helperText={touched.nvPassword && errors.nvPassword}
+                      //error={!!touched.nvPassword && !!errors.nvPassword}
+                     // helperText={touched.nvPassword && errors.nvPassword}
+                      disabled={true}
                     />
                   </Grid>
                    {/* <Grid item md={6} xs={12}>
@@ -465,13 +468,13 @@ const ProfileEditor = () => {
  
 // });
 
-const initialValues = {
-  first_name: '',
-   last_name: "",
-   email: "",
-   contact: "",
-   birth_date: new Date(),
- };
+// const initialValues = {
+//   first_name: '',
+//    last_name: "",
+//    email: "",
+//    contact: "",
+//    birth_date: new Date(),
+//  };
 
 
 
@@ -481,11 +484,11 @@ const initialValues = {
   email: yup.string().email("invalid email").required("required"),
    contact: yup.string().required("required"),
    birth: yup.string().required("required"),
-   Etat: yup.string().required("required"),
-   ville: yup.string().required("required"),
-   CodeZip: yup.string().required("required"),
-   oldPassword:yup.string().required("required"),
-  nvPassword:yup.string().required("required"),
+  // Etat: yup.string().required("required"),
+  // ville: yup.string().required("required"),
+   //CodeZip: yup.string().required("required"),
+   //oldPassword:yup.string().required("required"),
+ // nvPassword:yup.string().required("required"),
  //birth_date: yup.date().required("invalid date"),
  });
 

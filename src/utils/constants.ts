@@ -11,7 +11,7 @@ export const sectionsUrl=devUrl+"get_sections";
 export const offersUrl=devUrl+"get_offer_images";
 export const productsUrl=devUrl+"get_products";
 export const editProfilUrl=devUrl+"update_user";
-
+export const getAdressUrl=devUrl+"get_address";
 export const TOKEN = 'Bearer '+jwt ;
 
 
