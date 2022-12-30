@@ -24,18 +24,28 @@ export interface initTypes {
       Authorization: TOKEN,
     },
   };
+  // export interface userTypes {
+  //   username:string,
+  //   dob:string,
+  //   mobile:string,
+  //   adress: string,
+  //   user_id:number
+   
+  //  }
   export const updateUser = createAsyncThunk(
-    "loginuser",
-    async ({username ,dob,mobile,adress,user_id}: any) => {
+    "updateuser",
+    async ({username ,dob,mobile,adress,user_id}:any) => {
 
       var bodyFormData = new FormData();
       //bodyFormData.append("email", email);
-    //  bodyFormData.append("user_id", user_id);
-    bodyFormData.append("user_id", "15")
+      // bodyFormData.append("user_id",user_id.toFixed(0));
+      bodyFormData.append("user_id", user_id)
+      //bodyFormData.append("user_id", "15")
       bodyFormData.append("username", username);
       bodyFormData.append('dob', dob);
       bodyFormData.append('mobile',mobile);
       bodyFormData.append('adress',adress);
+      
       
       const response = await axios.post(editProfilUrl, bodyFormData, config);
       console.log(response.data);     

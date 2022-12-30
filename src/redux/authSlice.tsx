@@ -5,6 +5,7 @@ import axios from "axios";
 import { CollectionsOutlined } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { UserInfo } from "os";
+import { DefinedNumberSchema } from "yup/lib/number";
 //import {initialValues} from "pages-sections/sessions/Login"
 export interface initialTypes {
   msg: String;
@@ -12,7 +13,7 @@ export interface initialTypes {
   loading: boolean;
   error: String;
   token:String;
- // user_id:String
+  //user_id:String
 }
 //const token =localStorage.getItem('token')
 // ? localStorage.getItem('token')
@@ -23,7 +24,7 @@ const initialState: initialTypes = {
   loading: false,
   error: "",
   token:"",
- // user_id:""
+ // user_id: ""
 };
 
 var config = {

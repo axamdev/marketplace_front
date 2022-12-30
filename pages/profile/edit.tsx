@@ -24,8 +24,10 @@ const ProfileEditor = () => {
   const dispatch = useDispatch<AppDispatch>();
    const handleFormSubmit = async (values: any) => {
      console.log(values);
+     console.log("user id");
+     console.log(user.id);
      setImage(user.image)
-    await dispatch(updateUser({ username:values.first_name,mobile:values.contact,dob:values.birth,adress:values.last_name,user_id:values.user_id}))
+    await dispatch(updateUser({ username:values.first_name,mobile:values.contact,dob:values.birth,adress:values.last_name,user_id:user.id}))
      console.log('submitted')
    };
   
@@ -126,7 +128,7 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="first_name"
-                      label="First Name"
+                      label="nom et prénom"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.first_name}
@@ -138,7 +140,7 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="last_name"
-                      label="Last Name"
+                      label="adresse"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.last_name}
@@ -174,7 +176,7 @@ const ProfileEditor = () => {
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="birth"
+                      label="Birth"
                       name="birth"
                       onBlur={handleBlur}
                       value={values.birth}
@@ -192,7 +194,7 @@ const ProfileEditor = () => {
                      <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="Etat"
+                      label="L'État"
                       name="Etat"
                       onBlur={handleBlur}
                       value={values.Etat}
@@ -204,7 +206,7 @@ const ProfileEditor = () => {
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
-                      label="ville"
+                      label="Ville"
                       name="ville"
                       onBlur={handleBlur}
                       value={values.ville}
