@@ -12,11 +12,12 @@ import {
     REGISTER,
 } from 'redux-persist';
 import authReducer from './authSlice'
-import editReducer from'./editSlice'
+import editReducer from'./editSlice';
+import adressSlice from './adressSlice';
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 //const persistConfig = { key: 'counter', storage}
-const rootReducer = combineReducers({auth:authReducer,user:userReducer,edit:editReducer})
+const rootReducer = combineReducers({auth:authReducer,user:userReducer,edit:editReducer,getAdr:adressSlice})
 
 //const persistedReducer = persistReducer(persistConfig, rootReducer)
  const store = configureStore({

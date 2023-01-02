@@ -6,10 +6,35 @@ import CustomerDashboardLayout from "components/layouts/customer-dashboard";
 import CustomerDashboardNavigation from "components/layouts/customer-dashboard/Navigations";
 import TableRow from "components/TableRow";
 import Link from "next/link";
+import { authSelector } from "redux/authSlice";
+import { adressSelector } from "redux/adressSlice";
+import { AppDispatch } from "redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import {getAdress } from "redux/adressSlice";
+import  { useEffect } from 'react';
 
 const AddressList = () => {
+ const {user} = useSelector(authSelector) ;
+
+  const dispatch = useDispatch<AppDispatch>();
+  const handle = async () => {
+   await dispatch(getAdress({user_id:user.id})
+
+
+   )  
+   console.log('hi adress')
+   
+  };const {adresses} = useSelector(adressSelector) ;
+  useEffect(() => {
+    handle();
+  }, []);
+
+ 
   return (
+     
     <CustomerDashboardLayout>
+      {/* <Button onClick={handle} >Click here</Button>  */}
+
       <UserDashboardHeader
         icon={Place}
         title="My Addresses"
@@ -20,7 +45,6 @@ const AddressList = () => {
           </Button>
         }
       />
-
       {orderList.map((_, ind) => (
         <TableRow sx={{ my: 2, padding: "6px 18px" }} key={ind}>
           <Typography whiteSpace="pre" m={0.75} textAlign="left">

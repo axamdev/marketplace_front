@@ -27,7 +27,7 @@ export interface initTypes {
  
   export const updateUser = createAsyncThunk(
     "updateuser",
-    async ({username ,dob,mobile,adress,user_id,pincode}:any) => {
+    async ({username ,dob,mobile,address,user_id}:any) => {
 
       var bodyFormData = new FormData();
       //bodyFormData.append("email", email);
@@ -37,10 +37,10 @@ export interface initTypes {
       bodyFormData.append("username", username);
       bodyFormData.append('dob', dob);
       bodyFormData.append('mobile',mobile);
-      bodyFormData.append('adress',adress);
+      bodyFormData.append('address',address);
       //bodyFormData.append('area', area);
       //bodyFormData.append('city', city);
-     bodyFormData.append('pincode', pincode);
+     //bodyFormData.append('pincode', pincode);
 
       
       const response = await axios.post(editProfilUrl, bodyFormData, config);

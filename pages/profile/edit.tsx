@@ -25,7 +25,7 @@ const ProfileEditor = () => {
    const handleFormSubmit = async (values: any) => {
      console.log(values);
      setImage(user.image)
-    await dispatch(updateUser({ username:values.first_name,mobile:values.contact,dob:values.birth,adress:values.last_name,pincode:values.CodeZip,user_id:user.id}))
+    await dispatch(updateUser({ username:values.first_name,address:values.last_name,mobile:values.contact,dob:values.birth,user_id:user.id}))
     
    };
   
@@ -35,7 +35,7 @@ const ProfileEditor = () => {
   const [mobile,setMobile]=useState(user.mobile)
   const [email,setEmail]=useState(user.email)
   const [birth,setBirth]=useState(user.dob)
-  const [adr,setAdr]=useState(user.address)
+  const [adress,setAdress]=useState(user.address)
   const [area,setArea]=useState(user.area)
   const [city,setCity]=useState(user.city)
   const [pin,setPin]=useState(user.pincode)
@@ -43,8 +43,8 @@ const ProfileEditor = () => {
  const [neauv,setNeauv]=useState(user.new)
   const initialValues = {
     first_name: nom,
-    last_name:adr,
-     email: email,
+    last_name:adress,
+    // email: email,
      contact: mobile,
      birth:birth,
      Etat:area,
@@ -153,7 +153,8 @@ const ProfileEditor = () => {
                       type="email"
                       label="E-mail"
                       onBlur={handleBlur}
-                      value={values.email}
+                    //  value={values.email}
+                      value={user.email}
                       onChange={handleChange}
                       error={!!touched.email && !!errors.email}
                       helperText={touched.email && errors.email}
@@ -481,7 +482,7 @@ const ProfileEditor = () => {
  const checkoutSchema = yup.object().shape({
   first_name: yup.string().required("required"),
   last_name: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
+  //email: yup.string().email("invalid email").required("required"),
    contact: yup.string().required("required"),
    birth: yup.string().required("required"),
   // Etat: yup.string().required("required"),

@@ -3,13 +3,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {  getAdressUrl, TOKEN } from "../utils/constants";
 import axios from "axios";
 export interface initTypes {
-    data:String,
+  adresses:Object[]
     msg:String,
     error:String,
     loading:boolean
    }
    const initialState: initTypes = {
-    data:"",
+    adresses:[],
     msg:"",
     error:"",
     loading:false,
@@ -28,6 +28,7 @@ export interface initTypes {
       bodyFormData.append("user_id", user_id);
 
       const response = await axios.post(getAdressUrl, bodyFormData, config);
+      console.log(response.data)
       return response.data;
     }
   );
@@ -52,8 +53,7 @@ export interface initTypes {
           state.error = payload.error;
           state.msg = payload.message;
           state.loading = false;
-          state.data = payload.data;
-       
+          state.adresses = payload.data;
 
         }
   
@@ -67,4 +67,4 @@ export interface initTypes {
     },
 })
 export default adressSlice.reducer;
-export const authSelector = (state) => state.getadress
+export const adressSelector = (state) => state.getadress
