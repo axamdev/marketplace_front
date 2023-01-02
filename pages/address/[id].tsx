@@ -6,12 +6,21 @@ import CustomerDashboardLayout from "components/layouts/customer-dashboard";
 import CustomerDashboardNavigation from "components/layouts/customer-dashboard/Navigations";
 import { Formik } from "formik";
 import Link from "next/link";
+import addAdress from 'redux/addadrSlice'
 import * as yup from "yup";
+import { AppDispatch } from "redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { authSelector } from "redux/authSlice";
 
 const AddressEditor = () => {
+ 
+  const {user} = useSelector(authSelector) ;
+  const dispatch = useDispatch<AppDispatch>();
   // handle form submit
   const handleFormSubmit = async (values: any) => {
     console.log(values);
+    //await dispatch(addAdress({user_id:user.id}))   
+
   };
 
   return (

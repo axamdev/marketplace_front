@@ -14,10 +14,11 @@ import {
 import authReducer from './authSlice'
 import editReducer from'./editSlice';
 import adressSlice from './adressSlice';
+import addadrSlice from "./addadrSlice"
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 //const persistConfig = { key: 'counter', storage}
-const rootReducer = combineReducers({auth:authReducer,user:userReducer,edit:editReducer,getAdr:adressSlice})
+const rootReducer = combineReducers({auth:authReducer,user:userReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice})
 
 //const persistedReducer = persistReducer(persistConfig, rootReducer)
  const store = configureStore({

@@ -19,14 +19,12 @@ const AddressList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const handle = async () => {
    await dispatch(getAdress({user_id:user.id}))    
-   console.log('hi adress')
-   
   };
 const {adresses} = useSelector(adressSelector) ;
   useEffect(() => {
     handle(); 
   }, []);
-
+ 
  
   return (
      
@@ -38,9 +36,11 @@ const {adresses} = useSelector(adressSelector) ;
         title="My Addresses"
         navigation={<CustomerDashboardNavigation />}
         button={
-          <Button color="primary" sx={{ bgcolor: "primary.light", px: 4 }}>
+          <Link href="/address/new" passHref>
+          <Button color="primary" sx={{ bgcolor: "primary.light", px: 4 }} >
             Add New Address
           </Button>
+          </Link>
         }
       />
       {adresses.map((adr, ind) => (
@@ -58,7 +58,7 @@ const {adresses} = useSelector(adressSelector) ;
           </Typography>
 
           <Typography whiteSpace="pre" textAlign="center" color="grey.600">
-            <Link href="/address/xkssThds6h37sd" passHref>
+            <Link href={`/address/${adr.id}`} passHref>
               <IconButton>
                 <Edit fontSize="small" color="inherit" />
               </IconButton>
@@ -78,37 +78,37 @@ const {adresses} = useSelector(adressSelector) ;
   );
 };
 
-const orderList = [
-  {
-    orderNo: "1050017AS",
-    status: "Pending",
-    purchaseDate: new Date(),
-    price: 350,
-  },
-  {
-    orderNo: "1050017AS",
-    status: "Processing",
-    purchaseDate: new Date(),
-    price: 500,
-  },
-  {
-    orderNo: "1050017AS",
-    status: "Delivered",
-    purchaseDate: "2020/12/23",
-    price: 700,
-  },
-  {
-    orderNo: "1050017AS",
-    status: "Delivered",
-    purchaseDate: "2020/12/23",
-    price: 700,
-  },
-  {
-    orderNo: "1050017AS",
-    status: "Cancelled",
-    purchaseDate: "2020/12/15",
-    price: 300,
-  },
-];
+// const orderList = [
+//   {
+//     orderNo: "1050017AS",
+//     status: "Pending",
+//     purchaseDate: new Date(),
+//     price: 350,
+//   },
+//   {
+//     orderNo: "1050017AS",
+//     status: "Processing",
+//     purchaseDate: new Date(),
+//     price: 500,
+//   },
+//   {
+//     orderNo: "1050017AS",
+//     status: "Delivered",
+//     purchaseDate: "2020/12/23",
+//     price: 700,
+//   },
+//   {
+//     orderNo: "1050017AS",
+//     status: "Delivered",
+//     purchaseDate: "2020/12/23",
+//     price: 700,
+//   },
+//   {
+//     orderNo: "1050017AS",
+//     status: "Cancelled",
+//     purchaseDate: "2020/12/15",
+//     price: 300,
+//   },
+// ];
 
 export default AddressList;

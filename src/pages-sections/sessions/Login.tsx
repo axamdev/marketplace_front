@@ -49,7 +49,7 @@ const Login = () => {
     console.log(values);
 
    await dispatch(loginUser({ email: values.email, password: values.password }));
-    console.log(auth, "here error login");
+   
    //{
    //  {error?null:router.push("/")};
   // }  
