@@ -35,14 +35,14 @@ const Cart: NextPage = () => {
               <Span color="grey.600">Total:</Span>
 
               <Span fontSize={18} fontWeight={600} lineHeight="1">
-                ${getTotalPrice().toFixed(2)}
+                TND{getTotalPrice().toFixed(2)}
               </Span>
             </FlexBetween>
 
             <Divider sx={{ mb: 2 }} />
 
             <FlexBox alignItems="center" columnGap={1} mb={2}>
-              <Span fontWeight="600">Additional Comments</Span>
+              <Span fontWeight="600">Commentaires supplémentaires</Span>
 
               <Span
                 p="6px 10px"
@@ -67,51 +67,56 @@ const Cart: NextPage = () => {
             <Divider sx={{ mb: 2 }} />
 
             <TextField
+            disabled={true}
               fullWidth
               size="small"
               label="Voucher"
               variant="outlined"
-              placeholder="Voucher"
+              placeholder="le bon d'achat"
             />
 
             <Button
+            disabled={true}
               variant="outlined"
               color="primary"
               fullWidth
               sx={{ mt: 2, mb: 4 }}
             >
-              Apply Voucher
+             Appliquer le bon d'achat
             </Button>
 
             <Divider sx={{ mb: 2 }} />
 
             <Span fontWeight={600} mb={2} display="block">
-              Shipping Estimates
+            Estimations d'expédition
             </Span>
 
             <Autocomplete
               fullWidth
+              disabled={true}
               sx={{ mb: 2 }}
               options={countryList}
               // getOptionLabel={(option) => option.label}
               renderInput={(params) => (
                 <TextField
+                disabled={true}
                   {...params}
                   size="small"
-                  label="Country"
+                  label="Etat"
                   variant="outlined"
-                  placeholder="Select Country"
+                  placeholder="Choisissez le pays"
                 />
               )}
             />
 
             <TextField
               select
+              disabled={true}
               fullWidth
               size="small"
-              label="State"
+              label="Délégation"
               variant="outlined"
-              placeholder="Select State"
+              placeholder="Choisissez la Délégation"
               defaultValue="new-york"
             >
               {stateList.map((item) => (
@@ -122,21 +127,22 @@ const Cart: NextPage = () => {
             </TextField>
 
             <TextField
+            disabled={true}
               fullWidth
               size="small"
-              label="Zip Code"
+              label="Code postal"
               placeholder="3100"
               variant="outlined"
               sx={{ mt: 2 }}
             />
 
-            <Button variant="outlined" color="primary" fullWidth sx={{ my: 2 }}>
-              Calculate Shipping
+            <Button disabled={true} variant="outlined" color="primary" fullWidth sx={{ my: 2 }}>
+            Calculer Frais de port
             </Button>
 
             <Link href="/checkout" passHref>
               <Button variant="contained" color="primary" fullWidth>
-                Checkout Now
+              Passer à la caisse
               </Button>
             </Link>
           </Card>
@@ -147,8 +153,9 @@ const Cart: NextPage = () => {
 };
 
 const stateList = [
-  { value: "new-york", label: "New York" },
-  { value: "chicago", label: "Chicago" },
+  { value: "Sahline", label: "Sahline" },
+  { value: "Moknine", label: "Moknine" },
+  { value: "Sousse Medina", label: "Sousse Medina" },
 ];
 
 export default Cart;

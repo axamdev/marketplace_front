@@ -12,15 +12,16 @@ import CustomerDashboardNavigation from "components/layouts/customer-dashboard/N
 import { Formik } from "formik";
 import Link from "next/link";
 import * as yup from "yup";
+import {  useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { authSelector } from "redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "redux/editSlice";
 import { useState } from "react";
 import { userAgent } from "next/server";
-
 //city:values.ville,pincode:values.CodeZip
 const ProfileEditor = () => {
+
   const dispatch = useDispatch<AppDispatch>();
    const handleFormSubmit = async (values: any) => {
      console.log(values);
@@ -73,7 +74,8 @@ const ProfileEditor = () => {
       <Card1>
         <FlexBox alignItems="flex-end" mb={3}>
           <Avatar
-            src={image}
+            src={user.image}
+
             sx={{ height: 64, width: 64 }}
           />
 
@@ -126,6 +128,7 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="first_name"
+
                       label="nom et prénom"
                       onBlur={handleBlur}
                       onChange={handleChange}
@@ -138,9 +141,11 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="last_name"
+
                       label="Adresse"
                       onBlur={handleBlur}
                       onChange={handleChange}
+                      //value={user.username}
                       value={values.last_name}
                       error={!!touched.last_name && !!errors.last_name}
                       helperText={touched.last_name && errors.last_name}
@@ -433,7 +438,8 @@ const ProfileEditor = () => {
                 </Grid>
               </Box>
 
-              <Button type="submit" variant="contained" color="primary" >
+              <Button type="submit" variant="contained" color="primary">
+
               Sauvegarder les modifications
               </Button>
             </form>

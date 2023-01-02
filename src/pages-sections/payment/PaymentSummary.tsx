@@ -3,14 +3,23 @@ import Card1 from "components/Card1";
 import { FlexBetween } from "components/flex-box";
 import { Paragraph } from "components/Typography";
 import React from "react";
+import { CartItem, useAppContext } from "contexts/AppContext";
+
 
 const PaymentSummary = () => {
+
+  const { state } = useAppContext();
+const cartList: CartItem[] = state.cart;
+
+  const getTotalPrice = () => {
+    return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
+     };
   return (
     <Card1>
       <FlexBetween mb={1}>
         <Paragraph color="grey.600">Subtotal:</Paragraph>
         <Paragraph fontSize={18} fontWeight={600} lineHeight={1}>
-          TND 2610
+        TND{getTotalPrice().toFixed(2)}
         </Paragraph>
       </FlexBetween>
 
@@ -43,7 +52,7 @@ const PaymentSummary = () => {
         lineHeight={1}
         textAlign="right"
       >
-        TND 2610.00
+         TND{getTotalPrice().toFixed(2)}
       </Paragraph>
     </Card1>
   );

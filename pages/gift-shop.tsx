@@ -26,6 +26,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     transition: "all 350ms ease-in-out",
     width: layoutConstant.grocerySidenavWidth,
     minWidth: layoutConstant.grocerySidenavWidth,
+    //maxWidth:"1600px",
     "& .MuiPaper-root": { borderRadius: 0 },
     [theme.breakpoints.down("md")]: { display: "none" },
   },

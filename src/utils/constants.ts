@@ -7,6 +7,7 @@ export const categoriesUrl = devUrl+"get_categories" ;
 export const sliderhomeUrl=devUrl+"get_slider_images";
 export const registerUrl = devUrl+"register_user" ;
 export const loginUrl=devUrl+"login";
+export const orderUrl= devUrl+"place_order";
 export const sectionsUrl=devUrl+"get_sections";
 export const offersUrl=devUrl+"get_offer_images";
 export const productsUrl=devUrl+"get_products";

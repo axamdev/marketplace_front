@@ -2,15 +2,22 @@ import { Button, Divider, TextField, Typography } from "@mui/material";
 import Card1 from "components/Card1";
 import { FlexBetween, FlexBox } from "components/flex-box";
 import React, { FC } from "react";
+import { CartItem, useAppContext } from "contexts/AppContext";
 
 const CheckoutSummary: FC = () => {
+  const { state } = useAppContext();
+  const cartList: CartItem[] = state.cart;
+
+  const getTotalPrice = () => {
+    return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
+     };
   return (
     <Card1>
       <FlexBetween mb={1}>
-        <Typography color="grey.600">Subtotal:</Typography>
+        <Typography color="grey.600">Total:</Typography>
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-            $2610.
+          TND{getTotalPrice().toFixed(2)}
           </Typography>
           <Typography fontWeight="600" fontSize="14px" lineHeight="1">
             00
@@ -18,7 +25,7 @@ const CheckoutSummary: FC = () => {
         </FlexBox>
       </FlexBetween>
       <FlexBetween mb={1}>
-        <Typography color="grey.600">Shipping:</Typography>
+        <Typography color="grey.600">Expédition:</Typography>
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
             -
@@ -26,10 +33,10 @@ const CheckoutSummary: FC = () => {
         </FlexBox>
       </FlexBetween>
       <FlexBetween mb={1}>
-        <Typography color="grey.600">Tax:</Typography>
+        <Typography color="grey.600">Impôt:</Typography>
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-            $40.
+            TND0.
           </Typography>
           <Typography fontWeight="600" fontSize="14px" lineHeight="1">
             00
@@ -37,7 +44,7 @@ const CheckoutSummary: FC = () => {
         </FlexBox>
       </FlexBetween>
       <FlexBetween mb={2}>
-        <Typography color="grey.600">Discount:</Typography>
+        <Typography color="grey.600">Remise:</Typography>
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
             -
@@ -54,11 +61,11 @@ const CheckoutSummary: FC = () => {
         textAlign="right"
         mb={3}
       >
-        $2610.00
+         TND{getTotalPrice().toFixed(2)}
       </Typography>
 
       <TextField
-        placeholder="Voucher"
+        placeholder="code promo"
         variant="outlined"
         size="small"
         fullWidth
@@ -69,7 +76,7 @@ const CheckoutSummary: FC = () => {
         fullWidth
         sx={{ mt: "1rem", mb: "30px" }}
       >
-        Apply Voucher
+        Appliquer le bon
       </Button>
     </Card1>
   );

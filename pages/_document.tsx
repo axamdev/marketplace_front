@@ -60,6 +60,7 @@ Bazaar.getInitialProps = async (ctx) => {
   const cache = createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
+  
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: (App: any) => (props) =>

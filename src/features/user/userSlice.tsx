@@ -1,6 +1,6 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
 import axios from "axios";
-import { registerUrl, TOKEN,loginUrl } from "utils/constants";
+import { registerUrl, TOKEN} from "utils/constants";
 //import {useRouter} from 'next/router'
 
 export interface  initialTypes{

@@ -3,28 +3,63 @@ import Autocomplete from "@mui/material/Autocomplete";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Card1 from "components/Card1";
 import countryList from "data/countryList";
+import { postClientOrder } from "features/orders/ordersSlice";
+import { userSelector } from "features/user/userSlice";
 import { Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
+import { useSelector } from "react-redux";
+import { authSelector } from "redux/authSlice";
+import { useAppDispatch } from "redux/store";
+import { CartItem, useAppContext } from "contexts/AppContext";
 import * as yup from "yup";
+import ProductCard7 from "components/product-cards/ProductCard7";
 
 const CheckoutForm: FC = () => {
   const router = useRouter();
-  const [sameAsShipping, setSameAsShipping] = useState(false);
+  const [sameAsShipping, setSameAsShipping] = useState(true);
 
+  const auth = useSelector(authSelector);
+  const {user} = useSelector(authSelector);
+  //cart
+  const { state } = useAppContext();
+  const cartList: CartItem[] = state.cart;
+  const getTotalPrice = () => {
+    return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
+  };
+
+  let getProductVariantId = function (cartList: CartItem[]): string {
+    let product_variant_id :string = "";
+    for (let i = 0; i < cartList.length; i++) {
+      product_variant_id+= cartList[i].id+"," ;
+    }
+    return product_variant_id ;
+  };
+
+  let getProductQuantity = function (cartList: CartItem[]): string {
+    let product_quantity :string = "";
+    for (let i = 0; i < cartList.length; i++) {
+      product_quantity+= cartList[i].qty+"," ;
+    }
+    return product_quantity ;
+};
+// const [name,setName] =useState(user.)
+const dispatch= useAppDispatch();
   const handleFormSubmit = async (values: any) => {
+    // dispatch(postClientOrder({user_id:user.id,product_variant_id: getProductVariantId(cartList), final_total:getTotalPrice(),total:getTotalPrice(),mobile:user.mobile,quantity:getProductQuantity(cartList),delivery_charge:'7.0',tax_amount:'0',tax_percentage:'0',payment_method:'COD',address_id:'2',delivery_date:'10/12/2023',is_wallet_used:'0',
+    // delivery_time:'Today - Evening (4:00pm to 7:00pm)',active_status:'awaiting'}))
     router.push("/payment");
   };
 
   const handleCheckboxChange =
     (values: typeof initialValues, setFieldValue: any) =>
     (e: any, _: boolean) => {
-      const checked = e.currentTarget.checked;
+      // const checked = e.currentTarget.checked;
 
-      setSameAsShipping(checked);
-      setFieldValue("same_as_shipping", checked);
-      setFieldValue("billing_name", checked ? values.shipping_name : "");
+      // setSameAsShipping(checked);
+      // setFieldValue("same_as_shipping", checked);
+      // setFieldValue("billing_name", checked ? values.shipping_name : "");
     };
 
   return (
@@ -45,7 +80,7 @@ const CheckoutForm: FC = () => {
         <form onSubmit={handleSubmit}>
           <Card1 sx={{ mb: 4 }}>
             <Typography fontWeight="600" mb={2}>
-              Shipping Address
+            Adresse de livraison
             </Typography>
 
             <Grid container spacing={6}>
@@ -53,11 +88,11 @@ const CheckoutForm: FC = () => {
                 <TextField
                   fullWidth
                   sx={{ mb: 2 }}
-                  label="Full Name"
+                  label="Nom et prénom"
                   onBlur={handleBlur}
                   name="shipping_name"
                   onChange={handleChange}
-                  value={values.shipping_name}
+                  value={user.username}
                   error={!!touched.shipping_name && !!errors.shipping_name}
                   helperText={touched.shipping_name && errors.shipping_name}
                 />
@@ -65,10 +100,10 @@ const CheckoutForm: FC = () => {
                   fullWidth
                   sx={{ mb: 2 }}
                   onBlur={handleBlur}
-                  label="Phone Number"
+                  label="Numéro de téléphone"
                   onChange={handleChange}
                   name="shipping_contact"
-                  value={values.shipping_contact}
+                  value={user.mobile}
                   error={
                     !!touched.shipping_contact && !!errors.shipping_contact
                   }
@@ -80,7 +115,7 @@ const CheckoutForm: FC = () => {
                   fullWidth
                   type="number"
                   sx={{ mb: 2 }}
-                  label="Zip Code"
+                  label="Code postal"
                   name="shipping_zip"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -90,7 +125,7 @@ const CheckoutForm: FC = () => {
                 />
                 <TextField
                   fullWidth
-                  label="Address 1"
+                  label="Adresse 1"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   name="shipping_address1"
@@ -111,16 +146,16 @@ const CheckoutForm: FC = () => {
                   sx={{ mb: 2 }}
                   onBlur={handleBlur}
                   name="shipping_email"
-                  label="Email Address"
+                  label="Adresse e-mail"
                   onChange={handleChange}
-                  value={values.shipping_email}
+                  value={user.email}
                   error={!!touched.shipping_email && !!errors.shipping_email}
                   helperText={touched.shipping_email && errors.shipping_email}
                 />
                 <TextField
                   fullWidth
                   sx={{ mb: 2 }}
-                  label="Company"
+                  label="Entreprise"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   name="shipping_company"
@@ -144,7 +179,7 @@ const CheckoutForm: FC = () => {
                   }
                   renderInput={(params) => (
                     <TextField
-                      label="Country"
+                      label="L'état"
                       variant="outlined"
                       placeholder="Select Country"
                       error={
@@ -177,20 +212,20 @@ const CheckoutForm: FC = () => {
           </Card1>
 
           <Card1 sx={{ mb: 4 }}>
-            <Typography fontWeight="600" mb={2}>
-              Billing Address
-            </Typography>
+            {/* <Typography fontWeight="600" mb={2}>
+            Adresse de facturation
+            </Typography> */}
 
-            <FormControlLabel
-              label="Same as shipping address"
+            {/* <FormControlLabel
+              label="Même que l'adresse d'expédition"
               control={<Checkbox size="small" color="secondary" />}
               sx={{
                 zIndex: 1,
                 position: "relative",
                 mb: sameAsShipping ? "" : "1rem",
               }}
-              onChange={handleCheckboxChange(values, setFieldValue)}
-            />
+              // onChange={handleCheckboxChange(values, setFieldValue)}
+            /> */}
 
             {!sameAsShipping && (
               <Grid container spacing={6}>
@@ -198,7 +233,7 @@ const CheckoutForm: FC = () => {
                   <TextField
                     fullWidth
                     sx={{ mb: 2 }}
-                    label="Full Name"
+                    label="Nom et prénom"
                     name="billing_name"
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -210,7 +245,7 @@ const CheckoutForm: FC = () => {
                     fullWidth
                     sx={{ mb: 2 }}
                     onBlur={handleBlur}
-                    label="Phone Number"
+                    label="Numéro de téléphone"
                     name="billing_contact"
                     onChange={handleChange}
                     value={values.billing_contact}
@@ -225,7 +260,7 @@ const CheckoutForm: FC = () => {
                     fullWidth
                     type="number"
                     sx={{ mb: 2 }}
-                    label="Zip Code"
+                    label="Code postal"
                     name="billing_zip"
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -235,7 +270,7 @@ const CheckoutForm: FC = () => {
                   />
                   <TextField
                     fullWidth
-                    label="Address 1"
+                    label="Addresse 1"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     name="billing_address1"
@@ -255,7 +290,7 @@ const CheckoutForm: FC = () => {
                     sx={{ mb: 2 }}
                     onBlur={handleBlur}
                     name="billing_email"
-                    label="Email Address"
+                    label="Adresse e-mail"
                     onChange={handleChange}
                     value={values.billing_email}
                     error={!!touched.billing_email && !!errors.billing_email}
@@ -264,7 +299,7 @@ const CheckoutForm: FC = () => {
                   <TextField
                     fullWidth
                     sx={{ mb: 2 }}
-                    label="Company"
+                    label="Entreprise"
                     onBlur={handleBlur}
                     name="billing_company"
                     onChange={handleChange}
@@ -287,7 +322,7 @@ const CheckoutForm: FC = () => {
                     }
                     renderInput={(params) => (
                       <TextField
-                        label="Country"
+                        label="L'état"
                         placeholder="Select Country"
                         error={
                           !!touched.billing_country && !!errors.billing_country
@@ -327,7 +362,7 @@ const CheckoutForm: FC = () => {
                   type="button"
                   fullWidth
                 >
-                  Back to Cart
+                  Retour au panier
                 </Button>
               </Link>
             </Grid>
@@ -338,7 +373,7 @@ const CheckoutForm: FC = () => {
                 type="submit"
                 fullWidth
               >
-                Proceed to Payment
+                Procéder au paiement
               </Button>
             </Grid>
           </Grid>

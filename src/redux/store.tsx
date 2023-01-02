@@ -1,4 +1,3 @@
-
 import {configureStore} from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import userReducer from "../features/user/userSlice"
@@ -12,17 +11,20 @@ import {
     REGISTER,
 } from 'redux-persist';
 import authReducer from './authSlice'
+import logReducer from './reducerLg'
+import cartReducer from '../features/cart/cartSlice'
+import ordersReducer from '../features/orders/ordersSlice'
 import editReducer from'./editSlice';
 import adressSlice from './adressSlice';
 import addadrSlice from "./addadrSlice"
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 //const persistConfig = { key: 'counter', storage}
-const rootReducer = combineReducers({auth:authReducer,user:userReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice})
+const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cartReducer,orders:ordersReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice})
 
 //const persistedReducer = persistReducer(persistConfig, rootReducer)
  const store = configureStore({
-    reducer:rootReducer
+    reducer: rootReducer,
     // reducer: persistedReducer,
     // middleware: (getDefaultMiddleware) =>
     //     getDefaultMiddleware({
@@ -32,6 +34,6 @@ const rootReducer = combineReducers({auth:authReducer,user:userReducer,edit:edit
     //     }),
 });
 export default store
-export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch:()=>AppDispatch=useDispatch
+export type RootState = ReturnType<typeof store.getState>

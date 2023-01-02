@@ -34,7 +34,7 @@ nProgress.configure({ showSpinner: false });
 
 const App = ({ Component, pageProps }: MyAppProps) => {
   const AnyComponent = Component as any;
-  const getLayout = AnyComponent.getLayout ?? ((page) => page);
+  const getLayout = AnyComponent.getLayout ?? ((page)=> page);
 
   useEffect(() => {
     // Remove the server-side injected CSS.
