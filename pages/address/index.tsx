@@ -1,4 +1,4 @@
-import { Delete, Edit, Place } from "@mui/icons-material";
+import { Delete, DetailsRounded, Edit, Place } from "@mui/icons-material";
 import { Button, IconButton, Pagination, Typography } from "@mui/material";
 import { FlexBox } from "components/flex-box";
 import UserDashboardHeader from "components/header/UserDashboardHeader";
@@ -11,22 +11,20 @@ import { adressSelector } from "redux/adressSlice";
 import { AppDispatch } from "redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import {getAdress } from "redux/adressSlice";
-import  { useEffect } from 'react';
+import  { useEffect,useState} from 'react';
 
 const AddressList = () => {
+ // const [adr,setAdr]=useState([]);
  const {user} = useSelector(authSelector) ;
-
   const dispatch = useDispatch<AppDispatch>();
   const handle = async () => {
-   await dispatch(getAdress({user_id:user.id})
-
-
-   )  
+   await dispatch(getAdress({user_id:user.id}))    
    console.log('hi adress')
    
-  };const {adresses} = useSelector(adressSelector) ;
+  };
+const {adresses} = useSelector(adressSelector) ;
   useEffect(() => {
-    handle();
+    handle(); 
   }, []);
 
  
@@ -45,18 +43,18 @@ const AddressList = () => {
           </Button>
         }
       />
-      {orderList.map((_, ind) => (
+      {adresses.map((adr, ind) => (
         <TableRow sx={{ my: 2, padding: "6px 18px" }} key={ind}>
           <Typography whiteSpace="pre" m={0.75} textAlign="left">
-            Ralf Edward
+           {adr.name}
           </Typography>
 
           <Typography flex="1 1 260px !important" m={0.75} textAlign="left">
-            777 Brockton Avenue, Abington MA 2351
+          {adr.address}
           </Typography>
 
           <Typography whiteSpace="pre" m={0.75} textAlign="left">
-            +1927987987498
+           {adr.mobile}
           </Typography>
 
           <Typography whiteSpace="pre" textAlign="center" color="grey.600">

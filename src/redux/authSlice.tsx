@@ -59,7 +59,7 @@ const authSlice = createSlice({
     });
 
     builder.addCase(loginUser.fulfilled, (state, { payload }) => {
-      console.log("payload", payload);
+      
       if (payload.error) {
         state.error = payload.error;
         console.log(state.error, "here error login");

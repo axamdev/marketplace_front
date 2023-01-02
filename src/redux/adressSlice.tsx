@@ -2,8 +2,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {  getAdressUrl, TOKEN } from "../utils/constants";
 import axios from "axios";
+import { RootState } from "./store";
+export interface adressType {
+  id: string;
+  user_id: string;
+  name: string;
+  type: string;
+  mobile: string;
+  alternate_mobile: string;
+  address: string;
+  pincode: string;
+  country_code: string;
+  state: string;
+  country: string;
+  is_default: string;
+}
 export interface initTypes {
-  adresses:Object[]
+  adresses:adressType[]
     msg:String,
     error:String,
     loading:boolean
@@ -35,14 +50,17 @@ export interface initTypes {
   const adressSlice=createSlice({
     name:"getadress",
     initialState,
-    reducers:{},
+    reducers:{
+     
+    },
+    
     extraReducers: async (builder) => {
       builder.addCase(getAdress.pending, (state, action) => {
         state.loading = true;
       });
   
       builder.addCase(getAdress.fulfilled, (state, { payload }) => {
-        console.log("payload", payload);
+        
         if (payload.error) {
           state.error = payload.error;
           //console.log(state.error, "here error login");
@@ -67,4 +85,4 @@ export interface initTypes {
     },
 })
 export default adressSlice.reducer;
-export const adressSelector = (state) => state.getadress
+export const adressSelector = (state:RootState) => state.getAdr
