@@ -127,6 +127,7 @@ const Profile = () => {
             Date de naissance
           </Small>
           <span className="pre">
+            {user.dob}
             {/* {format(new Date(1996 / 11 / 16), "dd MMM, yyyy")} */}
           </span>
         </FlexBox>

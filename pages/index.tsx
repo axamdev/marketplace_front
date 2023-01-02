@@ -139,7 +139,6 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
 
        {props.sectionsList.data.map((item) => {
         return (
-
           <GiftShopPopularItems dataSections={item} productsData={props.popularProducts}/>
 
         );

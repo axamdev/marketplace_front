@@ -14,14 +14,18 @@ import authReducer from './authSlice'
 import logReducer from './reducerLg'
 import cartReducer from '../features/cart/cartSlice'
 import ordersReducer from '../features/orders/ordersSlice'
+import editReducer from'./editSlice';
+import adressSlice from './adressSlice';
+import addadrSlice from "./addadrSlice"
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 //const persistConfig = { key: 'counter', storage}
-const rootReducer = combineReducers({auth:authReducer,log:logReducer,user:userReducer,cart:cartReducer,orders:ordersReducer})
+const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cartReducer,orders:ordersReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice})
 
 //const persistedReducer = persistReducer(persistConfig, rootReducer)
  const store = configureStore({
     reducer: rootReducer,
+    // reducer: persistedReducer,
     // middleware: (getDefaultMiddleware) =>
     //     getDefaultMiddleware({
     //         serializableCheck: {
@@ -32,3 +36,4 @@ const rootReducer = combineReducers({auth:authReducer,log:logReducer,user:userRe
 export default store
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch:()=>AppDispatch=useDispatch
+export type RootState = ReturnType<typeof store.getState>
