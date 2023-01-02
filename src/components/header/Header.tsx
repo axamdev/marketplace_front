@@ -65,7 +65,7 @@ const Header: FC<HeaderProps> = ({
    //console.log(categoriesList) 
 
 
-  console.log("categoriesList"+categoriesList) 
+  //console.log("categoriesList"+categoriesList) 
   const { error,token,user } = useSelector(authSelector)
   const router = useRouter();
 

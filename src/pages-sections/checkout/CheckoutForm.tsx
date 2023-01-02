@@ -12,7 +12,9 @@ import React, { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { authSelector } from "redux/authSlice";
 import { useAppDispatch } from "redux/store";
+import { CartItem, useAppContext } from "contexts/AppContext";
 import * as yup from "yup";
+import ProductCard7 from "components/product-cards/ProductCard7";
 
 const CheckoutForm: FC = () => {
   const router = useRouter();
@@ -20,10 +22,33 @@ const CheckoutForm: FC = () => {
 
   const auth = useSelector(authSelector);
   const {user} = useSelector(authSelector);
+  //cart
+  const { state } = useAppContext();
+  const cartList: CartItem[] = state.cart;
+  const getTotalPrice = () => {
+    return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
+  };
+
+  let getProductVariantId = function (cartList: CartItem[]): string {
+    let product_variant_id :string = "";
+    for (let i = 0; i < cartList.length; i++) {
+      product_variant_id+= cartList[i].id+"," ;
+    }
+    return product_variant_id ;
+  };
+
+  let getProductQuantity = function (cartList: CartItem[]): string {
+    let product_quantity :string = "";
+    for (let i = 0; i < cartList.length; i++) {
+      product_quantity+= cartList[i].qty+"," ;
+    }
+    return product_quantity ;
+};
 // const [name,setName] =useState(user.)
 const dispatch= useAppDispatch();
   const handleFormSubmit = async (values: any) => {
-    dispatch(postClientOrder({user_id: "15",product_variant_id:"70"}))
+    // dispatch(postClientOrder({user_id:user.id,product_variant_id: getProductVariantId(cartList), final_total:getTotalPrice(),total:getTotalPrice(),mobile:user.mobile,quantity:getProductQuantity(cartList),delivery_charge:'7.0',tax_amount:'0',tax_percentage:'0',payment_method:'COD',address_id:'2',delivery_date:'10/12/2023',is_wallet_used:'0',
+    // delivery_time:'Today - Evening (4:00pm to 7:00pm)',active_status:'awaiting'}))
     router.push("/payment");
   };
 

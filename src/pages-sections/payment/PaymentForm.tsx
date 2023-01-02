@@ -3,15 +3,22 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Card1 from "components/Card1";
 import { FlexBox } from "components/flex-box";
 import { Paragraph } from "components/Typography";
+import { CartItem, useAppContext } from "contexts/AppContext";
 import { ordersSelector, postClientOrder } from "features/orders/ordersSlice";
 import { Formik } from "formik";
 import useWindowSize from "hooks/useWindowSize";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { userAgent } from "next/server";
+
 import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
+import { authSelector } from "redux/authSlice";
 import { useAppDispatch } from "redux/store";
 import * as yup from "yup";
+import ProductCard17 from "components/product-cards/ProductCard17";
+import ProductCard7 from "components/product-cards/ProductCard7";
+import { userSelector } from "features/user/userSlice";
 
 const PaymentForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
@@ -22,9 +29,50 @@ const PaymentForm = () => {
   const width = useWindowSize();
   const router = useRouter();
   const isMobile = width < 769;
+  const { state } = useAppContext();
+  const cartList: CartItem[] = state.cart;
+  const {user,loading}=useSelector(authSelector);
+
+  const getTotalPrice = () => {
+    return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
+  };
+
+  let getProductVariantId = function (cartList: CartItem[]): string {
+    let product_variant_id :string = "";
+    for (let i = 0; i < cartList.length; i++) {
+      if(i != cartList.length-1){
+      product_variant_id+= cartList[i].id+"," ;
+    }
+    else{
+      product_variant_id+= cartList[i].qty;
+    }
+     }
+    return product_variant_id ;
+  };
+
+  let getProductQuantity = function (cartList: CartItem[]): string {
+    let product_quantity :string = "";
+    for (let i = 0;  i < cartList.length; i++ ) {
+     if(i != cartList.length-1){
+      product_quantity+= cartList[i].qty+"," ;
+     }else{
+      product_quantity+= cartList[i].qty;
+     }
+      
+    }
+  
+    return product_quantity ;
+  };
 
   const handleFormSubmit = async (values: any) => {
-    dispatch(postClientOrder({user_id: '15',product_variant_id: '72,73,70'}))
+    console.log("final_total")
+    console.log(getTotalPrice())
+    console.log( typeof getTotalPrice())
+    
+
+
+    dispatch(postClientOrder({user_id:user.id,mobile:user.mobile,product_variant_id: getProductVariantId(cartList), final_total:getTotalPrice(),total:getTotalPrice(),quantity:getProductQuantity(cartList),delivery_charge:'7.0',tax_amount:'0',tax_percentage:'0',payment_method:'COD',address_id:'2',delivery_date:'10/12/2023',is_wallet_used:'0',
+    delivery_time:'Today - Evening (4:00pm to 7:00pm)',active_status:'awaiting',order_note:"hello"}))
     router.push("/payment");
   };
 //   dispatch(postClientOrder({user_id: '15',mobile:'55778899',product_variant_id: '72,73,70',quantity:'1,2,1',
