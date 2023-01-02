@@ -98,8 +98,8 @@ var config = {
   
 
 
-    console.log(config)
-    console.log(bodyFormData) 
+    //console.log(config)
+    //console.log(bodyFormData) 
      const response = await axios.post(orderUrl,bodyFormData,config);
       console.log("response client Orders : "+response.data);
       console.log(response.data);

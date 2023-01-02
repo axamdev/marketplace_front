@@ -93,11 +93,13 @@ const Cart: NextPage = () => {
 
             <Autocomplete
               fullWidth
+              disabled={true}
               sx={{ mb: 2 }}
               options={countryList}
               // getOptionLabel={(option) => option.label}
               renderInput={(params) => (
                 <TextField
+                disabled={true}
                   {...params}
                   size="small"
                   label="Etat"
@@ -109,6 +111,7 @@ const Cart: NextPage = () => {
 
             <TextField
               select
+              disabled={true}
               fullWidth
               size="small"
               label="Délégation"
@@ -124,6 +127,7 @@ const Cart: NextPage = () => {
             </TextField>
 
             <TextField
+            disabled={true}
               fullWidth
               size="small"
               label="Code postal"
@@ -132,7 +136,7 @@ const Cart: NextPage = () => {
               sx={{ mt: 2 }}
             />
 
-            <Button variant="outlined" color="primary" fullWidth sx={{ my: 2 }}>
+            <Button disabled={true} variant="outlined" color="primary" fullWidth sx={{ my: 2 }}>
             Calculer Frais de port
             </Button>
 

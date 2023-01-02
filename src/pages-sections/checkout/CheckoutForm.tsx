@@ -18,7 +18,7 @@ import ProductCard7 from "components/product-cards/ProductCard7";
 
 const CheckoutForm: FC = () => {
   const router = useRouter();
-  const [sameAsShipping, setSameAsShipping] = useState(false);
+  const [sameAsShipping, setSameAsShipping] = useState(true);
 
   const auth = useSelector(authSelector);
   const {user} = useSelector(authSelector);
@@ -55,11 +55,11 @@ const dispatch= useAppDispatch();
   const handleCheckboxChange =
     (values: typeof initialValues, setFieldValue: any) =>
     (e: any, _: boolean) => {
-      const checked = e.currentTarget.checked;
+      // const checked = e.currentTarget.checked;
 
-      setSameAsShipping(checked);
-      setFieldValue("same_as_shipping", checked);
-      setFieldValue("billing_name", checked ? values.shipping_name : "");
+      // setSameAsShipping(checked);
+      // setFieldValue("same_as_shipping", checked);
+      // setFieldValue("billing_name", checked ? values.shipping_name : "");
     };
 
   return (
@@ -212,11 +212,11 @@ const dispatch= useAppDispatch();
           </Card1>
 
           <Card1 sx={{ mb: 4 }}>
-            <Typography fontWeight="600" mb={2}>
+            {/* <Typography fontWeight="600" mb={2}>
             Adresse de facturation
-            </Typography>
+            </Typography> */}
 
-            <FormControlLabel
+            {/* <FormControlLabel
               label="Même que l'adresse d'expédition"
               control={<Checkbox size="small" color="secondary" />}
               sx={{
@@ -224,8 +224,8 @@ const dispatch= useAppDispatch();
                 position: "relative",
                 mb: sameAsShipping ? "" : "1rem",
               }}
-              onChange={handleCheckboxChange(values, setFieldValue)}
-            />
+              // onChange={handleCheckboxChange(values, setFieldValue)}
+            /> */}
 
             {!sameAsShipping && (
               <Grid container spacing={6}>
