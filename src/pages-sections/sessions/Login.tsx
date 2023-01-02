@@ -5,18 +5,14 @@ import BazaarTextField from "components/BazaarTextField";
 import { H3, Small } from "components/Typography";
 import { useFormik } from "formik";
 import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import SocialButtons from "./SocialButtons";
 import { useDispatch, useSelector } from "react-redux";
-import {closeLogin} from 'redux/reducerLg'
 import { loginUser } from "redux/authSlice";
 import { AppDispatch } from "redux/store";
-import{logSelector} from 'redux/reducerLg'
 import { authSelector } from "redux/authSlice";
 import { useRouter } from "next/router";
-import { userAgent } from "next/server";
 const fbStyle = { background: "#3B5998", color: "white" };
 const googleStyle = { background: "#4285F4", color: "white" };
 type WrapperProps = { passwordVisibility?: boolean };
@@ -42,25 +38,18 @@ const Login = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
-  }, []);
-  const dispatch = useDispatch();
-  const handleFormSubmit = async (values: any) => {
-    console.log(values);
-    
-  const {close}=useSelector(logSelector)
+  }, []);   
   const { error, msg,token,user } = useSelector(authSelector);
   const auth = useSelector(authSelector);
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
-  const handleClose=()=>{
-    dispatch(closeLogin({close:close}))
-  }
+ 
 
   const handleFormSubmit =async ()  => {
     console.log(values);
 
    await dispatch(loginUser({ email: values.email, password: values.password }));
-    console.log(auth, "here error login");
+   
    //{
    //  {error?null:router.push("/")};
   // }  

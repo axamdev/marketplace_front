@@ -1,5 +1,4 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
-import {useHistory} from "react-router-dom"
 import axios from "axios";
 import { registerUrl, TOKEN,loginUrl } from "utils/constants";
 //import {useRouter} from 'next/router'

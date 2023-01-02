@@ -132,13 +132,13 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
     
         </Box>
           </Box>
+          </Box>
         </StyledContainer>
 
        <Stack spacing={6} my={6}>
 
        {props.sectionsList.data.map((item) => {
         return (
-
           <GiftShopPopularItems dataSections={item} productsData={props.popularProducts}/>
 
         );

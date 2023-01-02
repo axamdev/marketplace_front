@@ -9,7 +9,6 @@ import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import { Wrapper } from "./Login";
 import SocialButtons from "./SocialButtons";
-import {Phone} from 'components/mobileCode';
 import {UserData} from "utils/api/axam-RegisterUser"
 import { useDispatch } from "react-redux";
 import { postSignUpUser } from "features/user/userSlice";
@@ -17,8 +16,6 @@ import { useAppDispatch } from "redux/store";
 import { useSelector } from "react-redux";
 import {userSelector} from "features/user/userSlice"
 import {useRouter} from 'next/router'
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 
 //import { FC} from "react";
 //const dispatch = useDispatch()
@@ -117,7 +114,7 @@ const router= useRouter();
           helperText={touched.email && errors.email}
         />
 
-<BazaarTextField
+      <BazaarTextField
           mb={1.5}
           fullWidth
           name="mobile"
