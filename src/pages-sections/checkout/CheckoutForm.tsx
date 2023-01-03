@@ -15,6 +15,8 @@ import { useAppDispatch } from "redux/store";
 import { CartItem, useAppContext } from "contexts/AppContext";
 import * as yup from "yup";
 import ProductCard7 from "components/product-cards/ProductCard7";
+import displayAddressList from 'components/address/displayAddress'
+import AddressList from "components/address/displayAddress";
 
 const CheckoutForm: FC = () => {
   const router = useRouter();
@@ -111,7 +113,7 @@ const dispatch= useAppDispatch();
                     touched.shipping_contact && errors.shipping_contact
                   }
                 />
-                <TextField
+                {/* <TextField
                   fullWidth
                   type="number"
                   sx={{ mb: 2 }}
@@ -122,8 +124,8 @@ const dispatch= useAppDispatch();
                   value={values.shipping_zip}
                   error={!!touched.shipping_zip && !!errors.shipping_zip}
                   helperText={touched.shipping_zip && errors.shipping_zip}
-                />
-                <TextField
+                /> */}
+                {/* <TextField
                   fullWidth
                   label="Adresse 1"
                   onBlur={handleBlur}
@@ -136,7 +138,7 @@ const dispatch= useAppDispatch();
                   helperText={
                     touched.shipping_address1 && errors.shipping_address1
                   }
-                />
+                /> */}
               </Grid>
 
               <Grid item sm={6} xs={12}>
@@ -152,7 +154,7 @@ const dispatch= useAppDispatch();
                   error={!!touched.shipping_email && !!errors.shipping_email}
                   helperText={touched.shipping_email && errors.shipping_email}
                 />
-                <TextField
+                {/* <TextField
                   fullWidth
                   sx={{ mb: 2 }}
                   label="Entreprise"
@@ -166,9 +168,9 @@ const dispatch= useAppDispatch();
                   helperText={
                     touched.shipping_company && errors.shipping_company
                   }
-                />
+                /> */}
 
-                <Autocomplete
+                {/* <Autocomplete
                   fullWidth
                   sx={{ mb: 2 }}
                   options={countryList}
@@ -191,15 +193,15 @@ const dispatch= useAppDispatch();
                       {...params}
                     />
                   )}
-                />
+                /> */}
 
                 <TextField
                   fullWidth
-                  label="Address 2"
+                  label="Numéro de téléphone facultatif"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  name="shipping_address2"
-                  value={values.shipping_address2}
+                  name="Numéro_de_téléphone_facultatif"
+                  value={values.Numéro_de_téléphone_facultatif}
                   error={
                     !!touched.shipping_address2 && !!errors.shipping_address2
                   }
@@ -210,149 +212,11 @@ const dispatch= useAppDispatch();
               </Grid>
             </Grid>
           </Card1>
-
-          <Card1 sx={{ mb: 4 }}>
-            {/* <Typography fontWeight="600" mb={2}>
-            Adresse de facturation
-            </Typography> */}
-
-            {/* <FormControlLabel
-              label="Même que l'adresse d'expédition"
-              control={<Checkbox size="small" color="secondary" />}
-              sx={{
-                zIndex: 1,
-                position: "relative",
-                mb: sameAsShipping ? "" : "1rem",
-              }}
-              // onChange={handleCheckboxChange(values, setFieldValue)}
-            /> */}
-
-            {!sameAsShipping && (
-              <Grid container spacing={6}>
-                <Grid item sm={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    sx={{ mb: 2 }}
-                    label="Nom et prénom"
-                    name="billing_name"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.billing_name}
-                    error={!!touched.billing_name && !!errors.billing_name}
-                    helperText={touched.billing_name && errors.billing_name}
-                  />
-                  <TextField
-                    fullWidth
-                    sx={{ mb: 2 }}
-                    onBlur={handleBlur}
-                    label="Numéro de téléphone"
-                    name="billing_contact"
-                    onChange={handleChange}
-                    value={values.billing_contact}
-                    error={
-                      !!touched.billing_contact && !!errors.billing_contact
-                    }
-                    helperText={
-                      touched.billing_contact && errors.billing_contact
-                    }
-                  />
-                  <TextField
-                    fullWidth
-                    type="number"
-                    sx={{ mb: 2 }}
-                    label="Code postal"
-                    name="billing_zip"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.billing_zip}
-                    error={!!touched.billing_zip && !!errors.billing_zip}
-                    helperText={touched.billing_zip && errors.billing_zip}
-                  />
-                  <TextField
-                    fullWidth
-                    label="Addresse 1"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    name="billing_address1"
-                    value={values.billing_address1}
-                    error={
-                      !!touched.billing_address1 && !!errors.billing_address1
-                    }
-                    helperText={
-                      touched.billing_address1 && errors.billing_address1
-                    }
-                  />
-                </Grid>
-                <Grid item sm={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    type="email"
-                    sx={{ mb: 2 }}
-                    onBlur={handleBlur}
-                    name="billing_email"
-                    label="Adresse e-mail"
-                    onChange={handleChange}
-                    value={values.billing_email}
-                    error={!!touched.billing_email && !!errors.billing_email}
-                    helperText={touched.billing_email && errors.billing_email}
-                  />
-                  <TextField
-                    fullWidth
-                    sx={{ mb: 2 }}
-                    label="Entreprise"
-                    onBlur={handleBlur}
-                    name="billing_company"
-                    onChange={handleChange}
-                    value={values.billing_company}
-                    error={
-                      !!touched.billing_company && !!errors.billing_company
-                    }
-                    helperText={
-                      touched.billing_company && errors.billing_company
-                    }
-                  />
-                  <Autocomplete
-                    fullWidth
-                    sx={{ mb: 2 }}
-                    options={countryList}
-                    value={values.billing_country}
-                    getOptionLabel={(option) => option.label}
-                    onChange={(_, value) =>
-                      setFieldValue("billing_country", value)
-                    }
-                    renderInput={(params) => (
-                      <TextField
-                        label="L'état"
-                        placeholder="Select Country"
-                        error={
-                          !!touched.billing_country && !!errors.billing_country
-                        }
-                        helperText={
-                          touched.billing_country && errors.billing_country
-                        }
-                        {...params}
-                      />
-                    )}
-                  />
-                  <TextField
-                    fullWidth
-                    label="Address 2"
-                    onBlur={handleBlur}
-                    name="billing_address2"
-                    onChange={handleChange}
-                    value={values.billing_address2}
-                    error={
-                      !!touched.billing_address2 && !!errors.billing_address2
-                    }
-                    helperText={
-                      touched.billing_address2 && errors.billing_address2
-                    }
-                  />
-                </Grid>
-              </Grid>
-            )}
-          </Card1>
-
+         <div>
+          
+          <AddressList/>
+          {/* <displayAddressList/>  */}
+          </div>
           <Grid container spacing={6}>
             <Grid item sm={6} xs={12}>
               <Link href="/cart" passHref>

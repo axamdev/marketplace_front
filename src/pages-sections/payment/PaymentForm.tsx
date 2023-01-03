@@ -10,7 +10,6 @@ import useWindowSize from "hooks/useWindowSize";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { userAgent } from "next/server";
-
 import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import { authSelector } from "redux/authSlice";
@@ -19,10 +18,12 @@ import * as yup from "yup";
 import ProductCard17 from "components/product-cards/ProductCard17";
 import ProductCard7 from "components/product-cards/ProductCard7";
 import { userSelector } from "features/user/userSlice";
+//import Cart from "../../../pages/cart";
 
-const PaymentForm = () => {
+
+const PaymentForm = (props) => {
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
-
+  const {note,setNote} =props
   const dispatch= useAppDispatch();
   const { error, msg} = useSelector(ordersSelector)
   const orders = useSelector(ordersSelector)
@@ -32,7 +33,7 @@ const PaymentForm = () => {
   const { state } = useAppContext();
   const cartList: CartItem[] = state.cart;
   const {user,loading}=useSelector(authSelector);
-
+ 
   const getTotalPrice = () => {
     return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
   };
@@ -67,7 +68,7 @@ const PaymentForm = () => {
   const handleFormSubmit = async (values: any) => {
    
     dispatch(postClientOrder({user_id:user.id,mobile:user.mobile,product_variant_id: getProductVariantId(cartList), final_total:getTotalPrice(),total:getTotalPrice(),quantity:getProductQuantity(cartList),delivery_charge:'7.0',tax_amount:'0',tax_percentage:'0',payment_method:'COD',address_id:'2',delivery_date:'10/12/2023',is_wallet_used:'0',
-    delivery_time:'Today - Evening (4:00pm to 7:00pm)',active_status:'awaiting',order_note:"hello"}))
+    delivery_time:'Today - Evening (4:00pm to 7:00pm)',active_status:'awaiting',order_note:''}))
     if (loading==true){
       router.push("/orders");
     }else{
