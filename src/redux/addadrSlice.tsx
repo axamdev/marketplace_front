@@ -17,14 +17,28 @@ export interface adressType {
   country: string;
   is_default: string;
 }
+const initialadress: adressType={
+  id: "",
+  user_id: "",
+  name: "",
+  type: "",
+  mobile: "",
+  alternate_mobile: "",
+  address: "",
+  pincode: "",
+  country_code: "",
+  state: "",
+  country: "",
+  is_default: "",
+}
 export interface initTypes {
-  newAdress:adressType[]
+  newAdress:adressType
     msg:String,
     error:String,
     loading:boolean
    }
    const initialState: initTypes = {
-    newAdress:[],
+    newAdress:initialadress,
     msg:"",
     error:"",
     loading:false,
@@ -36,13 +50,22 @@ export interface initTypes {
       Authorization: TOKEN,
     },
   };
-  export const addAdress = createAsyncThunk(
-    "addAdress",
-    async ({ user_id}: any) => {
+//   interface Param {
+//     user_id: string;
+//     name: String;
+//     mobile:String
+// }
+
+  export const newAdd= createAsyncThunk(
+    "newAdd",
+    async ({ user_id,name,mobile,address}: any) => {
       var bodyFormData = new FormData();
       bodyFormData.append("user_id", user_id);
-      //bodyFormData.append("name", name);
-      //bodyFormData.append("mobile", mobile);
+       bodyFormData.append("name", name);
+       bodyFormData.append("mobile", mobile);
+      //  bodyFormData.append("alternate_mobile", alternate_mobile);
+       bodyFormData.append("address",address);
+      //  bodyFormData.append("state",state);
       const response = await axios.post(addAdressUrl, bodyFormData, config);
      
       return response.data;
@@ -56,11 +79,11 @@ export interface initTypes {
     },
     
     extraReducers: async (builder) => {
-      builder.addCase(addAdress.pending, (state, action) => {
+      builder.addCase(newAdd.pending, (state, action) => {
         state.loading = true;
       });
   
-      builder.addCase(addAdress.fulfilled, (state, { payload }) => {
+      builder.addCase(newAdd.fulfilled, (state, { payload }) => {
         
         if (payload.error) {
           state.error = payload.error;
@@ -72,7 +95,7 @@ export interface initTypes {
           state.error = payload.error;
           state.msg = payload.message;
           state.loading = false;
-          state.newAdress= payload.data;
+          state.newAdress= payload.data[0];
 
         }
   
@@ -80,10 +103,10 @@ export interface initTypes {
      
       });
   
-      builder.addCase(addAdress.rejected, (state, action) => {
+      builder.addCase(newAdd.rejected, (state, action) => {
         state.loading = false;
       });
     },
 })
 export default newadressSlice.reducer;
-
+export const addAdressSelector = (state:RootState) => state.addadr

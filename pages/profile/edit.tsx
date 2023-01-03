@@ -12,7 +12,6 @@ import CustomerDashboardNavigation from "components/layouts/customer-dashboard/N
 import { Formik } from "formik";
 import Link from "next/link";
 import * as yup from "yup";
-import {  useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { authSelector } from "redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -189,12 +188,7 @@ const ProfileEditor = () => {
                       helperText={touched.birth && errors.birth}
                     />
                   </Grid>
-                  {/* Etat:area,
-     ville:city,
-     CodeZip:pin,
-     oldPassword:old,
-     nvPassword:neauv, */}
-                     
+     
                      <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
@@ -449,39 +443,7 @@ const ProfileEditor = () => {
     </CustomerDashboardLayout>
   );
 };
-// const initialValues = {
-//   nom:'',
-//   mobile: '',
-//   email: '',
-//   birth: '',
-//   adr: '',
-//   area:'',
-//   city: '',
-//   pin: '',
-//   old:'',
-//   neauv:''
-// };
-// const checkoutSchema = yup.object().shape({
-//   nom: yup.string().required("required"),
-//   mobile: yup.string().required("required"),
-//   email: yup.string().email("invalid email").required("required"),
-//   birth: yup.string().required("required"),
-//   adr:yup.string().required("required"),
-//   area:yup.string().required("required"),
-//   city:yup.string().required("required"),
-//   pin:yup.string().required("required"),
-//   old:yup.string().required("required"),
-//   neauv:yup.string().required("required"),
- 
-// });
 
-// const initialValues = {
-//   first_name: '',
-//    last_name: "",
-//    email: "",
-//    contact: "",
-//    birth_date: new Date(),
-//  };
 
 
 
