@@ -18,7 +18,8 @@ const AddressList = () => {
  const {user} = useSelector(authSelector) ;
   const dispatch = useDispatch<AppDispatch>();
   const handle = async () => {
-   await dispatch(getAdress({user_id:user.id}))    
+   await dispatch(getAdress({user_id:user.id})) 
+   
   };
 const {adresses} = useSelector(adressSelector) ;
   useEffect(() => {
@@ -33,12 +34,12 @@ const {adresses} = useSelector(adressSelector) ;
 
       <UserDashboardHeader
         icon={Place}
-        title="My Addresses"
+        title="Mes adresses"
         navigation={<CustomerDashboardNavigation />}
         button={
           <Link href="/address/new" passHref>
           <Button color="primary" sx={{ bgcolor: "primary.light", px: 4 }} >
-            Add New Address
+          Ajouter une nouvelle adresse
           </Button>
           </Link>
         }

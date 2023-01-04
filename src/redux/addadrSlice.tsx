@@ -58,14 +58,14 @@ export interface initTypes {
 
   export const newAdd= createAsyncThunk(
     "newAdd",
-    async ({ user_id,name,mobile,address}: any) => {
+    async ({ user_id,name,mobile,address,alternate_mobile,state}: any) => {
       var bodyFormData = new FormData();
       bodyFormData.append("user_id", user_id);
        bodyFormData.append("name", name);
        bodyFormData.append("mobile", mobile);
-      //  bodyFormData.append("alternate_mobile", alternate_mobile);
+        bodyFormData.append("alternate_mobile", alternate_mobile);
        bodyFormData.append("address",address);
-      //  bodyFormData.append("state",state);
+        bodyFormData.append("state",state);
       const response = await axios.post(addAdressUrl, bodyFormData, config);
      
       return response.data;
@@ -95,7 +95,7 @@ export interface initTypes {
           state.error = payload.error;
           state.msg = payload.message;
           state.loading = false;
-          state.newAdress= payload.data[0];
+          state.newAdress= payload.data;
 
         }
   
