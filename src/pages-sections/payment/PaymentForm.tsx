@@ -68,11 +68,13 @@ const PaymentForm = () => {
    
     dispatch(postClientOrder({user_id:user.id,mobile:user.mobile,product_variant_id: getProductVariantId(cartList), final_total:getTotalPrice(),total:getTotalPrice(),quantity:getProductQuantity(cartList),delivery_charge:'7.0',tax_amount:'0',tax_percentage:'0',payment_method:'COD',address_id:'2',delivery_date:'10/12/2023',is_wallet_used:'0',
     delivery_time:'Today - Evening (4:00pm to 7:00pm)',active_status:'awaiting',order_note:"hello"}))
-    if (loading==true){
-      router.push("/orders");
-    }else{
+    //modifications
+    // if (loading==true){
+    //   router.push("/orders");
+    // }else{
       
-    }
+    // }
+    router.push("/orders")
     
   };
 //   dispatch(postClientOrder({user_id: '15',mobile:'55778899',product_variant_id: '72,73,70',quantity:'1,2,1',

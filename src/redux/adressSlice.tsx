@@ -58,15 +58,12 @@ export interface initTypes {
       builder.addCase(getAdress.pending, (state, action) => {
         state.loading = true;
       });
-  
       builder.addCase(getAdress.fulfilled, (state, { payload }) => {
         
         if (payload.error) {
           state.error = payload.error;
-          //console.log(state.error, "here error login");
           state.msg = payload.message;
-          state.loading = false;
-          //state.user = payload;
+          state.loading = false;        
         } else {
           state.error = payload.error;
           state.msg = payload.message;
@@ -74,9 +71,6 @@ export interface initTypes {
           state.adresses = payload.data;
 
         }
-  
-        //state.token = payload.data[0].activation_code
-     
       });
   
       builder.addCase(getAdress.rejected, (state, action) => {

@@ -4,12 +4,29 @@ import TableRow from "components/TableRow";
 import { H5 } from "components/Typography";
 import { FC, Fragment } from "react";
 import OrderRow from "./OrderRow";
+import { authSelector } from "redux/authSlice";
+import { ordersSelector } from "redux/getordersSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {getOrders } from "redux/getordersSlice";
+import { AppDispatch } from "redux/store";
+import  { useEffect,useState} from 'react';
 
 // ============================================================
 type OrderListProps = {};
 // ============================================================
 
 const OrderList: FC<OrderListProps> = () => {
+
+  const {user} = useSelector(authSelector) ;
+  const dispatch = useDispatch<AppDispatch>();
+  const handle = async () => {
+   await dispatch(getOrders({user_id:user.id}))    
+  };
+const {data} = useSelector(ordersSelector) ;
+  useEffect(() => {
+    handle(); 
+  }, []);
+
   return (
     <Fragment>
       <TableRow
