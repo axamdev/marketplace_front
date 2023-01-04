@@ -10,11 +10,28 @@ import { CartItem, useAppContext } from "contexts/AppContext";
 import countryList from "data/countryList";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useState } from "react"; 
+import { useSelector } from "react-redux";
+import { cartSelector } from "features/cart/cartSlice";
+import { useAppDispatch } from "redux/store";
 
 const Cart: NextPage = () => {
   const { state } = useAppContext();
   const cartList: CartItem[] = state.cart;
-
+  const [note, setNote] = useState('Helooo');
+  //const [updated, setUpdated] = useState(note);
+  // const handleChange = (event) => {
+  //   setNote(event.target.value);
+  //   console.log('your note is',event.target.value);
+  // };
+  // const dispatch= useAppDispatch();
+  // const handleClick = () => {
+  //   //setUpdated(note);
+  //   alert(note);
+  //   console.log(note);
+   
+  // };
+  
   const getTotalPrice = () => {
     return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
   };
@@ -58,7 +75,10 @@ const Cart: NextPage = () => {
 
             <TextField
               variant="outlined"
+              disabled={true}
               rows={6}
+              //onChange={handleChange}
+              //value={note}
               fullWidth
               multiline
               sx={{ mb: 2 }}
@@ -141,7 +161,7 @@ const Cart: NextPage = () => {
             </Button>
 
             <Link href="/checkout" passHref>
-              <Button variant="contained" color="primary" fullWidth>
+              <Button  variant="contained" color="primary" fullWidth>
               Passer à la caisse
               </Button>
             </Link>
