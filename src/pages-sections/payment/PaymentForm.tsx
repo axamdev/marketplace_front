@@ -19,12 +19,21 @@ import ProductCard17 from "components/product-cards/ProductCard17";
 import ProductCard7 from "components/product-cards/ProductCard7";
 import { userSelector } from "features/user/userSlice";
 //import Cart from "../../../pages/cart";
+import LoadingButton from '@mui/lab/LoadingButton';
+import { adressSelector } from "redux/adressSlice";
+import { selectedAdrIdSelector } from "redux/sellectedAddress";
 
 
 const PaymentForm = (props) => {
+  const [isloading, setIsLoading] = useState(false);
+   const handleClick =() =>{
+    
+   }
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const {note,setNote} =props
   const dispatch= useAppDispatch();
+  const {adresses,getAdr} = useSelector(adressSelector)
+  const {selectedAdrId} = useSelector(selectedAdrIdSelector) ;
   const { error, msg} = useSelector(ordersSelector)
   const orders = useSelector(ordersSelector)
   const width = useWindowSize();
@@ -34,6 +43,10 @@ const PaymentForm = (props) => {
   const cartList: CartItem[] = state.cart;
   const {user,loading}=useSelector(authSelector);
  
+
+
+
+
   const getTotalPrice = () => {
     return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
   };
@@ -66,13 +79,15 @@ const PaymentForm = (props) => {
   };
 
   const handleFormSubmit = async (values: any) => {
-   
-    dispatch(postClientOrder({user_id:user.id,mobile:user.mobile,product_variant_id: getProductVariantId(cartList), final_total:getTotalPrice(),total:getTotalPrice(),quantity:getProductQuantity(cartList),delivery_charge:'7.0',tax_amount:'0',tax_percentage:'0',payment_method:'COD',address_id:'2',delivery_date:'10/12/2023',is_wallet_used:'0',
+    setIsLoading(true);
+    console.log("start loading ") ;
+   await  dispatch(postClientOrder({user_id:user.id,mobile:user.mobile,product_variant_id: getProductVariantId(cartList), final_total:getTotalPrice(),total:getTotalPrice(),quantity:getProductQuantity(cartList),delivery_charge:'7.0',tax_amount:'0',tax_percentage:'0',payment_method:'COD'
+   ,address_id:selectedAdrId,delivery_date:'10/12/2023',is_wallet_used:'0',
     delivery_time:'Today - Evening (4:00pm to 7:00pm)',active_status:'awaiting',order_note:''}))
+    console.log("stop loading ") ;
+    setIsLoading(false);
     if (loading==true){
       router.push("/orders");
-    }else{
-      
     }
     
   };
@@ -90,11 +105,25 @@ const PaymentForm = (props) => {
   return (
     <Fragment >
       <Card1 sx={{ mb: 4 }}>
+      <FormControlLabel
+          name="cod"
+          onChange={handlePaymentMethodChange}
+          label={<Paragraph fontWeight={600}>Payement à la livraison </Paragraph>}
+          control={
+            <Radio
+              checked={paymentMethod === "cod"}
+              color="primary"
+              size="small"
+            />
+          }
+        />
+        <Divider sx={{ mb: 3, mx: -4 }} />
         <FormControlLabel
+         // disabled={true}
           sx={{ mb: 3 }}
           name="credit-card"
           onChange={handlePaymentMethodChange}
-          label={<Paragraph fontWeight={600}>Pay with credit card</Paragraph>}
+          label={<Paragraph fontWeight={600}>Payment sécurisé </Paragraph>}
           control={
             <Radio
               checked={paymentMethod === "credit-card"}
@@ -182,10 +211,11 @@ const PaymentForm = (props) => {
         )}
 
         <FormControlLabel
+          disabled={true}
           name="paypal"
           sx={{ mb: 3 }}
           onChange={handlePaymentMethodChange}
-          label={<Paragraph fontWeight={600}>Pay with Paypal</Paragraph>}
+          label={<Paragraph fontWeight={600}>Payement avec virement bancaire ou chèque</Paragraph>}
           control={
             <Radio
               checked={paymentMethod === "paypal"}
@@ -216,18 +246,7 @@ const PaymentForm = (props) => {
           </Fragment>
         )}
 
-        <FormControlLabel
-          name="cod"
-          onChange={handlePaymentMethodChange}
-          label={<Paragraph fontWeight={600}>Cash On Delivery</Paragraph>}
-          control={
-            <Radio
-              checked={paymentMethod === "cod"}
-              color="primary"
-              size="small"
-            />
-          }
-        />
+       
       </Card1>
 
       <Grid container spacing={7}>
@@ -240,23 +259,10 @@ const PaymentForm = (props) => {
         </Grid>
         <Grid item sm={6} xs={12}>
           {/* <Link href="/orders" passHref> */}
-          {/* <LoadingButton
-          loading={orders.loading==false}
-          done={orders.loading==true}
-          onClick={() => {handleFormSubmit;
-            router.push("/orders");
-            // // Clicked, so show the progress dialog
-            // this.setState({ loading: true });
-
-            // // In a 1.5 seconds, end the progress to show that it's done
-            // setTimeout(() => { this.setState({ finished: true })}, 1500);
-          }}
-        >
-          Click Me
-        </LoadingButton> */}
-            <Button onClick = {handleFormSubmit} variant="contained" color="primary" type="submit" fullWidth>
+            <LoadingButton  loading = {isloading} onClick={handleFormSubmit} 
+                        variant="outlined"  color="primary" type="submit" fullWidth>
               Review
-            </Button>
+            </LoadingButton>
           {/* </Link> */}
         </Grid>
       </Grid>

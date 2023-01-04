@@ -13,17 +13,26 @@ import { AppDispatch } from "redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import {getAdress } from "redux/adressSlice";
 import  { useEffect,useState} from 'react';
+import { setSelectedAdrIdSlice } from "redux/sellectedAddress";
 
 const AddressList = () => {
  // const [adr,setAdr]=useState([]);
  const {user} = useSelector(authSelector) ;
+ 
   const dispatch = useDispatch<AppDispatch>();
   const handle = async () => {
    await dispatch(getAdress({user_id:user.id}))    
   };
   const [value, setValue] =useState('');
+  
   const handleChange = (event) => {
-    setValue(event.target.value);
+    console.log("event.target.value")
+    console.log(event.target.value)
+    // store.dispatch(setSelectedAdrIdSlice.actions.setID('0'))
+    dispatch(setSelectedAdrIdSlice.actions.setID(event.target.value)) 
+    
+     setValue(event.target.value);
+
   };
 const {adresses} = useSelector(adressSelector) ;
   useEffect(() => {
@@ -43,7 +52,8 @@ const {adresses} = useSelector(adressSelector) ;
        
         
       />
-      {adresses.map((adr, ind) => (
+     <RadioGroup aria-label="gender" name="gender1"  onChange={handleChange}>
+       {adresses.map((adr, ind) => (
         <TableRow sx={{ my: 2, padding: "6px 18px" }} key={ind}>
           <Typography whiteSpace="pre" m={0.75} textAlign="left">
            {adr.name}
@@ -59,14 +69,14 @@ const {adresses} = useSelector(adressSelector) ;
 
           <Typography whiteSpace="pre" textAlign="center" color="grey.600">
           <FormControl component="fieldset">
-            <RadioGroup aria-label="gender" name="gender1"  onChange={handleChange}>
-        <FormControlLabel value="address" control={<Radio />} label=''/>
-        </RadioGroup>
+          
+                         <FormControlLabel value={adr.id} control={<Radio />} label=''/>
+            
         </FormControl>
           </Typography>
         </TableRow>
       ))}
-
+ </RadioGroup>
      
     </>
   );

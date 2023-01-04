@@ -214,7 +214,7 @@ const dispatch= useAppDispatch();
           </Card1>
          <div>
           
-          <AddressList/>
+          <AddressList />
           {/* <displayAddressList/>  */}
           </div>
           <Grid container spacing={6}>

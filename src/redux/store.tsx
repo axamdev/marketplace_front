@@ -11,6 +11,7 @@ import {
     REGISTER,
 } from 'redux-persist';
 import authReducer from './authSlice'
+import setSelectedAdrIdSlice from './sellectedAddress'
 import logReducer from './reducerLg'
 import cartReducer from '../features/cart/cartSlice'
 import ordersReducer from '../features/orders/ordersSlice'
@@ -20,7 +21,7 @@ import addadrSlice from "./addadrSlice"
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 //const persistConfig = { key: 'counter', storage}
-const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cartReducer,orders:ordersReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice})
+const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cartReducer,orders:ordersReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice,selectedAdrId:setSelectedAdrIdSlice})
 
 //const persistedReducer = persistReducer(persistConfig, rootReducer)
  const store = configureStore({
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cart
     //         },
     //     }),
 });
+
 export default store
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch:()=>AppDispatch=useDispatch
