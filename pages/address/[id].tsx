@@ -27,6 +27,8 @@ const AddressEditor = () => {
   const handleFormSubmit = async (values: any) => {
    
     console.log(values);
+    //await dispatch(addAdress({user_id:user.id}))   
+
    await dispatch<any>(newAdd({user_id:user.id,name:adresses[1].name,mobile:adresses[1].mobile,address:values.address,alternate_mobile:values.altcontact,state:values.Etat}))  
      
     //console.log(newAdress.name)

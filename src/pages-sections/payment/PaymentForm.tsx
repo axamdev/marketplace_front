@@ -79,6 +79,7 @@ const PaymentForm = (props) => {
   };
 
   const handleFormSubmit = async (values: any) => {
+
     setIsLoading(true);
     console.log("start loading ") ;
    await  dispatch(postClientOrder({user_id:user.id,mobile:user.mobile,product_variant_id: getProductVariantId(cartList), final_total:getTotalPrice(),total:getTotalPrice(),quantity:getProductQuantity(cartList),delivery_charge:'7.0',tax_amount:'0',tax_percentage:'0',payment_method:'COD'

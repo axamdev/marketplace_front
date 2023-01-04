@@ -14,6 +14,7 @@ export const productsUrl=devUrl+"get_products";
 export const editProfilUrl=devUrl+"update_user";
 export const getAdressUrl=devUrl+"get_address";
 export const addAdressUrl=devUrl+"add_address";
+export const getOrdersUrl=devUrl+"get_orders";
 export const TOKEN = 'Bearer '+jwt ;
 
 
