@@ -12,8 +12,8 @@ import {
 } from 'redux-persist';
 import authReducer from './authSlice'
 
-import setSelectedAdrIdSlice from './sellectedAddress'
-import logReducer from './reducerLg'
+import setSelectedAdrIdSlice from './placeOrders'
+//import logReducer from './reducerLg'
 
 
 import cartReducer from '../features/cart/cartSlice'
@@ -21,7 +21,7 @@ import ordersReducer from '../features/orders/ordersSlice'
 import editReducer from'./editSlice';
 import  getOrdersSlice from "./getordersSlice"
 import adressSlice from './adressSlice';
-import newadressSlice from "./addadrSlice"
+import addadrSlice from "./addadrSlice"
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 //const persistConfig = { key: 'counter', storage}

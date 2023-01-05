@@ -13,7 +13,7 @@ import { AppDispatch } from "redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import {getAdress } from "redux/adressSlice";
 import  { useEffect,useState} from 'react';
-import { setSelectedAdrIdSlice } from "redux/sellectedAddress";
+import { setSelectedAdrIdSlice } from "redux/placeOrders";
 
 const AddressList = () => {
  // const [adr,setAdr]=useState([]);

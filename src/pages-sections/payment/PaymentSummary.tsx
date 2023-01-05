@@ -17,28 +17,28 @@ const cartList: CartItem[] = state.cart;
   return (
     <Card1>
       <FlexBetween mb={1}>
-        <Paragraph color="grey.600">Subtotal:</Paragraph>
+        <Paragraph color="grey.600">Total:</Paragraph>
         <Paragraph fontSize={18} fontWeight={600} lineHeight={1}>
         TND{getTotalPrice().toFixed(2)}
         </Paragraph>
       </FlexBetween>
 
       <FlexBetween mb={1}>
-        <Paragraph color="grey.600">Shipping:</Paragraph>
+        <Paragraph color="grey.600">Expédition:</Paragraph>
         <Paragraph fontSize={18} fontWeight={600} lineHeight={1}>
           -
         </Paragraph>
       </FlexBetween>
 
       <FlexBetween mb={1}>
-        <Paragraph color="grey.600">Tax:</Paragraph>
+        <Paragraph color="grey.600">Impôt:</Paragraph>
         <Paragraph fontSize={18} fontWeight={600} lineHeight={1}>
           TND 40
         </Paragraph>
       </FlexBetween>
 
       <FlexBetween mb={2}>
-        <Paragraph color="grey.600">Discount:</Paragraph>
+        <Paragraph color="grey.600">Remise:</Paragraph>
         <Paragraph fontSize={18} fontWeight={600} lineHeight={1}>
           -
         </Paragraph>

@@ -35,7 +35,7 @@ const Signup = () => {
   }, []);
 
  const dispatch= useAppDispatch();
- const { error, msg } = useSelector(userSelector)
+ const { error, msg,loading,token} = useSelector(userSelector)
  const user = useSelector(userSelector)
  //const user = useSelector(userSelector)
  //const [auth,setAuth] = ('signin')
@@ -54,7 +54,8 @@ const router= useRouter();
    dispatch(postSignUpUser({name:values.name,email:values.email,mobile:values.mobile,password:values.password,country_code:216}))
    console.log("after gestting values"+values);
 // console.log(user,"erreur is here");
-   {error?router.push("login"): router.push("signup")}
+
+   {error? await (router.push("/signup")): await (router.push("/"))}
    
   };
 
@@ -83,7 +84,9 @@ const router= useRouter();
         >
           Veuillez remplir tous les champs pour continuer
         </Small>
-
+        <>{!loading?(<Alert severity="success">
+                   <AlertTitle>{msg}</AlertTitle>
+         </Alert>): (null)} </> 
         <BazaarTextField
           mb={1.5}
           fullWidth
@@ -231,8 +234,10 @@ const router= useRouter();
         <br/><br/>
         {error?(<Alert severity="error">
                    <AlertTitle>{msg}</AlertTitle>
-</Alert>):null}
-                  
+</Alert>): null}
+{/* <>{loading?(<Alert severity="success">
+                   <AlertTitle>{msg}</AlertTitle>
+</Alert>): (null)} </>     */}
          
       </form>
 
