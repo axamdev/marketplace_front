@@ -5,7 +5,13 @@ import { RootState } from "./store";
 import { yellow } from "@mui/material/colors";
 export interface itemsType{
      id:String,
-     active_status:String
+     active_status:String,
+     product_name:String,
+     price:String,
+     quantity:String,
+     variant_name:String,
+     seller_address:String,
+     sub_total:String
    }
 export interface ordersType {
             id:String,
@@ -15,14 +21,14 @@ export interface ordersType {
             order_items:itemsType[]          
   }
 export interface initTypes {
-      data:ordersType[]
+      List:ordersType[]
       msg:String,
       error:String,
       Total:String,
       loading:Boolean
      }
      const initialState: initTypes = {
-      data:[],
+      List:[],
       msg:"",
       error:"",
       Total:"",
@@ -65,7 +71,7 @@ export interface initTypes {
               state.error = payload.error;
               state.msg = payload.message;
               state.loading = false;
-              state.data = payload.data;
+              state.List = payload.data;
               state.Total=payload.total
     
             }

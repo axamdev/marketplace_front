@@ -38,7 +38,7 @@ const PaymentForm = (props) => {
   const orders = useSelector(ordersSelector)
   const width = useWindowSize();
   const router = useRouter();
-  const isMobile = width < 769;
+  const isMobile = width < 769; 
   const { state } = useAppContext();
   const cartList: CartItem[] = state.cart;
   const {user,loading}=useSelector(authSelector);
@@ -87,10 +87,10 @@ const PaymentForm = (props) => {
     delivery_time:'Today - Evening (4:00pm to 7:00pm)',active_status:'awaiting',order_note:''}))
     console.log("stop loading ") ;
     setIsLoading(false);
-    if (loading==true){
-      router.push("/orders");
-    }
-    
+    // if (loading==true){
+    //   router.push("/orders");
+    // }
+    router.push("/orders")
   };
 //   dispatch(postClientOrder({user_id: '15',mobile:'55778899',product_variant_id: '72,73,70',quantity:'1,2,1',
 //   total: '1550.00',delivery_charge:'7.0',tax_amount:'0',tax_percentage: '0',final_total: '1557.00',

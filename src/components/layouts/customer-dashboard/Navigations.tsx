@@ -84,7 +84,7 @@ const linkList = [
       { href: "/address", title: "Adresses", icon: Place, count: 16 },
       {
         href: "/payment-methods",
-        title: "méthodes de payement",
+        title: "méthodes de paiement",
         icon: CreditCard,
         count: 4,
       },

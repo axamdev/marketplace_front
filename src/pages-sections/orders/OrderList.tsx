@@ -22,7 +22,7 @@ const OrderList: FC<OrderListProps> = () => {
   const handle = async () => {
    await dispatch(getOrders({user_id:user.id}))    
   };
-const {data} = useSelector(ordersSelector) ;
+const {List} = useSelector(ordersSelector) ;
   useEffect(() => {
     handle(); 
   }, []);
@@ -38,24 +38,25 @@ const {data} = useSelector(ordersSelector) ;
         }}
       >
         <H5 color="grey.600" my={0} mx={0.75} textAlign="left">
-          Order #
+         Commande #
         </H5>
 
         <H5 color="grey.600" my={0} mx={0.75} textAlign="left">
-          Status
+          Statut
         </H5>
 
         <H5 color="grey.600" my={0} mx={0.75} textAlign="left">
-          Date purchased
+          Date de commande
+          {/* Date purshaced */}
         </H5>
 
         <H5 color="grey.600" my={0} mx={0.75} textAlign="left">
-          Total
+          Totale
         </H5>
         <H5 flex="0 0 0 !important" color="grey.600" px={2.75} my={0} />
       </TableRow>
 
-      {orderList.map((item, ind) => (
+      {List.map((item, ind) => (
         <OrderRow item={item} key={ind} />
       ))}
 
@@ -71,42 +72,42 @@ const {data} = useSelector(ordersSelector) ;
   );
 };
 
-const orderList = [
-  {
-    orderNo: "1050017AS",
-    status: "Pending",
-    purchaseDate: new Date(),
-    price: 350,
-    href: "/orders/5452423",
-  },
-  {
-    orderNo: "1050017AS",
-    status: "Processing",
-    purchaseDate: new Date(),
-    price: 500,
-    href: "/orders/5452423",
-  },
-  {
-    orderNo: "1050017AS",
-    status: "Delivered",
-    purchaseDate: "2020/12/23",
-    price: 700,
-    href: "/orders/5452423",
-  },
-  {
-    orderNo: "1050017AS",
-    status: "Delivered",
-    purchaseDate: "2020/12/23",
-    price: 700,
-    href: "/orders/5452423",
-  },
-  {
-    orderNo: "1050017AS",
-    status: "Cancelled",
-    purchaseDate: "2020/12/15",
-    price: 300,
-    href: "/orders/5452423",
-  },
-];
+// const orderList = [
+//   {
+//     orderNo: "1050017AS",
+//     status: "Pending",
+//     purchaseDate: new Date(),
+//     price: 350,
+//     href: "/orders/5452423",
+//   },
+//   {
+//     orderNo: "1050017AS",
+//     status: "Processing",
+//     purchaseDate: new Date(),
+//     price: 500,
+//     href: "/orders/5452423",
+//   },
+//   {
+//     orderNo: "1050017AS",
+//     status: "Delivered",
+//     purchaseDate: "2020/12/23",
+//     price: 700,
+//     href: "/orders/5452423",
+//   },
+//   {
+//     orderNo: "1050017AS",
+//     status: "Delivered",
+//     purchaseDate: "2020/12/23",
+//     price: 700,
+//     href: "/orders/5452423",
+//   },
+//   {
+//     orderNo: "1050017AS",
+//     status: "Cancelled",
+//     purchaseDate: "2020/12/15",
+//     price: 300,
+//     href: "/orders/5452423",
+//   },
+// ];
 
 export default OrderList;

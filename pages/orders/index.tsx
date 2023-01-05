@@ -8,7 +8,7 @@ const Orders = () => {
   return (
     <CustomerDashboardLayout>
       <UserDashboardHeader
-        title="My Orders"
+        title="Mes Commandes"
         icon={ShoppingBag}
         navigation={<CustomerDashboardNavigation />}
       />

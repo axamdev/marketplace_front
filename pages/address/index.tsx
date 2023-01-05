@@ -55,7 +55,7 @@ const {adresses} = useSelector(adressSelector) ;
           </Typography>
 
           <Typography whiteSpace="pre" m={0.75} textAlign="left">
-           {adr.mobile}
+           {adr.alternate_mobile}
           </Typography>
 
           <Typography whiteSpace="pre" textAlign="center" color="grey.600">
