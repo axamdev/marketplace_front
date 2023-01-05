@@ -88,7 +88,7 @@ const Header: FC<HeaderProps> = ({
         >
           <Link href="/">
             <a>
-              <Image height={88} src="/assets/images/axamlogo.png" alt="logo" />
+              <Image height={88} src="/assets/images/Logo axam.png" alt="logo" />
             </a>
           </Link>
 

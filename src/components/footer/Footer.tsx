@@ -33,7 +33,7 @@ const Footer: FC = () => {
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/">
                   <a>
-                    <Image mb={2.5} src="/assets/images/axamlogo.png" alt="logo" />
+                    <Image mb={2.5} src="/assets/images/Logo axam.png" alt="logo" />
                   </a>
                 </Link>
 
