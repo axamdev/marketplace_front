@@ -5,26 +5,22 @@ import { H5 } from "components/Typography";
 import { format } from "date-fns";
 import Link from "next/link";
 import { FC } from "react";
+import { ordersType } from "redux/getordersSlice";
 
 // =================================================
 type OrderRowProps = {
-  item: {
-    orderNo: any;
-    href: string;
-    price: number;
-    status: string;
-    purchaseDate: string | Date;
-  };
+  item: ordersType 
+
 };
 // =================================================
 
 const OrderRow: FC<OrderRowProps> = ({ item }) => {
-  const getColor = (status: string) => {
+  const getColor = (status: String) => {
     switch (status) {
-      case "Pending":
+      case "Awaiting":
         return "secondary";
 
-      case "Processing":
+      case "Processed":
         return "secondary";
 
       case "Delivered":
@@ -34,39 +30,41 @@ const OrderRow: FC<OrderRowProps> = ({ item }) => {
         return "error";
 
       default:
-        return "";
+        return "secondary";
     }
   };
 
   return (
-    <Link href={item.href}>
+    
+    <Link href={`/orders/${item.id}`}>
       <a>
         <TableRow sx={{ my: "1rem", padding: "6px 18px" }}>
           <H5 m={0.75} textAlign="left">
-            {item.orderNo}
+            {item.id}
           </H5>
           <Box m={0.75}>
             <Chip
               size="small"
-              label={item.status}
+              label={item.order_items[0].active_status}
               sx={{
                 p: "0.25rem 0.5rem",
                 fontSize: 12,
-                color: !!getColor(item.status)
-                  ? `${getColor(item.status)}.900`
+                color: !!getColor(item.order_items[0].active_status)
+                  ? `${getColor(item.order_items[0].active_status)}.900`
                   : "inherit",
-                backgroundColor: !!getColor(item.status)
-                  ? `${getColor(item.status)}.100`
+                backgroundColor: !!getColor(item.order_items[0].active_status)
+                  ? `${getColor(item.order_items[0].active_status)}.100`
                   : "none",
               }}
             />
           </Box>
           <Typography className="pre" m={0.75} textAlign="left">
-            {format(new Date(item.purchaseDate), "MMM dd, yyyy")}
+            {/* {format(new Date(item.date_added), "MMM dd, yyyy")} */}
+            {item.date_added}
           </Typography>
 
           <Typography m={0.75} textAlign="left">
-            ${item.price.toFixed(2)}
+            DT {item.total_payable}
           </Typography>
 
           <Typography
