@@ -12,7 +12,10 @@ import {
 } from 'redux-persist';
 import authReducer from './authSlice'
 
-import setSelectedAdrIdSlice from './sellectedAddress'
+
+import setSelectedAdrIdSlice from './placeOrders'
+
+
 import cartReducer from '../features/cart/cartSlice'
 import ordersReducer from '../features/orders/ordersSlice'
 import editReducer from'./editSlice';

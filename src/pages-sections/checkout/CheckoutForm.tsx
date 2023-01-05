@@ -17,6 +17,7 @@ import * as yup from "yup";
 import ProductCard7 from "components/product-cards/ProductCard7";
 import displayAddressList from 'components/address/displayAddress'
 import AddressList from "components/address/displayAddress";
+import AddressEditor from "components/address/addAddress";
 
 const CheckoutForm: FC = () => {
   const router = useRouter();
@@ -80,7 +81,7 @@ const dispatch= useAppDispatch();
         setFieldValue,
       }) => (
         <form onSubmit={handleSubmit}>
-          <Card1 sx={{ mb: 4 }}>
+          {/* <Card1 sx={{ mb: 4 }}>
             <Typography fontWeight="600" mb={2}>
             Adresse de livraison
             </Typography>
@@ -112,7 +113,7 @@ const dispatch= useAppDispatch();
                   helperText={
                     touched.shipping_contact && errors.shipping_contact
                   }
-                />
+                /> */}
                 {/* <TextField
                   fullWidth
                   type="number"
@@ -139,7 +140,7 @@ const dispatch= useAppDispatch();
                     touched.shipping_address1 && errors.shipping_address1
                   }
                 /> */}
-              </Grid>
+              {/* </Grid>
 
               <Grid item sm={6} xs={12}>
                 <TextField
@@ -153,7 +154,7 @@ const dispatch= useAppDispatch();
                   value={user.email}
                   error={!!touched.shipping_email && !!errors.shipping_email}
                   helperText={touched.shipping_email && errors.shipping_email}
-                />
+                /> */}
                 {/* <TextField
                   fullWidth
                   sx={{ mb: 2 }}
@@ -195,7 +196,7 @@ const dispatch= useAppDispatch();
                   )}
                 /> */}
 
-                <TextField
+                {/* <TextField
                   fullWidth
                   label="Numéro de téléphone facultatif"
                   onBlur={handleBlur}
@@ -211,12 +212,15 @@ const dispatch= useAppDispatch();
                 />
               </Grid>
             </Grid>
-          </Card1>
+          </Card1> */}
          <div>
           
           <AddressList />
           {/* <displayAddressList/>  */}
           </div>
+          {/* <div>
+            <AddressEditor/>
+          </div> */}
           <Grid container spacing={6}>
             <Grid item sm={6} xs={12}>
               <Link href="/cart" passHref>
