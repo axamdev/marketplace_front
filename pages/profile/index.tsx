@@ -50,16 +50,16 @@ const Profile = () => {
                   <div>
                     <H5 my="0px">{user.username}</H5>
                     <FlexBox alignItems="center">
-                      <Typography color="grey.600">solde:</Typography>
+                      <Typography color="grey.600">Points de fidélité:</Typography>
                       <Typography ml={0.5} color="primary.main">
                        {user.balance}
                       </Typography>
                     </FlexBox>
                   </div>
 
-                  <Typography color="grey.600" letterSpacing="0.2em">
+                  {/* <Typography color="grey.600" letterSpacing="0.2em">
                     SILVER USER
-                  </Typography>
+                  </Typography> */}
                 </FlexBetween>
               </Box>
             </Card>
@@ -96,17 +96,17 @@ const Profile = () => {
       <TableRow sx={{ p: "0.75rem 1.5rem" }}>
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
-            Prénom
+            Nom et Prénom
           </Small>
           <span>{user.username}</span>
         </FlexBox>
 
-        <FlexBox flexDirection="column" p={1}>
+        {/* <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
             Nom
           </Small>
           <span></span>
-        </FlexBox>
+        </FlexBox> */}
 
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
@@ -127,6 +127,7 @@ const Profile = () => {
             Date de naissance
           </Small>
           <span className="pre">
+            {user.dob}
             {/* {format(new Date(1996 / 11 / 16), "dd MMM, yyyy")} */}
           </span>
         </FlexBox>
@@ -136,10 +137,10 @@ const Profile = () => {
 };
 
 const infoList = [
-  { title: "16", subtitle: "Tous les ordres" },
-  { title: "02", subtitle: "en attente de paiements" },
+  { title: "00", subtitle: "Tous les ordres" },
+  { title: "00", subtitle: "en attente de paiements" },
   { title: "00", subtitle: "En attente d'expédition" },
-  { title: "01", subtitle: "En attente de livraison" },
+  { title: "00", subtitle: "En attente de livraison" },
 ];
 
 export default Profile;

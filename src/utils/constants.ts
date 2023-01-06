@@ -3,18 +3,18 @@ const devHost = "http://5.135.194.236" ;
 const devPort = "8181" ;
 const devUrl= devHost+":"+devPort+"/app/v1/api/" ;
 const jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcyI6ImVzaG9wIiwiZXhwIjoxNjY0NDEwODI2fQ.R9yCge_10pnDkSjL9aospCdvnRBGYFI4dsOsVaW7fkE"
-
-
-
-
-export const loginUrl=devUrl+"login"
 export const categoriesUrl = devUrl+"get_categories" ;
 export const sliderhomeUrl=devUrl+"get_slider_images";
+export const registerUrl = devUrl+"register_user" ;
+export const loginUrl=devUrl+"login";
+export const orderUrl= devUrl+"place_order";
 export const sectionsUrl=devUrl+"get_sections";
 export const offersUrl=devUrl+"get_offer_images";
 export const productsUrl=devUrl+"get_products";
-
-
+export const editProfilUrl=devUrl+"update_user";
+export const getAdressUrl=devUrl+"get_address";
+export const addAdressUrl=devUrl+"add_address";
+export const getOrdersUrl=devUrl+"get_orders";
 export const TOKEN = 'Bearer '+jwt ;
 
 

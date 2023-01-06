@@ -11,7 +11,7 @@ var config = {
   };
 const getAllOffers = async () => {
    const response = await axios.post( offersUrl,params,config);
-   console.log("offers"+response.data);
+//    console.log("offers"+response.data);
    return response.data as OffersResponse;
   //return data["data"] ;
 };

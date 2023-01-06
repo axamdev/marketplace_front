@@ -20,6 +20,7 @@ import Link from "next/link";
 import Login from "pages-sections/sessions/Login";
 import { FC, useState } from "react";
 import { DataCategories } from "utils/api/axam-category";
+
 import { layoutConstant } from "utils/constants";
 import SearchBox from "../search-box/SearchBox";
 import { authSelector } from "redux/authSlice";
@@ -60,9 +61,14 @@ const Header: FC<HeaderProps> = ({
   const downMd = useMediaQuery(theme.breakpoints.down(1150));
   const toggleDialog = () => {setDialogOpen(!dialogOpen)};
   const toggleSidenav = () => setSidenavOpen(!sidenavOpen);
-  console.log("categoriesList"+categoriesList) 
+  // console.log("categoriesList"+categoriesList) 
+   //console.log(categoriesList) 
+
+
+  //console.log("categoriesList"+categoriesList) 
   const { error,token,user } = useSelector(authSelector)
   const router = useRouter();
+
   return (
     <HeaderWrapper className={clsx(className)}>
       <Container
@@ -82,7 +88,7 @@ const Header: FC<HeaderProps> = ({
         >
           <Link href="/">
             <a>
-              <Image height={88} src="/assets/images/axamlogo.png" alt="logo" />
+              <Image height={88} src="/assets/images/Logo axam.png" alt="logo" />
             </a>
           </Link>
 

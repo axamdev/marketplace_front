@@ -23,6 +23,8 @@ import productDatabase from "data/product-database";
 import { format } from "date-fns";
 import useWindowSize from "hooks/useWindowSize";
 import { Fragment } from "react";
+import { ordersSelector } from "redux/getordersSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const StyledFlexbox = styled(FlexBetween)(({ theme }) => ({
   flexWrap: "wrap",
@@ -49,16 +51,17 @@ const OrderDetails = () => {
   const width = useWindowSize();
   const theme = useTheme();
   const breakpoint = 350;
+  const {List} = useSelector(ordersSelector) 
 
   return (
     <CustomerDashboardLayout>
       <UserDashboardHeader
         icon={ShoppingBag}
-        title="Order Details"
+        title="Détails de la commande"
         navigation={<CustomerDashboardNavigation />}
         button={
           <Button color="primary" sx={{ bgcolor: "primary.light", px: 4 }}>
-            Order Again
+           Commander à nouveau
           </Button>
         }
       />
@@ -111,7 +114,7 @@ const OrderDetails = () => {
             color="primary.main"
             bgcolor="primary.light"
           >
-            Estimated Delivery Date <b>4th October</b>
+           Date de livraison estimée <b>25 Janvier</b>
           </Typography>
         </FlexBox>
       </Card>
@@ -127,14 +130,15 @@ const OrderDetails = () => {
         >
           <FlexBox className="pre" m={0.75} alignItems="center">
             <Typography fontSize={14} color="grey.600" mr={0.5}>
-              Order ID:
+              Commande ID:
             </Typography>
             <Typography fontSize={14}>9001997718074513</Typography>
           </FlexBox>
 
           <FlexBox className="pre" m={0.75} alignItems="center">
             <Typography fontSize={14} color="grey.600" mr={0.5}>
-              Placed on:
+              {/* Placed on: */}
+              Mis le :
             </Typography>
             <Typography fontSize={14}>
               {format(new Date(), "dd MMM, yyyy")}
@@ -143,7 +147,8 @@ const OrderDetails = () => {
 
           <FlexBox className="pre" m={0.75} alignItems="center">
             <Typography fontSize={14} color="grey.600" mr={0.5}>
-              Delivered on:
+              {/* Delivered on */}
+             Livré le:
             </Typography>
             <Typography fontSize={14}>
               {format(new Date(), "dd MMM, yyyy")}
@@ -152,33 +157,35 @@ const OrderDetails = () => {
         </TableRow>
 
         <Box py={1}>
-          {productDatabase.slice(179, 182).map((item) => (
+        {/* productDatabase.slice(179, 182).map */}
+          {List.slice(0,3).map((item,ind) => (
             <FlexBox
               px={2}
               py={1}
               flexWrap="wrap"
               alignItems="center"
-              key={item.id}
+              //key={item.id}
             >
               <FlexBox flex="2 2 260px" m={0.75} alignItems="center">
-                <Avatar src={item.imgUrl} sx={{ height: 64, width: 64 }} />
+                <Avatar src={"/assets/images/Furniture Shop/Furniture.png"} sx={{ height: 64, width: 64 }} />
                 <Box ml={2.5}>
-                  <H6 my="0px">{item.title}</H6>
+                  <H6 my="0px">{item.order_items[0].product_name}</H6>
                   <Typography fontSize="14px" color="grey.600">
-                    ${item.price} x 1
+                    ${item.order_items[0].price} x 1
                   </Typography>
                 </Box>
               </FlexBox>
 
               <FlexBox flex="1 1 260px" m={0.75} alignItems="center">
                 <Typography fontSize="14px" color="grey.600">
-                  Product properties: Black, L
+                  {/* Product properties: Black, L */}
+                  Propriétés du produit: {item.order_items[0].variant_name}
                 </Typography>
               </FlexBox>
 
               <FlexBox flex="160px" m={0.75} alignItems="center">
                 <Button variant="text" color="primary">
-                  <Typography fontSize="14px">Write a Review</Typography>
+                  <Typography fontSize="14px">écrire un commentaire</Typography>
                 </Button>
               </FlexBox>
             </FlexBox>
@@ -189,12 +196,13 @@ const OrderDetails = () => {
       <Grid container spacing={3}>
         <Grid item lg={6} md={6} xs={12}>
           <Card sx={{ p: "20px 30px" }}>
-            <H5 mt={0} mb={2}>
-              Shipping Address
+            <H5 mt={0} mb={2}>             
+             Adresse de livraison
             </H5>
 
             <Paragraph fontSize={14} my={0}>
-              Kelly Williams 777 Brockton Avenue, Abington MA 2351
+              {/* Kelly Williams 777 Brockton Avenue, Abington MA 2351 */}
+              {List[0].order_items[0].seller_address}
             </Paragraph>
           </Card>
         </Grid>
@@ -202,38 +210,42 @@ const OrderDetails = () => {
         <Grid item lg={6} md={6} xs={12}>
           <Card sx={{ p: "20px 30px" }}>
             <H5 mt={0} mb={2}>
-              Total Summary
+              {/* Total Summary */}
+             Récapitulatif total
             </H5>
 
             <FlexBetween mb={1}>
               <Typography fontSize={14} color="grey.600">
-                Subtotal:
+                total:
               </Typography>
-              <H6 my="0px">$335</H6>
+              <H6 my="0px">DT {List[0].order_items[0].sub_total}</H6>
             </FlexBetween>
 
             <FlexBetween mb={1}>
               <Typography fontSize={14} color="grey.600">
-                Shipping fee:
+              frais de livraison:
               </Typography>
-              <H6 my="0px">$10</H6>
+              <H6 my="0px">0</H6>
             </FlexBetween>
 
             <FlexBetween mb={1}>
               <Typography fontSize={14} color="grey.600">
-                Discount:
+                Remise:
               </Typography>
-              <H6 my="0px">-$30</H6>
+              <H6 my="0px">0</H6>
             </FlexBetween>
 
             <Divider sx={{ mb: 1 }} />
 
             <FlexBetween mb={2}>
               <H6 my="0px">Total</H6>
-              <H6 my="0px">$315</H6>
+              <H6 my="0px">DT{List[0].order_items[0].sub_total}</H6>
             </FlexBetween>
 
-            <Typography fontSize={14}>Paid by Credit/Debit Card</Typography>
+            <Typography fontSize={14}>
+              {/* Paid by Credit/Debit Card */}
+              Payé par crédit/Carte de débit
+              </Typography>
           </Card>
         </Grid>
       </Grid>

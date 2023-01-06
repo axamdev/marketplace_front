@@ -1,5 +1,6 @@
 import { Delete, DetailsRounded, Edit, Place } from "@mui/icons-material";
-import { Button, IconButton, Pagination, Typography } from "@mui/material";
+import { Button, FormControl,FormControlLabel, IconButton, Pagination, Radio, RadioGroup, Typography } from "@mui/material";
+//import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FlexBox } from "components/flex-box";
 import UserDashboardHeader from "components/header/UserDashboardHeader";
 import CustomerDashboardLayout from "components/layouts/customer-dashboard";
@@ -12,14 +13,26 @@ import { AppDispatch } from "redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import {getAdress } from "redux/adressSlice";
 import  { useEffect,useState} from 'react';
+import { setSelectedAdrIdSlice } from "redux/placeOrders";
 
 const AddressList = () => {
  // const [adr,setAdr]=useState([]);
  const {user} = useSelector(authSelector) ;
+ 
   const dispatch = useDispatch<AppDispatch>();
   const handle = async () => {
-   await dispatch(getAdress({user_id:user.id})) 
-   
+   await dispatch(getAdress({user_id:user.id}))    
+  };
+  const [value, setValue] =useState('');
+  
+  const handleChange = (event) => {
+    console.log("event.target.value")
+    console.log(event.target.value)
+    // store.dispatch(setSelectedAdrIdSlice.actions.setID('0'))
+    dispatch(setSelectedAdrIdSlice.actions.setID(event.target.value)) 
+    
+     setValue(event.target.value);
+
   };
 const {adresses} = useSelector(adressSelector) ;
   useEffect(() => {
@@ -29,22 +42,18 @@ const {adresses} = useSelector(adressSelector) ;
  
   return (
      
-    <CustomerDashboardLayout>
+    <>
       {/* <Button onClick={handle} >Click here</Button>  */}
 
       <UserDashboardHeader
         icon={Place}
-        title="Mes adresses"
+        title="My Addresses"
         navigation={<CustomerDashboardNavigation />}
-        button={
-          <Link href="/address/new" passHref>
-          <Button color="primary" sx={{ bgcolor: "primary.light", px: 4 }} >
-          Ajouter une nouvelle adresse
-          </Button>
-          </Link>
-        }
+       
+        
       />
-      {adresses.map((adr, ind) => (
+     <RadioGroup aria-label="gender" name="gender1"  onChange={handleChange}>
+       {adresses.map((adr, ind) => (
         <TableRow sx={{ my: 2, padding: "6px 18px" }} key={ind}>
           <Typography whiteSpace="pre" m={0.75} textAlign="left">
            {adr.name}
@@ -55,61 +64,24 @@ const {adresses} = useSelector(adressSelector) ;
           </Typography>
 
           <Typography whiteSpace="pre" m={0.75} textAlign="left">
-           {adr.alternate_mobile}
+           {adr.mobile}
           </Typography>
 
           <Typography whiteSpace="pre" textAlign="center" color="grey.600">
-            <Link href={`/address/${adr.id}`} passHref>
-              <IconButton>
-                <Edit fontSize="small" color="inherit" />
-              </IconButton>
-            </Link>
-
-            <IconButton onClick={(e) => e.stopPropagation()}>
-              <Delete fontSize="small" color="inherit" />
-            </IconButton>
+          <FormControl component="fieldset">
+          
+                         <FormControlLabel value={adr.id} control={<Radio />} label=''/>
+            
+        </FormControl>
           </Typography>
         </TableRow>
       ))}
-
-      <FlexBox justifyContent="center" mt={5}>
-        <Pagination count={5} onChange={(data) => console.log(data)} />
-      </FlexBox>
-    </CustomerDashboardLayout>
+ </RadioGroup>
+     
+    </>
   );
 };
 
-// const orderList = [
-//   {
-//     orderNo: "1050017AS",
-//     status: "Pending",
-//     purchaseDate: new Date(),
-//     price: 350,
-//   },
-//   {
-//     orderNo: "1050017AS",
-//     status: "Processing",
-//     purchaseDate: new Date(),
-//     price: 500,
-//   },
-//   {
-//     orderNo: "1050017AS",
-//     status: "Delivered",
-//     purchaseDate: "2020/12/23",
-//     price: 700,
-//   },
-//   {
-//     orderNo: "1050017AS",
-//     status: "Delivered",
-//     purchaseDate: "2020/12/23",
-//     price: 700,
-//   },
-//   {
-//     orderNo: "1050017AS",
-//     status: "Cancelled",
-//     purchaseDate: "2020/12/15",
-//     price: 300,
-//   },
-// ];
+
 
 export default AddressList;

@@ -83,11 +83,11 @@ const ProductCard7: React.FC<ProductCard7Props> = ({
 
         <FlexBox gap={1} flexWrap="wrap" alignItems="center">
           <Span color="grey.600">
-            ${price.toFixed(2)} x {qty}
+            TND{price.toFixed(2)} x {qty}
           </Span>
 
           <Span fontWeight={600} color="primary.main">
-            ${(price * qty).toFixed(2)}
+            TND{(price * qty).toFixed(2)}
           </Span>
         </FlexBox>
 
