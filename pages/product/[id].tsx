@@ -11,6 +11,7 @@ import RelatedProducts from "components/products/RelatedProducts";
 import { H2 } from "components/Typography";
 import bazaarReactDatabase from "data/bazaar-react-database";
 import { id } from "date-fns/locale";
+import { GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
 import api, { ProductsResponse } from "utils/api/axam-products";
@@ -75,8 +76,8 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
         {product ? <ProductIntro product={product.data[0]} /> : <H2>Loading...</H2>} 
         
         
-        {/* {product ? <H2>{product.data[0].name}</H2> : <H2>Loading...</H2>} */}
-        {/* <StyledTabs
+        {/* {product ? <H2>{product.data[0].name}</H2> : <H2>Loading...</H2> } */}
+        <StyledTabs
           textColor="primary"
           value={selectedOption}
           indicatorColor="primary"
@@ -91,36 +92,36 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
           {selectedOption === 1 && <ProductReview />}
         </Box>
 
-        {frequentlyBought && (
+        {/* {frequentlyBought && (
           <FrequentlyBought productsData={frequentlyBought} />
-        )}
+        )} */}
 
-        <AvailableShops />
+        {/* <AvailableShops /> */}
 
-        {relatedProducts && <RelatedProducts productsData={relatedProducts} />} */}
+        {relatedProducts && <RelatedProducts productsData={relatedProducts} />}
 
 
       </Container>
     </ShopLayout1>
-  );
+   );
+ };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = bazaarReactDatabase.slice(0, 2).map((pro) => ({ params: { id: pro.id } }));
+
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: "blocking", //indicates the type of fallback
+  };
 };
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const paths = bazaarReactDatabase.slice(0, 2).map((pro) => ({ params: { id: pro.id } }));
+export async function getStaticProps() {
+  const frequentlyBought = await getFrequentlyBought();
+  const relatedProducts = await getRelatedProducts();
 
-//   return {
-//     paths: [], //indicates that no page needs be created at build time
-//     fallback: "blocking", //indicates the type of fallback
-//   };
-// };
-
-// export async function getStaticProps() {
-//   const frequentlyBought = await getFrequentlyBought();
-//   const relatedProducts = await getRelatedProducts();
-
-//   return {
-//     props: { frequentlyBought, relatedProducts },
-//   };
-// }
+  return {
+    props: { frequentlyBought, relatedProducts },
+  };
+}
 
 export default ProductDetails;

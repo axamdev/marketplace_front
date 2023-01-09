@@ -1,18 +1,30 @@
 import { Call, Place } from "@mui/icons-material";
 import { Avatar, Box, Button, Card, Rating } from "@mui/material";
+import { useRouter } from "@nx/next-router";
 import { FlexBetween, FlexBox } from "components/flex-box";
 import FacebookFilled from "components/icons/FacebookFilled";
 import InstagramFilled from "components/icons/InstagramFilled";
 import TwitterFilled from "components/icons/TwitterFilled";
 import YoutubeFilled from "components/icons/YoutubeFilled";
 import { H3, Small, Span } from "components/Typography";
-import React from "react";
+import React, { useEffect,useState } from "react";
+import api, { ProductsResponse } from "utils/api/axam-products";
 
 // =======================================================
 type ShopIntroCardProps = {};
 // =======================================================
 
-const ShopIntroCard: React.FC<ShopIntroCardProps> = () => {
+const ShopIntroCard: React.FC<ShopIntroCardProps> = (props) => {
+
+  // const router = useRouter()
+  // const pId =parseInt(router.query.id as string, 10)
+  // const [product, setProduct] = useState<ProductsResponse> ();
+
+  // useEffect(() => {
+  //   api.get_products(pId).then((data)=> setProduct(data) )
+  // }, []);
+
+
   return (
     <Card sx={{ mb: 4, pb: 2.5 }}>
       <Box
@@ -24,7 +36,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = () => {
 
       <FlexBox mt={-8} px={3.75} flexWrap="wrap">
         <Avatar
-          src="/assets/images/faces/propic.png"
+          src="http://5.135.194.236:8181/uploads/seller/ag84-fatalessahloul.jpg"
           sx={{
             mr: "37px",
             width: "120px",
@@ -50,7 +62,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = () => {
               bgcolor="secondary.main"
             >
               <H3 fontWeight="600" color="grey.100">
-                Scarlett Beauty
+                Hamza
               </H3>
             </Box>
 

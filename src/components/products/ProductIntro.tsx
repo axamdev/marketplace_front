@@ -61,6 +61,7 @@ var price: number =  +prod.variants[0].special_price ;
           name: prod.name,
           imgUrl: prod.image,
           id: prod.id || routerId,
+          description:prod.description,
         },
       });
     },
