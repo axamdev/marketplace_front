@@ -25,7 +25,7 @@ import useWindowSize from "hooks/useWindowSize";
 import { Fragment } from "react";
 import { ordersSelector } from "redux/getordersSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useRouter } from "next/router";
 const StyledFlexbox = styled(FlexBetween)(({ theme }) => ({
   flexWrap: "wrap",
   marginTop: "2rem",
@@ -43,15 +43,27 @@ const StyledFlexbox = styled(FlexBetween)(({ theme }) => ({
 type OrderStatus = "packaging" | "shipping" | "delivering" | "complete";
 
 const OrderDetails = () => {
+  const router=useRouter();
+  const{query:{data}}=router;
+  const props={data}
   const orderStatus: OrderStatus = "shipping";
   const orderStatusList = ["packaging", "shipping", "delivering", "complete"];
   const stepIconList = [PackageBox, TruckFilled, Delivery];
-
   const statusIndex = orderStatusList.indexOf(orderStatus);
   const width = useWindowSize();
   const theme = useTheme();
   const breakpoint = 350;
   const {List} = useSelector(ordersSelector) 
+  const selectedId=[props.data];
+  const newList=selectedId.map((id) => List.find((el) => el.id === id))
+  const total=newList.map(el=>el.order_items)
+  const fintotal=total[0].map(e=>e.sub_total)   
+ const initialValue = 0;
+ const sumWithInitial = fintotal.reduce(
+  (accumulator, currentValue) => accumulator + +currentValue,
+  initialValue
+);
+ 
 
   return (
     <CustomerDashboardLayout>
@@ -158,38 +170,39 @@ const OrderDetails = () => {
 
         <Box py={1}>
         {/* productDatabase.slice(179, 182).map */}
-          {List.slice(0,3).map((item,ind) => (
+          {/* {List.slice(0,3).map((item,ind) => ( */}
+          {newList.map((item,ind) => (<>{item.order_items.map((el,indx)=>(
             <FlexBox
               px={2}
               py={1}
               flexWrap="wrap"
               alignItems="center"
               //key={item.id}
-            >
-              <FlexBox flex="2 2 260px" m={0.75} alignItems="center">
-                <Avatar src={"/assets/images/Furniture Shop/Furniture.png"} sx={{ height: 64, width: 64 }} />
-                <Box ml={2.5}>
-                  <H6 my="0px">{item.order_items[0].product_name}</H6>
-                  <Typography fontSize="14px" color="grey.600">
-                    ${item.order_items[0].price} x 1
-                  </Typography>
-                </Box>
-              </FlexBox>
+            ><FlexBox flex="2 2 260px" m={0.75} alignItems="center">
+            <Avatar src={"/assets/images/Furniture Shop/Furniture.png"} sx={{ height: 64, width: 64 }} />
+            <Box ml={2.5}>
+              <H6 my="0px">{el.product_name}</H6>
+              <Typography fontSize="14px" color="grey.600">
+                ${el.price} x 1
+              </Typography>
+            </Box>
+          </FlexBox>
 
-              <FlexBox flex="1 1 260px" m={0.75} alignItems="center">
-                <Typography fontSize="14px" color="grey.600">
-                  {/* Product properties: Black, L */}
-                  Propriétés du produit: {item.order_items[0].variant_name}
-                </Typography>
-              </FlexBox>
+          <FlexBox flex="1 1 260px" m={0.75} alignItems="center">
+            <Typography fontSize="14px" color="grey.600">
+              {/* Product properties: Black, L */}
+              Propriétés du produit: {el.variant_name}
+            </Typography>
+          </FlexBox>
 
-              <FlexBox flex="160px" m={0.75} alignItems="center">
-                <Button variant="text" color="primary">
-                  <Typography fontSize="14px">écrire un commentaire</Typography>
-                </Button>
-              </FlexBox>
-            </FlexBox>
-          ))}
+          <FlexBox flex="160px" m={0.75} alignItems="center">
+            <Button variant="text" color="primary" >
+              <Typography fontSize="14px">écrire un commentaire</Typography>
+            </Button>
+          </FlexBox>
+         
+            </FlexBox>))}
+          </>))}
         </Box>
       </Card>
 
@@ -202,7 +215,7 @@ const OrderDetails = () => {
 
             <Paragraph fontSize={14} my={0}>
               {/* Kelly Williams 777 Brockton Avenue, Abington MA 2351 */}
-              {List[0].order_items[0].seller_address}
+              {newList[0].address}
             </Paragraph>
           </Card>
         </Grid>
@@ -218,7 +231,8 @@ const OrderDetails = () => {
               <Typography fontSize={14} color="grey.600">
                 total:
               </Typography>
-              <H6 my="0px">DT {List[0].order_items[0].sub_total}</H6>
+               {/* <H6 my="0px">DT {List[0].order_items[0].sub_total}</H6>  */}
+               <H6 my="0px">DT {sumWithInitial }</H6> 
             </FlexBetween>
 
             <FlexBetween mb={1}>
@@ -232,14 +246,14 @@ const OrderDetails = () => {
               <Typography fontSize={14} color="grey.600">
                 Remise:
               </Typography>
-              <H6 my="0px">0</H6>
+              <H6 my="0px">{newList[0].discount}</H6>
             </FlexBetween>
 
             <Divider sx={{ mb: 1 }} />
 
             <FlexBetween mb={2}>
               <H6 my="0px">Total</H6>
-              <H6 my="0px">DT{List[0].order_items[0].sub_total}</H6>
+              <H6 my="0px">DT{sumWithInitial }</H6>
             </FlexBetween>
 
             <Typography fontSize={14}>

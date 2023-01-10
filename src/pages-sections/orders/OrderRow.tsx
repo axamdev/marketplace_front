@@ -4,8 +4,9 @@ import TableRow from "components/TableRow";
 import { H5 } from "components/Typography";
 import { format } from "date-fns";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { ordersType } from "redux/getordersSlice";
+import Router from 'next/router'
 
 // =================================================
 type OrderRowProps = {
@@ -33,15 +34,19 @@ const OrderRow: FC<OrderRowProps> = ({ item }) => {
         return "secondary";
     }
   };
-
-  return (
-    
-    <Link href={`/orders/${item.id}`}>
+  const data=`${item.id}`
+  return (  
+    // <Link href={`/orders/${item.id}`} >
+    <Link  href={{
+      pathname: `/orders/${item.id}`,
+      query:{data}
+    }} >
       <a>
         <TableRow sx={{ my: "1rem", padding: "6px 18px" }}>
           <H5 m={0.75} textAlign="left">
             {item.id}
           </H5>
+          {/* <IconButton onClick={select}>hi</IconButton> */}
           <Box m={0.75}>
             <Chip
               size="small"
@@ -75,7 +80,7 @@ const OrderRow: FC<OrderRowProps> = ({ item }) => {
               display: { xs: "none", md: "block" },
             }}
           >
-            <IconButton>
+            <IconButton >
               <East
                 fontSize="small"
                 color="inherit"
