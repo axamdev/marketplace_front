@@ -3,23 +3,50 @@ import { FlexBetween } from "components/flex-box";
 import ProductCard1 from "components/product-cards/ProductCard1";
 import { Span } from "components/Typography";
 import productDatabase from "data/product-database";
-import React, { Fragment } from "react";
+import { Productsdata, ProductsResponse } from "utils/api/axam-products";
+import React, { Fragment, useEffect, useState,useCallback } from "react";
+import { useRouter } from "next/router";
+import { CartItem, useAppContext } from "contexts/AppContext";
 
 // ========================================================
-type ProductCard1ListProps = {};
+type ProductCard1ListProps = {
+  product: Productsdata[];
+
+  
+};
 // ========================================================
 
-const ProductCard1List: React.FC<ProductCard1ListProps> = () => {
+const ProductCard1List: React.FC<ProductCard1ListProps> = ({product}) => {
+  
+  const prod = product;
+  const router = useRouter();
+  const routerId = router.query.id as string;
+  const { state, dispatch } = useAppContext();
+  const cartList: CartItem[] = state.cart;
+  
+
+  console.log(prod);
+
   return (
     <Fragment>
-      <Grid container spacing={3}>
-        {productDatabase.slice(95, 104).map((item, ind) => (
+      {prod &&
+      <Grid container spacing={3} >
+        {prod.slice(0, 3).map((item, ind) => (
           <Grid item lg={4} sm={6} xs={12} key={ind}>
-            <ProductCard1 {...item} />
+            <ProductCard1 
+             key={ind}
+             id={item.id}
+             title={item.name}
+             price={item.min_max_price.min_price}
+             off={item.min_max_price.discount_in_percentage}
+             rating={Number(item.rating)}
+             imgUrl={item.image}
+             category_name={item.category_name}
+             short_description={item.short_description} />
           </Grid>
         ))}
       </Grid>
-
+}
       <FlexBetween flexWrap="wrap" mt={4}>
         <Span color="grey.600">Showing 1-9 of 1.3k Products</Span>
         <Pagination count={10} variant="outlined" color="primary" />

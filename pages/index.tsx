@@ -176,6 +176,7 @@ export async function getStaticProps() {
   const loginList = await apiLogin.getLogin();
   const slidershomeList = await apiSlidersHome.getAllSlidersHome();
   const categoriesList = await apiCategories.getAllCategories();
+  
   const registerUserList = await apiRegister.postSignUpUser();
   const sectionsList = await apiSections.getAllSections();
   const offersList = await apiOffers.getAllOffers();

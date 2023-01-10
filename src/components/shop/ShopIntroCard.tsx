@@ -8,34 +8,37 @@ import TwitterFilled from "components/icons/TwitterFilled";
 import YoutubeFilled from "components/icons/YoutubeFilled";
 import { H3, Small, Span } from "components/Typography";
 import React, { useEffect,useState } from "react";
-import api, { ProductsResponse } from "utils/api/axam-products";
+import api, { Productsdata, ProductsResponse } from "utils/api/axam-products";
 
 // =======================================================
-type ShopIntroCardProps = {};
+type ShopIntroCardProps = {
+  product: Productsdata;
+
+};
 // =======================================================
 
-const ShopIntroCard: React.FC<ShopIntroCardProps> = (props) => {
-
-  // const router = useRouter()
-  // const pId =parseInt(router.query.id as string, 10)
-  // const [product, setProduct] = useState<ProductsResponse> ();
-
-  // useEffect(() => {
-  //   api.get_products(pId).then((data)=> setProduct(data) )
-  // }, []);
+const ShopIntroCard: React.FC<ShopIntroCardProps> = ({product}) => {
+  const prod = product;
+  //const router = useRouter();
+  //const pId = parseInt(router.query.id as string);
+ 
 
 
   return (
+    
     <Card sx={{ mb: 4, pb: 2.5 }}>
+     
       <Box
         height="202px"
         sx={{
           background: "url(/assets/images/banners/shop-cover.png) center/cover",
         }}
       />
-
+         
       <FlexBox mt={-8} px={3.75} flexWrap="wrap">
+      
         <Avatar
+        // key={ind}
           src="http://5.135.194.236:8181/uploads/seller/ag84-fatalessahloul.jpg"
           sx={{
             mr: "37px",
@@ -45,7 +48,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = (props) => {
             borderColor: "grey.100",
           }}
         />
-
+       
         <Box
           sx={{
             flex: "1 1 0",
@@ -62,7 +65,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = (props) => {
               bgcolor="secondary.main"
             >
               <H3 fontWeight="600" color="grey.100">
-                Hamza
+                {/* {prod.seller_name} */}hamza
               </H3>
             </Box>
 
@@ -79,7 +82,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = (props) => {
               ))}
             </FlexBox>
           </FlexBetween>
-
+          
           <FlexBetween flexWrap="wrap">
             <Box>
               <FlexBox alignItems="center" gap={1} mb={2}>
@@ -109,8 +112,11 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = (props) => {
             </a>
           </FlexBetween>
         </Box>
+       
       </FlexBox>
-    </Card>
+         
+         </Card>
+    
   );
 };
 

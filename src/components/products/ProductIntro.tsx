@@ -22,7 +22,6 @@ type ProductIntroProps = {
 
 const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const prod = product;
-
   const router = useRouter();
   const routerId = router.query.id as string;
 
@@ -61,7 +60,7 @@ var price: number =  +prod.variants[0].special_price ;
           name: prod.name,
           imgUrl: prod.image,
           id: prod.id || routerId,
-          description:prod.description,
+          description:prod.description
         },
       });
     },
@@ -191,7 +190,7 @@ var price: number =  +prod.variants[0].special_price ;
 
           <FlexBox alignItems="center" mb={2}>
             <Box>Vendu par : :</Box>
-            <Link href="/shops/fdfdsa">
+            <Link href={`/shops/${prod.seller_id}`}>
               <a>
                 <H6 ml={1}>{prod.seller_name}</H6>
               </a>

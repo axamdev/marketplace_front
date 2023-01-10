@@ -23,9 +23,20 @@ async function  get_products( product_id?: number , category_id?: number, seller
   //return data["data"] ;
 };
 
+async function  get_products_by_seller_id( seller_id?: number) : Promise<ProductsResponse>  {
+    
+    var bodyFormData = new FormData();
+	  bodyFormData.append('id', seller_id.toString());
+
+   const response = await axios.post( productsUrl,bodyFormData,config);
+   console.log("products "+response.data);
+   return response.data as ProductsResponse;
+  //return data["data"] ;
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-
+    get_products_by_seller_id,
     get_products,
 
 };
