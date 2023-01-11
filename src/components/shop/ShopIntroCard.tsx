@@ -1,6 +1,7 @@
 import { Call, Place } from "@mui/icons-material";
 import { Avatar, Box, Button, Card, Rating } from "@mui/material";
-import { useRouter } from "@nx/next-router";
+//import Router,{ useRouter } from "@nx/next-router";
+import Router, { useRouter } from "next/router";
 import { FlexBetween, FlexBox } from "components/flex-box";
 import FacebookFilled from "components/icons/FacebookFilled";
 import InstagramFilled from "components/icons/InstagramFilled";
@@ -12,16 +13,29 @@ import api, { Productsdata, ProductsResponse } from "utils/api/axam-products";
 
 // =======================================================
 type ShopIntroCardProps = {
-  product: Productsdata;
+  products?: Productsdata[];
 
 };
 // =======================================================
 
-const ShopIntroCard: React.FC<ShopIntroCardProps> = ({product}) => {
-  const prod = product;
-  //const router = useRouter();
-  //const pId = parseInt(router.query.id as string);
- 
+const ShopIntroCard: React.FC<ShopIntroCardProps> = ({products}) => {
+  // const prod=products
+  // console.log(prod);
+  const router = useRouter();
+  //const { query, isReady } = useRouter();
+  // useEffect(() => {
+  //   if (router.isReady) {
+  //     // Code using query
+  //     console.log(router.query);
+  //    }
+  // }, [router.isReady]);
+  const seller_id = parseInt(router.query.id as string);
+  const [product, setProduct] = useState<Productsdata[]> ();
+  useEffect(() => {
+    api.get_products_by_seller_id(seller_id).then((data)=> setProduct(data.data)    )
+  }, []);
+  //console.log(product);
+  console.log(product);
 
 
   return (
@@ -34,12 +48,13 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = ({product}) => {
           background: "url(/assets/images/banners/shop-cover.png) center/cover",
         }}
       />
-         
+         {product ?
       <FlexBox mt={-8} px={3.75} flexWrap="wrap">
       
         <Avatar
         // key={ind}
-          src="http://5.135.194.236:8181/uploads/seller/ag84-fatalessahloul.jpg"
+          //src="http://5.135.194.236:8181/uploads/seller/ag84-fatalessahloul.jpg"
+           src={product[0].seller_profile}
           sx={{
             mr: "37px",
             width: "120px",
@@ -65,7 +80,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = ({product}) => {
               bgcolor="secondary.main"
             >
               <H3 fontWeight="600" color="grey.100">
-                {/* {prod.seller_name} */}hamza
+                {product[0].store_name} 
               </H3>
             </Box>
 
@@ -114,9 +129,9 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = ({product}) => {
         </Box>
        
       </FlexBox>
-         
+         : <H3>Loading...</H3>}
          </Card>
-    
+         
   );
 };
 

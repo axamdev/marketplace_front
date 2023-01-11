@@ -188,7 +188,7 @@ var price: number =  +prod.variants[0].special_price ;
             </FlexBox>
           )}
 
-          <FlexBox alignItems="center" mb={2}>
+          <FlexBox alignItems="center" mb={2} product={prod}>
             <Box>Vendu par : :</Box>
             <Link href={`/shops/${prod.seller_id}`}>
               <a>

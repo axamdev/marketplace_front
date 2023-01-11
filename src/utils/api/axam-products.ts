@@ -26,7 +26,7 @@ async function  get_products( product_id?: number , category_id?: number, seller
 async function  get_products_by_seller_id( seller_id?: number) : Promise<ProductsResponse>  {
     
     var bodyFormData = new FormData();
-	  bodyFormData.append('id', seller_id.toString());
+	  bodyFormData.append('seller_id', seller_id.toString());
 
    const response = await axios.post( productsUrl,bodyFormData,config);
    console.log("products "+response.data);
