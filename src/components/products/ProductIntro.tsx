@@ -31,6 +31,13 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const [ImageList, setImageList] = useState([]);
 
   const { state, dispatch } = useAppContext();
+
+  ImageList.push(prod.image);
+  ImageList.push(prod.other_images);
+
+  console.log("ImageList",ImageList)
+
+
   const cartList: CartItem[] = state.cart;
   const cartItem = cartList.find(
     (item) => item.id === prod.id || item.id === routerId
@@ -49,29 +56,24 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   //   setCurrentImage(0);
   //   setIsViewerOpen(false);
   // };
-var price: number =  +prod.variants[0].special_price ;
+  var price: number = +prod.variants[0].special_price;
   const handleCartAmountChange = useCallback(
     (amount) => () => {
       dispatch({
         type: "CHANGE_CART_AMOUNT",
         payload: {
-          price ,
+          price,
           qty: amount,
           name: prod.name,
           imgUrl: prod.image,
           id: prod.id || routerId,
-          description:prod.description
+          description: prod.description
         },
       });
     },
     []
   );
-  useEffect(() => {
-    ImageList.push(prod.other_images);
-    ImageList.push(prod.image) ; 
-  
-    
-  }, []);
+  console.log("prod.other_images", prod.other_images, " prod.image", prod.image)
   return (
     <Box width="100%">
       <Grid container spacing={3} justifyContent="space-around">
@@ -84,7 +86,7 @@ var price: number =  +prod.variants[0].special_price ;
               loading="eager"
               objectFit="contain"
               src={ImageList[selectedImage]}
-              // onClick={() => openImageViewer(imgGroup.indexOf(imgGroup[selectedImage]))}
+            // onClick={() => openImageViewer(imgGroup.indexOf(imgGroup[selectedImage]))}
             />
             {/* {isViewerOpen && (
               <ImageViewer
@@ -188,7 +190,7 @@ var price: number =  +prod.variants[0].special_price ;
             </FlexBox>
           )}
 
-          <FlexBox alignItems="center" mb={2} product={prod}>
+          <FlexBox alignItems="center" mb={2}>
             <Box>Vendu par : :</Box>
             <Link href={`/shops/${prod.seller_id}`}>
               <a>

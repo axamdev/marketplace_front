@@ -7,10 +7,10 @@ import { Productsdata } from "utils/api/axam-products";
 import { useRouter } from "next/router";
 import api, { ProductsResponse } from "utils/api/axam-products";
 // ======================================================
-type ProductDescriptionProps = { products: Productsdata};
+type ProductDescriptionProps = {};
 // ======================================================
 
-const ProductDescription: React.FC<ProductDescriptionProps> = ({products}) => {
+const ProductDescription: React.FC<ProductDescriptionProps> = () => {
   //const prod = product;
   const { state,dispatch} = useAppContext();
   const cartList: CartItem[] = state.cart;
