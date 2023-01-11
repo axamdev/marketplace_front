@@ -11,7 +11,6 @@ import Router from 'next/router'
 // =================================================
 type OrderRowProps = {
   item: ordersType 
-
 };
 // =================================================
 

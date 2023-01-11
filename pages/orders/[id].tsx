@@ -144,7 +144,7 @@ const OrderDetails = () => {
             <Typography fontSize={14} color="grey.600" mr={0.5}>
               Commande ID:
             </Typography>
-            <Typography fontSize={14}>9001997718074513</Typography>
+            <Typography fontSize={14}>{props.data}</Typography>
           </FlexBox>
 
           <FlexBox className="pre" m={0.75} alignItems="center">
