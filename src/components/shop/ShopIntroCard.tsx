@@ -1,30 +1,61 @@
 import { Call, Place } from "@mui/icons-material";
 import { Avatar, Box, Button, Card, Rating } from "@mui/material";
+//import Router,{ useRouter } from "@nx/next-router";
+import Router, { useRouter } from "next/router";
 import { FlexBetween, FlexBox } from "components/flex-box";
 import FacebookFilled from "components/icons/FacebookFilled";
 import InstagramFilled from "components/icons/InstagramFilled";
 import TwitterFilled from "components/icons/TwitterFilled";
 import YoutubeFilled from "components/icons/YoutubeFilled";
 import { H3, Small, Span } from "components/Typography";
-import React from "react";
+import React, { useEffect,useState } from "react";
+import api, { Productsdata, ProductsResponse } from "utils/api/axam-products";
 
 // =======================================================
-type ShopIntroCardProps = {};
+type ShopIntroCardProps = {
+  products?: Productsdata[];
+
+};
 // =======================================================
 
-const ShopIntroCard: React.FC<ShopIntroCardProps> = () => {
+const ShopIntroCard: React.FC<ShopIntroCardProps> = ({products}) => {
+  // const prod=products
+  // console.log(prod);
+  const router = useRouter();
+  //const { query, isReady } = useRouter();
+  // useEffect(() => {
+  //   if (router.isReady) {
+  //     // Code using query
+  //     console.log(router.query);
+  //    }
+  // }, [router.isReady]);
+  const seller_id = parseInt(router.query.id as string);
+  const [product, setProduct] = useState<Productsdata[]> ();
+  useEffect(() => {
+    api.get_products_by_seller_id(seller_id).then((data)=> setProduct(data.data)    )
+  }, []);
+  //console.log(product);
+  console.log("product is here",product);
+
+
   return (
+    
     <Card sx={{ mb: 4, pb: 2.5 }}>
+     
       <Box
         height="202px"
         sx={{
           background: "url(/assets/images/banners/shop-cover.png) center/cover",
         }}
+        
       />
-
+         {product ?
       <FlexBox mt={-8} px={3.75} flexWrap="wrap">
+      
         <Avatar
-          src="/assets/images/faces/propic.png"
+        // key={ind}
+          //src="http://5.135.194.236:8181/uploads/seller/ag84-fatalessahloul.jpg"
+           src={product[0].seller_profile}
           sx={{
             mr: "37px",
             width: "120px",
@@ -33,7 +64,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = () => {
             borderColor: "grey.100",
           }}
         />
-
+       
         <Box
           sx={{
             flex: "1 1 0",
@@ -50,7 +81,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = () => {
               bgcolor="secondary.main"
             >
               <H3 fontWeight="600" color="grey.100">
-                Scarlett Beauty
+                {product[0].store_name} 
               </H3>
             </Box>
 
@@ -67,7 +98,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = () => {
               ))}
             </FlexBox>
           </FlexBetween>
-
+          
           <FlexBetween flexWrap="wrap">
             <Box>
               <FlexBox alignItems="center" gap={1} mb={2}>
@@ -78,27 +109,30 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = () => {
               </FlexBox>
 
               <FlexBox color="grey.600" gap={1} mb={1} maxWidth={270}>
-                <Place fontSize="small" sx={{ fontSize: 18, mt: "3px" }} />
+                {/* <Place fontSize="small" sx={{ fontSize: 18, mt: "3px" }} /> */}
                 <Span color="grey.600">
-                  845 N. Stonybrook Ave. Tonawanda, NY 14210, Denmark
+                  {product[0].store_description}
                 </Span>
               </FlexBox>
 
-              <FlexBox color="grey.600" gap={1} mb={1}>
+              {/* <FlexBox color="grey.600" gap={1} mb={1}>
                 <Call fontSize="small" sx={{ fontSize: 18, mt: "2px" }} />
                 <Span color="grey.600">(613) 343-9004</Span>
-              </FlexBox>
+              </FlexBox> */}
             </Box>
 
             <a href="mailto:scarletbeauty@xmail.com">
               <Button variant="outlined" color="primary" sx={{ my: 1.5 }}>
-                Contact Vendor
+              Contacter le vendeur
               </Button>
             </a>
           </FlexBetween>
         </Box>
+       
       </FlexBox>
-    </Card>
+         : <H3>Loading...</H3>}
+         </Card>
+         
   );
 };
 

@@ -15,7 +15,7 @@ import { H5, H6, Paragraph, Span } from "components/Typography";
 const ProductFilterCard = () => {
   return (
     <Card sx={{ p: "18px 27px", overflow: "auto" }} elevation={1}>
-      <H6 mb={1.25}>Filter</H6>
+      <H6 mb={1.25}>Filtre</H6>
 
       {categroyList.map((item) =>
         item.subCategories ? (
@@ -52,7 +52,7 @@ const ProductFilterCard = () => {
 
       <Divider sx={{ mt: 2, mb: 3 }} />
 
-      <H6 mb={2}>Price Range</H6>
+      <H6 mb={2}>Échelle des prix</H6>
       <FlexBetween>
         <TextField placeholder="0" type="number" size="small" fullWidth />
         <H5 color="grey.600" px={1}>
@@ -63,7 +63,7 @@ const ProductFilterCard = () => {
 
       <Divider sx={{ my: 3 }} />
 
-      <H6 mb={2}>Brands</H6>
+      <H6 mb={2}>Marques</H6>
       {brandList.map((item) => (
         <FormControlLabel
           key={item}
@@ -74,7 +74,7 @@ const ProductFilterCard = () => {
       ))}
 
       <Divider sx={{ my: 3 }} />
-      <H6 mb={2}>Stock type</H6>
+      <H6 mb={2}>Type de stock</H6>
       {otherOptions.map((item) => (
         <FormControlLabel
           key={item}
@@ -86,7 +86,7 @@ const ProductFilterCard = () => {
 
       <Divider sx={{ my: 3 }} />
 
-      <H6 mb={2}>Ratings</H6>
+      <H6 mb={2}>évaluation</H6>
       {[5, 4, 3, 2, 1].map((item) => (
         <FormControlLabel
           control={<Checkbox size="small" color="secondary" />}
@@ -98,7 +98,7 @@ const ProductFilterCard = () => {
 
       <Divider sx={{ my: 3 }} />
 
-      <H6 mb={2}>Colors</H6>
+      <H6 mb={2}>Couleurs</H6>
       <FlexBox mb={2} flexWrap="wrap" gap={1}>
         {colorList.map((item) => (
           <Box
@@ -120,8 +120,8 @@ const ProductFilterCard = () => {
 
 const categroyList = [
   {
-    title: "Size",
-    subCategories: ["Large", "Medium", "Small"],
+    title: "Taille",
+    subCategories: ["Grand", "Moyen", "Petit"],
   },
   { title: "700 pouce" },
   { title: "Canapé a 2 place" },
@@ -129,7 +129,7 @@ const categroyList = [
 ];
 
 const brandList = ["Maccs", "Karts", "Baars", "Bukks", "Luasis"];
-const otherOptions = ["On Sale", "In Stock", "Featured"];
+const otherOptions = ["En Vente", "En stock", "Présenté"];
 const colorList = [
   "#1C1C1C",
   "#FF7A7A",

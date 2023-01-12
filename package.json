@@ -31,7 +31,6 @@
     "@mui/styles": "^5.0.2",
     "@mui/system": "^5.10.7",
     "@nx/next-router": "^1.4.2",
-
     "@reduxjs/toolkit": "^1.9.1",
     "@types/next": "^9.0.0",
     "@types/react-redux": "^7.1.24",
@@ -43,6 +42,7 @@
     "cross-env": "^7.0.3",
     "currency.js": "^2.0.4",
     "date-fns": "^2.25.0",
+    "dompurify": "^2.4.3",
     "formik": "^2.2.9",
     "merge": "^2.1.1",
     "next": "^12.0.1",
@@ -55,13 +55,9 @@
     "react-phone-input-2": "^2.15.1",
     "react-redux": "^8.0.5",
     "react-scroll": "^1.8.4",
-
-    "redux-persist": "^6.0.0",
-
+    "react-simple-image-viewer": "^1.2.2",
     "redux": "^4.2.0",
-
-
-
+    "redux-persist": "^6.0.0",
     "sharp": "^0.30.3",
     "simplebar-react": "^2.3.6",
     "stylis": "^4.1.1",
