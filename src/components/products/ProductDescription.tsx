@@ -7,6 +7,7 @@ import { Productsdata } from "utils/api/axam-products";
 import { useRouter } from "next/router";
 import api, { ProductsResponse } from "utils/api/axam-products";
 import createDOMPurify from 'dompurify'
+import DOMPurify from 'dompurify'
 // ======================================================
 type ProductDescriptionProps = {};
 // ======================================================
@@ -27,13 +28,9 @@ console.log(product);
 
   return (
     <Box>
-   
-      <H3 mb={2}>Specification:</H3>
       {product ?
         <Box>
-          
-          {product[0].description}
-          { <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(rawHTML) }} /> }
+          <div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(product[0].description)}}></div>
       </Box>
       : <H3>Loading...</H3>}
     </Box>
