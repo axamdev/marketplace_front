@@ -43,9 +43,8 @@ const StyledFlexbox = styled(FlexBetween)(({ theme }) => ({
 type OrderStatus = "packaging" | "shipping" | "delivering" | "complete";
 
 const OrderDetails = () => {
-  const router=useRouter();
-  const{query:{data}}=router;
-  const props={data}
+  const router = useRouter()
+  const order_id = (router.query.id as string);
   const orderStatus: OrderStatus = "shipping";
   const orderStatusList = ["packaging", "shipping", "delivering", "complete"];
   const stepIconList = [PackageBox, TruckFilled, Delivery];
@@ -54,7 +53,7 @@ const OrderDetails = () => {
   const theme = useTheme();
   const breakpoint = 350;
   const {List} = useSelector(ordersSelector) 
-  const selectedId=[props.data];
+  const selectedId=[order_id]
   const newList=selectedId.map((id) => List.find((el) => el.id === id))
   const total=newList.map(el=>el.order_items)
   const fintotal=total[0].map(e=>e.sub_total)   
@@ -144,7 +143,7 @@ const OrderDetails = () => {
             <Typography fontSize={14} color="grey.600" mr={0.5}>
               Commande ID:
             </Typography>
-            <Typography fontSize={14}>{props.data}</Typography>
+            <Typography fontSize={14}>{order_id}</Typography>
           </FlexBox>
 
           <FlexBox className="pre" m={0.75} alignItems="center">
@@ -232,14 +231,14 @@ const OrderDetails = () => {
                 total:
               </Typography>
                {/* <H6 my="0px">DT {List[0].order_items[0].sub_total}</H6>  */}
-               <H6 my="0px">DT {sumWithInitial }</H6> 
+               <H6 my="0px"> {sumWithInitial }TND</H6> 
             </FlexBetween>
 
             <FlexBetween mb={1}>
               <Typography fontSize={14} color="grey.600">
               frais de livraison:
               </Typography>
-              <H6 my="0px">0</H6>
+              <H6 my="0px"> 7TND</H6>
             </FlexBetween>
 
             <FlexBetween mb={1}>
@@ -248,12 +247,10 @@ const OrderDetails = () => {
               </Typography>
               <H6 my="0px">{newList[0].discount}</H6>
             </FlexBetween>
-
             <Divider sx={{ mb: 1 }} />
-
             <FlexBetween mb={2}>
               <H6 my="0px">Total</H6>
-              <H6 my="0px">DT{sumWithInitial }</H6>
+              <H6 my="0px">{sumWithInitial }TND</H6>
             </FlexBetween>
 
             <Typography fontSize={14}>

@@ -18,14 +18,31 @@ import ProductCard9List from "components/products/ProductCard9List";
 import ProductFilterCard from "components/products/ProductFilterCard";
 import Sidenav from "components/sidenav/Sidenav";
 import { H5, Paragraph } from "components/Typography";
-import { useCallback, useState } from "react";
-
+import { useCallback } from "react";
+import Router, { useRouter } from "next/router";
+import api, {  ProductsCategoryResponse,Productsdata } from "utils/api/axam-products";
+import React, { useEffect,useState } from "react";
 const ProductCategoryResult = () => {
   const [view, setView] = useState("grid");
   const downMd = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
 
   const toggleView = useCallback((v) => () => setView(v), []);
+  const router = useRouter()
+  const category_id = parseInt(router.query.id as string);
+  const selectedId=[ category_id ]
+  const [Specialproducts, setSpecialProduct] = useState<Productsdata[]> ();
+  useEffect(() => {
+    api.get_productsByCategory(category_id).then((data)=>setSpecialProduct(data.data)    )
+  }, []);
+  //console.log(product);
+   console.log(Specialproducts)
 
+  const ListProducts=selectedId.map((id) => Specialproducts?.find((el) => el.id === id.toString()))
+   //const name=ListProducts.map((el)=>el.category_name)
+  console.log(ListProducts)
+  console.log(ListProducts[0])
+   //const name=ListProducts[0].category_name
+  //  console.log(name)
   return (
     <ShopLayout1>
       <Container sx={{ mt: 4, mb: 6 }}>
@@ -42,13 +59,15 @@ const ProductCategoryResult = () => {
               md: "0.5rem 1.25rem",
               xs: "1.25rem 1.25rem 0.25rem",
             },
-          }}
-        >
+          }}>
+        {/* { ListProducts? */}
           <Box>
-            <H5>Searching for “ mobile phone ”</H5>
-            <Paragraph color="grey.600">48 results found</Paragraph>
+          { ListProducts[0]?  <H5>{`Rechercher  ${ListProducts[0].category_name}`}</H5>  :<H5>Loading</H5>}
+       
+           { ListProducts[0]?   <Paragraph color="grey.600">{`${ListProducts[0].total} résultats trouvés` }</Paragraph> :<H5>Loading</H5>}
+          
           </Box>
-
+           {/* : <H5>Loading</H5>} */}
           <FlexBox
             alignItems="center"
             columnGap={4}
@@ -57,7 +76,7 @@ const ProductCategoryResult = () => {
           >
             <FlexBox alignItems="center" gap={1} flex="1 1 0">
               <Paragraph color="grey.600" whiteSpace="pre">
-                Short by:
+               Trier par
               </Paragraph>
 
               <TextField
@@ -79,7 +98,8 @@ const ProductCategoryResult = () => {
 
             <FlexBox alignItems="center" my="0.25rem">
               <Paragraph color="grey.600" mr={1}>
-                View:
+                {/* View: */}
+                Affichage               
               </Paragraph>
 
               <IconButton onClick={toggleView("grid")}>

@@ -35,11 +35,7 @@ const OrderRow: FC<OrderRowProps> = ({ item }) => {
   };
   const data=`${item.id}`
   return (  
-    // <Link href={`/orders/${item.id}`} >
-    <Link  href={{
-      pathname: `/orders/${item.id}`,
-      query:{data}
-    }} >
+    <Link href={`/orders/${item.id}`} >
       <a>
         <TableRow sx={{ my: "1rem", padding: "6px 18px" }}>
           <H5 m={0.75} textAlign="left">

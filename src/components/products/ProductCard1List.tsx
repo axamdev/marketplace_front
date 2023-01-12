@@ -20,7 +20,7 @@ const ProductCard1List: React.FC<ProductCard1ListProps> = () => {
     api.get_productsByCategory(category_id).then((data)=>setCatProduct(data.data)    )
   }, []);
   //console.log(product);
-  console.log(Catproducts)
+ // console.log(Catproducts)
   return (
     <Fragment>
       <Grid container spacing={3}>

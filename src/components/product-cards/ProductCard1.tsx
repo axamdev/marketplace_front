@@ -187,10 +187,10 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
             <FlexBox alignItems="center" gap={1} mt={0.5}>
               <Box fontWeight="600" color="primary.main">
-                ${(min_max_price.max_price - (min_max_price.max_price * discount) / 100).toFixed(2)}
+                {(min_max_price.max_price - (min_max_price.max_price *min_max_price.discount_in_percentage) / 100).toFixed(2)}TND
               </Box>
 
-              {!!discount && (
+              {!!min_max_price.discount_in_percentage && (
                 <Box color="grey.600" fontWeight="600">
                   <del>{min_max_price.max_price?.toFixed(2)}</del>
                 </Box>
