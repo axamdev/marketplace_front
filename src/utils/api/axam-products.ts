@@ -22,12 +22,33 @@ async function  get_products( product_id?: number , category_id?: number, seller
    return response.data as ProductsResponse;
   //return data["data"] ;
 };
+async function  get_productsByCategory( category_id?: number) : Promise<ProductsResponse>  {
+    
+    var bodyFormData = new FormData();
+	  bodyFormData.append('category_id', category_id.toString());
+
+   const response = await axios.post( productsUrl,bodyFormData,config);
+   console.log("products "+response.data);
+   return response.data as ProductsResponse;
+  //return data["data"] ;
+};
+
+async function  get_products_by_seller_id( seller_id?: number) : Promise<ProductsResponse>  {
+    
+    var bodyFormData = new FormData();
+	  bodyFormData.append('seller_id', seller_id.toString());
+
+   const response = await axios.post( productsUrl,bodyFormData,config);
+   console.log("products "+response.data);
+   return response.data as ProductsResponse;
+  //return data["data"] ;
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-
+    get_products_by_seller_id,
     get_products,
-
+    get_productsByCategory
 };
  interface Variant {
     id: string;
@@ -48,7 +69,7 @@ export default {
     cart_count: string;
 }
 
- interface MinMaxPrice {
+ export interface MinMaxPrice {
     min_price: number;
     max_price: number;
     special_price: number;

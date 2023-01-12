@@ -18,6 +18,8 @@ export interface ordersType {
             user_id: String,
             total_payable:String,
             date_added:String,
+            address:String,
+            discount:String,
             order_items:itemsType[]          
   }
 export interface initTypes {

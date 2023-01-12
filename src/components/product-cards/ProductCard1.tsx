@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Add, Favorite, Remove, RemoveRedEye } from "@mui/icons-material";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { Box, Button, Chip, IconButton, styled } from "@mui/material";
@@ -66,31 +65,24 @@ const ContentWrapper = styled(Box)(() => ({
 
 // ========================================================
 type ProductCard1Props = {
-  off?: number;
+  off: number;
   title: string;
   price: number;
   imgUrl: string;
+  short_description: string;
+  category_name: string;
   rating?: number;
-  discount?: number;
   className?: string;
   id: string | number;
   hideRating?: boolean;
-  hoverEffect?: boolean;
   style?: CSSProperties;
   showProductSize?: boolean;
+  sx?: { [key: string]: any };
 };
 // ========================================================
 
 const ProductCard1: FC<ProductCard1Props> = ({
-  id,
-  title,
-  price,
-  imgUrl,
-  rating = 5,
-  hideRating,
-  hoverEffect,
-  discount = 5,
-  showProductSize,
+  sx, off, id, title, price, imgUrl, short_description,category_name,rating, hideRating
 }) => {
   const { state, dispatch } = useAppContext();
   const [openModal, setOpenModal] = useState(false);
@@ -110,13 +102,14 @@ const ProductCard1: FC<ProductCard1Props> = ({
   );
 
   return (
-    <StyledBazaarCard hoverEffect={hoverEffect}>
+    <StyledBazaarCard >
       <ImageWrapper>
-        {!!discount && (
-          <StyledChip color="primary" size="small" label={`${discount}% off`} />
+        {!!off && (
+          <StyledChip color="primary" size="small" label={`${off}% off`} />
         )}
 
         <HoverIconWrapper className="hover-box">
+          
           <IconButton onClick={toggleDialog}>
             <RemoveRedEye color="disabled" fontSize="small" />
           </IconButton>
@@ -171,20 +164,20 @@ const ProductCard1: FC<ProductCard1Props> = ({
               <BazaarRating value={rating || 0} color="warn" readOnly />
             )}
 
-            {showProductSize && (
+            {/* {showProductSize && (
               <Span color="grey.600" mb={1} display="block">
                 300ml
               </Span>
-            )}
+            )} */}
 
             <FlexBox alignItems="center" gap={1} mt={0.5}>
               <Box fontWeight="600" color="primary.main">
-                ${(price - (price * discount) / 100).toFixed(2)}
+                {(price - (price * off) / 100).toFixed(2)} TND
               </Box>
 
-              {!!discount && (
+              {!!off && (
                 <Box color="grey.600" fontWeight="600">
-                  <del>{price?.toFixed(2)}</del>
+                  <del>{price?.toFixed(2)} TND </del>
                 </Box>
               )}
             </FlexBox>
@@ -205,7 +198,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
                 id,
                 price,
                 imgUrl,
-                name: title,
+                name: name,
                 qty: (cartItem?.qty || 0) + 1,
               })}
             >
@@ -226,7 +219,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
                     id,
                     price,
                     imgUrl,
-                    name: title,
+                    name: name,
                     qty: (cartItem?.qty || 0) - 1,
                   })}
                 >

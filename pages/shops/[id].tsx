@@ -7,8 +7,27 @@ import ProductFilterCard from "components/products/ProductFilterCard";
 import ShopIntroCard from "components/shop/ShopIntroCard";
 import Sidenav from "components/sidenav/Sidenav";
 import useWindowSize from "hooks/useWindowSize";
+import { useRouter } from "next/router";
+//import { ProductsResponse } from "utils/api/axam-products";
+import { H2 } from "components/Typography";
+import React from "react";
+import { FC, useEffect, useState } from "react";
+import api, { Productsdata, ProductsResponse } from "utils/api/axam-products";
+// ===========================================================
+type ShopProps = {
+  
+  productsList?:Productsdata[];
+};
+// ===========================================================
+const Shop :FC<ShopProps> = ({productsList}) => {
+  const router = useRouter()
+  const seller_id =parseInt(router.query.id as string, 10)
+  const [product, setProduct] = useState<Productsdata[]> ();
 
-const Shop = () => {
+  useEffect(() => {
+    api.get_products_by_seller_id(seller_id).then((data)=> setProduct(data.data)    )
+  }, []);
+
   const width = useWindowSize();
   const isTablet = width < 1025;
 
@@ -41,7 +60,7 @@ const Shop = () => {
               </Sidenav>
             )}
 
-            <ProductCardList />
+           {product ? <ProductCardList   product={product} />: <H2>Loading...</H2>}
           </Grid>
         </Grid>
       </Container>

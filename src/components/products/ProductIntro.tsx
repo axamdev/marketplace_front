@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Add, Remove } from "@mui/icons-material";
 import { Box, Grid } from "@mui/material";
 import BazaarAvatar from "components/BazaarAvatar";
@@ -29,7 +28,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  const [ImageList, setImageList] = useState(product.other_images);
+  const [currentImageList, setCurrentImageList] = useState([]);
 
   const { state, dispatch } = useAppContext();
   const cartList: CartItem[] = state.cart;
@@ -40,7 +39,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const handleImageClick = (ind: number) => () => {
     setSelectedImage(ind);
   };
-   
+
   const openImageViewer = useCallback((index) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
@@ -66,17 +65,23 @@ var price: number =  +prod.variants[0].special_price ;
     },
     []
   );
-  // useEffect(() => {
-  //   ImageList.push(prod.other_images);
-  //   ImageList.push(prod.image) ; 
-  // }, );
+   let listImg= [];
+  
+  useEffect(() => {
+    console.log("didMount");
 
-
+listImg=prod.other_images ;
+ listImg.push(prod.image) ; 
+ setSelectedImage(0);
+ console.log(listImg);
+ console.log(selectedImage);
+ console.log(listImg[selectedImage]);
+ setCurrentImageList(listImg)
+  }, []);
   return (
-    
     <Box width="100%">
       <Grid container spacing={3} justifyContent="space-around">
-        <Grid item md={6} xs={12} alignItems="center">
+        { currentImageList.length>0 && <Grid item md={6} xs={12} alignItems="center">
           <FlexBox justifyContent="center" mb={6}>
             <LazyImage
               width={300}
@@ -84,24 +89,25 @@ var price: number =  +prod.variants[0].special_price ;
               height={300}
               loading="eager"
               objectFit="contain"
-              src={prod.image}
-              //  onClick={() => openImageViewer(ImageList.indexOf(ImageList[selectedImage]))}
+              src={currentImageList[selectedImage]}
+               onClick={() => openImageViewer(selectedImage)}
             />
-            {/* {isViewerOpen && (
+            {isViewerOpen && (
               <ImageViewer
-                src={ImageList}
+                src={currentImageList}
                 onClose={closeImageViewer}
                 currentIndex={currentImage}
+                closeOnClickOutside={ true }
                 backgroundStyle={{
                   backgroundColor: "rgba(0,0,0,0.9)",
                   zIndex: 1501,
                 }}
               />
-            )} */}
+            )}
           </FlexBox>
 
           <FlexBox overflow="auto">
-            {ImageList.map((url, ind) => (
+            {currentImageList.map((url, ind) => (
               <FlexRowCenter
                 key={ind}
                 width={64}
@@ -113,7 +119,7 @@ var price: number =  +prod.variants[0].special_price ;
                 ml={ind === 0 ? "auto" : 0}
                 style={{ cursor: "pointer" }}
                 onClick={handleImageClick(ind)}
-                mr={ind === ImageList.length - 1 ? "auto" : "10px"}
+                mr={ind === listImg.length - 1 ? "auto" : "10px"}
                 borderColor={
                   selectedImage === ind ? "primary.main" : "grey.400"
                 }
@@ -122,18 +128,17 @@ var price: number =  +prod.variants[0].special_price ;
               </FlexRowCenter>
             ))}
           </FlexBox>
-        </Grid>
-
+        </Grid> }
         <Grid item md={6} xs={12} alignItems="center">
           <H1 mb={2}>{prod.name}</H1>
 
           <FlexBox alignItems="center" mb={2}>
-            <Box>Category</Box>
+            <Box>Catégorie</Box>
             <H6 ml={1}>{prod.category_name}</H6>
           </FlexBox>
 
           <FlexBox alignItems="center" mb={2}>
-            <Box lineHeight="1">Rated:</Box>
+            <Box lineHeight="1">évaluation:</Box>
             <Box mx={1} lineHeight="1">
               <BazaarRating
                 color="warn"
@@ -147,9 +152,9 @@ var price: number =  +prod.variants[0].special_price ;
 
           <Box mb={3}>
             <H2 color="primary.main" mb={0.5} lineHeight="1">
-              ${price.toFixed(2)}
+              {price.toFixed(2)} TND
             </H2>
-            <Box color="inherit">Stock Available</Box>
+            <Box color="inherit">Stock disponible</Box>
           </Box>
 
           {!cartItem?.qty ? (
@@ -159,7 +164,7 @@ var price: number =  +prod.variants[0].special_price ;
               onClick={handleCartAmountChange(1)}
               sx={{ mb: 4.5, px: "1.75rem", height: 40 }}
             >
-              Add to Cart
+             Ajouter au panier
             </BazaarButton>
           ) : (
             <FlexBox alignItems="center" mb={4.5}>
@@ -191,7 +196,7 @@ var price: number =  +prod.variants[0].special_price ;
 
           <FlexBox alignItems="center" mb={2}>
             <Box>Vendu par : :</Box>
-            <Link href="/shops/fdfdsa">
+            <Link href={`/shops/${prod.seller_id}`}>
               <a>
                 <H6 ml={1}>{prod.seller_name}</H6>
               </a>

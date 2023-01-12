@@ -45,8 +45,7 @@ const TopCategorySection: FC<Props> = ({ categoriesList }) => {
         }}
       >
         {categoriesList.data.map((item, ind) => (
-         
-          <Link href="#" key={ind}>
+          <Link href={`/product/categories/${item.id}`} key={ind}>
             <a>
               <ProductCard15
                 title={item.name}

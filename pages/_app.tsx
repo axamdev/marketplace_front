@@ -18,7 +18,7 @@ import "../src/fake-db";
 import store from "redux/store"
 
 
-let persistor = persistStore(store);
+//let persistor = persistStore(store);
 type MyAppProps = AppProps & {
   Component: NextPage & {
     getLayout?: (page: ReactElement) => ReactNode;
@@ -61,11 +61,11 @@ const App = ({ Component, pageProps }: MyAppProps) => {
       <SettingsProvider>
         <AppProvider>
        <Provider store={store}>
-        <PersistGate persistor={persistor}>
+        {/* <PersistGate persistor={persistor}> */}
           <MuiTheme>
             <RTL>{getLayout(<AnyComponent {...pageProps} />)}</RTL>
           </MuiTheme>
-          </PersistGate>
+          {/* </PersistGate> */}
           </Provider>
            
         </AppProvider>

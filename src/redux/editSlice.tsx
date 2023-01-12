@@ -3,17 +3,31 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { editProfilUrl, TOKEN } from "../utils/constants";
 import axios from "axios";
 
+import { RootState } from "./store";
+export interface editType {
+  username:String;
+  email: string;
+  dob: string;
+  mobile: string;
+ 
+}
 export interface initTypes {
-   user:String,
+   edituser:editType[],
    msg:String,
    error:String,
+   username:String,
+   mobile:String,
+   dob:String,
    loading: boolean;
-  
   }
+ 
   const initialState: initTypes = {
-    user:"",
+   edituser:[],
    msg:"",
    error:"",
+   username:"",
+   mobile:"",
+   dob:"",
    loading:false,
   
   };
@@ -68,9 +82,11 @@ const editSlice=createSlice({
         } else {
           state.error = payload.error;
           state.msg = payload.message;
-          state.loading = false;
-          state.user = payload.data[0];
-       
+          state.loading = true;
+          state.edituser = payload.data[0];
+          state.username= payload.data[0].username
+          state.mobile= payload.data[0].mobile
+          state.dob= payload.data[0].dob
 
         }
   
@@ -84,3 +100,4 @@ const editSlice=createSlice({
     },
 })
 export default editSlice.reducer;
+export const editSelector = (state:RootState) => state.edit

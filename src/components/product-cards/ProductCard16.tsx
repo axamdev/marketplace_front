@@ -178,12 +178,12 @@ const ProductCard16: FC<Props> = (props) => {
       <ContentWrapper>
         <FlexRowCenter>
           <Box pr={1} fontWeight="500" color="primary.main">
-            dt {(price - (price * off) / 100).toFixed(2)}
+             {(price - (price * off) / 100).toFixed(2)} TND
           </Box>
 
           {off !== 0 && (
             <Box color="grey.600" fontWeight="500">
-              <del>{price?.toFixed(2)}</del>
+              <del>{price?.toFixed(2)} TND</del> 
             </Box>
           )}
         </FlexRowCenter>

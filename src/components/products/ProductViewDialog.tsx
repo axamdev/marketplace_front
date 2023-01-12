@@ -102,7 +102,7 @@ const ProductViewDialog: FC<ProductViewDialogProps> = (props) => {
                 CATEGORIE: {product.category_name}
               </Paragraph>
 
-              <H1 color="primary.main">TND {product.price.toFixed(2)}</H1>
+              {/* <H1 color="primary.main">TND {product.price.toFixed(2)}</H1> */}
 
               <FlexBox alignItems="center" gap={1}>
                 <BazaarRating

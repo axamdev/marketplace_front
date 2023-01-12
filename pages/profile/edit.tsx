@@ -14,25 +14,28 @@ import Link from "next/link";
 import * as yup from "yup";
 import { AppDispatch } from "redux/store";
 import { authSelector } from "redux/authSlice";
+import {editSelector} from "redux/editSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "redux/editSlice";
 import { useState } from "react";
 import { userAgent } from "next/server";
+
 //city:values.ville,pincode:values.CodeZip
 const ProfileEditor = () => {
-
+  
+  const {user} = useSelector(authSelector)
+  const {loading,msg,username,dob,mobile}=useSelector(editSelector)
   const dispatch = useDispatch<AppDispatch>();
    const handleFormSubmit = async (values: any) => {
      console.log(values);
      setImage(user.image)
     await dispatch(updateUser({ username:values.first_name,address:values.last_name,mobile:values.contact,dob:values.birth,user_id:user.id}))
-    
+     
    };
-  
-   const {user} = useSelector(authSelector)
+
    const [image,setImage]=useState(user.image)
   const [nom,setNom]=useState(user.username)
-  const [mobile,setMobile]=useState(user.mobile)
+  const [tel,setTobile]=useState(user.mobile)
   const [email,setEmail]=useState(user.email)
   const [birth,setBirth]=useState(user.dob)
   const [adress,setAdress]=useState(user.address)
@@ -42,16 +45,19 @@ const ProfileEditor = () => {
   const [old,setOld]=useState(user.old)
  const [neauv,setNeauv]=useState(user.new)
   const initialValues = {
-    first_name: nom,
+    // {(!loading)? {nom}:{username}}
+   // first_name: nom,
+    first_name: (!loading)?nom:username ,
     last_name:adress,
     // email: email,
-     contact: mobile,
-     birth:birth,
+     contact: (!loading)?tel:mobile,
+     birth:(!loading)?birth:dob,
      Etat:area,
      ville:city,
      CodeZip:pin,
       oldPassword:old,
      nvPassword:neauv,
+     username:username
      //birth_date: new Date(),
    };
 
@@ -127,11 +133,11 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       name="first_name"
-
                       label="nom et prénom"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.first_name}
+                    
                       error={!!touched.first_name && !!errors.first_name}
                       helperText={touched.first_name && errors.first_name}
                     />
