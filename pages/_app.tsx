@@ -18,7 +18,7 @@ import "../src/fake-db";
 import store from "redux/store"
 
 
-let persistor = persistStore(store);
+//let persistor = persistStore(store);
 type MyAppProps = AppProps & {
   Component: NextPage & {
     getLayout?: (page: ReactElement) => ReactNode;

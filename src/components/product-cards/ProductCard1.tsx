@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Add, Favorite, Remove, RemoveRedEye } from "@mui/icons-material";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { Box, Button, Chip, IconButton, styled } from "@mui/material";

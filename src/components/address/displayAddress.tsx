@@ -17,7 +17,7 @@ import { setSelectedAdrIdSlice } from "redux/placeOrders";
 
 const AddressList = () => {
  // const [adr,setAdr]=useState([]);
- const {user} = useSelector(authSelector) ;
+ const {user} = useSelector(authSelector) ;   
  
   const dispatch = useDispatch<AppDispatch>();
   const handle = async () => {

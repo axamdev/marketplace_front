@@ -9,10 +9,16 @@ import { H3, H5, Small } from "components/Typography";
 import { format } from "date-fns";
 import Link from "next/link";
 import { authSelector } from "redux/authSlice";
-import {  useSelector } from "react-redux";
-
+import {useDispatch,useSelector } from "react-redux";
+import { AppDispatch } from "redux/store";
+import  { useEffect,useState} from 'react';
+import { updateUser } from "redux/editSlice";
+import {editSelector} from "redux/editSlice"
 const Profile = () => {
-  const {user} = useSelector(authSelector)
+
+ const {user} = useSelector(authSelector)
+ const {loading,msg,username,dob,mobile}=useSelector(editSelector)
+
   return (
     <CustomerDashboardLayout>
       <UserDashboardHeader
@@ -48,7 +54,7 @@ const Profile = () => {
               <Box ml={1.5} flex="1 1 0">
                 <FlexBetween flexWrap="wrap">
                   <div>
-                    <H5 my="0px">{user.username}</H5>
+                    {(!loading)? <H5 my="0px">{user.username}</H5>:<H5 my="0px">{username}</H5>}
                     <FlexBox alignItems="center">
                       <Typography color="grey.600">Points de fidélité:</Typography>
                       <Typography ml={0.5} color="primary.main">
@@ -98,7 +104,8 @@ const Profile = () => {
           <Small color="grey.600" mb={0.5} textAlign="left">
             Nom et Prénom
           </Small>
-          <span>{user.username}</span>
+          {(!loading)?<span>{user.username}</span>:<span>{username}</span>}
+          {/* <span>{(!loading)?{user.username}:({user.username})}</span> */}
         </FlexBox>
 
         {/* <FlexBox flexDirection="column" p={1}>
@@ -119,17 +126,16 @@ const Profile = () => {
           <Small color="grey.600" mb={0.5} textAlign="left">
           Téléphone
           </Small>
-          <span>{user.mobile}</span>
+          {(!loading)?<span>{user.mobile}</span>:<span>{mobile}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5}>
             Date de naissance
           </Small>
-          <span className="pre">
-            {user.dob}
+
             {/* {format(new Date(1996 / 11 / 16), "dd MMM, yyyy")} */}
-          </span>
+          {(!loading)?<span className="pre">{user.dob}</span>:<span className="pre">{dob}</span>}
         </FlexBox>
       </TableRow>
     </CustomerDashboardLayout>
