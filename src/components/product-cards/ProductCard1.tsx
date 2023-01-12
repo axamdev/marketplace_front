@@ -10,7 +10,6 @@ import { CartItem, useAppContext } from "contexts/AppContext";
 import Link from "next/link";
 import { CSSProperties, FC, Fragment, useCallback, useState } from "react";
 import { FlexBox } from "../flex-box";
-import {MinMaxPrice} from "utils/api/axam-products"
 
 const StyledBazaarCard = styled(BazaarCard)(() => ({
   height: "100%",
@@ -66,39 +65,24 @@ const ContentWrapper = styled(Box)(() => ({
 
 // ========================================================
 type ProductCard1Props = {
-  off?: number;
-  //title: string;
-  name:string;
- // price: number;
-  //imgUrl: string;
-  image:string;
- // rating?: number;
-  discount?: number;
+  off: number;
+  title: string;
+  price: number;
+  imgUrl: string;
+  short_description: string;
+  category_name: string;
+  rating?: number;
   className?: string;
-  id: string ;
-  rating: string;
+  id: string | number;
   hideRating?: boolean;
-  hoverEffect?: boolean;
   style?: CSSProperties;
   showProductSize?: boolean;
-  min_max_price: MinMaxPrice;
+  sx?: { [key: string]: any };
 };
 // ========================================================
 
 const ProductCard1: FC<ProductCard1Props> = ({
-  id,
-  //title,
-  name,
-  image,
- // price,
- // imgUrl,
- // rating = 5,
-  hideRating,
-  hoverEffect,
-  rating,
-  discount = 5,
-  showProductSize,
-  min_max_price
+  sx, off, id, title, price, imgUrl, short_description,category_name,rating, hideRating
 }) => {
   const { state, dispatch } = useAppContext();
   const [openModal, setOpenModal] = useState(false);
@@ -118,13 +102,14 @@ const ProductCard1: FC<ProductCard1Props> = ({
   );
 
   return (
-    <StyledBazaarCard hoverEffect={hoverEffect}>
+    <StyledBazaarCard >
       <ImageWrapper>
-        {/* {!!discount && (
-          <StyledChip color="primary" size="small" label={`${discount}% off`} />
-        )} */}
+        {!!off && (
+          <StyledChip color="primary" size="small" label={`${off}% off`} />
+        )}
 
         <HoverIconWrapper className="hover-box">
+          
           <IconButton onClick={toggleDialog}>
             <RemoveRedEye color="disabled" fontSize="small" />
           </IconButton>
@@ -141,11 +126,11 @@ const ProductCard1: FC<ProductCard1Props> = ({
         <Link href={`/product/${id}`}>
           <a>
             <LazyImage
-              src={image}
+              src={imgUrl}
               width={0}
               height={0}
               layout="responsive"
-              alt={name}
+              alt={title}
             />
           </a>
         </Link>
@@ -154,7 +139,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
       <ProductViewDialog
         openDialog={openModal}
         handleCloseDialog={toggleDialog}
-        product={{ name, id, imgGroup: [image, image] }}
+        product={{ title, price, id, imgGroup: [imgUrl, imgUrl] }}
       />
 
       <ContentWrapper>
@@ -164,35 +149,35 @@ const ProductCard1: FC<ProductCard1Props> = ({
               <a>
                 <H3
                   mb={1}
-                  title={name}
+                  title={title}
                   fontSize="14px"
                   fontWeight="600"
                   className="title"
                   color="text.secondary"
                 >
-                  {name}
+                  {title}
                 </H3>
               </a>
             </Link>
 
             {!hideRating && (
-              <BazaarRating value={parseInt(rating) || 0} color="warn" readOnly />
+              <BazaarRating value={rating || 0} color="warn" readOnly />
             )}
 
-            {showProductSize && (
+            {/* {showProductSize && (
               <Span color="grey.600" mb={1} display="block">
                 300ml
               </Span>
-            )}
+            )} */}
 
             <FlexBox alignItems="center" gap={1} mt={0.5}>
               <Box fontWeight="600" color="primary.main">
-                {(min_max_price.max_price - (min_max_price.max_price *min_max_price.discount_in_percentage) / 100).toFixed(2)}TND
+                {(price - (price * off) / 100).toFixed(2)} TND
               </Box>
 
-              {!!min_max_price.discount_in_percentage && (
+              {!!off && (
                 <Box color="grey.600" fontWeight="600">
-                  <del>{min_max_price.max_price?.toFixed(2)}</del>
+                  <del>{price?.toFixed(2)} TND </del>
                 </Box>
               )}
             </FlexBox>
@@ -211,8 +196,8 @@ const ProductCard1: FC<ProductCard1Props> = ({
               sx={{ padding: "3px" }}
               onClick={handleCartAmountChange({
                 id,
-               // price,
-                image,
+                price,
+                imgUrl,
                 name: name,
                 qty: (cartItem?.qty || 0) + 1,
               })}
@@ -232,9 +217,9 @@ const ProductCard1: FC<ProductCard1Props> = ({
                   sx={{ padding: "3px" }}
                   onClick={handleCartAmountChange({
                     id,
-                    // price,
-                    image,
-                    name:name,
+                    price,
+                    imgUrl,
+                    name: name,
                     qty: (cartItem?.qty || 0) - 1,
                   })}
                 >
@@ -250,6 +235,3 @@ const ProductCard1: FC<ProductCard1Props> = ({
 };
 
 export default ProductCard1;
-
-
-
