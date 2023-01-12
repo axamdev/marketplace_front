@@ -93,13 +93,14 @@ listImg=prod.other_images ;
               loading="eager"
               objectFit="contain"
               src={currentImageList[selectedImage]}
-               onClick={() => openImageViewer(imgGroup.indexOf(imgGroup[selectedImage]))}
+               onClick={() => openImageViewer(selectedImage)}
             />
             {isViewerOpen && (
               <ImageViewer
-                src={imgGroup}
+                src={currentImageList}
                 onClose={closeImageViewer}
                 currentIndex={currentImage}
+                closeOnClickOutside={ true }
                 backgroundStyle={{
                   backgroundColor: "rgba(0,0,0,0.9)",
                   zIndex: 1501,

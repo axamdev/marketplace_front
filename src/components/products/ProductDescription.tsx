@@ -6,6 +6,7 @@ import { CartItem, useAppContext } from "contexts/AppContext";
 import { Productsdata } from "utils/api/axam-products";
 import { useRouter } from "next/router";
 import api, { ProductsResponse } from "utils/api/axam-products";
+import createDOMPurify from 'dompurify'
 // ======================================================
 type ProductDescriptionProps = {};
 // ======================================================
@@ -31,11 +32,8 @@ console.log(product);
       {product ?
         <Box>
           
-          {product[0].short_description}
-        {/* Fragrance Description: This is a delicious potion of joy built around the 
-        gardenia flower blended with solar jasmine absolute, cheerful pear blossom accord, 
-        and sweet brown sugar accord. It is a signature floral scent for all free-spirited women 
-        full of positive energy */}
+          {product[0].description}
+          { <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(rawHTML) }} /> }
       </Box>
       : <H3>Loading...</H3>}
     </Box>
