@@ -110,6 +110,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
         )}
 
         <HoverIconWrapper className="hover-box">
+          
           <IconButton onClick={toggleDialog}>
             <RemoveRedEye color="disabled" fontSize="small" />
           </IconButton>
@@ -177,7 +178,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
               {!!off && (
                 <Box color="grey.600" fontWeight="600">
-                  <del>{price?.toFixed(2)} TND</del>
+                  <del>{price?.toFixed(2)} TND </del>
                 </Box>
               )}
             </FlexBox>
