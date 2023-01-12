@@ -35,7 +35,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = ({products}) => {
     api.get_products_by_seller_id(seller_id).then((data)=> setProduct(data.data)    )
   }, []);
   //console.log(product);
-  console.log(product);
+  console.log("product is here",product);
 
 
   return (

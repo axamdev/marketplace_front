@@ -1,4 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+
+
+
 import { Add, Remove } from "@mui/icons-material";
 import { Box, Grid } from "@mui/material";
 import BazaarAvatar from "components/BazaarAvatar";
@@ -11,7 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { Productsdata } from "utils/api/axam-products";
-// import ImageViewer from "react-simple-image-viewer";
+ import ImageViewer from "react-simple-image-viewer";
 import { FlexBox, FlexRowCenter } from "../flex-box";
 
 // ================================================================
@@ -22,22 +24,16 @@ type ProductIntroProps = {
 
 const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
   const prod = product;
+
   const router = useRouter();
   const routerId = router.query.id as string;
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  const [ImageList, setImageList] = useState([]);
+  const [currentImageList, setCurrentImageList] = useState([]);
 
   const { state, dispatch } = useAppContext();
-
-  ImageList.push(prod.image);
-  ImageList.push(prod.other_images);
-
-  console.log("ImageList",ImageList)
-
-
   const cartList: CartItem[] = state.cart;
   const cartItem = cartList.find(
     (item) => item.id === prod.id || item.id === routerId
@@ -47,37 +43,48 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
     setSelectedImage(ind);
   };
 
-  // const openImageViewer = useCallback((index) => {
-  //   setCurrentImage(index);
-  //   setIsViewerOpen(true);
-  // }, []);
+  const openImageViewer = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
 
-  // const closeImageViewer = () => {
-  //   setCurrentImage(0);
-  //   setIsViewerOpen(false);
-  // };
-  var price: number = +prod.variants[0].special_price;
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
+var price: number =  +prod.variants[0].special_price ;
   const handleCartAmountChange = useCallback(
     (amount) => () => {
       dispatch({
         type: "CHANGE_CART_AMOUNT",
         payload: {
-          price,
+          price ,
           qty: amount,
           name: prod.name,
           imgUrl: prod.image,
           id: prod.id || routerId,
-          description: prod.description
         },
       });
     },
     []
   );
-  console.log("prod.other_images", prod.other_images, " prod.image", prod.image)
+   let listImg= [];
+  
+  useEffect(() => {
+    console.log("didMount");
+
+listImg=prod.other_images ;
+ listImg.push(prod.image) ; 
+ setSelectedImage(0);
+ console.log(listImg);
+ console.log(selectedImage);
+ console.log(listImg[selectedImage]);
+ setCurrentImageList(listImg)
+  }, []);
   return (
     <Box width="100%">
       <Grid container spacing={3} justifyContent="space-around">
-        <Grid item md={6} xs={12} alignItems="center">
+        { currentImageList.length>0 && <Grid item md={6} xs={12} alignItems="center">
           <FlexBox justifyContent="center" mb={6}>
             <LazyImage
               width={300}
@@ -85,10 +92,10 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
               height={300}
               loading="eager"
               objectFit="contain"
-              src={ImageList[selectedImage]}
-            // onClick={() => openImageViewer(imgGroup.indexOf(imgGroup[selectedImage]))}
+              src={currentImageList[selectedImage]}
+               onClick={() => openImageViewer(imgGroup.indexOf(imgGroup[selectedImage]))}
             />
-            {/* {isViewerOpen && (
+            {isViewerOpen && (
               <ImageViewer
                 src={imgGroup}
                 onClose={closeImageViewer}
@@ -98,11 +105,11 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
                   zIndex: 1501,
                 }}
               />
-            )} */}
+            )}
           </FlexBox>
 
           <FlexBox overflow="auto">
-            {ImageList.map((url, ind) => (
+            {currentImageList.map((url, ind) => (
               <FlexRowCenter
                 key={ind}
                 width={64}
@@ -114,7 +121,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
                 ml={ind === 0 ? "auto" : 0}
                 style={{ cursor: "pointer" }}
                 onClick={handleImageClick(ind)}
-                mr={ind === ImageList.length - 1 ? "auto" : "10px"}
+                mr={ind === listImg.length - 1 ? "auto" : "10px"}
                 borderColor={
                   selectedImage === ind ? "primary.main" : "grey.400"
                 }
@@ -123,8 +130,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({ product }) => {
               </FlexRowCenter>
             ))}
           </FlexBox>
-        </Grid>
-
+        </Grid> }
         <Grid item md={6} xs={12} alignItems="center">
           <H1 mb={2}>{prod.name}</H1>
 
