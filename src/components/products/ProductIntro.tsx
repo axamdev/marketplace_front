@@ -136,12 +136,12 @@ listImg=prod.other_images ;
           <H1 mb={2}>{prod.name}</H1>
 
           <FlexBox alignItems="center" mb={2}>
-            <Box>Category</Box>
+            <Box>Catégorie</Box>
             <H6 ml={1}>{prod.category_name}</H6>
           </FlexBox>
 
           <FlexBox alignItems="center" mb={2}>
-            <Box lineHeight="1">Rated:</Box>
+            <Box lineHeight="1">évaluation:</Box>
             <Box mx={1} lineHeight="1">
               <BazaarRating
                 color="warn"
@@ -155,9 +155,9 @@ listImg=prod.other_images ;
 
           <Box mb={3}>
             <H2 color="primary.main" mb={0.5} lineHeight="1">
-              ${price.toFixed(2)}
+              {price.toFixed(2)} TND
             </H2>
-            <Box color="inherit">Stock Available</Box>
+            <Box color="inherit">Stock disponible</Box>
           </Box>
 
           {!cartItem?.qty ? (
@@ -167,7 +167,7 @@ listImg=prod.other_images ;
               onClick={handleCartAmountChange(1)}
               sx={{ mb: 4.5, px: "1.75rem", height: 40 }}
             >
-              Add to Cart
+             Ajouter au panier
             </BazaarButton>
           ) : (
             <FlexBox alignItems="center" mb={4.5}>

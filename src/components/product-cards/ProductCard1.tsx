@@ -172,12 +172,12 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
             <FlexBox alignItems="center" gap={1} mt={0.5}>
               <Box fontWeight="600" color="primary.main">
-                ${(price - (price * off) / 100).toFixed(2)}
+                {(price - (price * off) / 100).toFixed(2)} TND
               </Box>
 
               {!!off && (
                 <Box color="grey.600" fontWeight="600">
-                  <del>{price?.toFixed(2)}</del>
+                  <del>{price?.toFixed(2)} TND</del>
                 </Box>
               )}
             </FlexBox>

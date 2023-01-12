@@ -84,7 +84,7 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
           onChange={handleOptionClick}
         >
           <Tab className="inner-tab" label="Description" />
-          <Tab className="inner-tab" label="Review (3)" />
+          <Tab className="inner-tab" label="Commentaires (3)" />
         </StyledTabs>
 
         <Box mb={6}>

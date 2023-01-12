@@ -47,6 +47,7 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = ({products}) => {
         sx={{
           background: "url(/assets/images/banners/shop-cover.png) center/cover",
         }}
+        
       />
          {product ?
       <FlexBox mt={-8} px={3.75} flexWrap="wrap">
@@ -108,21 +109,21 @@ const ShopIntroCard: React.FC<ShopIntroCardProps> = ({products}) => {
               </FlexBox>
 
               <FlexBox color="grey.600" gap={1} mb={1} maxWidth={270}>
-                <Place fontSize="small" sx={{ fontSize: 18, mt: "3px" }} />
+                {/* <Place fontSize="small" sx={{ fontSize: 18, mt: "3px" }} /> */}
                 <Span color="grey.600">
-                  845 N. Stonybrook Ave. Tonawanda, NY 14210, Denmark
+                  {product[0].store_description}
                 </Span>
               </FlexBox>
 
-              <FlexBox color="grey.600" gap={1} mb={1}>
+              {/* <FlexBox color="grey.600" gap={1} mb={1}>
                 <Call fontSize="small" sx={{ fontSize: 18, mt: "2px" }} />
                 <Span color="grey.600">(613) 343-9004</Span>
-              </FlexBox>
+              </FlexBox> */}
             </Box>
 
             <a href="mailto:scarletbeauty@xmail.com">
               <Button variant="outlined" color="primary" sx={{ my: 1.5 }}>
-                Contact Vendor
+              Contacter le vendeur
               </Button>
             </a>
           </FlexBetween>

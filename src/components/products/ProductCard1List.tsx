@@ -48,7 +48,7 @@ const ProductCard1List: React.FC<ProductCard1ListProps> = ({product}) => {
       </Grid>
 }
       <FlexBetween flexWrap="wrap" mt={4}>
-        <Span color="grey.600">Showing 1-9 of 1.3k Products</Span>
+        <Span color="grey.600">Montrant 1-9 de 1.3k Produits</Span>
         <Pagination count={10} variant="outlined" color="primary" />
       </FlexBetween>
     </Fragment>
