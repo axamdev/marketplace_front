@@ -80,12 +80,12 @@ const GiftShop: NextPage<GiftShopProps> = (props) => {
           <GiftShopSection3 />
 
           <Box my={6} className="categories">
-            <TopCategorySection categoryList={props.giftShopTopCategories} />
+            {/* <TopCategorySection categoryList={props.giftShopTopCategories} /> */}
           </Box>
         </Box>
       </StyledContainer>
 
-      <GiftShopPopularItems productsData={props.popularProducts} />
+      {/* <GiftShopPopularItems productsData={props.popularProducts} /> */}
       <GiftShopTopSales productsData={props.topSailedProducts} />
       <GiftShopAllProducts productsData={props.giftShopProducts} />
 

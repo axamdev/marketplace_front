@@ -48,6 +48,7 @@ const CategoryCard1: FC<CategoryCard1Props> = ({ image, title }) => {
         height="10%"
         layout="responsive"
         objectFit="contain"
+        alt="categoryCard"
       />
 
       <CategoryTitle className="category-title">

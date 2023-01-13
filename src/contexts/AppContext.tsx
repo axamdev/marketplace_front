@@ -11,7 +11,7 @@ export type CartItem = {
   price: number;
   imgUrl?: string;
   id: string | number;
-  description: string;
+  // description: string;
 };
 
 type cartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };

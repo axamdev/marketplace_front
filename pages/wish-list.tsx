@@ -27,7 +27,7 @@ const WishList: NextPage = () => {
       <Grid container spacing={3}>
         {productDatabase.slice(53, 59).map((item) => (
           <Grid item lg={4} sm={6} xs={12} key={item.id}>
-            <ProductCard1 {...item} />
+            {/* <ProductCard1 {...item} /> */}
           </Grid>
         ))}
       </Grid>

@@ -63,7 +63,7 @@ const AddressEditor = () => {
         button={
           <Link href="/address" passHref>
             <Button color="primary" sx={{ bgcolor: "primary.light", px: 4 }}>
-            Retour à l'adresse
+            Retour à l&aposadresse
             </Button>
           </Link>
         }

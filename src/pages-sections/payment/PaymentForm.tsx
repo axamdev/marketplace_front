@@ -9,7 +9,7 @@ import { Formik } from "formik";
 import useWindowSize from "hooks/useWindowSize";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { userAgent } from "next/server";
+// import { userAgent } from "next/server";
 import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import { authSelector } from "redux/authSlice";

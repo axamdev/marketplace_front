@@ -34,14 +34,14 @@ const Section2: FC<Props> = ({ flashDeals }) => {
       >
         {flashDeals.map((item, ind) => (
           <Box py={0.5} key={ind}>
-            <ProductCard1
+            {/* <ProductCard1
               id={item.id}
               title={item.title}
               price={item.price}
               imgUrl={item.imgUrl}
               rating={item.rating}
               discount={item.discount}
-            />
+            /> */}
           </Box>
         ))}
       </Carousel>

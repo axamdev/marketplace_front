@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   Add,
+  Description,
   Favorite,
   FavoriteBorder,
   Remove,

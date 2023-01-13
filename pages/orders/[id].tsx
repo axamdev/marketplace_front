@@ -172,6 +172,7 @@ const OrderDetails = () => {
           {/* {List.slice(0,3).map((item,ind) => ( */}
           {newList.map((item,ind) => (<>{item.order_items.map((el,indx)=>(
             <FlexBox
+            key={ind}
               px={2}
               py={1}
               flexWrap="wrap"

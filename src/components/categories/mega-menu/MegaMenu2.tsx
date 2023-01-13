@@ -28,9 +28,10 @@ const MegaMenu2: FC<MegaMenu2Props> = ({
             caret={!!item.children}
             key={id}
           >
-            {item.children && (
-              <MegaMenu3 minWidth="560px" data={item.children} />
-            )}
+            {/* {item.children && ( */}
+               {/* <MegaMenu3 minWidth="560px" data={item.children} />
+               <MegaMenu3 minWidth="560px" data={item.children} /> */}
+            {/* )} */}
           </CategoryMenuItem>
         ))}
       </BazaarCard>
