@@ -16,10 +16,23 @@ const getAllSections = async () => {
   //return data["data"] ;
 };
 
+ async function   getSections_by_Id( section_id) : Promise<SectionsResponse>  {
+    
+    var bodyFormData = new FormData();
+	  bodyFormData.append('section_id', section_id);
+
+   const response = await axios.post(sectionsUrl,bodyFormData,config);
+   console.log("products "+response.data);
+   return response.data as SectionsResponse;
+  //return data["data"] ;
+};
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 
     getAllSections,
+    getSections_by_Id
 
 };
 
