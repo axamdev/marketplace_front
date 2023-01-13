@@ -98,7 +98,7 @@ const FurnitureShop: NextPage<FurnitureShopProps> = (props) => {
             <GiftShopSection3 />
 
 <Box my={10} className="categories">
-  <TopCategorySection categoryList={props.giftShopTopCategories} />
+  {/* <TopCategorySection categoryList={props.giftShopTopCategories} /> */}
 </Box>
             <Box className="pageContent" ref={pageContentRef}>
           {/* <GiftShopServices serviceData={props.giftShopServicesList} /> */}
@@ -111,7 +111,7 @@ const FurnitureShop: NextPage<FurnitureShopProps> = (props) => {
           <TopProductsSection productsData={props.topNewProducts} />
           <TopSellingProducts productsData={props.topSellingProducts} />
           <FurnitureShopAllProducts productsData={props.furnitureProducts} />
-          <GiftShopPopularItems productsData={props.popularProducts} />
+          {/* <GiftShopPopularItems productsData={props.popularProducts} /> */}
       <GiftShopTopSales  productsData={props.topSailedProducts} />
       <GiftShopAllProducts productsData={props.giftShopProducts} />
         </Stack>

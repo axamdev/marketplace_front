@@ -124,6 +124,7 @@ const Section1: FC<Props> = ({slidershomeList,offersList}) => {
             content={carouselContent1}
             mode="dark"
             bgImage={_item.image}
+            key={ind}
           />
         ))}
     
@@ -161,6 +162,7 @@ const Section1: FC<Props> = ({slidershomeList,offersList}) => {
         >
                 {offersList.map((_item, ind) => (
              <BannerCard1
+             key={ind}
              url="#"
              title=""
              subTitle=""

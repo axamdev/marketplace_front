@@ -101,13 +101,13 @@ const Cart: NextPage = () => {
               fullWidth
               sx={{ mt: 2, mb: 4 }}
             >
-             Appliquer le bon d'achat
+             Appliquer le bon d&aposachat
             </Button>
 
             <Divider sx={{ mb: 2 }} />
 
             <Span fontWeight={600} mb={2} display="block">
-            Estimations d'expédition
+            Estimations d&aposexpédition
             </Span>
 
             <Autocomplete

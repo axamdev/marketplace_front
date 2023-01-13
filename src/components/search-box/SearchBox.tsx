@@ -10,7 +10,7 @@ import { FlexBox } from "components/flex-box";
 import Link from "next/link";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { DataCategories } from "utils/api/axam-category";
-
+import { H5 } from "components/Typography";
 // styled components
 // also used in the GrocerySearchBox component
 export const SearchOutlinedIcon = styled(SearchOutlined)(({ theme }) => ({
@@ -42,8 +42,8 @@ type SearchBoxProps = {
 //j'ai ajouter props
 const SearchBox: FC<SearchBoxProps> = (props) => {
   const {categoriesList } = props;
-//console.log(categoriesList);
-  const [category, setCategory] = useState("All Categories");
+//console.log(categoriesList.data);
+  const [category, setCategory] = useState("Toutes les Catégories");
 
   const [resultList, setResultList] = useState<string[]>([]);
   const parentRef = useRef();
@@ -72,6 +72,8 @@ const SearchBox: FC<SearchBoxProps> = (props) => {
   }, []);
 
   const categoryDropdown = (
+    
+
     <BazaarMenu
       direction="left"
       sx={{ zIndex: 1502 }}
@@ -91,13 +93,13 @@ const SearchBox: FC<SearchBoxProps> = (props) => {
       }
     >
                 {/* item.name pour afficher le nom de categorie */}
-
+             
       {/* {categoriesList.data.map((item) => (
         <MenuItem key={item.id} onClick={handleCategoryChange(item.name)}>
           {item.name}
         </MenuItem>
-      ))} */}
-    </BazaarMenu>
+      ))}  */}
+    </BazaarMenu> 
   );
 //j'ai importée categoriesList pour map sur les categories
   return (

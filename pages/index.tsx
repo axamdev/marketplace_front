@@ -136,9 +136,9 @@ const IndexPage: NextPage<FurnitureShopProps> = (props) => {
 
        <Stack spacing={6} my={6}>
 
-       {props.sectionsList.data.map((item) => {
+       {props.sectionsList.data.map((item,ind) => {
         return (
-          <GiftShopPopularItems dataSections={item} productsData={props.popularProducts}/>
+          <GiftShopPopularItems dataSections={item} key={ind} productsData={props.popularProducts}/>
 
         );
       })}

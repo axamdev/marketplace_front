@@ -18,7 +18,7 @@ import {editSelector} from "redux/editSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "redux/editSlice";
 import { useState } from "react";
-import { userAgent } from "next/server";
+// import { userAgent } from "next/server";
 
 //city:values.ville,pincode:values.CodeZip
 const ProfileEditor = () => {

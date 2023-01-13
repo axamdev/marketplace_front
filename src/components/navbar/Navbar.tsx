@@ -220,6 +220,7 @@ const Navbar: FC<NavbarProps> = ({
           {/* Category megamenu */}
           <CategoryMenu open={navListOpen} categoriesList={categoriesList} >
             <CategoryMenuButton variant="text">
+              {/* icon categories  */}
               <Category fontSize="small" />
               <Paragraph
                 fontWeight="600"

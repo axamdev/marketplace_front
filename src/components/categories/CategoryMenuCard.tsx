@@ -56,24 +56,24 @@ const CategoryMenuCard: FC<CategoryMenuCardProps> = (props) => {
   // });
   // console.log("categories" + categoriesList.data[0].name);
   return (
-   
+    
     <Wrapper open={open} position={position}>
      
-      {categoriesList.data.map(({ id, icon, name, banner, children,caret}) => {
+      {categoriesList.data.map(({ id, icon, name, banner, children}) => {
         let MegaMenu = megaMenu['MegaMenu1'];
         let SimpleMenu = megaMenu['MegaMenu2'];
 
         return (
-          //<Scrollbar autoHide={false} key={id}>
+          // <Scrollbar autoHide={false} key={id}>
           
           <CategoryMenuItem
             key={id}
-            href={"#"}
+            href={`/product/categories/${id}`}
             icon={icon}
             title={name}
             caret={!!children.length}
           >
-            {caret? (
+            {children.length >0 ? (
               <MegaMenu data={{
                 categories: children,
                 rightImage: {
@@ -92,7 +92,7 @@ const CategoryMenuCard: FC<CategoryMenuCardProps> = (props) => {
             )}
             
           </CategoryMenuItem>
-          //</Scrollbar>
+           /* </Scrollbar>  */
         );
 
       })}

@@ -32,6 +32,7 @@ const CategoryMenu: FC<CategoryMenuProps> = ({
   categoriesList
 }) => {
   const [open, setOpen] = useState(isOpen);
+  const [showMenu, setShowMenu] = useState(false);
   const popoverRef = useRef(open);
   popoverRef.current = open;
 

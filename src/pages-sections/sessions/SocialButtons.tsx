@@ -58,7 +58,7 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
       </BazaarButton> */}
 
       <FlexRowCenter my="1.25rem">
-        <Box>Vous n'avez pas de compte ?</Box>
+        <Box>Vous n&aposavez pas de compte ?</Box>
         <Link href={redirect}>
           <a>
             <H6 ml={1} borderBottom="1px solid" borderColor="grey.900">

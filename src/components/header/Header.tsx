@@ -106,7 +106,7 @@ const Header: FC<HeaderProps> = ({
 
         <FlexBox justifyContent="center" flex="1 1 0">
           {/* {searchBoxType === "type1" && <SearchBox categoriesList={categoriesList}/>} */}
-          {searchBoxType === "type2" && <GrocerySearchBox />}
+           <GrocerySearchBox />
         </FlexBox>
 
         <FlexBox
@@ -128,7 +128,7 @@ const Header: FC<HeaderProps> = ({
             component={IconButton}
             p={1.25}
             bgcolor="grey.200"
-            // onClick={toggleDialog}
+            onClick={toggleDialog}
             >
               <Favorite /> 
           </Box></Link>
