@@ -39,7 +39,7 @@ const GiftShopTopSales: FC<Props> = ({ productsData }) => {
           },
         }}
       >
-        {productsData.map((item, ind) => (
+        {/* {productsData.map((item, ind) => (
           <ProductCard16
             key={ind}
             id={item.id}
@@ -50,7 +50,7 @@ const GiftShopTopSales: FC<Props> = ({ productsData }) => {
             imgUrl={item.imgUrl}
             sx={{ "& #imgBox": { background: palette.primary[200] } }}
           />
-        ))}
+        ))} */}
       </Carousel>
     </CategorySectionCreator>
   );

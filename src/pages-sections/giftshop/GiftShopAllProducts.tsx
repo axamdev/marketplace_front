@@ -12,14 +12,14 @@ const GiftShopAllProducts: FC<Props> = ({ productsData }) => {
       <Grid container mb={-0.5} spacing={3}>
         {productsData.map((item, ind) => (
           <Grid key={ind} item md={3} sm={6} xs={12}>
-            <ProductCard16
+            {/* <ProductCard16
               id={item.id}
               imgUrl={item.imgUrl}
               title={item.title}
               rating={item.rating}
               price={item.price}
               off={item.discount}
-            />
+            /> */}
           </Grid>
         ))}
       </Grid>
