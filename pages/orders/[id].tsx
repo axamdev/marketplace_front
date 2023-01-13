@@ -54,11 +54,11 @@ const OrderDetails = () => {
   const breakpoint = 350;
   const {List} = useSelector(ordersSelector) 
   const selectedId=[order_id]
-  const newList=selectedId.map((id) => List.find((el) => el.id === id))
-  const total=newList.map(el=>el.order_items)
-  const fintotal=total[0].map(e=>e.sub_total)   
+  const newList=selectedId?.map((id) => List.find((el) => el.id === id))
+  const total=newList?.map(el=>el?.order_items)
+  const fintotal=total[0]?.map(e=>e.sub_total)   
  const initialValue = 0;
- const sumWithInitial = fintotal.reduce(
+ const sumWithInitial = fintotal?.reduce(
   (accumulator, currentValue) => accumulator + +currentValue,
   initialValue
 );
@@ -79,7 +79,7 @@ const OrderDetails = () => {
 
       <Card sx={{ p: "2rem 1.5rem", mb: "30px" }}>
         <StyledFlexbox>
-          {stepIconList.map((Icon, ind) => (
+          {stepIconList?.map((Icon, ind) => (
             <Fragment key={ind}>
               <Box position="relative">
                 <Avatar
@@ -170,7 +170,7 @@ const OrderDetails = () => {
         <Box py={1}>
         {/* productDatabase.slice(179, 182).map */}
           {/* {List.slice(0,3).map((item,ind) => ( */}
-          {newList.map((item,ind) => (<>{item.order_items.map((el,indx)=>(
+          {  newList?.map((item,ind) => (<>{item?.order_items?.map((el,indx)=>(
             <FlexBox
             key={ind}
               px={2}
@@ -215,7 +215,7 @@ const OrderDetails = () => {
 
             <Paragraph fontSize={14} my={0}>
               {/* Kelly Williams 777 Brockton Avenue, Abington MA 2351 */}
-              {newList[0].address}
+              {newList[0]?.address}
             </Paragraph>
           </Card>
         </Grid>
@@ -246,7 +246,7 @@ const OrderDetails = () => {
               <Typography fontSize={14} color="grey.600">
                 Remise:
               </Typography>
-              <H6 my="0px">{newList[0].discount}</H6>
+              <H6 my="0px">{newList[0]?.discount}</H6>
             </FlexBetween>
             <Divider sx={{ mb: 1 }} />
             <FlexBetween mb={2}>

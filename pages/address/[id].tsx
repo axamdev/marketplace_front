@@ -283,7 +283,7 @@ const AddressEditor = () => {
                       name="Nom"
                       label="Nom"
                       onBlur={handleBlur}
-                      value={adresses[1].name}
+                      value={adresses[1]?.name}
                      // onChange={handleChange}
                      // error={!!touched.name && !!errors.name}
                      // helperText={touched.name && errors.name}
@@ -336,7 +336,7 @@ const AddressEditor = () => {
                       label="téléphone"
                       name="téléphone"
                       onBlur={handleBlur}
-                      value={adresses[adresses.length-1].alternate_mobile}
+                      value={adresses[adresses.length-1]?.alternate_mobile}
                       //onChange={handleChange}
                      // error={!!touched.contact && !!errors.contact}
                       //helperText={touched.contact && errors.contact}
