@@ -25,7 +25,7 @@ const ProductCard9List: React.FC<ProductCard9ListProps> = ({product}) => {
   console.log(prod);
   return (
     <div>
-       {prod &&<>{prod.slice(0, 10).map((item, ind) => (
+       {prod &&<>{prod.map((item, ind) => (
         <ProductCard9
         id={item.id}
         title={item.name}

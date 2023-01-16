@@ -57,9 +57,9 @@ const ProductSectionsResult = () => {
            },
          }}>  
          <Box>
-         { ListProductBySections ?  <H5>{`Rechercher  ${ListProductBySections.data[0].title}`}</H5>  :<H5></H5>}
+         { ListProductBySections && ListProductBySections.data[0] ?  <H5>{`Rechercher  ${ListProductBySections.data[0].title}`}</H5>  :<H5></H5>}
       
-          { ListProductBySections  ?   <Paragraph color="grey.600">{`${ListProductBySections.data[0].total} résultats trouvés` }</Paragraph> :<H5></H5>}
+          { ListProductBySections  && ListProductBySections.data[0] ?   <Paragraph color="grey.600">{`${ListProductBySections.data[0].total} résultats trouvés` }</Paragraph> :<H5></H5>}
          
          </Box>      
          <FlexBox
@@ -132,7 +132,7 @@ const ProductSectionsResult = () => {
 
          <Grid item md={9} xs={12}>
          {/* {product ? <ProductCardList   product={product} />: <H2>Loading...</H2>} */}
-         {ListProductBySections ? <>{ListProductBySections &&  view === "grid" ? <ProductCard1List  product={ListProductBySections.data[0].product_details}  /> : <ProductCard9List product={ListProductBySections.data[0].product_details} />  }</> :null   } 
+         {ListProductBySections ? <>{ListProductBySections &&  view === "grid" ? <ProductCard1List  product={ListProductBySections.data[0]?.product_details}  /> : <ProductCard9List product={ListProductBySections.data[0]?.product_details} />  }</> :null   } 
          </Grid>
        </Grid>
      </Container>
@@ -141,10 +141,14 @@ const ProductSectionsResult = () => {
 };
 
 const sortOptions = [
- { label: "Relevance", value: "Relevance" },
- { label: "Date", value: "Date" },
- { label: "Price Low to High", value: "Price Low to High" },
- { label: "Price High to Low", value: "Price High to Low" },
+   // { label: "Relevance", value: "Relevance" },
+   { label: "pertinence", value: "Relevance" },
+   { label: "Date", value: "Date" },
+   // { label: "Price Low to High", value: "Price Low to High" },
+   { label: "Prix ​​bas à élevé", value: "Price Low to High" },
+ 
+   // { label: "Price High to Low", value: "Price High to Low" },
+   { label: "Prix élevé à bas", value: "Price High to Low" }
 ];
 
 export default ProductSectionsResult;

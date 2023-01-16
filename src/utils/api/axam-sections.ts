@@ -19,7 +19,8 @@ const getAllSections = async () => {
  async function   getSections_by_Id( section_id) : Promise<SectionsResponse>  {
     
     var bodyFormData = new FormData();
-	  bodyFormData.append('section_id', section_id);
+	  bodyFormData.append('section_id', section_id,);
+       bodyFormData.append('p_limit', '100');
 
    const response = await axios.post(sectionsUrl,bodyFormData,config);
    console.log("products "+response.data);

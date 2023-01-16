@@ -32,7 +32,7 @@ const ProductCard1List: React.FC<ProductCard1ListProps> = ({product}) => {
     <Fragment>
       {prod &&
       <Grid container spacing={3} >
-        {prod.slice(0, 10).map((item, ind) => (
+        {prod.map((item, ind) => (
           <Grid item lg={4} sm={6} xs={12} key={ind}>
             <ProductCard1 
              key={ind}

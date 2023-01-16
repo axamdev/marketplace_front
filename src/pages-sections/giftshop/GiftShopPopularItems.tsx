@@ -18,6 +18,7 @@ const GiftShopPopularItems: FC<Props> = ({ productsData,dataSections }) => {
   const width = useWindowSize();
   const { palette, shadows } = useTheme();
   const [visibleSlides, setVisibleSlides] = useState(4);
+ 
 
   useEffect(() => {
     if (width < 500) setVisibleSlides(1);
@@ -27,7 +28,7 @@ const GiftShopPopularItems: FC<Props> = ({ productsData,dataSections }) => {
   }, [width]);
 
   return (
-    <CategorySectionCreator title={dataSections.title} subtitle={dataSections.short_description} seeMoreLink="#">
+    <CategorySectionCreator title={dataSections.title} subtitle={dataSections.short_description} seeMoreLink={dataSections.id}>
       <Carousel
         infinite={true}
         visibleSlides={visibleSlides}

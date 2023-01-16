@@ -15,7 +15,7 @@ type CategorySectionHeaderProps = {
   subtitle?: string;
   icon?: ReactNode;
   seeMoreLink?: string;
-  Section_by_Id?:SectionsResponse
+  // Section_by_Id?:SectionsResponse
  
 };
 // type Props={
@@ -25,9 +25,9 @@ type CategorySectionHeaderProps = {
 // ===================================================
 
 const CategorySectionHeader: React.FC<CategorySectionHeaderProps > = (props) => {
-   const { title, subtitle,seeMoreLink, icon, Section_by_Id} = props;
+   const { title, subtitle,seeMoreLink, icon} = props;
   const { settings } = useSettings();
-  console.log("Sections here",Section_by_Id)
+  // console.log("Sections here",Section_by_Id)
 //  const router = useRouter()
 //  const section_id = parseInt(router.query.id as string);
 //  const [ProductSections, setProductSections] = useState<SectionsResponse> ();
@@ -37,7 +37,7 @@ const CategorySectionHeader: React.FC<CategorySectionHeaderProps > = (props) => 
 //  console.log("succes here",ProductSections)
 
 //  console.log("idSections here",ProductSections.data[0].id)
- const sectionId=Section_by_Id.data[0]
+//  const sectionId=Section_by_Id.data[0]
   return (
     <FlexBetween mb={3}>
       <FlexBox alignItems="center" gap={1}>
@@ -52,8 +52,10 @@ const CategorySectionHeader: React.FC<CategorySectionHeaderProps > = (props) => 
 
        {seeMoreLink && (
         //  <Link href={seeMoreLink}> 
+         
             // <Link href={`product/sections/${ProductSections.data[0].id}`} > 
-           <Link href="product/sections/17">  
+          //  <Link href="product/sections/17">  
+          <Link href={`product/sections/${seeMoreLink}`} > 
             <a>
             <FlexBox alignItems="center" color="grey.600">
               View all
