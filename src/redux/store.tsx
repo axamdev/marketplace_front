@@ -22,11 +22,12 @@ import editReducer from'./editSlice';
 import  getOrdersSlice from "./getordersSlice"
 import adressSlice from './adressSlice';
 import addadrSlice from "./addadrSlice"
+import getAllCategoriesSlice from "./categoriesSlice"
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 //const persistConfig = { key: 'counter', storage}
 
-const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cartReducer,orders:ordersReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice,selectedAdrId:setSelectedAdrIdSlice,getOrd:getOrdersSlice})
+const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cartReducer,orders:ordersReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice,selectedAdrId:setSelectedAdrIdSlice,getOrd:getOrdersSlice,getCateg:getAllCategoriesSlice})
 
 
 

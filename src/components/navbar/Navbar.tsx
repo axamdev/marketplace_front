@@ -15,10 +15,14 @@ import NavLink from "components/nav-link/NavLink";
 import { Paragraph } from "components/Typography";
 import navbarNavigations from "data/navbarNavigations";
 import useSettings from "hooks/useSettings";
-import { FC } from "react";
+import { FC,useEffect } from "react";
+import { useSelector } from "react-redux";
+import { categoriesSelector, getAllCategories } from "redux/categoriesSlice";
+import { useAppDispatch } from "redux/store";
 import { DataCategories } from "utils/api/axam-category";
 import MegaMenu from "./MegaMenu";
 import MegaMenu2 from "./MegaMenu2";
+
 
 // NavList props interface
 type Navs = {
@@ -117,110 +121,115 @@ const Navbar: FC<NavbarProps> = ({
   categoriesList
 }) => {
   const { settings } = useSettings();
+  console.log("categories are there");
+console.log(categoriesList);
+  // const renderNestedNav = (list: any[] = [], isRoot = false) => {
+  //   return list.map((nav: NavList) => {
+  //     if (isRoot) {
+  //       // show megamenu
+  //       if (nav.megaMenu) {
+  //         return (
+  //           //@ts-ignore
+  //           <MegaMenu key={nav.title} title={nav.title} menuList={nav.child} />
+  //         );
+  //       }
 
-  const renderNestedNav = (list: any[] = [], isRoot = false) => {
-    return list.map((nav: NavList) => {
-      if (isRoot) {
-        // show megamenu
-        if (nav.megaMenu) {
-          return (
-            //@ts-ignore
-            <MegaMenu key={nav.title} title={nav.title} menuList={nav.child} />
-          );
-        }
+  //       // show megamenu with sub
+  //       if (nav.megaMenuWithSub) {
+  //         return (
+  //           //@ts-ignore
+  //           <MegaMenu2 key={nav.title} title={nav.title} menuList={nav.child} />
+  //         );
+  //       }
 
-        // show megamenu with sub
-        if (nav.megaMenuWithSub) {
-          return (
-            //@ts-ignore
-            <MegaMenu2 key={nav.title} title={nav.title} menuList={nav.child} />
-          );
-        }
+  //       if (nav.url) {
+  //         return (
+  //           <StyledNavLink href={nav.url} key={nav.title}>
+  //             {nav.title}
+  //           </StyledNavLink>
+  //         );
+  //       }
 
-        if (nav.url) {
-          return (
-            <StyledNavLink href={nav.url} key={nav.title}>
-              {nav.title}
-            </StyledNavLink>
-          );
-        }
+  //       if (nav.child) {
+  //         return (
+  //           <FlexBox
+  //             key={nav.title}
+  //             alignItems="center"
+  //             position="relative"
+  //             flexDirection="column"
+  //             sx={{
+  //               "&:hover": { "& > .child-nav-item": { display: "block" } },
+  //             }}
+  //           >
+  //             <FlexBox alignItems="flex-end" gap={0.3} sx={navLinkStyle}>
+  //               {nav.title}{" "}
+  //               <KeyboardArrowDown
+  //                 sx={{ color: "grey.500", fontSize: "1.1rem" }}
+  //               />
+  //             </FlexBox>
 
-        if (nav.child) {
-          return (
-            <FlexBox
-              key={nav.title}
-              alignItems="center"
-              position="relative"
-              flexDirection="column"
-              sx={{
-                "&:hover": { "& > .child-nav-item": { display: "block" } },
-              }}
-            >
-              <FlexBox alignItems="flex-end" gap={0.3} sx={navLinkStyle}>
-                {nav.title}{" "}
-                <KeyboardArrowDown
-                  sx={{ color: "grey.500", fontSize: "1.1rem" }}
-                />
-              </FlexBox>
+  //             <ChildNavsWrapper className="child-nav-item">
+  //               <BazaarCard
+  //                 elevation={3}
+  //                 sx={{ mt: 2.5, py: 1, minWidth: 200 }}
+  //               >
+  //                 {renderNestedNav(nav.child)}
+  //               </BazaarCard>
+  //             </ChildNavsWrapper>
+  //           </FlexBox>
+  //         );
+  //       }
+  //     } else {
+  //       if (nav.url) {
+  //         return (
+  //           <NavLink href={nav.url} key={nav.title}>
+  //             <MenuItem>{nav.title}</MenuItem>
+  //           </NavLink>
+  //         );
+  //       }
 
-              <ChildNavsWrapper className="child-nav-item">
-                <BazaarCard
-                  elevation={3}
-                  sx={{ mt: 2.5, py: 1, minWidth: 200 }}
-                >
-                  {renderNestedNav(nav.child)}
-                </BazaarCard>
-              </ChildNavsWrapper>
-            </FlexBox>
-          );
-        }
-      } else {
-        if (nav.url) {
-          return (
-            <NavLink href={nav.url} key={nav.title}>
-              <MenuItem>{nav.title}</MenuItem>
-            </NavLink>
-          );
-        }
+  //       if (nav.child) {
+  //         return (
+  //           <ParentNav position="relative" minWidth="230px" key={nav.title}>
+  //             <MenuItem color="grey.700">
+  //               <Box flex="1 1 0" component="span">
+  //                 {nav.title}
+  //               </Box>
 
-        if (nav.child) {
-          return (
-            <ParentNav position="relative" minWidth="230px" key={nav.title}>
-              <MenuItem color="grey.700">
-                <Box flex="1 1 0" component="span">
-                  {nav.title}
-                </Box>
+  //               {settings.direction === "ltr" ? (
+  //                 <ArrowRight fontSize="small" />
+  //               ) : (
+  //                 <ArrowLeft fontSize="small" />
+  //               )}
+  //             </MenuItem>
 
-                {settings.direction === "ltr" ? (
-                  <ArrowRight fontSize="small" />
-                ) : (
-                  <ArrowLeft fontSize="small" />
-                )}
-              </MenuItem>
+  //             <ParentNavItem className="parent-nav-item">
+  //               <BazaarCard
+  //                 sx={{ py: "0.5rem", minWidth: "230px" }}
+  //                 elevation={3}
+  //               >
+  //                 {renderNestedNav(nav.child)}
+  //               </BazaarCard>
+  //             </ParentNavItem>
+  //           </ParentNav>
+  //         );
+  //       }
+  //     }
+  //   });
+  // };
+  const dispatch= useAppDispatch();
+  const getCateg = useSelector(categoriesSelector)
+  useEffect(() => {
+    dispatch(getAllCategories());
 
-              <ParentNavItem className="parent-nav-item">
-                <BazaarCard
-                  sx={{ py: "0.5rem", minWidth: "230px" }}
-                  elevation={3}
-                >
-                  {renderNestedNav(nav.child)}
-                </BazaarCard>
-              </ParentNavItem>
-            </ParentNav>
-          );
-        }
-      }
-    });
-  };
-
+  },[]);
   return (
     <NavBarWrapper hoverEffect={true} elevation={elevation} border={border}>
-      {!hideCategories ? (
+      
         <InnerContainer>
           {/* Category megamenu */}
-          <CategoryMenu open={navListOpen} categoriesList={categoriesList} >
+          <CategoryMenu open={navListOpen} categoriesList={getCateg} >
             <CategoryMenuButton variant="text">
-              {/* icon categories  */}
               <Category fontSize="small" />
               <Paragraph
                 fontWeight="600"
@@ -269,14 +278,14 @@ const Navbar: FC<NavbarProps> = ({
 
           </FlexBox> */}
           {/* Horizontal menu */}
-          <FlexBox gap={4}>{renderNestedNav(navbarNavigations, true)}</FlexBox>
+          {/* <FlexBox gap={4}>{renderNestedNav(navbarNavigations, true)}</FlexBox>
         </InnerContainer>
       ) : (
         <InnerContainer sx={{ justifyContent: "center" }}>
           <FlexBox gap={4}>{renderNestedNav(navbarNavigations, true)}</FlexBox>
         </InnerContainer>
-      )}
-          
+      )} */}
+        </InnerContainer>   
     </NavBarWrapper>
   );
 };

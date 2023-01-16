@@ -92,7 +92,8 @@ export default {
       error: boolean;
       total: number;
       data: ChildCategory[];
-      popular_categories: PopularCategory[];
+      loading? : boolean
+      // popular_categories: PopularCategory[];
   }
 
 

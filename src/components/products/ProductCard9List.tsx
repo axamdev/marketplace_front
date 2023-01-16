@@ -27,6 +27,7 @@ const ProductCard9List: React.FC<ProductCard9ListProps> = ({product}) => {
     <div>
        {prod &&<>{prod.map((item, ind) => (
         <ProductCard9
+        key={ind}
         id={item.id}
         title={item.name}
         price={item.min_max_price.min_price}

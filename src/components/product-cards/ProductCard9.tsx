@@ -90,7 +90,7 @@ const ProductCard9: React.FC<ProductCard9Props> = ({
               />
             )}
 
-            <Image src={imgUrl} alt={title} width="100%" />
+            <Image src={imgUrl} alt={title}  width="100%" />
           </Box>
         </Grid>
 
