@@ -21,7 +21,7 @@ import Sidenav from "components/sidenav/Sidenav";
 import { H5, H2,Paragraph } from "components/Typography";
 import { useCallback } from "react";
 import Router, { useRouter } from "next/router";
-import api, {  ProductsResponse } from "utils/api/axam-products";
+import api, {  ProductsResponse,Productsdata } from "utils/api/axam-products";
 import React, { useEffect,useState } from "react";
 const ProductCategoryResult = () => {
   const [view, setView] = useState("grid");
@@ -32,11 +32,13 @@ const ProductCategoryResult = () => {
   const category_id = parseInt(router.query.id as string);
   const [ListProducts, setListProducts] = useState<ProductsResponse> ();
   useEffect(() => {
-    api.get_productsByCategory(category_id).then((data)=>setListProducts(data)    )
+    api.get_productsByCategory(category_id).then((data)=>setListProducts(data))
   }, []);
    console.log(ListProducts)
    const ProductsCat=ListProducts?.data
- 
+   console.log("here productsCat",ProductsCat);
+   const [items,setItems]=useState<Productsdata[]>()
+   console.log("items",items)
 
   return (
     <ShopLayout1>
@@ -118,7 +120,7 @@ const ProductCategoryResult = () => {
                     </IconButton>
                   }
                 >
-                  <ProductFilterCard />
+                  <ProductFilterCard product={ProductsCat}/>
                 </Sidenav>
               )}
             </FlexBox>
@@ -127,7 +129,7 @@ const ProductCategoryResult = () => {
 
         <Grid container spacing={3}>
           <Grid item md={3} sx={{ display: { md: "block", xs: "none" } }}>
-            <ProductFilterCard />
+            <ProductFilterCard product={ProductsCat} />
           </Grid>
 
           <Grid item md={9} xs={12}>

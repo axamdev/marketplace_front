@@ -11,8 +11,21 @@ import Accordion from "components/accordion/Accordion";
 import AccordionHeader from "components/accordion/AccordionHeader";
 import { FlexBetween, FlexBox } from "components/flex-box";
 import { H5, H6, Paragraph, Span } from "components/Typography";
+import { Productsdata, ProductsResponse } from "utils/api/axam-products";
+import React, { useEffect,useState } from "react";
+// ========================================================
+type ProductFilterProps = {
+  product: Productsdata[];
 
-const ProductFilterCard = () => {
+  
+};
+// ========================================================
+// const ProductCard1List: React.FC<ProductCard1ListProps> = ({product}) => {
+const ProductFilterCard: React.FC<ProductFilterProps> = ({product})  => {
+    const [minValue,setMinValue]=useState(30)
+    const [maxValue,setMaxValue]=useState(300)
+    const ProdFiltr=product?.filter(el=>((el.min_max_price.min_price>=minValue)&&(el.min_max_price.min_price<=maxValue)))
+    console.log("prodFiltr",ProdFiltr)
   return (
     <Card sx={{ p: "18px 27px", overflow: "auto" }} elevation={1}>
       <H6 mb={1.25}>Filtre</H6>
@@ -54,11 +67,11 @@ const ProductFilterCard = () => {
 
       <H6 mb={2}>Échelle des prix</H6>
       <FlexBetween>
-        <TextField placeholder="0" type="number" size="small" fullWidth />
+        <TextField placeholder="0" type="number" size="small" fullWidth value={minValue} onChange={e=>setMinValue(parseInt(e.target.value))}/>
         <H5 color="grey.600" px={1}>
           -
         </H5>
-        <TextField placeholder="250" type="number" size="small" fullWidth />
+        <TextField placeholder="250" type="number" size="small" fullWidth value={maxValue} onChange={e=>setMaxValue(parseInt(e.target.value))} />
       </FlexBetween>
 
       <Divider sx={{ my: 3 }} />

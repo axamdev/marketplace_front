@@ -23,15 +23,16 @@ const ProductCard1List: React.FC<ProductCard1ListProps> = ({product}) => {
   const routerId = router.query.id as string;
   const { state, dispatch } = useAppContext();
   const cartList: CartItem[] = state.cart;
-  
-
   console.log("show prod");
   console.log(prod);
+ 
+ 
 
   return (
     <Fragment>
       {prod &&
       <Grid container spacing={3} >
+      
         {prod.map((item, ind) => (
           <Grid item lg={4} sm={6} xs={12} key={ind}>
             <ProductCard1 

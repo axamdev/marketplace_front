@@ -118,7 +118,7 @@ const ProductSectionsResult = () => {
                    </IconButton>
                  }
                >
-                 <ProductFilterCard />
+                 <ProductFilterCard  />
                </Sidenav>
              )}
            </FlexBox>
