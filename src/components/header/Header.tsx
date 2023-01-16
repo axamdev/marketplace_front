@@ -26,6 +26,7 @@ import SearchBox from "../search-box/SearchBox";
 import { authSelector } from "redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { categoriesSelector } from "redux/categoriesSlice";
 // styled component
 export const HeaderWrapper = styled(Box)(({ theme }) => ({
   zIndex: 3,
@@ -68,7 +69,7 @@ const Header: FC<HeaderProps> = ({
   //console.log("categoriesList"+categoriesList) 
   const { error,token,user } = useSelector(authSelector)
   const router = useRouter();
-
+  const getCateg = useSelector(categoriesSelector)
   return (
     <HeaderWrapper className={clsx(className)}>
       <Container
@@ -93,7 +94,7 @@ const Header: FC<HeaderProps> = ({
           </Link>
 
           {isFixed && (
-            <CategoryMenu categoriesList={categoriesList}>
+            <CategoryMenu categoriesList={getCateg}>
               <FlexBox color="grey.600" alignItems="center" ml={2}>
                 <BazaarButton color="inherit">
                   <Category fontSize="small" color="inherit" />
