@@ -29,12 +29,19 @@ const ProductCategoryResult = () => {
 
   const toggleView = useCallback((v) => () => setView(v), []);
   const router = useRouter()
+
   const category_id = parseInt(router.query.id as string);
   const [ListProducts, setListProducts] = useState<ProductsResponse> ();
+  
+  category_id
   useEffect(() => {
     api.get_productsByCategory(category_id).then((data)=>setListProducts(data)    )
   }, []);
-   console.log(ListProducts)
+  console.log(ListProducts)
+  console.log(category_id)
+
+
+
    const ProductsCat=ListProducts?.data
  
 

@@ -45,14 +45,14 @@ const MegaMenu1: FC<MegaMenuProps> = ({
               {categories.map(({id, ...item}) => (
                 <Grid item md={3} key={id}>
                   {item.banner ? (
-                    <NavLink className="title-link" href={"#"}>
+                    <NavLink className="title-link"  href={`/product/categories/${id}`} >
                       {item.name}
                     </NavLink>
                   ) : (
                     <Box className="title-link">{item.name}</Box>
                   )}
                   {item.children.map(({id, ...item}) => (
-                    <NavLink className="child-link" href={"#"} key={id}>
+                    <NavLink className="child-link"  href={`/product/categories/${id}`} key={id}>
                       {item.name}
                     </NavLink>
                   ))}
