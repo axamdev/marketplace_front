@@ -1,3 +1,4 @@
+
 import { Apps, FilterList, ViewList } from "@mui/icons-material";
 import {
   Box,
@@ -20,7 +21,7 @@ import Sidenav from "components/sidenav/Sidenav";
 import { H5, H2,Paragraph } from "components/Typography";
 import { useCallback } from "react";
 import Router, { useRouter } from "next/router";
-import api, {  Productsdata } from "utils/api/axam-products";
+import api, {  ProductsResponse } from "utils/api/axam-products";
 import React, { useEffect,useState } from "react";
 const ProductCategoryResult = () => {
   const [view, setView] = useState("grid");
@@ -29,18 +30,14 @@ const ProductCategoryResult = () => {
   const toggleView = useCallback((v) => () => setView(v), []);
   const router = useRouter()
   const category_id = parseInt(router.query.id as string);
-  const selectedId=[ category_id ]
-  const [ListProducts, setListProducts] = useState<Productsdata[]> ();
+  const [ListProducts, setListProducts] = useState<ProductsResponse> ();
   useEffect(() => {
-    api.get_productsByCategory(category_id).then((data)=>setListProducts(data.data)    )
+    api.get_productsByCategory(category_id).then((data)=>setListProducts(data)    )
   }, []);
-  //console.log(product);
    console.log(ListProducts)
+   const ProductsCat=ListProducts?.data
+ 
 
-   //const name=ListProducts.map((el)=>el.category_name)
-  console.log(ListProducts)
-   //const name=ListProducts[0].category_name
-  //  console.log(name)
   return (
     <ShopLayout1>
       <Container sx={{ mt: 4, mb: 6 }}>
@@ -58,14 +55,13 @@ const ProductCategoryResult = () => {
               xs: "1.25rem 1.25rem 0.25rem",
             },
           }}>
-        {/* { ListProducts? */}
-          <Box>
-          { ListProducts && ListProducts.length> 0?  <H5>{`Rechercher  ${ListProducts[0].category_name}`}</H5>  :<H5></H5>}
        
-           { ListProducts&& ListProducts.length> 0 ?   <Paragraph color="grey.600">{`${ListProducts[0].total} résultats trouvés` }</Paragraph> :<H5></H5>}
+          <Box>
+          { ProductsCat && ProductsCat.length> 0?  <H5>{`Rechercher  ${ProductsCat[0].category_name}`}</H5>:null}      
+           { ListProducts  &&  ProductsCat.length> 0?  <Paragraph color="grey.600">{`${ListProducts.total} résultats trouvés` }</Paragraph> :null}
           
           </Box>
-           {/* : <H5>Loading</H5>} */}
+         
           <FlexBox
             alignItems="center"
             columnGap={4}
@@ -137,7 +133,7 @@ const ProductCategoryResult = () => {
           <Grid item md={9} xs={12}>
           {/* {product ? <ProductCardList   product={product} />: <H2>Loading...</H2>} */}
 
-            {ListProducts &&  view === "grid" ? <ProductCard1List  product={ListProducts}  /> : <ProductCard9List />  }
+            {ListProducts &&  view === "grid" ? <ProductCard1List  product={ProductsCat}  /> : <ProductCard9List product={ProductsCat}  />  }
           </Grid>
         </Grid>
       </Container>
@@ -146,10 +142,27 @@ const ProductCategoryResult = () => {
 };
 
 const sortOptions = [
-  { label: "Relevance", value: "Relevance" },
+  // { label: "Relevance", value: "Relevance" },
+  { label: "pertinence", value: "Relevance" },
   { label: "Date", value: "Date" },
-  { label: "Price Low to High", value: "Price Low to High" },
-  { label: "Price High to Low", value: "Price High to Low" },
+  // { label: "Price Low to High", value: "Price Low to High" },
+  { label: "Prix ​​bas à élevé", value: "Price Low to High" },
+
+  // { label: "Price High to Low", value: "Price High to Low" },
+  { label: "Prix élevé à bas", value: "Price High to Low" }
+
 ];
 
 export default ProductCategoryResult;
+
+
+
+
+
+
+
+
+
+
+
+

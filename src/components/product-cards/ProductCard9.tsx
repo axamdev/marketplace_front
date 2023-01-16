@@ -16,7 +16,7 @@ import { H5, Span } from "components/Typography";
 import { CartItem, useAppContext } from "contexts/AppContext";
 import Link from "next/link";
 import React, { useCallback } from "react";
-
+import { useRouter } from "next/router";
 // styled components
 const Wrapper = styled(Card)(() => ({
   width: "100%",
@@ -27,26 +27,24 @@ const Wrapper = styled(Card)(() => ({
 
 // ===========================================================
 type ProductCard9Props = {
-  className?: string;
-  style?: any;
-  imgUrl: string;
+  off: number;
   title: string;
   price: number;
-  off?: number;
+  imgUrl: string;
+  short_description: string;
+  category_name: string;
   rating?: number;
-  id: string;
-  subcategories?: Array<{ title: string; url: string }>;
-  [key: string]: unknown;
+  className?: string;
+  id: string | number;
+  hideRating?: boolean;
+  // style?: CSSProperties;
+  showProductSize?: boolean;
+  sx?: { [key: string]: any };
 };
 // ===========================================================
 
 const ProductCard9: React.FC<ProductCard9Props> = ({
-  imgUrl,
-  title,
-  price,
-  off,
-  rating,
-  id,
+  sx, off, id, title, price, imgUrl, short_description,category_name,rating, hideRating
 }) => {
   const { state, dispatch } = useAppContext();
   const cartItem: CartItem | undefined = state.cart.find(
@@ -54,10 +52,10 @@ const ProductCard9: React.FC<ProductCard9Props> = ({
   );
 
   const handleCartAmountChange = useCallback(
-    (amount) => () => {
+    (product) => () => {
       dispatch({
         type: "CHANGE_CART_AMOUNT",
-        payload: { name: title, qty: amount, price, imgUrl, id },
+        payload: product ,
       });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -170,18 +168,18 @@ const ProductCard9: React.FC<ProductCard9Props> = ({
   );
 };
 
-ProductCard9.defaultProps = {
-  title:
-    "Apple iPhone 5 Unlocked 16GB 8MP Used Cell-Phone-16gbIOS Used Refurbished 100%Factory Used",
-  imgUrl: "/assets/images/products/macbook.png",
-  off: 50,
-  price: 450,
-  rating: 0,
-  subcategories: [
-    { title: "Bike", url: "/#" },
-    { title: "Ducati", url: "/#" },
-    { title: "Motors", url: "/#" },
-  ],
-};
+// ProductCard9.defaultProps = {
+//   title:
+//     "Apple iPhone 5 Unlocked 16GB 8MP Used Cell-Phone-16gbIOS Used Refurbished 100%Factory Used",
+//   imgUrl: "/assets/images/products/macbook.png",
+//   off: 50,
+//   price: 450,
+//   rating: 0,
+//   subcategories: [
+//     { title: "Bike", url: "/#" },
+//     { title: "Ducati", url: "/#" },
+//     { title: "Motors", url: "/#" },
+//   ],
+// };
 
 export default ProductCard9;
