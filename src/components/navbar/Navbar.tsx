@@ -229,7 +229,9 @@ const Navbar: FC<NavbarProps> = ({
         <InnerContainer>
           {/* Category megamenu */}
           <CategoryMenu  categoriesList={getCateg} >
-            <CategoryMenuButton variant="text">
+            <CategoryMenuButton variant="text"
+            
+            >
               <Category fontSize="small" />
               <Paragraph
                 fontWeight="600"

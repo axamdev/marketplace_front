@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { categoriesSelector } from "redux/categoriesSlice";
 import { DataCategories } from "utils/api/axam-category";
 import CategoryMenuCard from "./CategoryMenuCard";
+import BazaarButton from "components/BazaarButton";
 
 // styled component
 const Wrapper = styled(Box)<{ open: boolean }>(
@@ -27,7 +28,12 @@ type CategoryMenuProps = {
   categoriesList?:DataCategories;
 };
 // ===========================================================
-
+const CategoryMenuButton = styled(BazaarButton)(({ theme }) => ({
+  width: "278px",
+  height: "40px",
+  backgroundColor: theme.palette.grey[100],
+  textAlign:'left'
+}));
 const CategoryMenu: FC<CategoryMenuProps> = ({
   open: isOpen = false,
   children,
@@ -47,6 +53,7 @@ const CategoryMenu: FC<CategoryMenuProps> = ({
     if (popoverRef.current && !isOpen) setOpen(false);
   };
 
+
   useEffect(() => {
     window.addEventListener("click", handleDocumentClick);
 
@@ -59,13 +66,19 @@ const getCateg = useSelector(categoriesSelector)
 
   return (
     <Wrapper open={open}>
+       <CategoryMenuButton        onMouseEnter={() => setOpen(true)}
+         onMouseLeave={() => setOpen(false)}
+        >
+     
       {React.cloneElement(children, {
         open,
         onClick: toggleMenu,
+       
         className: `${children.props.className}`,
       })}
 
-    {!!categoriesList && <CategoryMenuCard open={open} categoriesList={categoriesList} />}
+    {!!categoriesList && <CategoryMenuCard open={open} categoriesList={categoriesList} />} 
+    </CategoryMenuButton>
     </Wrapper>
   );
 };
