@@ -4,11 +4,18 @@ import BazaarButton from "components/BazaarButton";
 import Link from "next/link";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { SearchOutlinedIcon, SearchResultCard } from "./SearchBox";
+import api, {  ProductsResponse } from "utils/api/axam-products";
 
 const GrocerySearchBox: FC = () => {
+  const [inputText, setInputText] = useState("");
+  // let inputHandler = (e) => {
+  //   //convert input text to lower case
+  //   var lowerCase = e.target.value.toLowerCase();
+  //   setInputText(lowerCase);
+  // };
   const [resultList, setResultList] = useState<string[]>([]);
   const parentRef = useRef();
-
+ 
   const search = debounce((e) => {
     const value = e.target?.value;
 
@@ -43,6 +50,7 @@ const GrocerySearchBox: FC = () => {
         variant="outlined"
         placeholder="Searching for..."
         onChange={hanldeSearch}
+        // onChange={inputHandler}
         InputProps={{
           sx: {
             height: 44,
@@ -65,7 +73,7 @@ const GrocerySearchBox: FC = () => {
                 borderRadius: "0 300px 300px 0",
               }}
             >
-              Search
+              Rechercher
             </BazaarButton>
           ),
           startAdornment: <SearchOutlinedIcon fontSize="small" />,

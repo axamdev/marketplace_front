@@ -73,6 +73,7 @@ const ParentNavItem = styled(Box)(({ theme }) => ({
 const NavBarWrapper = styled(BazaarCard)<{ border: number }>(
   ({ theme, border }) => ({
     height: "60px",
+    
     display: "block",
     borderRadius: "0px",
     position: "relative",
