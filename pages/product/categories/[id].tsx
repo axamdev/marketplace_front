@@ -33,10 +33,10 @@ const ProductCategoryResult = () => {
   const category_id = parseInt(router.query.id as string);
   const [ListProducts, setListProducts] = useState<ProductsResponse> ();
   
-  category_id
+  
   useEffect(() => {
     api.get_productsByCategory(category_id).then((data)=>setListProducts(data)    )
-  }, []);
+  }, [category_id]);
   console.log(ListProducts)
   console.log(category_id)
 
