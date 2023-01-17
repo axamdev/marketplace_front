@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, styled } from "@mui/material";
 import React, { FC, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { categoriesSelector } from "redux/categoriesSlice";
 import { DataCategories } from "utils/api/axam-category";
 import CategoryMenuCard from "./CategoryMenuCard";
 
@@ -53,7 +55,7 @@ const CategoryMenu: FC<CategoryMenuProps> = ({
 
 //console.log("Data in category menu : "+ categoriesList)
 //console.log(categoriesList);
-
+const getCateg = useSelector(categoriesSelector)
 
   return (
     <Wrapper open={open}>

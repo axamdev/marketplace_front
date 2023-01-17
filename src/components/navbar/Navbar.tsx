@@ -121,8 +121,8 @@ const Navbar: FC<NavbarProps> = ({
   categoriesList
 }) => {
   const { settings } = useSettings();
-  console.log("categories are there");
-console.log(categoriesList);
+  //console.log("categories are there");
+//console.log(categoriesList);
   // const renderNestedNav = (list: any[] = [], isRoot = false) => {
   //   return list.map((nav: NavList) => {
   //     if (isRoot) {
@@ -228,7 +228,7 @@ console.log(categoriesList);
       
         <InnerContainer>
           {/* Category megamenu */}
-          <CategoryMenu open={navListOpen} categoriesList={getCateg} >
+          <CategoryMenu  categoriesList={getCateg} >
             <CategoryMenuButton variant="text">
               <Category fontSize="small" />
               <Paragraph

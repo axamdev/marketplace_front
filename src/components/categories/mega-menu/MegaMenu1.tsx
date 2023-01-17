@@ -4,6 +4,7 @@ import LazyImage from "components/LazyImage";
 import NavLink from "components/nav-link/NavLink";
 import Link from "next/link";
 import { FC } from "react";
+import { Router } from "react-router-dom";
 import { ChildCategory, DataCategories } from "utils/api/axam-category";
 import StyledMegaMenu from "./StyledMegaMenu";
 
@@ -42,17 +43,19 @@ const MegaMenu1: FC<MegaMenuProps> = ({
         <FlexBox px={2.5} py={1.75} alignItems="unset">
           <Box flex="1 1 0">
             <Grid container spacing={4}>
-              {categories.map(({id, ...item}) => (
-                <Grid item md={3} key={id}>
-                  {item.banner ? (
-                    <NavLink className="title-link"  href={`/product/categories/${id}`} >
+              {categories.map((item,ind) => (
+                <Grid item md={3} key={ind}>
+                  {item.banner && (
+                    <NavLink className="title-link"  href={`/product/categories/${item.id}`} >
                       {item.name}
                     </NavLink>
-                  ) : (
-                    <Box className="title-link">{item.name}</Box>
-                  )}
-                  {item.children.map(({id, ...item}) => (
-                    <NavLink className="child-link"  href={`/product/categories/${id}`} key={id}>
+                  ) 
+                  // : (
+                  //   <Box className="title-link">{item.name}</Box>
+                  // )
+                  }
+                  {item?.children?.map((item,ind) => (
+                    <NavLink className="child-link"  key={ind} href={`/product/categories/${item.id}`} >
                       {item.name}
                     </NavLink>
                   ))}
