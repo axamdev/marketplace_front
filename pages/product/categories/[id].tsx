@@ -163,7 +163,7 @@ var order ;
                     </IconButton>
                   }
                 >
-                  <ProductFilterCard />
+                  <ProductFilterCard category_id={category_id} />
                 </Sidenav>
               )}
             </FlexBox>
@@ -172,7 +172,7 @@ var order ;
 
         <Grid container spacing={3}>
           <Grid item md={3} sx={{ display: { md: "block", xs: "none" } }}>
-            <ProductFilterCard />
+            <ProductFilterCard category_id={category_id}/>
           </Grid>
 
        {

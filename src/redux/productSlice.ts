@@ -11,13 +11,16 @@ export interface initTypes {
     total?: string,
     error:boolean,
     loading:boolean,
-    
+    min_price?: string,
+    max_price?: string,
    }
    const initialState: initTypes = {
     data:[],
     total: "",
     error:false,
     loading:false,
+    min_price:"",
+    max_price:""
    };
    var config = {
     headers: {
@@ -90,19 +93,31 @@ type MyArguments = {
       builder.addCase(getProducts.fulfilled, (state, { payload }) => {
         
         if (payload.error) {
-  
+            state.data= [];
+            state.total="0"
           state.loading = false;
           //state.user = payload;
         } else {
              state.loading = false;
-          if 
+         
+             if 
+             ( state.error==true){
+                state.data= [];
+                state.total="0"
+
+             }
+             if 
          ( state.error==false)
          
           {state.data= payload.data;
-          state.total=payload.total}
+          state.total=payload.total;
+         state.max_price=payload.max_price;
+        state.min_price=payload.min_price}
           else
           {state.data= [];
-            state.total="0"}
+            state.total="0"
+        
+        }
         }
   
         //state.token = payload.data[0].activation_code
