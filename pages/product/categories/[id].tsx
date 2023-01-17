@@ -7,6 +7,8 @@ import {
   Grid,
   IconButton,
   MenuItem,
+  Select,
+  SelectChangeEvent,
   TextField,
   Theme,
 } from "@mui/material";
@@ -23,26 +25,61 @@ import { useCallback } from "react";
 import Router, { useRouter } from "next/router";
 import api, {  ProductsResponse } from "utils/api/axam-products";
 import React, { useEffect,useState } from "react";
+import { useSelector } from "react-redux";
+import { getProducts, getProductsSliceSelector } from "redux/productSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "redux/store";
 const ProductCategoryResult = () => {
   const [view, setView] = useState("grid");
+  const [tri,setTri] =useState("");
   const downMd = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
 
   const toggleView = useCallback((v) => () => setView(v), []);
   const router = useRouter()
 
   const category_id = parseInt(router.query.id as string);
-  const [ListProducts, setListProducts] = useState<ProductsResponse> ();
-  
-  
+  // const [ListProducts, setListProducts] = useState<ProductsResponse> ();
+  const dispatch = useDispatch<AppDispatch>();
+  const {data,total}= useSelector(getProductsSliceSelector)
+
+  const handleChangeSelect =(event:SelectChangeEvent)=>{
+    const value = event.target.value as string;
+    setTri(value);
+var sort ;
+var order ;
+
+  if( value == 'p.date_added_ASC'){
+    sort = 'p.date_added'
+    order= 'ASC'
+  }
+  if( value == 'p.date_added_DESC'){
+    sort = 'p.date_added'
+    order= 'DESC'
+  }
+  if( value == 'pv.price_ASC'){
+    sort = 'pv.price'
+    order= 'ASC'
+  }
+  if( value == 'pv.price_DESC'){
+    sort = 'pv.price'
+    order= 'DESC'
+  }
+    // dispatch new data with new params 
+    dispatch(getProducts({category_id:category_id.toString(),sort:sort,order:order}))
+  }
+
+
   useEffect(() => {
-    api.get_productsByCategory(category_id).then((data)=>setListProducts(data)    )
+    // api.get_productsByCategory(category_id).then((data)=>setListProducts(data)    )
+   dispatch(getProducts({category_id:category_id.toString()}))
+    // setListProducts(data) 
   }, [category_id]);
-  console.log(ListProducts)
+  // console.log("data is here",ListProducts)
   console.log(category_id)
 
 
 
-   const ProductsCat=ListProducts?.data
+    //const ProductsCat=ListProducts?.data
  
 
   return (
@@ -64,8 +101,8 @@ const ProductCategoryResult = () => {
           }}>
        
           <Box>
-          { ProductsCat && ProductsCat.length> 0?  <H5>{`Rechercher  ${ProductsCat[0].category_name}`}</H5>:null}      
-           { ListProducts  &&  ProductsCat.length> 0?  <Paragraph color="grey.600">{`${ListProducts.total} résultats trouvés` }</Paragraph> :null}
+          { data && data?.length> 0?  <H5>{`Rechercher  ${data[0].category_name}`}</H5>:null}      
+           { data  &&  data?.length> 0?  <Paragraph color="grey.600">{`${total} résultats trouvés` }</Paragraph> :null}
           
           </Box>
          
@@ -80,13 +117,14 @@ const ProductCategoryResult = () => {
                Trier par
               </Paragraph>
 
-              <TextField
-                select
+              <Select
+                
                 fullWidth
                 size="small"
-                variant="outlined"
-                placeholder="Short by"
-                defaultValue={sortOptions[0].value}
+                
+                label="trié par "
+                onChange={handleChangeSelect}
+                value={tri}
                 sx={{ flex: "1 1 0", minWidth: "150px" }}
               >
                 {sortOptions.map((item) => (
@@ -94,7 +132,7 @@ const ProductCategoryResult = () => {
                     {item.label}
                   </MenuItem>
                 ))}
-              </TextField>
+              </Select>
             </FlexBox>
 
             <FlexBox alignItems="center" my="0.25rem">
@@ -125,7 +163,7 @@ const ProductCategoryResult = () => {
                     </IconButton>
                   }
                 >
-                  <ProductFilterCard />
+                  <ProductFilterCard category_id={category_id} />
                 </Sidenav>
               )}
             </FlexBox>
@@ -134,14 +172,16 @@ const ProductCategoryResult = () => {
 
         <Grid container spacing={3}>
           <Grid item md={3} sx={{ display: { md: "block", xs: "none" } }}>
-            <ProductFilterCard />
+            <ProductFilterCard category_id={category_id}/>
           </Grid>
 
-          <Grid item md={9} xs={12}>
+       {
+        data && <Grid item md={9} xs={12}>
           {/* {product ? <ProductCardList   product={product} />: <H2>Loading...</H2>} */}
 
-            {ListProducts &&  view === "grid" ? <ProductCard1List  product={ProductsCat}  /> : <ProductCard9List product={ProductsCat}  />  }
+            {data &&  view === "grid" ? <ProductCard1List  product={data}  /> : <ProductCard9List product={data}  />  }
           </Grid>
+       }  
         </Grid>
       </Container>
     </ShopLayout1>
@@ -150,13 +190,13 @@ const ProductCategoryResult = () => {
 
 const sortOptions = [
   // { label: "Relevance", value: "Relevance" },
-  { label: "pertinence", value: "Relevance" },
-  { label: "Date", value: "Date" },
+  { label: "les plus anciens", value: "p.date_added_ASC" },
+  { label: "les plus récentes", value: "p.date_added_DESC" },
   // { label: "Price Low to High", value: "Price Low to High" },
-  { label: "Prix ​​bas à élevé", value: "Price Low to High" },
+  { label: "Prix ​​bas à élevé", value: "pv.price_ASC" },
 
   // { label: "Price High to Low", value: "Price High to Low" },
-  { label: "Prix élevé à bas", value: "Price High to Low" }
+  { label: "Prix élevé à bas", value: "pv.price_DESC" }
 
 ];
 
