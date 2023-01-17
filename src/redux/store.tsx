@@ -25,9 +25,12 @@ import addadrSlice from "./addadrSlice"
 import getAllCategoriesSlice from "./categoriesSlice"
 import { combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
+import getProductsSlice from "./productSlice"
+
 //const persistConfig = { key: 'counter', storage}
 
-const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cartReducer,orders:ordersReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice,selectedAdrId:setSelectedAdrIdSlice,getOrd:getOrdersSlice,getCateg:getAllCategoriesSlice})
+const rootReducer = combineReducers({auth:authReducer,user:userReducer,cart:cartReducer,orders:ordersReducer,edit:editReducer,getAdr:adressSlice,addadr:addadrSlice,selectedAdrId:setSelectedAdrIdSlice,getOrd:getOrdersSlice,
+    getCateg:getAllCategoriesSlice,getProd:getProductsSlice})
 
 
 
