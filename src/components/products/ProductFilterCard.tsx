@@ -91,8 +91,8 @@ const ProductFilterCard = (props) => {
         onChange={(e) => {
           var value = parseInt(e.target.value, 10);
 
-          if (value > parseInt(max_price)) value = parseInt(max_price);
-          if (value < parseInt(min_price)) value =parseInt(min_price) ;
+          if (value >= parseInt(max_price)) value = parseInt(max_price);
+          if (value <= parseInt(min_price)) value =parseInt(min_price) ;
 
           setmaxValue(value);
         }}

@@ -128,7 +128,7 @@ var order ;
                 sx={{ flex: "1 1 0", minWidth: "150px" }}
               >
                 {sortOptions.map((item) => (
-                  <MenuItem value={item.value} key={item.value}>
+                  <MenuItem  value={item.value} key={item.value}>
                     {item.label}
                   </MenuItem>
                 ))}

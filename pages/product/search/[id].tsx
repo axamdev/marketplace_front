@@ -18,14 +18,30 @@ import ProductCard9List from "components/products/ProductCard9List";
 import ProductFilterCard from "components/products/ProductFilterCard";
 import Sidenav from "components/sidenav/Sidenav";
 import { H5, Paragraph } from "components/Typography";
-import { useCallback, useState } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useState,useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getProducts, getProductsSliceSelector } from "redux/productSlice";
+import { AppDispatch } from "redux/store";
 
 const ProductSearchResult = () => {
   const [view, setView] = useState("grid");
   const downMd = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
 
   const toggleView = useCallback((v) => () => setView(v), []);
+  const router = useRouter()
 
+  const id = parseInt(router.query.id as string);
+  const category_id = parseInt(router.query.id as string);
+  // const [ListProducts, setListProducts] = useState<ProductsResponse> ();
+  const dispatch = useDispatch<AppDispatch>();
+   const {data}= useSelector(getProductsSliceSelector)
+  useEffect(() => {
+    // api.get_productsByCategory(category_id).then((data)=>setListProducts(data)    )
+   dispatch(getProducts({id:id.toString()}))
+    // setListProducts(data) 
+  }, [id]);
   return (
     <ShopLayout1>
       <Container sx={{ mt: 4, mb: 6 }}>
@@ -113,12 +129,14 @@ const ProductSearchResult = () => {
 
         <Grid container spacing={3}>
           <Grid item md={3} sx={{ display: { md: "block", xs: "none" } }}>
-            <ProductFilterCard />
+            <ProductFilterCard  category_id={category_id}/>
           </Grid>
-
-          <Grid item md={9} xs={12}>
-            {/* {view === "grid" ? <ProductCard1List /> : <ProductCard9List />} */}
+          {
+        data && <Grid item md={9} xs={12}>
+          
+            {data &&  view === "grid" ? <ProductCard1List  product={data}  /> : <ProductCard9List product={data}  />  }
           </Grid>
+       }  
         </Grid>
       </Container>
     </ShopLayout1>

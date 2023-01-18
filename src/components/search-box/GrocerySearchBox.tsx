@@ -5,27 +5,37 @@ import Link from "next/link";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { SearchOutlinedIcon, SearchResultCard } from "./SearchBox";
 import api, {  ProductsResponse } from "utils/api/axam-products";
+import { AppDispatch } from "redux/store";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getProducts, getProductsSliceSelector } from "redux/productSlice";
+import { useRouter } from "next/router";
 
 const GrocerySearchBox: FC = () => {
   const [inputText, setInputText] = useState("");
-  // let inputHandler = (e) => {
-  //   //convert input text to lower case
-  //   var lowerCase = e.target.value.toLowerCase();
-  //   setInputText(lowerCase);
-  // };
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
   const [resultList, setResultList] = useState<string[]>([]);
   const parentRef = useRef();
  
-  const search = debounce((e) => {
+  const Search = debounce((e) => {
     const value = e.target?.value;
 
     if (!value) setResultList([]);
     else setResultList(dummySearchResult);
   }, 200);
-
+  //-------------
+  // const dispatch = useDispatch<AppDispatch>();
+ 
+  // const router = useRouter()
+  // const category_id = parseInt(router.query.id as string);
   const hanldeSearch = useCallback((event) => {
     event.persist();
-    search(event);
+    Search(event);
+    // dispatch(getProducts({category_id:category_id.toString(),search:inputText,tags:inputText}))
   }, []);
 
   const handleDocumentClick = () => setResultList([]);
@@ -93,11 +103,11 @@ const GrocerySearchBox: FC = () => {
   );
 };
 
-const dummySearchResult = [
-  "Macbook Air 13",
-  "Asus K555LA",
-  "Acer Aspire X453",
-  "iPad Mini 3",
-];
+// const dummySearchResult = [
+//   "Macbook Air 13",
+//   "Asus K555LA",
+//   "Acer Aspire X453",
+//   "iPad Mini 3",
+// ];
 
 export default GrocerySearchBox;
